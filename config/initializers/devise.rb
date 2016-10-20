@@ -272,6 +272,5 @@ Devise.setup do |config|
   # so you need to do it manually. For the users scope, it would be:
   # config.omniauth_path_prefix = '/my_engine/users/auth'
 
-  config.omniauth :github, Figaro.env.github_app_id, Figaro.env.github_app_secret,
-    callback_url: "https://myapp.com/users/auth/facebook/callback"
+  config.omniauth :github, Figaro.env.github_app_id, Figaro.env.github_app_secret
 end
