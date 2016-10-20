@@ -1,11 +1,14 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
 
-  http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
+  # http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
   
   # GET /projects
   # GET /projects.json
   def index
+    if current_user.nil?
+      redirect_to new_user_session_path
+    end
     @projects = Project.all
     @metric_names = ProjectMetrics.metric_names
   end
