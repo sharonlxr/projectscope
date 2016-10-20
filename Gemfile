@@ -47,7 +47,7 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
-gem 'omniauth-github', :git => 'git@github.com:intridea/omniauth-github.git'
+gem 'omniauth-github', github: 'intridea/omniauth-github'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 

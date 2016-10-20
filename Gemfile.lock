@@ -1,5 +1,5 @@
 GIT
-  remote: git@github.com:intridea/omniauth-github.git
+  remote: git://github.com/intridea/omniauth-github.git
   revision: 45f2fc73d6d06f30863adac0e6aa112bcaaadf67
   specs:
     omniauth-github (1.1.2)
