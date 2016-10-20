@@ -30,16 +30,18 @@ class User < ActiveRecord::Base
   COACH = "coach"
 
   def self.from_omniauth(auth)
-  	User.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-  		user.provider = auth.provider
-  		user.uid = auth.uid
-  		user.email = auth.extra.raw_info.email
-  		user.password = Devise.friendly_token[0,20]
-  	end
+    email = auth.extra.raw_info.email
+    if !email.nil? and Whitelist.has_email? email
+    	User.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    		user.provider = auth.provider
+    		user.uid = auth.uid
+    		user.email = email
+    		user.password = Devise.friendly_token[0,20]
+    	end
+    end
   end
 
   def is_admin?
   	self.role == ADMIN
   end
-  
 end

@@ -28,6 +28,11 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def github
     @user = User.from_omniauth(request.env["omniauth.auth"])
-    sign_in_and_redirect @user
+    if @user.nil?
+      flash[:alert] = "You are not authorized."
+      redirect_to new_user_session_path
+    else
+      sign_in_and_redirect @user
+    end
   end
 end
