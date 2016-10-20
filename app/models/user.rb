@@ -17,6 +17,7 @@
 #  updated_at             :datetime         not null
 #  provider               :string
 #  uid                    :string
+#  role                   :string           default("coach"), not null
 #
 
 class User < ActiveRecord::Base
@@ -24,6 +25,9 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:github]
+
+  ADMIN = "admin"
+  COACH = "coach"
 
   def self.from_omniauth(auth)
   	User.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -33,4 +37,9 @@ class User < ActiveRecord::Base
   		user.password = Devise.friendly_token[0,20]
   	end
   end
+
+  def is_admin?
+  	self.role == ADMIN
+  end
+  
 end
