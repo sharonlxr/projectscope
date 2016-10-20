@@ -32,6 +32,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
       flash[:alert] = "You are not authorized."
       redirect_to new_user_session_path
     else
+      flash[:notice] = "Signed in successfully."
       sign_in_and_redirect @user
     end
   end
