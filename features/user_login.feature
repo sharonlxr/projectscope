@@ -22,6 +22,6 @@ Scenario: authrozied coach login
 @omniauth_test
 Scenario: unauthrozied user login
 	Given I am on the login page
-	When I sign in as coach with email "test-coach-not-exist@test.com"
+	When I sign in as coach with github email "test-coach-not-exist@test.com"
 	Then I should be on the login page
 	And I should see "You are not authroized."
