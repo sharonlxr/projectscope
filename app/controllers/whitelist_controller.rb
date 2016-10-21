@@ -55,7 +55,7 @@ class WhitelistController < ApplicationController
        redirect_to projects_url
     end
   end
-  
+
   # DELETE /whitelist/
   def destroy
     user = params[:id]
