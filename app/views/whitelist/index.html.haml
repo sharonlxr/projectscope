@@ -1,0 +1,19 @@
+%h1 Whitelist
+
+%table
+  %thead
+    %tr
+      %th Authorized User Accounts
+      %th Role
+
+  %tbody
+    - @permitted_users.each do |user|
+      %tr
+        %td= user.email
+        %td= user.role
+
+%br/
+
+= link_to 'Back to project page', projects_url
+
+

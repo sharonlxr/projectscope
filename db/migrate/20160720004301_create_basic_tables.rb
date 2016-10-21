@@ -22,5 +22,11 @@ class CreateBasicTables < ActiveRecord::Migration
     end
     add_index :metric_samples, :project_id
     add_index :metric_samples, [:project_id, :metric_name]
+    
+    create_table :authorized_users, :force => true  do |t|
+      t.string :email                  # default: "",      null: false
+      t.string :role                   # default: "coach", null: false
+    end
+    add_index :authorized_users, :email
   end
 end

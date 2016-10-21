@@ -11,7 +11,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161020040440) do
+ActiveRecord::Schema.define(version: 20161021104336) do
+
+  create_table "authorized_users", force: :cascade do |t|
+    t.string "email"
+    t.string "role"
+  end
+
+  add_index "authorized_users", ["email"], name: "index_authorized_users_on_email"
 
   create_table "configs", force: :cascade do |t|
     t.integer  "project_id"
@@ -45,12 +52,6 @@ ActiveRecord::Schema.define(version: 20161020040440) do
   end
 
   add_index "projects", ["name"], name: "index_projects_on_name"
-
-  create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",      null: false
