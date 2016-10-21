@@ -1,7 +1,10 @@
 class WhitelistController < ApplicationController
-  before_action :set_whitelist, only: [:show, :add, :destroy]
+#   before_action :set_whitelist, only: [:show, :add, :destroy]
 
   # http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
+  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
+  ADMIN_ROLE = "admin"
+  COACH_ROLE = "coach"
   
   # GET /whitelist
   def index
@@ -9,15 +12,42 @@ class WhitelistController < ApplicationController
        @permitted_users = Authorized_user.all 
       
     else
-       redirect_to root
+       flash[:notice] = "You are not authorized to manipulate whitelist."
+       redirect_to projects_url
     end
   end
 
-  # GET /whitelist/1
-  # GET /projects/1.json
+  # GET /whitelist/index
   def show
     @readonly = true
     render :template => 'whitelist/index'
+  end
+  
+  # GET /whitelist/new
+  def new
+      @authorized_user = Authorized_user.new
+  end
+  
+  # POST /whitelist/add
+  def add
+    if current_user.is_admin?
+        email = params[:email]
+        role = params[:role]
+        unless (email =~ VALID_EMAIL_REGEX)
+            flash[:notice] = "Invalid Email."
+            redirect_to whitelist_add_path
+        end
+        unless (role.eql?(ADMIN_ROLE) or role.eql?(COACH_ROLE))
+            flash[:notice] = "Invalid Role: Role should be 'admin' or 'coach'. "
+            redirect_to whitelist_add_path
+        end
+        Authorized_user.create!(email: email, role: role)
+        flash[:notice] = "Add user #{email} successfully. "
+        redirect_to whitelist_index_path
+    else
+       flash[:notice] = "You are not authorized to manipulate whitelist."
+       redirect_to projects_url
+    end
   end
 
 #   # GET /projects/new

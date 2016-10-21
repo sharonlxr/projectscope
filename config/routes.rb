@@ -3,5 +3,8 @@ Rails.application.routes.draw do
   resources :projects
   root 'projects#index'
   # resources :whitelist
+  get '/whitelist', to: 'whitelist#index'
   get '/whitelist/index', to: 'whitelist#index'
+  post '/whitelist/add', to: 'whitelist#add'
+  get '/whitelist/new', to: 'whitelist#new'
 end

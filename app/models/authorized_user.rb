@@ -12,8 +12,8 @@ class Authorized_user < ActiveRecord::Base
   ADMIN = "admin"
   COACH = "coach"
 
-  def self.has_email?
-    if self.email.blank?
+  def self.has_email?(email)
+    if self.find_by_email(email).nil?
       return false
     else
       return true
