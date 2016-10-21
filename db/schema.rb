@@ -46,12 +46,6 @@ ActiveRecord::Schema.define(version: 20161020040440) do
 
   add_index "projects", ["name"], name: "index_projects_on_name"
 
-  create_table "roles", force: :cascade do |t|
-    t.string   "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "",      null: false
     t.string   "encrypted_password",     default: "",      null: false
