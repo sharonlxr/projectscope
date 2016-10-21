@@ -1,16 +1,32 @@
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  attr_accessor :pre_click, :order
   http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
   
   # GET /projects
   # GET /projects.json
+  def initialize(x = "", y = "ASC")
+    # Notice that `@` indicates instance variables.
+    @pre_click = x
+    @order = y
+  end
   def index
     click_type = params[:type]
     @projects = Project.all
     @metric_names = ProjectMetrics.metric_names
     if click_type == "project_name"
+      if self.pre_click==click_type
+        if self.order == "ASC"
+          @projects = Project.order(name: :desc)
+          self.order = "DECS"
+        end
+      end
+      self.pre_click = click_type
       @projects = Project.order(:name)
+      
+    elsif click_type == "code_climate" || click_type == "github"||click_type == "slack_trends"||click_type == "slack"||click_type == "pivotal_tracker"
+      @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score")
+      
     end
       
   end
