@@ -56,7 +56,11 @@ Given(/^A project update job has been run$/) do
 end
 
 And(/^I am logged in$/) do
-  page.driver.basic_authorize('cs169', ENV['PROJECTSCOPE_PASSWORD'])
+  steps %Q{
+    Given admin with email "test-admin@test.com" and password "testadminofprojectscope" exists
+    Given I am on the login page
+    When I sign in as admin with email "test-admin@test.com" and password "testadminofprojectscope"
+  }
 end
 
 Then(/^the config value "([^"]*)" should not appear in the page$/) do |value|
