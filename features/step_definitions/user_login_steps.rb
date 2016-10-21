@@ -9,7 +9,7 @@ end
 When /^I sign in as admin with email "(.*)" and password "(.*)"/ do |email, password|
 	fill_in "Email", :with => email
 	fill_in "Password", :with => password
-	click_button "Admin Log in"
+	click_button "Admin Sign in"
 end
 
 When /^I sign in as coach with github email "(.*)"/ do |email|
