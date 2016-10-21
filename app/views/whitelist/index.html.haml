@@ -11,6 +11,7 @@
       %tr
         %td= user.email
         %td= user.role
+        %td= link_to "Delete", whitelist_path(user), :method => :delete, data: { confirm: "Do you want to delete user #{user.email} from the whitelist?" }, :user => user
 
 %br/
 
@@ -18,6 +19,6 @@
 
 %br/
 
-= link_to 'Add user to whitelist', whitelist_new_path
+= link_to 'Add user to whitelist', new_whitelist_path
 
 
