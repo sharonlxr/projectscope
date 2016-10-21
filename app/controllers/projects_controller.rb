@@ -7,9 +7,6 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    if current_user.nil?
-      redirect_to new_user_session_path
-    end
     @projects = Project.all
     @metric_names = ProjectMetrics.metric_names
   end
