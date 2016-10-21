@@ -6,8 +6,13 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    click_type = params[:type]
     @projects = Project.all
     @metric_names = ProjectMetrics.metric_names
+    if click_type == "project_name"
+      @projects = Project.order(:name)
+    end
+      
   end
 
   # GET /projects/1
