@@ -49,7 +49,7 @@ class WhitelistController < ApplicationController
         end
         Authorized_user.create!(email: email, role: role)
           privilegeUser = User.find_by_email(email);
-          privilegeUser.update(role: role)
+          privilegeUser.update(role: role) if !privilegeUser.nil?
         flash[:notice] = "Add user #{email} successfully. "
         redirect_to whitelist_index_path
     else
