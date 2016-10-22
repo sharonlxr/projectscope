@@ -32,8 +32,8 @@ class WhitelistController < ApplicationController
     end
   end
   
-  # POST /whitelist/add
-  def add
+  # POST /whitelist/
+  def create
     if current_user.is_admin?
         email = params[:email]
         role = params[:role]
@@ -48,6 +48,8 @@ class WhitelistController < ApplicationController
             return
         end
         Authorized_user.create!(email: email, role: role)
+          privilegeUser = User.find_by_email(email);
+          privilegeUser.update(role: role)
         flash[:notice] = "Add user #{email} successfully. "
         redirect_to whitelist_index_path
     else
@@ -58,9 +60,9 @@ class WhitelistController < ApplicationController
 
   # DELETE /whitelist/
   def destroy
-    user = params[:id]
+    user = Authorized_user.find(params[:id])
     if current_user.is_admin?
-      Authorized_user.find(user).destroy!
+      user.destroy!
       respond_to do |format|
         format.html { redirect_to whitelist_index_path, notice: 'User account was successfully deleted.' }
       end

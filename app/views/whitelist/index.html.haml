@@ -3,8 +3,9 @@
 %table
   %thead
     %tr
-      %th Authorized User Accounts
+      %th Authorized Users
       %th Role
+      %th Action
 
   %tbody
     - @permitted_users.each do |user|
@@ -17,7 +18,7 @@
 
 = link_to 'Back to project page', projects_url
 
-%br/s
+%br/
 
 = link_to 'Add user to whitelist', new_whitelist_path
 

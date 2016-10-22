@@ -13,7 +13,7 @@ class Authorized_user < ActiveRecord::Base
   COACH = "coach"
 
   def self.has_email?(email)
-    if self.find_by_email(email).nil?
+    if self.find_by(email: email).nil?
       return false
     else
       return true
