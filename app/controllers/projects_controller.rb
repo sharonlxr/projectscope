@@ -30,16 +30,17 @@ class ProjectsController < ApplicationController
       end
     end
     click_type = params[:type]
-      
-    if session[:pre_click] == click_type
-      if session[:order] == "ASC"
-        session[:order] = "DESC"
+    if !click_type.nil? 
+      if session[:pre_click] == click_type
+        if session[:order] == "ASC"
+          session[:order] = "DESC"
+        else
+          session[:order] = "ASC"
+        end
       else
         session[:order] = "ASC"
+        session[:pre_click] = click_type
       end
-    else
-      session[:order] = "ASC"
-      session[:pre_click] = click_type
     end
     @metric_names = ProjectMetrics.metric_names
     if click_type == "project_name"
