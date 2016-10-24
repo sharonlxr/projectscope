@@ -14,36 +14,36 @@ GIT
       activesupport
 
 GIT
-  remote: https://github.com/AgileVentures/project_metric_code_climate
-  revision: 428cf1ca92e2e822bfdd4569fec5b1a8b518a52e
+  remote: https://github.com/Shuotong/project_metric_code_climate
+  revision: 14350e76877c1b4c302915f242768d82047fe5dd
   specs:
     project_metric_code_climate (0.0.5)
       httparty
 
 GIT
-  remote: https://github.com/AgileVentures/project_metric_github
-  revision: 629101fa195ece6843e13281a11604abdf4b597e
+  remote: https://github.com/Shuotong/project_metric_github
+  revision: 2323c7daa3d75e53781a7c27214f3e33e4dc4cd9
   specs:
     project_metric_github (0.0.9)
       octokit
 
 GIT
-  remote: https://github.com/AgileVentures/project_metric_pivotal_tracker
-  revision: d2b603bb1f6c8639e74a68d4a739d255e383d808
+  remote: https://github.com/Shuotong/project_metric_pivotal_tracker
+  revision: ed9ae728ac0549d78603675c574a5fe3ceaef035
   specs:
     project_metric_pivotal_tracker (0.0.1)
       tracker_api (~> 0.2.0)
 
 GIT
-  remote: https://github.com/AgileVentures/project_metric_slack
-  revision: f0e2a83a761087542c089f2b1226942d7c083bb8
+  remote: https://github.com/Shuotong/project_metric_slack
+  revision: 521b99180e59cab5e06b6a4e1d5df9a5baca4687
   specs:
     project_metric_slack (0.0.0)
       slack-ruby-client (>= 0.7.6)
 
 GIT
-  remote: https://github.com/AgileVentures/project_metric_slack_trends
-  revision: 5721ff93fc8f50cfda02c5fcaee9efba50b483df
+  remote: https://github.com/Shuotong/project_metric_slack_trends
+  revision: d4c7d0dec677bad3a80533cb967949e45360e156
   specs:
     project_metric_slack_trends (0.0.1)
       rasem (~> 0.6.1)
@@ -173,7 +173,7 @@ GEM
     encryptor (3.0.0)
     equalizer (0.0.11)
     erubis (2.7.0)
-    excon (0.52.0)
+    excon (0.54.0)
     execjs (2.7.0)
     factory_girl (4.7.0)
       activesupport (>= 3.0.0)
@@ -231,7 +231,7 @@ GEM
       multi_json (~> 1.3)
       multi_xml (~> 0.5)
       rack (>= 1.2, < 3)
-    octokit (4.3.0)
+    octokit (4.4.0)
       sawyer (~> 0.7.0, >= 0.5.3)
     omniauth (1.3.1)
       hashie (>= 1.2, < 4)
