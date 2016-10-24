@@ -63,6 +63,7 @@ Then(/^the config value "([^"]*)" should not appear in the page$/) do |value|
   expect(page.body).not_to match value
 end
 
+
 # Make sure that one string (regexp) occurs before or after another one
 #   on the same page
 
@@ -70,4 +71,12 @@ Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
   #  ensure that that e1 occurs before e2.
   #  page.body is the entire content of the page as a string.
   !(/#{e1}.*#{e2}/m =~ page.body).nil?
+end
+Given(/^the date is "([^"]*)"$/) do |date|
+  date =~ /(\d{2})\/(\d{2})\/(\d{4})/
+  month = Integer($1,10)
+  day = Integer($2,10)
+  year = Integer($3,10)
+  new_time = Time.utc(year, month,day, 12, 0, 0)
+  Timecop.travel(new_time)
 end
