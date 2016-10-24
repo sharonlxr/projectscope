@@ -1,9 +1,9 @@
 # == Schema Information
 #
-# Table name: whitelist
+# Table name: whitelists
 #
-#  id                     :integer          not null, primary key
-#  email                  :string           default(""), not null
+#  id    :integer          not null, primary key
+#  email :string
 #
 
 class Whitelist < ActiveRecord::Base

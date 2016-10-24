@@ -1,18 +1,17 @@
-class WhitelistController < ApplicationController
-  include ActiveModel::Validations
+class WhitelistsController < ApplicationController
   before_action :check_if_admin
 
-  # GET /whitelist
+  # GET /whitelists
   def index
     @permitted_users = Whitelist.all 
   end
   
-  # GET /whitelist/new
+  # GET /whitelists/new
   def new
     @authorized_user = Whitelist.new
   end
   
-  # POST /whitelist/
+  # POST /whitelists/
   def create
     email = params[:email]
     if Whitelist.has_email?(email)
@@ -25,15 +24,15 @@ class WhitelistController < ApplicationController
         flash[:notice] = "Invalid Email format."
       end
     end
-    redirect_to whitelist_index_path
+    redirect_to whitelists_path
   end
 
-  # DELETE /whitelist/
+  # DELETE /whitelists/
   def destroy
     user = Whitelist.find(params[:id])
     user.destroy!
     flash[:notice] = "User is deleted successfully. "
-    redirect_to whitelist_index_path
+    redirect_to whitelists_path
   end
   
   def check_if_admin
