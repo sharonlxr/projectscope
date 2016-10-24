@@ -63,4 +63,5 @@ Project.create!(:name => "QuestionBank",
                     MetricSample.create!(:metric_name => 'slack', :project_id => 9, :score => 6),
                     MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 9, :score => 2),
                     MetricSample.create!(:metric_name => 'slack_trends', :project_id => 9, :score => 6)])
+
     
