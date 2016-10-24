@@ -1,7 +1,5 @@
-= form_tag '/whitelist' do
+= form_tag whitelist_index_path do
   = field_set_tag do
     = label_tag :email, 'Email'
     = text_field_tag :email
-    = label_tag :role, 'Role'
-    = text_field_tag :role
     = submit_tag 'Add'

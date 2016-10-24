@@ -31,8 +31,7 @@ class User < ActiveRecord::Base
 
   def self.from_omniauth(auth)
     email = auth.info.email.nil? ? auth.extra.raw_info.email : auth.info.email
-    if !email.nil? and Authorized_user.has_email? email
-      puts email
+    if !email.nil? and AuthorizedUser.has_email? email
     	User.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
     		user.provider = auth.provider
     		user.uid = auth.uid

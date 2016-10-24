@@ -4,14 +4,12 @@
   %thead
     %tr
       %th Authorized Users
-      %th Role
       %th Action
 
   %tbody
     - @permitted_users.each do |user|
       %tr
         %td= user.email
-        %td= user.role
         %td= link_to "Delete", whitelist_path(user), :method => :delete, data: { confirm: "Do you want to delete user #{user.email} from the whitelist?" }, :user => user
 
 %br/

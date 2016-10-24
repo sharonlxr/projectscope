@@ -3,7 +3,7 @@ Given /^admin with email "(.*)" and password "(.*)" exists/ do |email, password|
 end
 
 Given /^coach with email "(.*)" is in the whitelist/ do |email|
-	Authorized_user.create!(email: email, role: "coach")
+	AuthorizedUser.create!(email: email)
 end
 
 When /^I sign in as admin with email "(.*)" and password "(.*)"/ do |email, password|

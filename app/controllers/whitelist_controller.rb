@@ -1,31 +1,22 @@
 class WhitelistController < ApplicationController
 
   # http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
-  VALID_EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
-  ADMIN_ROLE = "admin"
-  COACH_ROLE = "coach"
-  
+
   # GET /whitelist
   def index
     if current_user.is_admin?
-       @permitted_users = Authorized_user.all 
+       @permitted_users = AuthorizedUser.all 
       
     else
        flash[:notice] = "You are not authorized to manipulate whitelist."
        redirect_to projects_url
     end
   end
-
-  # GET /whitelist/index
-  def show
-    @readonly = true
-    render :template => 'whitelist/index'
-  end
   
   # GET /whitelist/new
   def new
     if current_user.is_admin?
-      @authorized_user = Authorized_user.new
+      @authorized_user = AuthorizedUser.new
     else
       flash[:notice] = "You are not authorized to manipulate whitelist."
       redirect_to projects_url
@@ -36,20 +27,12 @@ class WhitelistController < ApplicationController
   def create
     if current_user.is_admin?
         email = params[:email]
-        role = params[:role]
-        unless (email =~ VALID_EMAIL_REGEX)
-            flash[:notice] = "Invalid Email."
-            redirect_to whitelist_new_path
-            return
+        if AuthorizedUser.has_email?(email)
+          flash[:notice] = "User #{email} already exists in whitelist. "
+          redirect_to whitelist_index_path
+          return
         end
-        unless (role.eql?(ADMIN_ROLE) or role.eql?(COACH_ROLE))
-            flash[:notice] = "Invalid Role: Role should be 'admin' or 'coach'. "
-            redirect_to whitelist_new_path
-            return
-        end
-        Authorized_user.create!(email: email, role: role)
-          privilegeUser = User.find_by_email(email);
-          privilegeUser.update(role: role) if !privilegeUser.nil?
+        AuthorizedUser.create!(email: email)
         flash[:notice] = "Add user #{email} successfully. "
         redirect_to whitelist_index_path
     else
@@ -60,12 +43,11 @@ class WhitelistController < ApplicationController
 
   # DELETE /whitelist/
   def destroy
-    user = Authorized_user.find(params[:id])
+    user = AuthorizedUser.find(params[:id])
     if current_user.is_admin?
       user.destroy!
-      respond_to do |format|
-        format.html { redirect_to whitelist_index_path, notice: 'User account was successfully deleted.' }
-      end
+      flash[:notice] = "User is deleted successfully. "
+      redirect_to whitelist_index_path
     else
       flash[:notice] = "You are not authorized to manipulate whitelist."
        redirect_to projects_url
