@@ -13,12 +13,6 @@
 
 ActiveRecord::Schema.define(version: 20161022053828) do
 
-  create_table "authorized_users", force: :cascade do |t|
-    t.string "email"
-  end
-
-  add_index "authorized_users", ["email"], name: "index_authorized_users_on_email"
-
   create_table "configs", force: :cascade do |t|
     t.integer  "project_id"
     t.string   "metric_name"
@@ -72,5 +66,11 @@ ActiveRecord::Schema.define(version: 20161022053828) do
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+  create_table "whitelists", force: :cascade do |t|
+    t.string "email"
+  end
+
+  add_index "whitelists", ["email"], name: "index_whitelists_on_email"
 
 end
