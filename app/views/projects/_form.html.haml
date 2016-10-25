@@ -28,7 +28,7 @@
           = text_field_tag field_name, val, :disabled => @readonly
           %br
           %br
-        - unless @readonly
+        - if !@readonly
           - classes[name].credentials.each do |cred|
             -if !existed.include?(cred)
               .field.new
@@ -47,7 +47,7 @@
           %label{:for => field_name}= "#{key}:"
           = text_field_tag field_name, val, :disabled => @readonly
           %br
-        - unless @readonly
+        - if !@readonly
           = link_to 'Add new', '', :class => 'add'
           .field.new
             = text_field_tag "project[configs_attributes][#{index}][new][]", '', :id => nil, :class => 'newf'
