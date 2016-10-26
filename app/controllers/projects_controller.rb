@@ -6,55 +6,12 @@ class ProjectsController < ApplicationController
   # GET /projects.json
 
   def index
-    
-    
-    if session.nil?
-      session[:order] = "ASC"
-      @projects = Project.all
-    elsif session[:pre_click].nil?
-      @projects = Project.all      
-    else
-      @metric_names = ProjectMetrics.metric_names
-      if session[:pre_click] == "project_name"
-        if session[:order] == "DESC"
-          @projects = Project.order(name: :desc)
-        else
-          @projects = Project.order(:name)
-        end
-      elsif session[:pre_click] == "code_climate" || session[:pre_click] == "github"||session[:pre_click] == "slack_trends"||session[:pre_click] == "slack"||session[:pre_click] == "pivotal_tracker"
-        if session[:order] == "DESC"
-          @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", session[:pre_click]).order("metric_samples.score")
-        else            
-          @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", session[:pre_click]).order("metric_samples.score")
-        end
-      end
-    end
-    click_type = params[:type]
-    if !click_type.nil? 
-      if session[:pre_click] == click_type
-        if session[:order] == "ASC"
-          session[:order] = "DESC"
-        else
-          session[:order] = "ASC"
-        end
-      else
-        session[:order] = "ASC"
-        session[:pre_click] = click_type
-      end
-    end
     @metric_names = ProjectMetrics.metric_names
-    if click_type == "project_name"
-      if session[:order] == "ASC"
-        @projects = Project.order(:name)
-      else
-        @projects = Project.order(name: :desc)
-      end
-    elsif click_type == "code_climate" || click_type == "github"||click_type == "slack_trends"||click_type == "slack"||click_type == "pivotal_tracker"
-      if session[:order] == "ASC"
-        @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score")
-      else
-        @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score").reverse
-      end
+    @projects = Project.all
+    if(params[:type] == "project_name")
+      order_by_project_name
+    elsif(!params[:type].nil?)
+      order_by_metric_name
     end
   end
 
@@ -136,5 +93,42 @@ class ProjectsController < ApplicationController
       v['options'].delete_if { |k,v| v.blank? }
     end
     params['project']
+  end
+  
+  private
+  def order_by_project_name
+    if session[:pre_click] == "project_name"
+      if session[:order] == "ASC"
+        @projects = Project.order(name: :desc)
+      else
+        @projects = Project.order(:name)
+      end
+    else    
+      @projects = Project.order(:name)  
+    end
+    change
+  end
+  
+  def order_by_metric_name 
+    click_type = params[:type]
+    if session[:pre_click] == click_type
+      if session[:order] == "ASC"
+        @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score")
+      else
+        @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score").reverse
+      end
+    else
+      @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score")
+    end 
+    change
+  end
+  
+  def change
+    if session[:order] == "ASC"
+      session[:order] = "DESC"
+    else
+      session[:order] = "ASC"
+    end
+    session[:pre_click] = params[:type]
   end
 end
