@@ -31,7 +31,7 @@ class ProjectsController < ApplicationController
       name = config.metric_name
       if @project_metrics[name].respond_to?(:credentials)
         config.options.each_pair do |key,val|
-            @existed_configs[name] << key.intern
+            @existed_configs[name] << key.to_sym
         end
       end
     end
