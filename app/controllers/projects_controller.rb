@@ -1,10 +1,12 @@
 class ProjectsController < ApplicationController
+  include ProjectsHelper
   before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_project_metrics, only: [:show, :edit, :new]
+  before_action :init_existed_configs, only: [:show, :edit, :new]
   http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
-  
   # GET /projects
   # GET /projects.json
+
   def index
     @projects = Project.all
     @metric_names = ProjectMetrics.metric_names
@@ -24,6 +26,15 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    setup_metric_configs(@project)
+    @project.configs.each do |config|
+      name = config.metric_name
+      if @project_metrics[name].respond_to?(:credentials)
+        config.options.each_pair do |key,val|
+            @existed_configs[name] << key.intern
+        end
+      end
+    end
   end
 
   # POST /projects
@@ -71,6 +82,20 @@ class ProjectsController < ApplicationController
   # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.includes(:configs).find(params[:id])
+  end
+
+  def set_project_metrics
+    @project_metrics = {}
+    ProjectMetrics.metric_names.each do |name|
+      @project_metrics[name] = ProjectMetrics.class_for name
+    end
+  end
+
+  def init_existed_configs
+    @existed_configs = {}
+    ProjectMetrics.metric_names.each do |name|
+      @existed_configs[name] = []
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.

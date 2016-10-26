@@ -15,39 +15,24 @@
 
   = f.fields_for :configs do |cf|
     - name,index  = cf.object.metric_name, cf.index
-    - classes = {'github' => ProjectMetricGithub, 'code_climate' => ProjectMetricCodeClimate, 'slack' => ProjectMetricSlack,'pivotal_tracker' => ProjectMetricPivotalTracker,'slack_trends' => ProjectMetricSlackTrends}
-    - if classes[name].respond_to?(:credentials)
-      %fieldset{:id => name}
-        %legend= name.titleize
-        = hidden_field_tag "project[configs_attributes][#{index}][metric_name]", name
-        - existed = []
-        - cf.object.options.each_pair do |key,val|
-          - existed << key.intern
-          - field_name = "project[configs_attributes][#{index}][options][#{key}]"
-          %label{:for => field_name}= "#{key}:"
-          = text_field_tag field_name, val, :disabled => @readonly
-          %br
-          %br
-        - unless @readonly
-          - classes[name].credentials.each do |cred|
-            -unless existed.include?(cred)
+    %fieldset{:id => name}
+      %legend= name.titleize
+      = hidden_field_tag "project[configs_attributes][#{index}][metric_name]", name
+      - cf.object.options.each_pair do |key,val|
+        - field_name = "project[configs_attributes][#{index}][options][#{key}]"
+        %label{:for => field_name}= "#{key}:"
+        = text_field_tag field_name, val, :disabled => @readonly
+        %br
+      - unless @readonly
+        - if @project_metrics[name].respond_to?(:credentials)
+          - @project_metrics[name].credentials.each do |cred|
+            -unless @existed_configs[name].include?(cred)
               .field.new
                 = label_tag "project[configs_attributes][#{index}][new][]", "#{cred}", :id => nil, :class => 'newf'
                 \ :
                 = hidden_field_tag "project[configs_attributes][#{index}][new][]", "#{cred}", :id => nil, :class => 'newf'
                 = text_field_tag "project[configs_attributes][#{index}][new][]", '', :id => "#{name}_#{cred}", :class => 'newf'
-                %br
-    - else
-      - name,index  = cf.object.metric_name, cf.index
-      %fieldset{:id => name}
-        %legend= name.titleize
-        = hidden_field_tag "project[configs_attributes][#{index}][metric_name]", name
-        - cf.object.options.each_pair do |key,val|
-          - field_name = "project[configs_attributes][#{index}][options][#{key}]"
-          %label{:for => field_name}= "#{key}:"
-          = text_field_tag field_name, val, :disabled => @readonly
-          %br
-        - unless @readonly
+        - else
           = link_to 'Add new', '', :class => 'add'
           .field.new
             = text_field_tag "project[configs_attributes][#{index}][new][]", '', :id => nil, :class => 'newf'
