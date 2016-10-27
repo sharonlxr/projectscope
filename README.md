@@ -1,7 +1,7 @@
 Main Repo Status:
 
-<a href="https://codeclimate.com/github/AgileVentures/projectscope_mvp"><img src="https://codeclimate.com/github/AgileVentures/projectscope_mvp/badges/gpa.svg" /></a>
-<a href="https://travis-ci.org/AgileVentures/projectscope_mvp"><img src="https://travis-ci.org/AgileVentures/projectscope_mvp.svg?branch=master"></a>
+<a href="https://codeclimate.com/github/AgileVentures/projectscope"><img src="https://codeclimate.com/github/AgileVentures/projectscope/badges/gpa.svg" /></a>
+<a href="https://travis-ci.org/AgileVentures/projectscope"><img src="https://travis-ci.org/AgileVentures/projectscope.svg?branch=develop"></a>
 
 CS169 Group Forked Repo Status:
 
@@ -51,7 +51,7 @@ or execute
 The file `config/application.yml.asc` is a symmetric-key-encrypted YAML
 file that itself contains the encryption keys for encrypting sensitive
 database attributes at rest.  It is safe to version this file.  The secrets
-in this file are managed [as described in this article.](saasbook.blogspot.com/2016/08/keeping-secrets.html)
+in this file are managed [as described in this article.](http://saasbook.blogspot.com/2016/08/keeping-secrets.html)
 
 # Creating new metric gems
 
@@ -77,4 +77,4 @@ TODO
 * [ ] get JSON API set up so that other services can consume our data
 * [ ] get some sad path testing in place
 * [ ] get some rspecs on the individual models?
-* [ ] make cukes higher level?
+* [ ] make cukes higher
