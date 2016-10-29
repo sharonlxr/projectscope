@@ -1,4 +1,4 @@
-@javascript @vcr
+@omniauth@javascript @vcr
 Feature: display list of project sorted by different criteria
  
   As an instructor or GSI
@@ -26,6 +26,7 @@ Feature: display list of project sorted by different criteria
 
 Scenario: sort project alphabetically
   When I am on the projects page
+  Then I should see "Project Name"
   When I follow "Project Name"
   # your steps here
   Then I should see "LocalSupport" before "WebsiteOne"
