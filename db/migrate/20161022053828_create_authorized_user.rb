@@ -1,10 +1,11 @@
 class CreateAuthorizedUser < ActiveRecord::Migration
   def up
-  	Whitelist.create!(email: Figaro.env.root_user_email)
+  	Whitelist.create!(username: "DrakeW")
+  	Whitelist.create!(username: "armandofox")
   end
   
   def down
-  	user = Whitelist.find_by_email(Figaro.env.root_user_email)
-  	user.destroy
+  	Whitelist.where(username: "DrakeW").first.destroy
+  	Whitelist.where(username: "armandofox").first.destroy
   end
 end
