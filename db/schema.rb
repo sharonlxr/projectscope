@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161022053828) do
+ActiveRecord::Schema.define(version: 20161020040440) do
 
   create_table "configs", force: :cascade do |t|
     t.integer  "project_id"
@@ -47,6 +47,10 @@ ActiveRecord::Schema.define(version: 20161022053828) do
   add_index "projects", ["name"], name: "index_projects_on_name"
 
   create_table "users", force: :cascade do |t|
+<<<<<<< HEAD
+=======
+    t.string   "provider_username",      default: "",      null: false
+>>>>>>> bd78074f0cf5bfc8c5de0a81a4ecd57b3da8472f
     t.string   "email",                  default: "",      null: false
     t.string   "encrypted_password",     default: "",      null: false
     t.string   "reset_password_token"
@@ -65,6 +69,7 @@ ActiveRecord::Schema.define(version: 20161022053828) do
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true
+<<<<<<< HEAD
   add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
 
   create_table "whitelists", force: :cascade do |t|
@@ -73,4 +78,9 @@ ActiveRecord::Schema.define(version: 20161022053828) do
 
   add_index "whitelists", ["email"], name: "index_whitelists_on_email"
 
+=======
+  add_index "users", ["provider_username"], name: "index_users_on_provider_username", unique: true
+  add_index "users", ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
+
+>>>>>>> bd78074f0cf5bfc8c5de0a81a4ecd57b3da8472f
 end

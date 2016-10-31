@@ -23,19 +23,21 @@
 class User < ActiveRecord::Base
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
-  devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:github]
+  devise :database_authenticatable, :recoverable, 
+    :rememberable, :trackable, :validatable, :omniauthable, :omniauth_providers => [:github]
 
   ADMIN = "admin"
   COACH = "coach"
 
   def self.from_omniauth(auth)
     email = auth.info.email.nil? ? auth.extra.raw_info.email : auth.info.email
-    if !email.nil? and Whitelist.has_email? email
-    	User.where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    login = auth.extra.raw_info.login
+    if !login.nil? and !email.nil?
+    	User.where(provider: auth.provider, provider_username: login, email: email).first_or_create do |user|
     		user.provider = auth.provider
     		user.uid = auth.uid
     		user.email = email
+        user.provider_username = login
     		user.password = Devise.friendly_token[0,20]
     	end
     end

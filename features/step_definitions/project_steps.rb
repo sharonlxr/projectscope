@@ -57,12 +57,22 @@ end
 
 And(/^I am logged in$/) do
   steps %Q{
-    Given admin with email "test-admin@test.com" and password "testadminofprojectscope" exists
     Given I am on the login page
-    When I sign in as admin with email "test-admin@test.com" and password "testadminofprojectscope"
+    And I have a valid github account with email "test-coach@test.com" username "test-coach"
+    And I follow "Sign in with GitHub"
   }
+  sleep(1)
 end
 
 Then(/^the config value "([^"]*)" should not appear in the page$/) do |value|
   expect(page.body).not_to match value
+end
+
+Given(/^the date is "([^"]*)"$/) do |date|
+  date =~ /(\d{2})\/(\d{2})\/(\d{4})/
+  month = Integer($1,10)
+  day = Integer($2,10)
+  year = Integer($3,10)
+  new_time = Time.utc(year, month,day, 12, 0, 0)
+  Timecop.travel(new_time)
 end
