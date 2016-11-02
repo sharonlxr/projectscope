@@ -14,12 +14,16 @@ dummy1_slack = ProjectMetrics.class_for('slack').new(token: 'xoxp-88866518725-89
 dummy1_pivot = ProjectMetrics.class_for('pivotal_tracker').new(token: 'd9ef66309fcefb28ccb33863a922f8f5', project:'1886749')
 
 sample2 = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
-Project.create!(:name => "THE ARCTIC INSTITUTE", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 1, :score => dummy1_code_climate.score, :raw_data => dummy1_code_climate.raw_data, :image => dummy1_code_climate.image), 
-    MetricSample.create!(:metric_name => 'github', :project_id => 1, :score => dummy1_github.score, :raw_data => dummy1_github.raw_data, :image => dummy1_github.image), 
-    MetricSample.create!(:metric_name => 'slack', :project_id => 1, :score => 5),
-    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 1, :score =>dummy1_pivot.score, :image => dummy1_pivot.image),
-    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 1, :score => 3)])
+Project.create!(:name => "THE ARCTIC INSTITUTE", 
+    :configs => [
+        Config.create!(:metric_name => 'code_climate', :project_id => 1, :options => {'url' => 'http://github.com/AgileVentures/WebsiteOne'}),
+        Config.create!(:metric_name => 'github', :project_id => 1, :options => {'url' => 'http://github.com/AgileVentures/WebsiteOne'})], 
+    :metric_samples =>[
+        MetricSample.create!(:metric_name => 'code_climate', :project_id => 1, :score => dummy1_code_climate.score, :raw_data => dummy1_code_climate.raw_data, :image => dummy1_code_climate.image), 
+        MetricSample.create!(:metric_name => 'github', :project_id => 1, :score => dummy1_github.score, :raw_data => dummy1_github.raw_data, :image => dummy1_github.image), 
+        MetricSample.create!(:metric_name => 'slack', :project_id => 1, :score => 5),
+        MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 1, :score =>dummy1_pivot.score, :image => dummy1_pivot.image),
+        MetricSample.create!(:metric_name => 'slack_trends', :project_id => 1, :score => 3)])
 Project.create!(:name => "ALZHEIMER'S GREATER LOS ANGELES", :metric_samples =>[
     MetricSample.create!(:metric_name => 'code_climate', :project_id => 2, :score => sample2.score, :raw_data => sample2.raw_data, :image => sample2.image), 
     MetricSample.create!(:metric_name => 'github', :project_id => 2, :score => 7), 
