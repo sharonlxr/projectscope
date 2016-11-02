@@ -1,9 +1,11 @@
 class ProjectsController < ApplicationController
   include ProjectsHelper
   before_action :set_project, only: [:show, :edit, :update, :destroy]
+
   before_action :set_project_metrics, only: [:show, :edit, :new]
   before_action :init_existed_configs, only: [:show, :edit, :new]
-  http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
+  before_action :authenticate_user!
+
   # GET /projects
   # GET /projects.json
 
