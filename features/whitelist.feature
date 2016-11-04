@@ -40,7 +40,7 @@ Scenario: Whitelist users add a user to the whitelist
   And I enter the whitelist page
   Then I should see "Add user to whitelist"
   When I follow "Add user to whitelist"
-  Then I should be on the add user to whitelist page
+  Then I should be on the whitelist management page
   When I fill in "username" with "daisy"
   And I press "Add"
   Then I should be on the whitelist page

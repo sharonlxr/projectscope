@@ -23,7 +23,7 @@ module NavigationHelpers
         '/users/sign_in'
       when /^the whitelist page/ then
         '/whitelists'
-      when /^the add user to whitelist page/ then
+      when /^the whitelist management page/ then
         '/whitelists/new'
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
