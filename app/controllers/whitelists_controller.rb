@@ -1,5 +1,5 @@
 class WhitelistsController < ApplicationController
-  before_action :check_if_admin
+  before_action :check_if_in_whitelist
 
   # GET /whitelists
   def index
@@ -35,8 +35,8 @@ class WhitelistsController < ApplicationController
     redirect_to whitelists_path
   end
   
-  def check_if_admin
-    unless current_user.is_admin?
+  def check_if_in_whitelist
+    unless Whitelist.has_username?(current_user.provider_username)
        flash[:notice] = "You are not authorized to manipulate whitelist."
        redirect_to projects_url
     end
