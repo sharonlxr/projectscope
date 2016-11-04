@@ -9,23 +9,30 @@ require 'project_metric_code_climate'
 require 'project_metric_slack_trends'
 require 'project_metric_pivotal_tracker'
 dummy1_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/WebsiteOne'
-dummy1_github = ProjectMetrics.class_for('github').new url: 'https://github.com/AgileVentures/LocalSupport'
-dummy1_slack = ProjectMetrics.class_for('slack').new(token: 'xoxp-88866518725-89002779974-99405676995-ce5416e3518e3738525b6290720418e1', channel:'CS169-ProjectScope')
+dummy1_github = ProjectMetrics.class_for('github').new url: 'http://github.com/AgileVentures/WebsiteOne'
+dummy1_slack = ProjectMetrics.class_for('slack').new(token: 'xoxp-88866518725-89002779974-99405676995-ce5416e3518e3738525b6290720418e1', channel:'general')
 dummy1_pivot = ProjectMetrics.class_for('pivotal_tracker').new(token: 'd9ef66309fcefb28ccb33863a922f8f5', project:'1886749')
+dummy1_slack_trends = ProjectMetrics.class_for('slack_trends').new(token: 'xoxp-88866518725-89002779974-99405676995-ce5416e3518e3738525b6290720418e1', channel:'general')
 
-sample2 = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
+dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
+dummy2_github = ProjectMetrics.class_for('github').new url: 'http://github.com/AgileVentures/project_metric_slack'
+
 Project.create!(:name => "THE ARCTIC INSTITUTE", 
     :configs => [
         Config.create!(:metric_name => 'code_climate', :project_id => 1, :options => {'url' => 'http://github.com/AgileVentures/WebsiteOne'}),
-        Config.create!(:metric_name => 'github', :project_id => 1, :options => {'url' => 'http://github.com/AgileVentures/WebsiteOne'})], 
+        Config.create!(:metric_name => 'github', :project_id => 1, :options => {'url' => 'http://github.com/AgileVentures/WebsiteOne'}),
+        Config.create!(:metric_name => 'slack', :project_id => 1, :options => {'token' => 'xoxp-88866518725-89002779974-99405676995-ce5416e3518e3738525b6290720418e1', 'channel'=>'general'}),
+        Config.create!(:metric_name => 'pivotal_tracker', :project_id => 1, :options => {'token' => 'd9ef66309fcefb28ccb33863a922f8f5', 'project'=>'1886749'}),
+        Config.create!(:metric_name => 'slack_trends', :project_id => 1, :options => {'token' => 'xoxp-88866518725-89002779974-99405676995-ce5416e3518e3738525b6290720418e1', 'channel'=>'general'})
+        ], 
     :metric_samples =>[
         MetricSample.create!(:metric_name => 'code_climate', :project_id => 1, :score => dummy1_code_climate.score, :raw_data => dummy1_code_climate.raw_data, :image => dummy1_code_climate.image), 
         MetricSample.create!(:metric_name => 'github', :project_id => 1, :score => dummy1_github.score, :raw_data => dummy1_github.raw_data, :image => dummy1_github.image), 
-        MetricSample.create!(:metric_name => 'slack', :project_id => 1, :score => 5),
+        MetricSample.create!(:metric_name => 'slack', :project_id => 1, :score => dummy1_slack.score, :raw_data => dummy1_slack.raw_data, :image => dummy1_slack.image),
         MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 1, :score =>dummy1_pivot.score, :image => dummy1_pivot.image),
-        MetricSample.create!(:metric_name => 'slack_trends', :project_id => 1, :score => 3)])
+        MetricSample.create!(:metric_name => 'slack_trends', :project_id => 1, :score => dummy1_slack_trends.score, :raw_data => dummy1_slack_trends.raw_data, :image => dummy1_slack_trends.image)])
 Project.create!(:name => "ALZHEIMER'S GREATER LOS ANGELES", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 2, :score => sample2.score, :raw_data => sample2.raw_data, :image => sample2.image), 
+    MetricSample.create!(:metric_name => 'code_climate', :project_id => 2, :score => dummy2_code_climate .score, :raw_data => dummy2_code_climate .raw_data, :image =>dummy2_code_climate .image), 
     MetricSample.create!(:metric_name => 'github', :project_id => 2, :score => 7), 
     MetricSample.create!(:metric_name => 'slack', :project_id => 2, :score => 15),
     MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 2, :score => 14),
