@@ -13,15 +13,15 @@ class WhitelistsController < ApplicationController
   
   # POST /whitelists/
   def create
-    email = params[:email]
-    if Whitelist.has_email?(email)
-      flash[:notice] = "User #{email} already exists in whitelist. "
+    username = params[:username]
+    if Whitelist.has_username?(username)
+      flash[:notice] = "User #{username} already exists in whitelist. "
     else
       begin
-        Whitelist.create!(email: email)
-        flash[:notice] = "Add user #{email} successfully."
+        Whitelist.create!(username: username)
+        flash[:notice] = "Add user #{username} successfully."
       rescue ActiveRecord::RecordInvalid
-        flash[:notice] = "Invalid Email format."
+        flash[:notice] = "Invalid username format."
       end
     end
     redirect_to whitelists_path

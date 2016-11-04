@@ -9,8 +9,8 @@
   %tbody
     - @permitted_users.each do |user|
       %tr
-        %td= user.email
-        %td= link_to "Delete", whitelist_path(user), :method => :delete, data: { confirm: "Do you want to delete user #{user.email} from the whitelist?" }, :user => user
+        %td= user.username
+        %td= link_to "Delete", whitelist_path(user), :method => :delete, data: { confirm: "Do you want to delete user #{user.username} from the whitelist?" }, :user => user
 
 %br/
 

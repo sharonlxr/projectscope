@@ -32,7 +32,7 @@ class User < ActiveRecord::Base
   def self.from_omniauth(auth)
     email = auth.info.email.nil? ? auth.extra.raw_info.email : auth.info.email
     login = auth.extra.raw_info.login
-    unless login.nil?
+    unless login.nil? or !Whitelist.has_username?(login)
     	User.where(provider: auth.provider, provider_username: login).first_or_create do |user|
     		user.provider = auth.provider
     		user.uid = auth.uid
