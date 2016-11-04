@@ -1,7 +1,7 @@
 @omniauth
 Feature: Whitelist
-	As an admin of ProjectScope, I will be able to see the whitelist, add user to the whitelist, and delete user from the whitelist.
-    As a coach of ProjectScope, I will not be able to access the whitelist.
+	As a whitelist user, I will be able to login to the projectscope and see the whitelist.
+	If I am not a whitelist user, I will not be able to login and manipulate the whitelist.
 
 Background:
 	Given "test-admin" is in the whitelist
