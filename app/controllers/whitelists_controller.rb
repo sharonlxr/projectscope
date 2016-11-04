@@ -32,7 +32,11 @@ class WhitelistsController < ApplicationController
     user = Whitelist.find(params[:id])
     user.destroy!
     flash[:notice] = "User is deleted successfully. "
-    redirect_to whitelists_path
+    if Whitelist.has_username?(current_user.username)
+      redirect_to whitelists_path
+    else
+      redirect_to destroy_user_session
+    end
   end
   
   def check_if_in_whitelist
