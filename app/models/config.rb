@@ -19,7 +19,7 @@ class Config < ActiveRecord::Base
   attr_encrypted :options, :key => Figaro.env.attr_encrypted_key!, :marshal => true
   after_initialize { self.options ||= {} }
 
-  attr_accessible :options, :metric_name
+  attr_accessible :options, :metric_name, :project_id
 
 end
 
