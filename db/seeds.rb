@@ -36,13 +36,13 @@ Project.create!(:name => "THE ARCTIC INSTITUTE",
         Config.create!(:metric_name => 'slack_trends', :project_id => 1, :options => {'token' => 'xoxp-88866518725-89002779974-99405676995-ce5416e3518e3738525b6290720418e1', 'channel'=>'general'})
         ], 
     :metric_samples =>[
-        MetricSample.create!(:metric_name => 'code_climate', :project_id => 1, :score => dummy1_code_climate.score, :raw_data => dummy1_code_climate.raw_data, :image => dummy1_code_climate.image), 
+        MetricSample.create!(:metric_name => 'code_climate', :project_id => 1, :score => dummy1_code_climate.score, :raw_data => dummy1_code_climate.raw_data, :image => dummy1_code_climate.raw_data), 
         MetricSample.create!(:metric_name => 'github', :project_id => 1, :score => dummy1_github.score, :raw_data => dummy1_github.raw_data, :image => dummy1_github.image), 
         MetricSample.create!(:metric_name => 'slack', :project_id => 1, :score => dummy1_slack.score, :raw_data => dummy1_slack.raw_data, :image => dummy1_slack.image),
         MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 1, :score =>dummy1_pivot.score, :image => dummy1_pivot.image),
         MetricSample.create!(:metric_name => 'slack_trends', :project_id => 1, :score => dummy1_slack_trends.score, :raw_data => dummy1_slack_trends.raw_data, :image => dummy1_slack_trends.image)])
 Project.create!(:name => "ALZHEIMER'S GREATER LOS ANGELES", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 2, :score => dummy2_code_climate .score, :raw_data => dummy2_code_climate .raw_data, :image =>dummy2_code_climate .image), 
+    MetricSample.create!(:metric_name => 'code_climate', :project_id => 2, :score => dummy2_code_climate .score, :raw_data => dummy2_code_climate .raw_data, :image =>dummy2_code_climate.raw_data), 
     MetricSample.create!(:metric_name => 'github', :project_id => 2, :score => 0.6339563862928349, :image => github1),
     MetricSample.create!(:metric_name => 'slack', :project_id => 2, :score => 0.29861111111111116, :image => slack1),
     MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 2, :score => 0.5636833046471601, :image => pivot1),
