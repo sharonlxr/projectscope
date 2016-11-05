@@ -54,7 +54,7 @@ Scenario: Whitelist users add a user to the whitelist
    Then I should see "User is deleted successfully."
    And I should not see "test-admin"
    
- Scenario: Whitelist user delete himself from the whitelist
+ Scenario: Whitelist users are unable to delete themselves from the whitelist
    Given I am logged in
    And I enter the whitelist page
    Then I should see "test-admin"
@@ -64,10 +64,7 @@ Scenario: Whitelist users add a user to the whitelist
    Then I should not see "test-admin"
    When I follow the first "Delete"
    Then I should not see "ysiad"
-   When I follow the first "Delete"
-   Then I should not see "test-coach"
-   Then I should be on the projects page
-   Then I should see "You are not authorized to manipulate whitelist."
+   Then I should not see "Delete"
   
 	
 
