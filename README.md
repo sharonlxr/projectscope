@@ -1,6 +1,5 @@
 Main Repo Status:
 
-
 <a href="https://codeclimate.com/github/AgileVentures/projectscope"><img src="https://codeclimate.com/github/AgileVentures/projectscope/badges/gpa.svg" /></a>
 <a href="https://travis-ci.org/AgileVentures/projectscope"><img src="https://travis-ci.org/AgileVentures/projectscope.svg?branch=develop"></a>
 
@@ -8,6 +7,7 @@ CS169 Group Forked Repo Status:
 
 <a href="https://codeclimate.com/github/DrakeW/projectscope"><img src="https://codeclimate.com/github/DrakeW/projectscope/badges/gpa.svg" /></a>
 <a href="https://travis-ci.org/DrakeW/projectscope"><img src="https://travis-ci.org/DrakeW/projectscope.svg?branch=develop"></a>
+<a href="https://codeclimate.com/github/DrakeW/projectscope/coverage"><img src="https://codeclimate.com/github/DrakeW/projectscope/badges/coverage.svg" /></a>
 
 # MVP dashboard for ProjectScope
 
