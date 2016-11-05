@@ -48,7 +48,7 @@ Project.create!(:name => "ALZHEIMER'S GREATER LOS ANGELES", :metric_samples =>[
     MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 2, :score => 0.5636833046471601, :image => pivot1),
     MetricSample.create!(:metric_name => 'slack_trends', :project_id => 2, :score => 0.32200793650793647, :image => slack_trends1)])
 Project.create!(:name => "VISIONARIA NETWORK", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 3, :score => 3.2, :image => 'https://codeclimate.com/github/AgileVentures/WebsiteOne/badges/gpa.svg'), 
+    MetricSample.create!(:metric_name => 'code_climate', :project_id => 3, :score => dummy1_code_climate.score, :image => dummy1_code_climate.raw_data), 
     MetricSample.create!(:metric_name => 'github', :project_id => 3, :score => 0.6166666666666667, :image => github2), 
     MetricSample.create!(:metric_name => 'slack', :project_id => 3, :score => 0.25, :image => slack2),
     MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 3, :score => 0.49702380952380953, :image => pivot2),
@@ -58,8 +58,8 @@ Project.create!(:name => "QuestionBank",
         Config.create!(:metric_name => 'code_climate', :project_id => 4, :options => {'token' => 'xyz', 'user' => 'fox'}),
         Config.create!(:metric_name => 'github', :project_id => 4, :options => {'token' =>'123', 'user'=>"fox"})], 
     :metric_samples =>[
-        MetricSample.create!(:metric_name => 'code_climate', :project_id => 4,  :score => 3.2, :image => 'https://codeclimate.com/github/AgileVentures/LocalSupport/badges/gpa.svg'), 
-        MetricSample.create!(:metric_name => 'github', :project_id => 4, :score => 0.6339563862928349, :image => github3), 
-        MetricSample.create!(:metric_name => 'slack', :project_id => 4, :score => 6, :image => slack3),
+        MetricSample.create!(:metric_name => 'code_climate', :project_id => 4,  :score => dummy2_code_climate .score, :image => dummy2_code_climate.raw_data), 
+        MetricSample.create!(:metric_name => 'github', :project_id => 4, :score => 0.29, :image => github3), 
+        MetricSample.create!(:metric_name => 'slack', :project_id => 4, :score => 0.6, :image => slack3),
         MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 4, :score => 0),
         MetricSample.create!(:metric_name => 'slack_trends', :project_id => 4, :score => 0.4637265745007681, :image => slack_trends3)])
