@@ -6,13 +6,14 @@ class ProjectsController < ApplicationController
   # GET /projects.json
 
   def index
-    @metric_names = ProjectMetrics.metric_names
-    @projects = Project.all
-    if(params[:type] == "project_name")
-      order_by_project_name
-    elsif(!params[:type].nil?)
-      order_by_metric_name
+    @metric_names = current_user.preferred_metrics
+    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    if params[:type].nil? or params[:type] == "project_name"
+      @projects = order_by_project_name preferred_projects
+    else
+      @projects = order_by_metric_name preferred_projects
     end
+    update_session
   end
 
   # GET /projects/1
@@ -96,39 +97,19 @@ class ProjectsController < ApplicationController
   end
   
   private
-  def order_by_project_name
-    if session[:pre_click] == "project_name"
-      if session[:order] == "ASC"
-        @projects = Project.order(name: :desc)
-      else
-        @projects = Project.order(:name)
-      end
-    else    
-      @projects = Project.order(:name)  
-    end
-    change
+  def order_by_project_name preferred_projects
+    session[:order] = "ASC" if session[:pre_click] != "project_name"
+    preferred_projects.order_by_name(session[:order])
   end
   
-  def order_by_metric_name 
+  def order_by_metric_name preferred_projects
     click_type = params[:type]
-    if session[:pre_click] == click_type
-      if session[:order] == "ASC"
-        @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score")
-      else
-        @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score").reverse
-      end
-    else
-      @projects = Project.joins(:metric_samples).where("metric_samples.metric_name = ?", click_type).order("metric_samples.score")
-    end 
-    change
+    session[:order] = "ASC" if session[:pre_click] != click_type 
+    preferred_projects.order_by_metric_score(click_type, session[:order])
   end
   
-  def change
-    if session[:order] == "ASC"
-      session[:order] = "DESC"
-    else
-      session[:order] = "ASC"
-    end
+  def update_session
+    session[:order] = session[:order] == "ASC" ? "DESC" : "ASC"
     session[:pre_click] = params[:type]
   end
 end

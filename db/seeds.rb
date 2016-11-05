@@ -16,7 +16,17 @@ dummy1_slack_trends = ProjectMetrics.class_for('slack_trends').new(token: 'xoxp-
 
 dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
 dummy2_github = ProjectMetrics.class_for('github').new url: 'http://github.com/AgileVentures/project_metric_slack'
-
+slack1 = File.read './db/image/slack1.svg'
+slack2 = File.read './db/image/slack2.svg'
+slack3 = File.read './db/image/slack3.svg'
+slack_trends1 = File.read './db/image/slack_trends1.svg'
+slack_trends2 = File.read './db/image/slack_trends2.svg'
+slack_trends3 = File.read './db/image/slack_trends3.svg'
+pivot1 = File.read './db/image/pivot1.svg'
+pivot2 = File.read './db/image/pivot2.svg'
+github1 = File.read './db/image/github1.svg'
+github2 = File.read './db/image/github2.svg'
+github3 = File.read './db/image/github3.svg'
 Project.create!(:name => "THE ARCTIC INSTITUTE", 
     :configs => [
         Config.create!(:metric_name => 'code_climate', :project_id => 1, :options => {'url' => 'http://github.com/AgileVentures/WebsiteOne'}),
@@ -33,54 +43,25 @@ Project.create!(:name => "THE ARCTIC INSTITUTE",
         MetricSample.create!(:metric_name => 'slack_trends', :project_id => 1, :score => dummy1_slack_trends.score, :raw_data => dummy1_slack_trends.raw_data, :image => dummy1_slack_trends.image)])
 Project.create!(:name => "ALZHEIMER'S GREATER LOS ANGELES", :metric_samples =>[
     MetricSample.create!(:metric_name => 'code_climate', :project_id => 2, :score => dummy2_code_climate .score, :raw_data => dummy2_code_climate .raw_data, :image =>dummy2_code_climate .image), 
-    MetricSample.create!(:metric_name => 'github', :project_id => 2, :score => 7), 
-    MetricSample.create!(:metric_name => 'slack', :project_id => 2, :score => 15),
-    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 2, :score => 14),
-    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 2, :score => 4)])
+    MetricSample.create!(:metric_name => 'github', :project_id => 2, :score => 0.6339563862928349, :image => github1),
+    MetricSample.create!(:metric_name => 'slack', :project_id => 2, :score => 0.29861111111111116, :image => slack1),
+    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 2, :score => 0.5636833046471601, :image => pivot1),
+    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 2, :score => 0.32200793650793647, :image => slack_trends1)])
 Project.create!(:name => "VISIONARIA NETWORK", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 3, :score => 9), 
-    MetricSample.create!(:metric_name => 'github', :project_id => 3, :score => 4), 
-    MetricSample.create!(:metric_name => 'slack', :project_id => 3, :score => 3),
-    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 3, :score => 12),
-    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 3, :score => 14)])
-Project.create!(:name => "ACCCOS", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 4, :score => 13), 
-    MetricSample.create!(:metric_name => 'github', :project_id => 4, :score => 6), 
-    MetricSample.create!(:metric_name => 'slack', :project_id => 4, :score => 9),
-    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 4, :score => 3),
-    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 4, :score => 7)])
-Project.create!(:name => "ORINDA POLICE DEPARTMENT", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 5, :score => 3), 
-    MetricSample.create!(:metric_name => 'github', :project_id => 5, :score => 2), 
-    MetricSample.create!(:metric_name => 'slack', :project_id => 5, :score => 5),
-    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 5, :score => 4),
-    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 5, :score => 6)])
-Project.create!(:name => "ESENTIAL", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 6, :score => 3), 
-    MetricSample.create!(:metric_name => 'github', :project_id => 6, :score => 1), 
-    MetricSample.create!(:metric_name => 'slack', :project_id => 6, :score => 7),
-    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 6, :score => 5),
-    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 6, :score => 9)])
-Project.create!(:name => "ProjectScope", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 7, :score => 23), 
-    MetricSample.create!(:metric_name => 'github', :project_id => 7, :score => 22), 
-    MetricSample.create!(:metric_name => 'slack', :project_id => 7, :score => 15),
-    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 7, :score => 14),
-    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 7, :score => 16)])
-Project.create!(:name => "CALIFORNIA POETS IN THE SCHOOLS", :metric_samples =>[
-    MetricSample.create!(:metric_name => 'code_climate', :project_id => 8, :score => 4), 
-    MetricSample.create!(:metric_name => 'github', :project_id => 8, :score => 3), 
-    MetricSample.create!(:metric_name => 'slack', :project_id => 8, :score => 7),
-    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 8, :score => 3),
-    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 8, :score => 5)])
+    MetricSample.create!(:metric_name => 'code_climate', :project_id => 3, :score => 3.2, :image => 'https://codeclimate.com/github/AgileVentures/WebsiteOne/badges/gpa.svg'), 
+    MetricSample.create!(:metric_name => 'github', :project_id => 3, :score => 0.6166666666666667, :image => github2), 
+    MetricSample.create!(:metric_name => 'slack', :project_id => 3, :score => 0.25, :image => slack2),
+    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 3, :score => 0.49702380952380953, :image => pivot2),
+    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 3, :score => 0.42148777348777344, :image => slack_trends2)])
 Project.create!(:name => "QuestionBank",
-                :configs => [
-                    Config.create!(:metric_name => 'code_climate', :options => {'token' => 'xyz', 'user' => 'fox'}),
-                    Config.create!(:metric_name => 'github', :options => {'token' =>'123', 'user'=>"fox"})], 
-                :metric_samples =>[
-                    MetricSample.create!(:metric_name => 'code_climate', :project_id => 9, :score => 5), 
-                    MetricSample.create!(:metric_name => 'github', :project_id => 9, :score => 4), 
-                    MetricSample.create!(:metric_name => 'slack', :project_id => 9, :score => 6),
-                    MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 9, :score => 2),
-                    MetricSample.create!(:metric_name => 'slack_trends', :project_id => 9, :score => 6)])
+    :configs => [
+        Config.create!(:metric_name => 'code_climate', :project_id => 4, :options => {'token' => 'xyz', 'user' => 'fox'}),
+        Config.create!(:metric_name => 'github', :project_id => 4, :options => {'token' =>'123', 'user'=>"fox"})], 
+    :metric_samples =>[
+        MetricSample.create!(:metric_name => 'code_climate', :project_id => 4,  :score => 3.2, :image => 'https://codeclimate.com/github/AgileVentures/LocalSupport/badges/gpa.svg'), 
+        MetricSample.create!(:metric_name => 'github', :project_id => 4, :score => 0.6339563862928349, :image => github3), 
+        MetricSample.create!(:metric_name => 'slack', :project_id => 4, :score => 6, :image => slack3),
+        MetricSample.create!(:metric_name => 'pivotal_tracker', :project_id => 4, :score => 0),
+        MetricSample.create!(:metric_name => 'slack_trends', :project_id => 4, :score => 0.4637265745007681, :image => slack_trends3)])
+
     
