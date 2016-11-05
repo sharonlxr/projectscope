@@ -16,14 +16,8 @@
         - project.latest_metric_samples.each do |sample|
           - if is_selected_metric? sample
             %td{:id => "#{project.name}_#{sample.try(:metric_name)}_metric"}
-              - if sample.try(:metric_name) == 'code_climate'
-                = '%.2f'.try(:%,sample.try(:score) || 0.0)
-
-                %img{:src =>  sample.try(:image)}
-              - else
-                = '%.2f'.try(:%,sample.try(:score) || 0.0)
-
-                #{raw sample.try(:image)}
+              = '%.2f'.try(:%,sample.try(:score) || 0.0)
+              #{raw sample.try(:image)}
 
 %br/
 
