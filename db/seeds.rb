@@ -45,8 +45,8 @@ project_4 = Project.create!(:name => "QuestionBank")
 projects_list = [project_1, project_2, project_3, project_4]
 
 
-start_date = Date.parse("2016-11-6")
-end_date = Date.parse("2016-11-14")
+end_date = Date.today
+start_date = end_date - 14.days
 
 start_date.upto(end_date) do |date|
     projects_list.each do |project|
@@ -54,7 +54,8 @@ start_date.upto(end_date) do |date|
             MetricSample.create!(:metric_name => metric,
                                  :project_id => project.id,
                                  :score => rand(4),
-                                 :image => dummies[metric][rand(3)])
+                                 :image => dummies[metric][rand(3)],
+                                 :created_at => date)
         end
     end
 end
