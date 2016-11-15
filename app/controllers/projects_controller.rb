@@ -15,7 +15,8 @@ class ProjectsController < ApplicationController
     end
     update_session
 
-    @metric_min_date = MetricSample.min_date
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
   end
 
   # GET /projects/1
@@ -75,8 +76,10 @@ class ProjectsController < ApplicationController
   end
 
   def metrics_on_date
-    date = DateTime.parse(params[:date])
-    @metrics = Project.latest_metrics_on_date date
+    days_from_now = params[:days_from_now].to_i
+    date = DateTime.parse (Date.today - days_from_now.days).to_s
+    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    @metrics = Project.latest_metrics_on_date preferred_projects, current_user.preferred_metrics, date
     respond_to do |format|
       format.json { render json: @metrics }
     end

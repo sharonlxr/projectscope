@@ -3,10 +3,10 @@
 %h1 Project List
 
 %div
-  - unless @metric_min_date.nil?
-    - @metric_min_date.upto(Date.today) do |date|
-      %div{:class => "btn btn-primary datetime-picker", :date => date.to_s}= date.to_s 
-
+  Current date:
+  %strong{:id => "date-label"}= Date.today.to_s
+%div{:id => "date-slider", :num_days_from_min => @num_days_from_today }
+%br/
 %table
   %thead
     %tr

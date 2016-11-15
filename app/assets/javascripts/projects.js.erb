@@ -11,24 +11,34 @@ var update_metrics = function(data) {
 	});
 };
 
-$(document).ready(function() {
-	$(".datetime-picker").click(function(event) {
-		var date = $(this).attr("date");
-		$.ajax({
+var update_date_label = function(data) {
+	$("#date-label").html(data[0][0].created_at.split("T")[0]);
+}
+
+var ready = function() {
+	$( "#date-slider" ).slider({
+      value: 100,
+      min: -$("#date-slider").attr("num_days_from_min"),
+      max: 0,
+      step: 1,
+      slide: function(event, ui) {
+        $.ajax({
 			url: 'projects/metrics_on_date',
 			type: 'POST',
 			dataType: 'json',
-			data: {date: date},
+			data: { days_from_now: -1 * ui.value },
 		})
 		.done(function(data) {
 			console.log(data)
 			update_metrics(data);
+			update_date_label(data);
 		})
 		.fail(function() {
 			console.log("error");
 		})
-	});
-});
+      }
+    });
+}
 
-
-
+$(document).ready(ready)
+$(document).on('turbolinks:load', ready)
