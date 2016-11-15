@@ -81,7 +81,7 @@ class ProjectsController < ApplicationController
     preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
     @metrics = Project.latest_metrics_on_date preferred_projects, current_user.preferred_metrics, date
     respond_to do |format|
-      format.json { render json: @metrics }
+      format.json { render json: { data: @metrics, date: date } }
     end
   end
 
