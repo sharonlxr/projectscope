@@ -39,14 +39,14 @@ var request_for_metrics = function(days_from_now) {
 
 var ready = function() {
 	$( "#date-slider" ).slider({
-      value: 100,
-      min: -$("#date-slider").attr("num_days_from_min"),
-      max: 0,
-      step: 1,
-      slide: function(event, ui) {
-      	var days_from_now = -1 * ui.value
-        request_for_metrics(days_from_now)
-      }
+		value: 100,
+		min: -$("#date-slider").attr("num_days_from_min"),
+		max: 0,
+		step: 1,
+		slide: function(event, ui) {
+			var days_from_now = -1 * ui.value
+		request_for_metrics(days_from_now)
+		}
     });
 }
 
