@@ -2,12 +2,16 @@
 
 %h1 Project List
 
+%div
+  - @metric_min_date.upto(Date.today) do |date|
+    %div{:class => "btn btn-primary datetime-picker", :date => date.to_s}= date.to_s 
+
 %table
   %thead
     %tr
-      %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name"
+      %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
       - @metric_names.each do |metric_name|
-        %th{:class => @class}= link_to metric_name, projects_path(:type => metric_name), :id => metric_name
+        %th{:class => @class}= link_to metric_name, projects_path(:type => metric_name), :id => metric_name, :method => :get
   
   %tbody
     - @projects.each do |project|
@@ -15,9 +19,9 @@
         %td= link_to project.name, project
         - project.latest_metric_samples.each do |sample|
           - if is_selected_metric? sample
-            %td{:id => "#{project.name}_#{sample.try(:metric_name)}_metric"}
-              = '%.2f'.try(:%,sample.try(:score) || 0.0)
-              #{raw sample.try(:image)}
+            %td{:id => "project_#{project.id}_#{sample.try(:metric_name)}_metric"}
+              %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
+              %span{:class => "metric_image"}#{raw sample.try(:image)}
 
 %br/
 

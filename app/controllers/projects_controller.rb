@@ -14,6 +14,8 @@ class ProjectsController < ApplicationController
       @projects = order_by_metric_name preferred_projects
     end
     update_session
+
+    @metric_min_date = MetricSample.min_date
   end
 
   # GET /projects/1
@@ -72,6 +74,14 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def metrics_on_date
+    date = DateTime.parse(params[:date])
+    @metrics = Project.latest_metrics_on_date date
+    respond_to do |format|
+      format.json { render json: @metrics }
+    end
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
@@ -96,7 +106,6 @@ class ProjectsController < ApplicationController
     params['project']
   end
   
-  private
   def order_by_project_name preferred_projects
     session[:order] = "ASC" if session[:pre_click] != "project_name"
     preferred_projects.order_by_name(session[:order])

@@ -55,4 +55,13 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def self.latest_metrics_on_date date
+    projects = Project.all
+    projects.collect do |p|
+      p.metric_samples
+       .where("metric_samples.created_at BETWEEN ? AND ?", date.beginning_of_day, date.end_of_day)
+       .map { |m| p.attributes.merge(m.attributes) }
+    end
+  end
+
 end

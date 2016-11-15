@@ -1,0 +1,34 @@
+// Place all the behaviors and hooks related to the matching controller here.
+// All this logic will automatically be available in application.js.
+
+var update_metrics = function(data) {
+	$.each(data, function(index, val) {
+		$.each(val, function(index, val) {
+			var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")
+			metric_content.find(".metric_score").html(val.score)
+			metric_content.find(".metric_image").html(val.image)
+		});
+	});
+};
+
+$(document).ready(function() {
+	$(".datetime-picker").click(function(event) {
+		var date = $(this).attr("date");
+		$.ajax({
+			url: 'projects/metrics_on_date',
+			type: 'POST',
+			dataType: 'json',
+			data: {date: date},
+		})
+		.done(function(data) {
+			console.log(data)
+			update_metrics(data);
+		})
+		.fail(function() {
+			console.log("error");
+		})
+	});
+});
+
+
+
