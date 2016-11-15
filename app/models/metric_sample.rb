@@ -20,7 +20,8 @@ class MetricSample < ActiveRecord::Base
   attr_encrypted :raw_data, :key => Figaro.env.attr_encrypted_key!
 
   def self.min_date
-	MetricSample.order(:created_at).first.created_at.to_date
+	earliest_metric = MetricSample.order(:created_at).first
+	earliest_metric.created_at.to_date unless earliest_metric.nil?
   end
 
 end
