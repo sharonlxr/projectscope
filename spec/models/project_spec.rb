@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'spec_helper'
 
 describe Project do
 	describe 'when ordered by metrics' do
