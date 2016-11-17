@@ -1,15 +1,10 @@
 require 'rails_helper'
-require 'spec_helper'
 
 describe Project do
 	describe 'when ordered by metrics' do
 		before(:each) do
-			@p1 = create(:project)
-			@p2 = create(:project)
-			@p1.metric_samples.create(:metric_name => "test_metric", :score => 1, :created_at => Date.today)
-			@p1.metric_samples.create(:metric_name => "test_metric", :score => 2, :created_at => Date.today - 1.day)
-			@p2.metric_samples.create(:metric_name => "test_metric", :score => 3, :created_at => Date.today)
-			@p2.metric_samples.create(:metric_name => "test_metric", :score => 4, :created_at => Date.today - 1.day)
+			@p1 = create(:project_with_many_metric_samples)
+			@p2 = create(:project_with_many_metric_samples)
 		end
 
 		it 'should be sorted by project name' do
