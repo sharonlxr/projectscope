@@ -13,6 +13,7 @@ script:
   - RAILS_ENV=test bundle exec rake db:migrate --trace
   - bundle exec rake db:test:prepare
   - bundle exec rspec
+  - bundle exec rake jasmine:ci
   - bundle exec cucumber
 after_script:
   - bundle exec rake send_to_codeclimate 
