@@ -25,7 +25,7 @@ var request_for_metrics = function(days_from_now) {
 		url: 'projects/metrics_on_date',
 		type: 'POST',
 		dataType: 'json',
-		data: { days_from_now:  days_from_now },
+		data: { days_from_now:  days_from_now }
 	})
 	.done(function(data) {
 		outdate_all_metrics()
