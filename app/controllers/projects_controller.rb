@@ -78,7 +78,7 @@ class ProjectsController < ApplicationController
 
   def metrics_on_date
     days_from_now = params[:days_from_now].to_i
-    date = DateTime.parse (Date.today - days_from_now.days).to_s
+    date = DateTime.parse((Date.today - days_from_now.days).to_s)
     preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
     @metrics = Project.latest_metrics_on_date preferred_projects, current_user.preferred_metrics, date
     respond_to do |format|
