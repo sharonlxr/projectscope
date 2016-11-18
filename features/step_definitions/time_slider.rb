@@ -6,7 +6,8 @@ When /^I slide (\d+) days{0,1} (.*)/ do |num_day, direction|
 		value = num_day
 	end
 	page.execute_script "s=$('#date-slider')"
-	page.execute_script "s.slider('option', 'value', #{value})"
+	page.execute_script "cur_val=s.slider('option', 'value')"
+	page.execute_script "s.slider('option', 'value', cur_val + #{value})"
 	page.execute_script "s.slider('option','slide').call(s,null,{ handle: $('.ui-slider-handle', s), value: #{value} });"
 end
 
