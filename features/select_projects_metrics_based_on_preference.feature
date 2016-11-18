@@ -75,6 +75,6 @@ Scenario: should see both newly created project and existing projects
     And I fill in "Name" with "Test Project"
     And I press "Create Project"
     When I go to the home page
-    Then I should see "2.9" within "#LocalSupport_code_climate_metric"
-	And I should see "0.6" within "#WebsiteOne_github_metric"
+    Then I should see "2.9" within "#project_1_code_climate_metric"
+	And I should see "0.6" within "#project_2_github_metric"
 	And I should see "Test Project"
