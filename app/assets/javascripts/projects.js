@@ -45,7 +45,7 @@ var ready = function() {
 		step: 1,
 		slide: function(event, ui) {
 			var days_from_now = -1 * ui.value
-		request_for_metrics(days_from_now)
+			request_for_metrics(days_from_now)
 		}
     });
 }
