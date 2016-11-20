@@ -38,6 +38,7 @@ class ProjectsController < ApplicationController
     @project = Project.new(project_params)
     respond_to do |format|
       if @project.save
+        current_user.preferred_projects << @project
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -97,7 +98,6 @@ class ProjectsController < ApplicationController
   end
   
   private
-
   def order_by_project_name preferred_projects
     session[:order] = "ASC" if session[:pre_click] != "project_name"
     preferred_projects.order_by_name(session[:order])
