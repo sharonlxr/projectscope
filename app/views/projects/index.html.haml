@@ -1,13 +1,13 @@
-= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
+%h3#gap Project List
 
-%h1 Project List
+#gap= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
 
 %div
   Current date:
   %strong{:id => "date-label"}= Date.today.to_s
 %div{:id => "date-slider", :num_days_from_min => @num_days_from_today }
 %br/
-%table
+%table#projectlist
   %thead
     %tr
       %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
@@ -26,8 +26,6 @@
 
 %br/
 
-= link_to 'New Project', new_project_path
-
+= link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
 %br/
-
 = link_to 'Whitelist', whitelists_path
