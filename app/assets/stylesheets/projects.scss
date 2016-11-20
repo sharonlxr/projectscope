@@ -1,3 +1,11 @@
 // Place all the styles related to the projects controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+.outdated-metric {
+	opacity: 0.3;
+}
+
+.ui-slider-handle {
+	outline: none;
+}

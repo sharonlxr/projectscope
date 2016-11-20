@@ -52,6 +52,8 @@ gem 'devise'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem 'jquery-ui-rails'
+gem 'jquery-turbolinks'
 
 group :development, :test do
   gem 'sqlite3'
@@ -61,6 +63,8 @@ group :development, :test do
   gem 'annotate'
   gem 'better_errors'
   gem 'binding_of_caller'
+  gem "jasmine"
+  gem 'jasmine-jquery-rails'
 end
 
 group :test do
