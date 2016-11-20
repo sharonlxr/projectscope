@@ -1,5 +1,6 @@
 class WhitelistsController < ApplicationController
   before_action :check_if_in_whitelist
+  attr_accessible :username
 
   # GET /whitelists
   def index
