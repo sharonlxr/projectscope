@@ -1,6 +1,33 @@
+:css
+  #whitelist{
+      border-collapse: collapse;
+      width: 80%;
+      margin-right: auto;
+  }
+  
+  #whitelist td, #whitelist th {
+      border: 1px solid #ddd;
+      padding: 8px;
+  }
+  
+  #whitelist tr:nth-child(even){background-color: #f2f2f2;}
+  
+  #whitelist tr:hover {background-color: #ddd;}
+  
+  #whitelist th {
+      padding-top: 12px;
+      padding-bottom: 12px;
+      text-align: left;
+      background-color: #337ab7;
+      color: white;
+  }
+  #whitelist tr {
+     text-align: left;
+  }
+  
 %h1 Whitelist
 
-%table
+%table#whitelist
   %thead
     %tr
       %th Authorized Users
@@ -12,6 +39,8 @@
         %td= user.username
         - unless user.username.eql?(current_user.provider_username)
           %td= link_to "Delete", whitelist_path(user), :method => :delete, data: { confirm: "Do you want to delete user #{user.username} from the whitelist?" }, :user => user
+        -else
+          %td  
 
 %br/
 
