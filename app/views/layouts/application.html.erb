@@ -7,10 +7,9 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
-	<div class="col-md-12" style="background-color:#337ab7; height:5px"></div>
-	<div class="col-md-12" style="background-color:#337ab7;">
+	<div class="col-md-12 header-bar">
 		<div class="col-md-9">		
-			<h4>Welcome to ProjectScope!</h4>
+			<h4>Welcome to ProjectScope</h4>
 		</div>
 		<div class="col-md-3" style="text-align: right;">
 			<% if user_signed_in? %>
@@ -18,7 +17,7 @@
 			<% end %>
 		</div>
 	</div>
-	<div class="container">
+	<div class="container" style="padding-top: 60px;">
 		<br>
 
 		<div class="row">
