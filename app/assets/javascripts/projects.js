@@ -20,6 +20,15 @@ var outdate_all_metrics = function() {
 	$(".metric-content").addClass('outdated-metric')
 }
 
+var update_slider_indicator = function() {
+	var indicator = $("#slider-progress-indicator");
+	if (indicator.css("display") == "none") {
+		indicator.css("display", "block");
+	} else {
+		indicator.css("display", "none");
+	}
+}
+
 var request_for_metrics = function(days_from_now) {
 	$.ajax({
 		url: 'projects/metrics_on_date',
@@ -31,9 +40,14 @@ var request_for_metrics = function(days_from_now) {
 		outdate_all_metrics()
 		update_metrics(data["data"]);
 		update_date_label(data["date"]);
+		$(".ui-slider").slider("enable");
+		update_slider_indicator();
 	})
 	.fail(function() {
-		console.log("error");
+		outdate_all_metrics()
+		$(".ui-slider").slider("enable");
+		update_slider_indicator();
+		alert("Error: Failed to load new data");
 	})
 }
 
@@ -46,6 +60,8 @@ var ready = function() {
 		slide: function(event, ui) {
 			var days_from_now = -1 * ui.value
 			request_for_metrics(days_from_now)
+			update_slider_indicator();
+			$(".ui-slider").slider("disable");
 		}
     });
 }
