@@ -6,6 +6,8 @@
   Current date:
   %strong{:id => "date-label"}= Date.today.to_s
 %div{:id => "date-slider", :num_days_from_min => @num_days_from_today }
+%div#slider-progress-indicator
+  Loading...
 %br/
 %table#projectlist
   %thead
