@@ -20,12 +20,19 @@ var outdate_all_metrics = function() {
 	$(".metric-content").addClass('outdated-metric')
 }
 
-var update_slider_indicator = function() {
+var update_slider_indicator = function(is_successful) {
 	var indicator = $("#slider-progress-indicator");
-	if (indicator.css("display") == "none") {
+	if (indicator.css("display") === "none" || indicator.hasClass('slider-error-msg')) {
+		indicator.html("Loading...");
+		indicator.removeClass('slider-error-msg');
 		indicator.css("display", "block");
 	} else {
-		indicator.css("display", "none");
+		if (is_successful) {
+			indicator.css("display", "none");
+		} else {
+			indicator.html("Error: Failed to load new data");
+			indicator.addClass('slider-error-msg');
+		}
 	}
 }
 
@@ -41,13 +48,12 @@ var request_for_metrics = function(days_from_now) {
 		update_metrics(data["data"]);
 		update_date_label(data["date"]);
 		$(".ui-slider").slider("enable");
-		update_slider_indicator();
+		update_slider_indicator(true);
 	})
 	.fail(function() {
 		outdate_all_metrics()
 		$(".ui-slider").slider("enable");
-		update_slider_indicator();
-		alert("Error: Failed to load new data");
+		update_slider_indicator(false);
 	})
 }
 
