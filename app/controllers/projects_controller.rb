@@ -1,9 +1,8 @@
 class ProjectsController < ApplicationController
-  include ProjectsHelper
   before_action :set_project, only: [:show, :edit, :update, :destroy]
   before_action :set_project_metrics, only: [:show, :edit, :new]
   before_action :init_existed_configs, only: [:show, :edit, :new]
-  http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
+  #http_basic_authenticate_with name: "cs169", password: ENV['PROJECTSCOPE_PASSWORD']
   # GET /projects
   # GET /projects.json
 
@@ -26,11 +25,10 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
-    setup_metric_configs(@project)
     @project.configs.each do |config|
       name = config.metric_name
       if @project_metrics[name].respond_to?(:credentials)
-        config.options.each_pair do |key,val|
+       config.options.each_pair do |key,val|
             @existed_configs[name] << key.to_sym
         end
       end
@@ -85,9 +83,8 @@ class ProjectsController < ApplicationController
   end
 
   def set_project_metrics
-    @project_metrics = {}
-    ProjectMetrics.metric_names.each do |name|
-      @project_metrics[name] = ProjectMetrics.class_for name
+    @project_metrics = ProjectMetrics.metric_names.inject({}) do |hash, name|
+      hash[name] = ProjectMetrics.class_for name; hash
     end
   end
 
