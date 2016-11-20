@@ -37,6 +37,8 @@ gem 'jbuilder', '~> 2.0'
 # bundle exec rake doc:rails generates the API under doc/api.
 gem 'sdoc', '~> 0.4.0', group: :doc
 
+gem 'timecop'
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 
@@ -46,11 +48,19 @@ gem 'sdoc', '~> 0.4.0', group: :doc
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+gem 'devise'
+gem 'omniauth-github', github: 'intridea/omniauth-github'
+
+gem 'bootstrap-sass', '~> 3.3.6'
+
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug'
   gem 'dotenv-rails'
+  gem 'annotate'
+  gem 'better_errors'
+  gem 'binding_of_caller'
 end
 
 group :test do
@@ -65,6 +75,8 @@ group :test do
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'vcr'
   gem 'webmock'
+  gem 'launchy'
+  gem 'codeclimate-test-reporter', require: nil
 end
 
 group :development do

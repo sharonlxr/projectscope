@@ -56,9 +56,42 @@ Given(/^A project update job has been run$/) do
 end
 
 And(/^I am logged in$/) do
-  page.driver.basic_authorize('cs169', ENV['PROJECTSCOPE_PASSWORD'])
+  visit path_to("the login page")
+  OmniAuth.config.mock_auth[:github] = OmniAuth::AuthHash.new(
+    {
+      :uid => '12345',
+      :info => {
+        :email => "test-coach@test.com"
+      },
+      :extra => {
+        :raw_info => {
+          :email => "test-coach@test.com",
+          :login => "test-coach"
+        }
+      }
+    })
+  click_link "Sign in with GitHub"
+  sleep(1)
 end
 
 Then(/^the config value "([^"]*)" should not appear in the page$/) do |value|
   expect(page.body).not_to match value
+end
+
+
+# Make sure that one string (regexp) occurs before or after another one
+#   on the same page
+
+Then /I should see "(.*)" before "(.*)"/ do |e1, e2|
+  #  ensure that that e1 occurs before e2.
+  #  page.body is the entire content of the page as a string.
+  !(/#{e1}.*#{e2}/m =~ page.body).nil?
+end
+Given(/^the date is "([^"]*)"$/) do |date|
+  date =~ /(\d{2})\/(\d{2})\/(\d{4})/
+  month = Integer($1,10)
+  day = Integer($2,10)
+  year = Integer($3,10)
+  new_time = Time.utc(year, month,day, 12, 0, 0)
+  Timecop.travel(new_time)
 end
