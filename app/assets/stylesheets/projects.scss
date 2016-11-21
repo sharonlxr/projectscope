@@ -7,7 +7,7 @@
 }
 #projectlist{
     border-collapse: collapse;
-    width: 80%;
+    width: 100%;
     margin-right: auto;
 }
 
@@ -25,9 +25,11 @@
     padding-bottom: 12px;
     text-align: left;
     color: white;
+    width: 16%;
 }
 #projectlist tr {
    text-align: left;
+   width: 16%;
 }
 
 .outdated-metric {
