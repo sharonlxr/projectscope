@@ -1,6 +1,6 @@
-= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
+%h3#gap Project List
 
-%h1 Project List
+#gap= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
 
 %div.slider-container
   %div
@@ -10,7 +10,8 @@
   %div#slider-progress-indicator
     Loading...
 %br/
-%table
+
+%table#projectlist
   %thead
     %tr
       %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
@@ -29,4 +30,4 @@
 
 %br/
 
-= link_to 'New Project', new_project_path
+= link_to 'Create New Project', new_project_path, :class => "btn btn-primary"

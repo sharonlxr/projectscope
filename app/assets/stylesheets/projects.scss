@@ -25,3 +25,34 @@
 .slider-error-msg {
 	color: red;
 }
+
+
+#gap{
+  	padding-bottom: 14px;
+}
+#projectlist{
+    border-collapse: collapse;
+    width: 100%;
+    margin-right: auto;
+}
+
+#projectlist td, #projectlist th {
+    border: 1px solid #ddd;
+    padding: 8px;
+}
+
+#projectlist tr:nth-child(even){background-color: #f2f2f2;}
+
+#projectlist tr:hover {background-color: #ddd;}
+
+#projectlist th {
+    padding-top: 12px;
+    padding-bottom: 12px;
+    text-align: left;
+    color: white;
+    width: 16%;
+}
+#projectlist tr {
+   text-align: left;
+   width: 16%;
+}
