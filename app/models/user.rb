@@ -35,7 +35,8 @@ class User < ActiveRecord::Base
   after_initialize :set_default_preferred_metrics
 
   ADMIN = "admin"
-  COACH = "coach"
+  INSTRUCTOR = "instructor"
+  STUDENT = "student"
 
   def self.from_omniauth(auth)
     email = auth.info.email.nil? ? auth.extra.raw_info.email : auth.info.email
