@@ -31,6 +31,9 @@ class User < ActiveRecord::Base
   serialize :preferred_metrics, Array
 
   has_and_belongs_to_many :selected_projects, :foreign_key => "user_id", :class_name => "Project"
+  has_many :ownerships
+  has_many :owned_projects, :class_name => "Project", :through => :ownerships, :source => :project
+
 
   after_initialize :set_default_preferred_metrics
 
@@ -58,6 +61,14 @@ class User < ActiveRecord::Base
 
   def is_admin?
   	self.role == ADMIN
+  end
+
+  def is_student?
+    self.role == STUDENT
+  end
+
+  def is_instructor?
+    self.role == INSTRUCTOR
   end
 
   def preferred_projects

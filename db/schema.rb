@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20161101210440) do
+ActiveRecord::Schema.define(version: 20161201212334) do
 
   create_table "configs", force: :cascade do |t|
     t.integer  "project_id"
@@ -37,6 +37,14 @@ ActiveRecord::Schema.define(version: 20161101210440) do
 
   add_index "metric_samples", ["project_id", "metric_name"], name: "index_metric_samples_on_project_id_and_metric_name"
   add_index "metric_samples", ["project_id"], name: "index_metric_samples_on_project_id"
+
+  create_table "ownerships", id: false, force: :cascade do |t|
+    t.integer "user_id"
+    t.integer "project_id"
+  end
+
+  add_index "ownerships", ["project_id"], name: "index_ownerships_on_project_id"
+  add_index "ownerships", ["user_id"], name: "index_ownerships_on_user_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
