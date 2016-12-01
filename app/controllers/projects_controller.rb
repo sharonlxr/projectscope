@@ -20,6 +20,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @readonly = true
+    @owners = @project.owners
     render :template => 'projects/edit'
   end
 

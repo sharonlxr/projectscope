@@ -2,8 +2,14 @@
 
 = render 'form'
 
+%div
+  %b Current Owners:
+  - @owners.each do |owner|
+    %div= owner.provider_username
+
 = form_tag add_owner_project_path, :method => "post" do
   = label_tag :username, "Enter new owner's username"
+  %br/
   = text_field_tag :username
   = submit_tag "Add"
 
