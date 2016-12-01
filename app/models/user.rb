@@ -80,6 +80,10 @@ class User < ActiveRecord::Base
     self.selected_projects = projects
   end
 
+  def is_owner_of? project
+    self.owned_projects.include? project
+  end
+
   private
 
   def set_default_preferred_metrics

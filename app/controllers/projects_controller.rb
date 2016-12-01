@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner]
   before_action :authenticate_user!
 
   # GET /projects
@@ -39,6 +39,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         current_user.preferred_projects << @project
+        current_user.owned_projects << @project
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -71,6 +72,24 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_owner
+    new_username = params[:username]
+    if current_user.is_owner_of? @project
+      new_owner = User.find_by_provider_username new_username
+      if new_owner.nil?
+        flash[:alert] = "User #{new_username} not found."
+      else
+        begin
+          @project.owners << new_owner
+          flash[:notice] = "User #{new_username} has become an owner of this project!"
+        rescue
+          flash[:alert] = "User #{new_username} is already an owner."
+        end
+      end
+    end
+    redirect_to project_path(@project)
   end
 
   private

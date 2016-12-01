@@ -2,6 +2,11 @@
 
 = render 'form'
 
+= form_tag add_owner_project_path, :method => "post" do
+  = label_tag :username, "Enter new owner's username"
+  = text_field_tag :username
+  = submit_tag "Add"
+
 - if @readonly
   = link_to 'Edit', edit_project_path(@project)
 = link_to 'Back', projects_path
