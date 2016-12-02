@@ -31,6 +31,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @owners = @project.owners
   end
 
   # POST /projects
