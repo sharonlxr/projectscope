@@ -78,17 +78,13 @@ class ProjectsController < ApplicationController
 
   def add_owner
     new_username = params[:username]
-    if current_user.is_owner_of? @project
-      new_owner = User.find_by_provider_username new_username
-      if new_owner.nil?
-        flash[:alert] = "User #{new_username} not found."
-      else
-        begin
-          @project.owners << new_owner
-          flash[:notice] = "User #{new_username} has become an owner of this project!"
-        rescue
-          flash[:alert] = "User #{new_username} is already an owner."
-        end
+    new_owner = User.find_by_provider_username new_username
+    if current_user.is_owner_of? @project and !new_owner.nil?
+      begin
+        @project.owners << new_owner
+        flash[:notice] = "#{new_username} has become an owner of this project!"
+      rescue
+        flash[:alert] = "Failed to add #{new_username} as owner."
       end
     end
     redirect_to project_path(@project)

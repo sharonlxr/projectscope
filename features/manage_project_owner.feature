@@ -18,7 +18,7 @@ Scenario: add other user as owner
   When I am on the edit page for project "Test Project"
   And I fill in "Enter new owner's username" with "test-coach-2"
   And I press "Add"
-  Then I should see "User test-coach-2 has become an owner of this project!"
+  Then I should see "test-coach-2 has become an owner of this project!"
   And I should see "test-coach-2" within ".owners-list"
 
 Scenario: cannot add a user who is already an owner
@@ -26,5 +26,5 @@ Scenario: cannot add a user who is already an owner
   When I am on the edit page for project "Test Project"
   And I fill in "Enter new owner's username" with "test-coach"
   And I press "Add"
-  Then I should see "User test-coach is already an owner"
+  Then I should see "Failed to add test-coach as owner"
   
