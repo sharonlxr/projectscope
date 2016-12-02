@@ -55,6 +55,7 @@ gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
+gem 'sprockets-rails', '~> 3.1.1'
 
 group :development, :test do
   gem 'sqlite3'
@@ -80,7 +81,6 @@ group :test do
   gem 'phantomjs', :require => 'phantomjs/poltergeist'
   gem 'vcr'
   gem 'webmock'
-  gem 'launchy'
   gem 'codeclimate-test-reporter', require: nil
 end
 
