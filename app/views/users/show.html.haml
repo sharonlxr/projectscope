@@ -1,6 +1,11 @@
+:javascript
+	$('#check_all').on("click", function(){ $('input[type="checkbox"]').click(); });
 %h1 Preference Settings
 = form_tag user_path, :method => :put do
 	%div#project-preference-list
+		%div
+			= check_box_tag "check_all", 0, true
+			= label_tag "check_all", "Check all"
 		%h4 Check projects to monitor:
 		- @all_projects.each do |project|
 			%div
