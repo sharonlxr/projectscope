@@ -14,7 +14,7 @@
     = f.text_field :name, :disabled => @readonly
 
   = f.fields_for :configs do |cf|
-    - name,index  = cf.object.metric_name, cf.index
+    - name,klass,index  = cf.object.metric_name, cf.object.klass, cf.index
     %fieldset{:id => name}
       %legend= name.titleize
       = hidden_field_tag "project[configs_attributes][#{index}][metric_name]", name
@@ -24,8 +24,8 @@
         = text_field_tag field_name, val, :disabled => @readonly
         %br
       - unless @readonly
-        - if @credentials_check[name]
-          - @project_metrics[name].credentials.each do |cred|
+        - if klass.respond_to? :credentials
+          - klass.credentials.each do |cred|
             -unless @existed_configs[name].include?(cred)
               .field.new
                 = label_tag "project[configs_attributes][#{index}][new][]", "#{cred}", :id => nil, :class => 'newf'
