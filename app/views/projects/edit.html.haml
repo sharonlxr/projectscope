@@ -2,9 +2,9 @@
 
 = render 'form'
 
-%div
+%div{:class => "owners-list"}
   %b Current Owners:
-  - @owners.each do |owner|
+  - @owners.try(:each) do |owner|
     %div= owner.provider_username
 
 = form_tag add_owner_project_path, :method => "post" do
