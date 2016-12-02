@@ -74,7 +74,7 @@ var ready = function() {
     $(".date-nav").unbind().click(function(event) {
     	var date_slider = $("#date-slider");
     	var days_from_now = -1 * date_slider.slider("value");
-    	days_from_now += this.id == "day-before" ? 1 : -1;
+    	days_from_now += this.id === "day-before" ? 1 : -1;
     	if (days_from_now < 0) {
     		days_from_now = 0;
     		return;
