@@ -52,6 +52,7 @@ gem 'devise'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 
 gem 'bootstrap-sass', '~> 3.3.6'
+gem "font-awesome-rails"
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 

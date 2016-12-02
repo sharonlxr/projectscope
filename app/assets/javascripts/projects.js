@@ -58,7 +58,7 @@ var request_for_metrics = function(days_from_now) {
 }
 
 var ready = function() {
-	$( "#date-slider" ).slider({
+	$("#date-slider").slider({
 		value: 100,
 		min: -$("#date-slider").attr("num_days_from_min"),
 		max: 0,
@@ -69,6 +69,19 @@ var ready = function() {
 			update_slider_indicator();
 			$(".ui-slider").slider("disable");
 		}
+    });
+
+    $(".date-nav").unbind().click(function(event) {
+    	var date_slider = $("#date-slider");
+    	var days_from_now = -1 * date_slider.slider("value");
+    	days_from_now += this.id == "day-before" ? 1 : -1;
+    	if (days_from_now < 0) {
+    		days_from_now = 0;
+    		return;
+    	}
+    	request_for_metrics(days_from_now);
+    	update_slider_indicator();
+    	date_slider.slider("value", -1 * days_from_now);
     });
 }
 
