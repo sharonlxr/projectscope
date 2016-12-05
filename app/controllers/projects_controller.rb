@@ -1,6 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
-
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
 
@@ -22,6 +21,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @readonly = true
+    @owners = @project.owners
     render :template => 'projects/edit'
   end
 
@@ -32,6 +32,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @owners = @project.owners
     @project.configs.each do |config|
       name = config.metric_name
       if config.klass.respond_to?(:credentials)
@@ -49,6 +50,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         current_user.preferred_projects << @project
+        current_user.owned_projects << @project
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -81,6 +83,20 @@ class ProjectsController < ApplicationController
       format.html { redirect_to projects_url, notice: 'Project was successfully destroyed.' }
       format.json { head :no_content }
     end
+  end
+
+  def add_owner
+    new_username = params[:username]
+    new_owner = User.find_by_provider_username new_username
+    if current_user.is_owner_of? @project and !new_owner.nil?
+      begin
+        @project.owners << new_owner
+        flash[:notice] = "#{new_username} has become an owner of this project!"
+      rescue
+        flash[:alert] = "Failed to add #{new_username} as owner."
+      end
+    end
+    redirect_to project_path(@project)
   end
 
   private
