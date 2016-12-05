@@ -1,51 +1,50 @@
 :css
-  #whitelist{
+  #Users{
       border-collapse: collapse;
       width: 80%;
       margin-right: auto;
   }
   
-  #whitelist td, #whitelist th {
+  #Users td, #Users th {
       border: 1px solid #ddd;
       padding: 8px;
   }
   
-  #whitelist tr:nth-child(even){background-color: #f2f2f2;}
+  #Users tr:nth-child(even){background-color: #f2f2f2;}
   
-  #whitelist tr:hover {background-color: #ddd;}
+  #Users tr:hover {background-color: #ddd;}
   
-  #whitelist th {
+  #Users th {
       padding-top: 12px;
       padding-bottom: 12px;
       text-align: left;
       background-color: #337ab7;
       color: white;
   }
-  #whitelist tr {
+  #Users tr {
      text-align: left;
   }
 
-%h1 Whitelist
+%h1 Privilege Control 
 
-%table#whitelist
+%table#Users
   %thead
     %tr
-      %th Authorized GitHub Accounts
+      %th GitHub Account
+      %th Role
       %th Action
 
   %tbody
     - @permitted_users.each do |user|
       %tr
-        %td= user.username
-        - unless user.username.eql?(current_user.provider_username)
-          %td= link_to "Delete", whitelist_path(user), :method => :delete, data: { confirm: "Do you want to delete user #{user.username} from the whitelist?" }, :user => user
+        %td= user.provider_username
+        %td= user.role
+        -if user.role.eql?("coach")
+          %td= link_to "Downgrade to student", downgrade_user_path(user), :method => :get, data: { confirm: "Do you want to downgrade user #{user.id} from the whitelist?" }, :user => user
+        -elsif user.role.eql?("student")
+          %td= link_to "Upgrade to coach", upgrade_user_path(user), :method => :get, data: { confirm: "Do you want to downgrade user #{user.id} from the whitelist?" }, :user => user
         -else
-          %td  
+          %td
 
 %br/
-
-= link_to 'Add user to whitelist', new_whitelist_path
-
-%br/
-
 = link_to 'Back to project page', projects_url

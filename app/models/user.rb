@@ -36,11 +36,12 @@ class User < ActiveRecord::Base
 
   ADMIN = "admin"
   COACH = "coach"
+  STUDENT = "student"
 
   def self.from_omniauth(auth)
     email = auth.info.email.nil? ? auth.extra.raw_info.email : auth.info.email
     login = auth.extra.raw_info.login
-    unless login.nil? or !Whitelist.has_username?(login)
+    unless login.nil?
     	User.where(provider: auth.provider, provider_username: login).first_or_create do |user|
     		user.provider = auth.provider
     		user.uid = auth.uid
@@ -57,6 +58,11 @@ class User < ActiveRecord::Base
 
   def is_admin?
   	self.role == ADMIN
+  end
+
+  def change_role(role)
+    self.role = role
+    self.save!
   end
 
   def preferred_projects
