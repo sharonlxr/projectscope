@@ -1,5 +1,6 @@
 Main Repo Status:
 
+
 <a href="https://codeclimate.com/github/AgileVentures/projectscope"><img src="https://codeclimate.com/github/AgileVentures/projectscope/badges/gpa.svg" /></a>
 <a href="https://travis-ci.org/AgileVentures/projectscope"><img src="https://travis-ci.org/AgileVentures/projectscope.svg?branch=develop"></a>
 
