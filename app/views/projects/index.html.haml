@@ -1,8 +1,9 @@
-= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
+%h3#gap Project List
 
-%h1 Project List
 
-%table
+#gap= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
+
+%table#projectlist
   %thead
     %tr
       %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name"
@@ -19,10 +20,17 @@
               = '%.2f'.try(:%,sample.try(:score) || 0.0)
               #{raw sample.try(:image)}
 
-%br/
+-unless current_user.role.eql?("coach") or current_user.role.eql?("admin")
+  %br/
 
-= link_to 'New Project', new_project_path
+  = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
 
-%br/
+-else
+  %br/
 
-= link_to 'Whitelist', whitelists_path
+  = link_to 'Privilege Control', whitelists_path, :class => "btn btn-primary"
+
+  %br/
+
+  = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+
