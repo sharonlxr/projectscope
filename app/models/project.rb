@@ -12,8 +12,9 @@
 class Project < ActiveRecord::Base
   has_many :configs
   has_many :metric_samples
-
   has_and_belongs_to_many :users
+  has_many :ownerships
+  has_many :owners, :class_name => "User", :through => :ownerships, :source => :user
 
   validates :name, :presence => true, :uniqueness => true
 
@@ -52,6 +53,17 @@ class Project < ActiveRecord::Base
                                     image: metric.image
         )
       end
+    end
+  end
+
+  def self.latest_metrics_on_date projects, preferred_metrics, date
+    projects.collect do |p|
+      p.metric_samples
+       .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)", 
+                  date.beginning_of_day, 
+                  date.end_of_day,
+                  preferred_metrics)
+       .map { |m| p.attributes.merge(m.attributes) }
     end
   end
 
