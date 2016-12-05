@@ -15,6 +15,9 @@ class ProjectsController < ApplicationController
       @projects = order_by_metric_name preferred_projects
     end
     update_session
+
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
   end
 
   # GET /projects/1
@@ -85,6 +88,16 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def metrics_on_date
+    days_from_now = params[:days_from_now].to_i
+    date = DateTime.parse((Date.today - days_from_now.days).to_s)
+    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    @metrics = Project.latest_metrics_on_date preferred_projects, current_user.preferred_metrics, date
+    respond_to do |format|
+      format.json { render json: { data: @metrics, date: date } }
+    end
+  end
+  
   def add_owner
     new_username = params[:username]
     new_owner = User.find_by_provider_username new_username
@@ -130,7 +143,6 @@ class ProjectsController < ApplicationController
     params['project']
   end
   
-  private
   def order_by_project_name preferred_projects
     session[:order] = "ASC" if session[:pre_click] != "project_name"
     preferred_projects.order_by_name(session[:order])
