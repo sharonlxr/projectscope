@@ -70,6 +70,11 @@ class User < ActiveRecord::Base
   def is_instructor?
     self.role == INSTRUCTOR
   end
+  
+  def change_role(role)
+    self.role = role
+    self.save!
+  end
 
   def preferred_projects
     self.selected_projects = Project.all if self.selected_projects.empty?

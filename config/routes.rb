@@ -10,5 +10,11 @@ Rails.application.routes.draw do
   		post "/add_owner", :to => "projects#add_owner"
   	end
   end
+
   root 'projects#index'
+  resources :whitelists
+
+  get '/whitelists/upgrade/:id', :to => 'whitelists#upgrade', :as => 'upgrade_user'
+  get '/whitelists/downgrade/:id', :to => 'whitelists#downgrade', :as => 'downgrade_user'
+  
 end

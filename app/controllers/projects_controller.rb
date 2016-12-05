@@ -3,6 +3,7 @@ class ProjectsController < ApplicationController
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
 
+
   # GET /projects
   # GET /projects.json
 

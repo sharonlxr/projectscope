@@ -30,7 +30,15 @@
             %td{:id => "project_#{project.id}_#{sample.try(:metric_name)}_metric", :class => metric_content_class_label(sample)}
               %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
               %span{:class => "metric_image"}#{raw sample.try(:image)}
-
 %br/
+-unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
+  %div
+    = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
 
-= link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+-else
+  %div
+    = link_to 'Privilege Control', whitelists_path, :class => "btn btn-primary"
+  %br/
+  %div
+    = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+
