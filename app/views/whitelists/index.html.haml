@@ -40,9 +40,9 @@
         %td= user.provider_username
         %td= user.role
         -if user.role.eql?("instructor")
-          %td= link_to "Downgrade to student", downgrade_user_path(user), :method => :get, data: { confirm: "Do you want to downgrade user #{user.id} from the whitelist?" }, :user => user
+          %td= link_to "Downgrade to student", downgrade_user_path(user), :method => :get, :user => user
         -elsif user.role.eql?("student")
-          %td= link_to "Upgrade to instructor", upgrade_user_path(user), :method => :get, data: { confirm: "Do you want to downgrade user #{user.id} from the whitelist?" }, :user => user
+          %td= link_to "Upgrade to instructor", upgrade_user_path(user), :method => :get, :user => user
         -else
           %td
 
