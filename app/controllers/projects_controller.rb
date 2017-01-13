@@ -1,6 +1,8 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner]
+  before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
+
 
   # GET /projects
   # GET /projects.json
@@ -14,12 +16,16 @@ class ProjectsController < ApplicationController
       @projects = order_by_metric_name preferred_projects
     end
     update_session
+
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
   end
 
   # GET /projects/1
   # GET /projects/1.json
   def show
     @readonly = true
+    @owners = @project.owners
     render :template => 'projects/edit'
   end
 
@@ -30,6 +36,15 @@ class ProjectsController < ApplicationController
 
   # GET /projects/1/edit
   def edit
+    @owners = @project.owners
+    @project.configs.each do |config|
+      name = config.metric_name
+      if config.klass.respond_to?(:credentials)
+        config.options.each_pair do |key,_val|
+            @existed_configs[name] << key.to_sym
+        end
+      end
+    end
   end
 
   # POST /projects
@@ -39,6 +54,7 @@ class ProjectsController < ApplicationController
     respond_to do |format|
       if @project.save
         current_user.preferred_projects << @project
+        current_user.owned_projects << @project
         format.html { redirect_to @project, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
@@ -73,11 +89,42 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def metrics_on_date
+    days_from_now = params[:days_from_now].to_i
+    date = DateTime.parse((Date.today - days_from_now.days).to_s)
+    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    @metrics = Project.latest_metrics_on_date preferred_projects, current_user.preferred_metrics, date
+    respond_to do |format|
+      format.json { render json: { data: @metrics, date: date } }
+    end
+  end
+  
+  def add_owner
+    new_username = params[:username]
+    new_owner = User.find_by_provider_username new_username
+    if current_user.is_owner_of? @project and !new_owner.nil?
+      begin
+        @project.owners << new_owner
+        flash[:notice] = "#{new_username} has become an owner of this project!"
+      rescue
+        flash[:alert] = "Failed to add #{new_username} as owner."
+      end
+    end
+    redirect_to project_path(@project)
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
   def set_project
     @project = Project.includes(:configs).find(params[:id])
+  end
+
+  def init_existed_configs
+    @existed_configs = {}
+    ProjectMetrics.metric_names.each do |name|
+      @existed_configs[name] = []
+    end
   end
 
   # Never trust parameters from the scary internet, only allow the white list through.
@@ -97,7 +144,6 @@ class ProjectsController < ApplicationController
     params['project']
   end
   
-  private
   def order_by_project_name preferred_projects
     session[:order] = "ASC" if session[:pre_click] != "project_name"
     preferred_projects.order_by_name(session[:order])
