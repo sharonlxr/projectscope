@@ -7,5 +7,11 @@ class ApplicationController < ActionController::Base
     user_id = params[:id]
     sign_in_and_redirect User.find_by(uid: user_id)
   end
-  
+
+
+  def update_all_projects
+    Project.all.each{|ele| ele.resample_all_metrics}
+    redirect_to projects_path
+  end
+
 end

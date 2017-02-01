@@ -13,6 +13,8 @@ Rails.application.routes.draw do
 
   root 'projects#index'
   resources :whitelists
+
+  get '/application/update_all_projects/', :to => 'application#update_all_projects', :as => 'update_all_projects'
   
   get '/login/:id', :to => 'application#passthru', :as => 'passthru'
 
