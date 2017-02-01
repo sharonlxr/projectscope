@@ -66,5 +66,4 @@ class Project < ActiveRecord::Base
        .map { |m| p.attributes.merge(m.attributes) }
     end
   end
-
 end
