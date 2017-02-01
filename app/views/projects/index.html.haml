@@ -33,7 +33,7 @@
 %br/
 -unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
   %div
-    = link_to 'Create New Project', whitelists_path, :class => "btn btn-primary"
+    = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
 
 -else
   %div
