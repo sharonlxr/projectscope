@@ -38,6 +38,12 @@ class Project < ActiveRecord::Base
     end
   end
 
+  # create a new button and link to a routes
+  # routes link to the controller
+  # controller
+  # update metrics here
+
+
   def resample_all_metrics
     ProjectMetrics.metric_names.each { |metric_name| resample_metric metric_name }
   end
