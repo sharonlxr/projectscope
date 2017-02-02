@@ -1,5 +1,5 @@
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
 
@@ -24,6 +24,7 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
+    # debugger
     @readonly = true
     @owners = @project.owners
     render :template => 'projects/edit'
@@ -92,13 +93,54 @@ class ProjectsController < ApplicationController
   def metrics_on_date
     days_from_now = params[:days_from_now].to_i
     date = DateTime.parse((Date.today - days_from_now.days).to_s)
-    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
-    @metrics = Project.latest_metrics_on_date preferred_projects, current_user.preferred_metrics, date
-    respond_to do |format|
-      format.json { render json: { data: @metrics, date: date } }
+    # debugger
+    if params[:id].nil?
+      # debugger
+      preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+      metrics = current_user.preferred_metrics
+      @metrics = Project.latest_metrics_on_date preferred_projects, metrics, date
+      # debugger
+      respond_to do |format|
+        format.json { render json: { data: @metrics, date: date} }
+      end
+    else
+      # debugger
+      preferred_projects = Project.where(:id => params[:id])
+      metrics = params[:metric]
+      @metrics = Project.latest_metrics_on_date preferred_projects, metrics, date
+      if (@metrics == [[]])
+        respond_to do |format|
+          format.json { render json: { score: "", image: "Project Information Needs to be Updated." } }
+        end
+      else
+        respond_to do |format|
+          format.json { render json: { score: @metrics[0][0]['score'], image: @metrics[0][0]['image'] } }
+        end
+      end
+      # debugger
+
     end
   end
-  
+
+  # def show_metric
+  #   # debugger
+  #   # id = params[:id] # retrieve movie ID from URI route
+  #   days_from_now = params[:days_from_now].to_i
+  #   date = DateTime.parse((Date.today - days_from_now.days).to_s)
+  #   metric = [params[:metric]]
+  #   project = Project.find(params[:id])
+  #   @metrics = Project.latest_metrics_on_date project, metric, date
+  #   @metric = params[:metric]
+  #   respond_to do |format|
+  #     format.json{render json: {@metrics, date: date} }
+  #   end
+  #   # @days_from_now = params[:days_from_now]
+  #   # debugger
+  #   # respond_to do |format|
+  #   #   format.html { render(:partial => 'hello_world') }
+  #   # end
+  # end
+
   def add_owner
     new_username = params[:username]
     new_owner = User.find_by_provider_username new_username
@@ -143,20 +185,21 @@ class ProjectsController < ApplicationController
     end
     params['project']
   end
-  
+
   def order_by_project_name preferred_projects
     session[:order] = "ASC" if session[:pre_click] != "project_name"
     preferred_projects.order_by_name(session[:order])
   end
-  
+
   def order_by_metric_name preferred_projects
     click_type = params[:type]
-    session[:order] = "ASC" if session[:pre_click] != click_type 
+    session[:order] = "ASC" if session[:pre_click] != click_type
     preferred_projects.order_by_metric_score(click_type, session[:order])
   end
-  
+
   def update_session
     session[:order] = session[:order] == "ASC" ? "DESC" : "ASC"
     session[:pre_click] = params[:type]
   end
+
 end

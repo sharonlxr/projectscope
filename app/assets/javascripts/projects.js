@@ -35,8 +35,10 @@ var update_slider_indicator = function(is_successful) {
 		}
 	}
 }
-
+// Global variable for days
+var days;
 var request_for_metrics = function(days_from_now) {
+	days = days_from_now;
 	$.ajax({
 		url: 'projects/metrics_on_date',
 		type: 'POST',
@@ -87,3 +89,61 @@ var ready = function() {
 
 $(document).ready(ready)
 $(document).on('turbolinks:load', ready)
+// var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")
+// metric_content.removeClass('outdated-metric')
+// metric_content.find(".metric_score").html(val.score)
+// metric_content.find(".metric_image").html(val.image)
+var MetricPopup = {
+  setup: function() {
+    // add hidden 'div' to end of page to display popup:
+    var popupDiv = $('<div id="metricInfo"><a id="closeLink" href="#" style="position: static">close</a><div class = "metric_score"></div><div class = "metric_image"></div></div>');
+		popupDiv.hide().appendTo($('body'));
+		$('.expand_link').each(function(){
+			var expand = $(this);
+			expand.on('click', MetricPopup.getMetricInfo);
+		})
+  }
+
+  ,getMetricInfo: function() {
+		// debugger
+    $.ajax({type: 'POST',
+            url: 'projects/metrics_on_date',
+				    data: {
+				        id: $(this).attr('proj_id'),
+								metric: $(this).attr('metric'),
+								days_from_now: days
+				    },
+            timeout: 5000,
+            success: MetricPopup.showMetricInfo,
+            error: function(xhrObj, textStatus, exception) { alert('Error!'); }
+            // 'success' and 'error' functions will be passed 3 args
+           });
+    return(false);
+  }
+
+  ,showMetricInfo: function(data, requestStatus, xhrObject) {
+    // center a floater 1/2 as wide and 1/4 as tall as screen
+    var oneFourth = Math.ceil($(window).width() / 4);
+		// debugger;
+    $('#metricInfo').
+		find(".metric_score").html(data['score']);
+		$('#metricInfo').
+		find(".metric_image").html(data['image']);
+		$('#metricInfo').
+      css({'left': oneFourth,  'width': 2*oneFourth, 'top': 300, 'position': 'fixed'}).
+      show();
+
+
+		// debugger;
+    // make the Close link in the hidden element work
+    $('#closeLink').click(MetricPopup.hideMetricInfo);
+		// debugger;
+    return(false);  // prevent default link action
+  }
+
+  ,hideMetricInfo: function() {
+    $('#metricInfo').hide();
+    return(false);
+  }
+};
+$(MetricPopup.setup);
