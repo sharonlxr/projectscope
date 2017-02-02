@@ -64,6 +64,8 @@ class ProjectsController < ApplicationController
     end
   end
 
+
+
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
@@ -159,4 +161,6 @@ class ProjectsController < ApplicationController
     session[:order] = session[:order] == "ASC" ? "DESC" : "ASC"
     session[:pre_click] = params[:type]
   end
+
+
 end
