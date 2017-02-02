@@ -9,6 +9,11 @@ require 'project_metric_code_climate'
 require 'project_metric_slack_trends'
 require 'project_metric_pivotal_tracker'
 
+User.delete_all
+Whitelist.delete_all
+Project.delete_all
+MetricSample.delete_all
+
 dummy1_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/WebsiteOne'
 dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
 
@@ -37,7 +42,7 @@ dummies["pivotal_tracker"] = [pivot1, pivot2, pivot2]
 dummies["slack_trends"] = [slack_trends1, slack_trends2, slack_trends3]
 
 projects_list = []
-1.upto(20).each do |num|
+1.upto(1).each do |num|
 	projects_list << Project.create!(:name => "Project #{num}")
 end
 
@@ -55,3 +60,7 @@ start_date.upto(end_date) do |date|
         end
     end
 end
+
+@user01 = User.create!(provider_username: "Clarkkkk", uid: "Clark",
+    provider: "developer", role: "admin", password: Devise.friendly_token[0,20])
+Whitelist.create!(username: @user01.provider_username)
