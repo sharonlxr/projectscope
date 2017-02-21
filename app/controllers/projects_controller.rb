@@ -84,6 +84,9 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
+    yulaoban = all_metrics(params[:id])
+    ashenme = metrics_data(params[:id], yulaoban)
+    debugger
     @project.attributes = project_params
     respond_to do |format|
       if @project.save
@@ -216,6 +219,21 @@ class ProjectsController < ApplicationController
   def update_session
     session[:order] = session[:order] == "ASC" ? "DESC" : "ASC"
     session[:pre_click] = params[:type]
+  end
+
+  # get all the names of metrics for this project
+  # get path: projects/:id/
+  def all_metrics(id)
+    MetricSample.all_metrics(id)
+  end
+
+
+
+  # get path: projects/:id/
+  # param metric_name string:"github"
+  # return all data from matrics_smaple of github relate to this project
+  def metrics_data(id, metric_name)
+    MetricSample.latest_metric(id, metric_name)
   end
 
 end

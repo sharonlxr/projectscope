@@ -23,5 +23,6 @@ Rails.application.routes.draw do
   get '/whitelists/downgrade/:id', :to => 'whitelists#downgrade', :as => 'downgrade_user'
   
   get '/dev', :to => 'projects#new_index', :as => 'new_index'
+  get 'all_metrics/:id', :to => 'projects#all_metrics', :as => 'all_metrics'
 
 end
