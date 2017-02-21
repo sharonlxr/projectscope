@@ -1,12 +1,13 @@
-%table
+%table.metric_list
    %thead
       %tr
-         %th
-            - project.latest_metric_samples.each do |sample|
+         - project.latest_metric_samples.each do |sample|
+            %th
                = sample.try(:metric_name).titleize
    %tbody
-      %td
+      %tr
          - project.latest_metric_samples.each do |sample|
-            %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
-            %span{:class => "metric_image"}#{raw sample.try(:image)}
+            %td
+               %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
+               %span{:class => "metric_image"}#{raw sample.try(:image)}
    
