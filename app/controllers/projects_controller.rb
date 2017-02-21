@@ -84,9 +84,6 @@ class ProjectsController < ApplicationController
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    yulaoban = all_metrics(params[:id])
-    ashenme = metrics_data(params[:id], yulaoban)
-    debugger
     @project.attributes = project_params
     respond_to do |format|
       if @project.save
@@ -220,13 +217,6 @@ class ProjectsController < ApplicationController
     session[:order] = session[:order] == "ASC" ? "DESC" : "ASC"
     session[:pre_click] = params[:type]
   end
-
-  # get all the names of metrics for this project
-  # get path: projects/:id/
-  def all_metrics(id)
-    MetricSample.all_metrics(id)
-  end
-
 
 
   # get path: projects/:id/

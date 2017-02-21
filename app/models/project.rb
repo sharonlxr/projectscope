@@ -62,7 +62,19 @@ class Project < ActiveRecord::Base
     end
   end
 
-  def self.latest_metrics_on_date projects, preferred_metrics, date
+def all_metrics
+    puts id
+    valid_configs = Config.all.where(:project_id => id)
+    return [] if valid_configs.nil?
+    metrics_name_ary = []
+    valid_configs.each do |config|
+      metrics_name_ary << config.metric_name
+    end
+    metrics_name_ary
+  end
+
+# I will not call this function in tomorrow's demo.
+  def latest_metrics_on_date projects, preferred_metrics, date
     projects.collect do |p|
       p.metric_samples
        .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)", 
