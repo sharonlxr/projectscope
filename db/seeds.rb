@@ -42,12 +42,12 @@ dummies["pivotal_tracker"] = [pivot1, pivot2, pivot2]
 dummies["slack_trends"] = [slack_trends1, slack_trends2, slack_trends3]
 
 projects_list = []
-1.upto(1).each do |num|
+0.upto(10).each do |num|
 	projects_list << Project.create!(:name => "Project #{num}")
 end
 
 end_date = Date.today
-start_date = end_date - 14.days
+start_date = end_date - 7.days
 
 start_date.upto(end_date) do |date|
     projects_list.each do |project|

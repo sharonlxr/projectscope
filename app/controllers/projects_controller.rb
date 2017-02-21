@@ -6,6 +6,20 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   # GET /projects.json
+  
+  def new_index
+    @metric_names = current_user.preferred_metrics
+    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    if params[:type].nil? or params[:type] == "project_name"
+      @projects = order_by_project_name preferred_projects
+    else
+      @projects = order_by_metric_name preferred_projects
+    end
+    update_session
+
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
+  end
 
   def index
     @metric_names = current_user.preferred_metrics
