@@ -49,14 +49,17 @@ end
 end_date = Date.today
 start_date = end_date - 7.days
 
-start_date.upto(end_date) do |date|
-    projects_list.each do |project|
-        ProjectMetrics.metric_names.each do |metric|
-            MetricSample.create!(:metric_name => metric,
+
+projects_list.each do |project|
+    ProjectMetrics.metric_names.each do |metric|
+        if rand(100) % 2 == 0
+            start_date.upto(end_date) do |date|
+                MetricSample.create!(:metric_name => metric,
                                  :project_id => project.id,
                                  :score => rand(0.0..4.0).round(2),
                                  :image => dummies[metric][rand(3)],
                                  :created_at => date)
+            end
         end
     end
 end

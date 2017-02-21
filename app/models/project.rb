@@ -31,9 +31,20 @@ class Project < ActiveRecord::Base
   def config_for(metric)
     configs.where(:metric_name => metric).first || configs.build(:metric_name => metric)
   end
+  
+  # These two functions need further revisions.
+  def all_metrics
+    valid_configs = MetricSample.all.where(:project_id => id)
+    return [] if valid_configs.nil?
+    metrics_name_ary = []
+    valid_configs.each do |config|
+      metrics_name_ary << config.metric_name
+    end
+    metrics_name_ary.uniq
+  end
 
   def latest_metric_samples
-    ProjectMetrics.metric_names.map do |metric_name|
+    all_metrics.map do |metric_name|
       metric_samples.latest_for(metric_name)
     end
   end
@@ -62,18 +73,6 @@ class Project < ActiveRecord::Base
     end
   end
 
-def all_metrics
-    puts id
-    valid_configs = Config.all.where(:project_id => id)
-    return [] if valid_configs.nil?
-    metrics_name_ary = []
-    valid_configs.each do |config|
-      metrics_name_ary << config.metric_name
-    end
-    metrics_name_ary
-  end
-
-# I will not call this function in tomorrow's demo.
   def latest_metrics_on_date projects, preferred_metrics, date
     projects.collect do |p|
       p.metric_samples

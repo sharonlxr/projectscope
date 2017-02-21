@@ -1,4 +1,4 @@
-%h3#gap Project List Hello World Developing!
+%h3#gap Project List Hello World We Are Developing This Page!
 
 #gap= link_to "Preference", user_path(current_user), :class => "btn btn-primary"
 
@@ -17,24 +17,17 @@
 %table#projectlist{:style=>"height: 100%;"}
   %thead
     %tr
-      %th{:class => @class}= link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
-      - @metric_names.each do |metric_name|
-        %th{:class => @class}= link_to metric_name.humanize, projects_path(:type => metric_name), :id => metric_name, :method => :get
-
+      %th{:class => @class}
+        = link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
+      %th
+        = "Monitored Metrics"
   %tbody
     - @projects.each do |project|
       %tr
-        %td= link_to project.name, project
-        - project.latest_metric_samples.each do |sample|
-          - if is_selected_metric? sample
-            -# %td
-              -# Hello World!
-            %td{:id => "project_#{project.id}_#{sample.try(:metric_name)}_metric", :class => metric_content_class_label(sample), :style=>"height:100%;"}
-              %div{:style=>"position:relative;height:120px; margin:0; padding:0;"}
-                %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
-                %span{:class => "metric_image"}#{raw sample.try(:image)}
-                %p.expand_button{:style => "position:absolute;bottom:0px; right:0px;margin:0; padding:0;"}
-                  =link_to 'expand', project, :id => "project_#{project.id}_#{sample.try(:metric_name)}_metric_expand", :class => "expand_link", :proj_id => project.id, :metric => sample.try(:metric_name)
+        %td
+          = link_to project.name, project
+        %td
+          = render :partial => 'metrics', :locals => {:project => project}
 %br/
 -unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
   %div
