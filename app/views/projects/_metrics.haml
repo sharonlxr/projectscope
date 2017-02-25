@@ -3,11 +3,10 @@
       %tr
          - project.latest_metric_samples.each do |sample|
             %th
-               = sample.try(:metric_name).titleize
+               = sample.try(:metric_name).titleize + " " + '%.2f'.try(:%,sample.try(:score) || 0.0)
    %tbody
       %tr
          - project.latest_metric_samples.each do |sample|
             %td
-               %span{:class => "metric_score"}= '%.2f'.try(:%,sample.try(:score) || 0.0)
                %span{:class => "metric_image"}#{raw sample.try(:image)}
    
