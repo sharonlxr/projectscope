@@ -87,6 +87,28 @@ var ready = function() {
     });
 }
 
+var render_charts = function() {
+	var get_charts_json = function(id) {
+		var splited = id.split(".");
+		var project_id = splited[0].split("#")[1];
+		var metric = splited[1].split("#")[1];
+		$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
+			createTimeSeriesGraph(id, data);
+		});
+		// $.ajax({url: "projects/" + project_id + "/metrics/" + metric,
+		// 	success: function(result) {
+		// 		debugger
+		// 		//Highcharts.chart(id, result);
+		// 	}});
+		}
+	$(".chart_place").each(function() {
+		get_charts_json(this.id);
+	});
+}
+
+$(document).ready(render_charts)
+
+
 $(document).ready(ready)
 $(document).on('turbolinks:load', ready)
 // var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")

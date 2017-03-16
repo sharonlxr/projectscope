@@ -21,7 +21,7 @@ class Project < ActiveRecord::Base
   accepts_nested_attributes_for :configs
   attr_accessible :name, :configs_attributes
 
-  scope :order_by_metric_score, -> (metric_name, order) { 
+  scope :order_by_metric_score, -> (metric_name, order) {
             joins(:metric_samples).where("metric_samples.metric_name = ?", metric_name)
                                   .group(:id)
                                   .having("metric_samples.created_at = MAX(metric_samples.created_at)")
@@ -31,7 +31,7 @@ class Project < ActiveRecord::Base
   def config_for(metric)
     configs.where(:metric_name => metric).first || configs.build(:metric_name => metric)
   end
-  
+
   # These two functions need further revisions.
   def all_metrics
     valid_configs = MetricSample.all.where(:project_id => id)
@@ -41,6 +41,10 @@ class Project < ActiveRecord::Base
       metrics_name_ary << config.metric_name
     end
     metrics_name_ary.uniq
+  end
+
+  def charts
+    puts "Hallo"
   end
 
   def latest_metric_samples
@@ -73,11 +77,13 @@ class Project < ActiveRecord::Base
     end
   end
 
+
+
   def latest_metrics_on_date projects, preferred_metrics, date
     projects.collect do |p|
       p.metric_samples
-       .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)", 
-                  date.beginning_of_day, 
+       .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)",
+                  date.beginning_of_day,
                   date.end_of_day,
                   preferred_metrics)
        .map { |m| p.attributes.merge(m.attributes) }

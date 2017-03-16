@@ -10,6 +10,8 @@ gem 'project_metric_slack', git: 'https://github.com/AgileVentures/project_metri
 gem 'project_metric_pivotal_tracker', git: 'https://github.com/AgileVentures/project_metric_pivotal_tracker'
 gem 'project_metric_slack_trends', git: 'https://github.com/AgileVentures/project_metric_slack_trends'
 
+gem 'highcharts-rails'
+
 # use Rails 3-style protected attributes rather than strong params
 gem 'protected_attributes'
 # Securely store secrets, including symmetric encrypt key for attr_encrypted
@@ -49,6 +51,7 @@ gem 'timecop'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'json'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -93,4 +96,3 @@ group :production do
   gem 'rails_12factor'
   gem 'pg'
 end
-

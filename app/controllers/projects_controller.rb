@@ -1,3 +1,4 @@
+require 'json'
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric]
   before_action :init_existed_configs, only: [:show, :edit, :new]
@@ -6,7 +7,7 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   # GET /projects.json
-  
+
   def new_index
     @metric_names = current_user.preferred_metrics
     preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
@@ -79,6 +80,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def get_metric_data
+    @data = {'message' => "GOOD STUFF HERE"}
+    render json: @data
+  end
 
 
   # PATCH/PUT /projects/1
