@@ -1,7 +1,6 @@
 
 function createTimeSeriesGraph(containerId, data) {
   // Divide the container
-  debugger
   var $container = $(document.getElementById(containerId)).css('position', 'relative');
   var detail_containerId = containerId + "-detail-container";
   var master_containerId = containerId + "-master-container";

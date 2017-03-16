@@ -85,6 +85,17 @@ var ready = function() {
     	update_slider_indicator();
     	date_slider.slider("value", -1 * days_from_now);
     });
+  $(".expand_button").click(function(event) {
+  	var $targetRow = $("[id = 'expanded_row-project:{0}']".format($(this).attr('pid')))
+  	//$targetRow.attr('style', 'display: blocked');
+  	debugger
+  	containerID = $targetRow.find('.expanded_container').attr('id');
+  	$.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
+			createTimeSeriesGraph(containerID, data);
+		});
+		$targetRow.attr('style', 'display: blocked');
+  	//createTimeSeriesGraph($targetRow.select('expanded_container'), );
+  })
 }
 
 var render_charts = function() {
@@ -106,7 +117,7 @@ var render_charts = function() {
 	});
 }
 
-$(document).ready(render_charts)
+//$(document).ready(render_charts)
 
 
 $(document).ready(ready)

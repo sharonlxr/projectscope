@@ -26,8 +26,13 @@
       %tr
         %td
           = link_to project.name, project
+          %button{:class => "expand_button", :pid => "#{project.id}"}
         %td
           = render :partial => 'metrics', :locals => {:project => project}
+      %tr{:id => "expanded_row-project:#{project.id}", :style => "display: none; height: 200px"}
+        %td{:colspan => "2"}
+          = render :partial => 'expanded', :locals => {:project => project}
+
 %br/
 -unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
   %div

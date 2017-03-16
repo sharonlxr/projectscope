@@ -8,6 +8,6 @@
       %tr
         - project.latest_metric_samples.each do |sample|
           %td
-            .chart_place{:id => "project##{project.id}.metric:##{sample.try(:metric_name)}"}
-              = "PLACEHOLDER"
-            /%span{:class => "metric_image"}#{raw sample.try(:image)}
+            -# .chart_place{:id => "project##{project.id}.metric:##{sample.try(:metric_name)}"}
+            -# = "PLACEHOLDER"
+            %span{:class => "metric_image"}#{raw sample.try(:image)}
