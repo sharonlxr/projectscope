@@ -34,7 +34,7 @@ function createTimeSeriesGraph(containerId, data) {
             enabled: false
         },
         title: {
-            text: 'Historical USD to EUR Exchange Rate'
+            text: 'Demo Metric'
         },
         subtitle: {
             text: 'Select an area by dragging across the lower chart'
