@@ -122,9 +122,12 @@ var render_charts = function () {
           // 'data'
         	success: function(result) {
         		//Highcharts.chart(id, result);
-            
+
             drawHighCharts(id, result);
-        	}
+        	},
+          error: function(a, b, c){
+            debugger
+          }
           }
 
         );

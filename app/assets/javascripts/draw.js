@@ -66,7 +66,6 @@ function parseChartParams(JSONStr) {
           }]
       };
     }else if(JSONStr['chartType'] == "pie"){
-      debugger
       var chartParams = {
           chart: {
               plotBackgroundColor: null,

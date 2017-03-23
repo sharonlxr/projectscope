@@ -14,12 +14,12 @@ Whitelist.delete_all
 Project.delete_all
 MetricSample.delete_all
 
-dummy1_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/WebsiteOne'
-dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
+# dummy1_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/WebsiteOne'
+# dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
 
-# generate images
-dummy1_code_climate.image
-dummy2_code_climate.image
+
+
+
 
 slack1 = '{
 							"chartType":"pie",
@@ -50,7 +50,6 @@ slack1 = '{
 										     }]
 										 }]
 					}'
-
 slack2 = '{
 							"chartType":"pie",
 							"titleText":"Activity",
@@ -95,20 +94,22 @@ slack3 = '{
 													 "sliced": true,
 													 "selected": true
 												 }, {
-													 name: "Steven",
-													 y: 18.12
+													 "name": "Steven",
+													 "y": 18.12
 												 }, {
-													 name: "Joseph",
-													 y: 2.47
+													 "name": "Joseph",
+													 "y": 2.47
 										     }, {
-													 name: "Levin",
-													 y: 21.60
+													 "name": "Levin",
+													 "y": 21.60
 										     }, {
-													 name: "Clark",
-													 y: 1.91
+													 "name": "Clark",
+													 "y": 1.91
 										     }]
 										 }]
 					}'
+dummy1_code_climate = slack1
+dummy2_code_climate = slack3
 slack_trends1 = '{
 										"chartType" : "spline",
 										"titleText" : "Foo",
@@ -138,23 +139,23 @@ slack_trends3 = '{
 								}'
 # slack_trends2 = File.read './db/images/slack_trends2.svg'
 # slack_trends3 = File.read './db/images/slack_trends3.svg'
-pivot1 = File.read './db/images/pivot1.svg'
-pivot2 = File.read './db/images/pivot2.svg'
-github1 = File.read './db/images/github1.svg'
-github2 = File.read './db/images/github2.svg'
-github3 = File.read './db/images/github3.svg'
+pivot1 = slack1
+pivot2 = slack2
+github1 = slack_trends1
+github2 = slack_trends2
+github3 = slack_trends3
 
 
 dummies = Hash.new
-dummies["code_climate"] = [dummy1_code_climate.raw_data,
-													 dummy2_code_climate.raw_data,
-													 dummy1_code_climate.raw_data]
+dummies["code_climate"] = [dummy1_code_climate,
+													 dummy2_code_climate,
+													 dummy1_code_climate]
 dummies["github"] = [github1,
 	                   github2,
 										 github3]
 dummies["slack"] = [slack1,
-	                  slack1,
-										slack1]
+	                  slack2,
+										slack3]
 dummies["pivotal_tracker"] = [pivot1,
 	                            pivot2,
 															pivot2]
@@ -173,7 +174,7 @@ start_date = end_date - 7.days
 
 projects_list.each do |project|
     ProjectMetrics.metric_names.each do |metric|
-        if rand(100) % 2 == 0
+        if rand(100) % 3 != 0
             start_date.upto(end_date) do |date|
                 MetricSample.create!(:metric_name => metric,
                                  :project_id => project.id,
