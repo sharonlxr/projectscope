@@ -30,11 +30,13 @@
 #gap{
   	padding-bottom: 14px;
 }
+
 #projectlist{
     border-collapse: collapse;
     width: 100%;
     margin-right: auto;
 }
+
 
 #projectlist td, #projectlist th {
     border: 1px solid #ddd;
@@ -49,7 +51,6 @@
     padding-top: 12px;
     padding-bottom: 12px;
     text-align: left;
-    color: white;
     width: 16%;
 }
 #projectlist tr {
@@ -61,6 +62,10 @@
 	text-align: right;
 	// font-weight: bold;
 	text-decoration: underline;
+}
+
+.metric_column {
+    width: 50px;
 }
 
 #metricInfo {

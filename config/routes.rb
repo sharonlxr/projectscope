@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   	end
   end
 
-  root 'projects#index'
+  root 'projects#new_index'
   resources :whitelists
 
   get '/application/update_all_projects/', :to => 'application#update_all_projects', :as => 'update_all_projects'
@@ -22,5 +22,9 @@ Rails.application.routes.draw do
   get '/whitelists/upgrade/:id', :to => 'whitelists#upgrade', :as => 'upgrade_user'
   get '/whitelists/downgrade/:id', :to => 'whitelists#downgrade', :as => 'downgrade_user'
 
+  get '/dev', :to => 'projects#new_index', :as => 'new_index'
+  get 'all_metrics/:id', :to => 'projects#all_metrics', :as => 'all_metrics'
+  get 'projects/:id/metrics/:metric', :to => 'projects#get_metric_data'
+  get '/charts', :to => 'projects#charts'
 
 end

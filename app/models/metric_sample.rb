@@ -24,4 +24,18 @@ class MetricSample < ActiveRecord::Base
 	earliest_metric.created_at.to_date unless earliest_metric.nil?
   end
 
+  
+
+
+  def self.latest_metric(project_id, metric_name)
+    projects_samples = MetricSample.all.where(:project_id => project_id)
+
+    result = []
+    all_metrics(project_id).each do |metric_name|
+      result << projects_samples.latest_for(metric_name)
+    end
+
+    result
+  end
+
 end

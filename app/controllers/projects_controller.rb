@@ -1,3 +1,4 @@
+require 'json'
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric]
   before_action :init_existed_configs, only: [:show, :edit, :new]
@@ -6,6 +7,20 @@ class ProjectsController < ApplicationController
 
   # GET /projects
   # GET /projects.json
+
+  def new_index
+    @metric_names = current_user.preferred_metrics
+    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    if params[:type].nil? or params[:type] == "project_name"
+      @projects = order_by_project_name preferred_projects
+    else
+      @projects = order_by_metric_name preferred_projects
+    end
+    update_session
+
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
+  end
 
   def index
     @metric_names = current_user.preferred_metrics
@@ -65,6 +80,10 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def get_metric_data
+    @data = {'message' => "GOOD STUFF HERE"}
+    render json: @data
+  end
 
 
   # PATCH/PUT /projects/1
@@ -202,6 +221,14 @@ class ProjectsController < ApplicationController
   def update_session
     session[:order] = session[:order] == "ASC" ? "DESC" : "ASC"
     session[:pre_click] = params[:type]
+  end
+
+
+  # get path: projects/:id/
+  # param metric_name string:"github"
+  # return all data from matrics_smaple of github relate to this project
+  def metrics_data(id, metric_name)
+    MetricSample.latest_metric(id, metric_name)
   end
 
 end
