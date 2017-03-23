@@ -81,7 +81,8 @@ class ProjectsController < ApplicationController
   end
 
   def get_metric_data
-    @data = '{"chartType":"spline","titleText":"Demo","subtitleText":"Foo","xAxisTitleText":"Explanatory Var","xAxisUnit":"","yAxisTitleText":"Response Var","yAxisUnit":"","data":[[0,15],[10,-50],[20,-56.5],[30,-46.5],[40,-22.1],[50,-2.5],[60,-27.7],[70,-55.7],[80,-76.5]]}'
+    #from @project to get metric
+    @data = MetricSample.find_by(project_id:params[:id], metric_name:params[:metric])[:image]
     render json: @data
   end
 

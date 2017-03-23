@@ -12,7 +12,7 @@ Rails.application.routes.draw do
   	end
   end
 
-  root 'projects#index'
+  root 'projects#new_index'
   resources :whitelists
 
   get '/application/update_all_projects/', :to => 'application#update_all_projects', :as => 'update_all_projects'

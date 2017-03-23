@@ -24,7 +24,7 @@ class MetricSample < ActiveRecord::Base
 	earliest_metric.created_at.to_date unless earliest_metric.nil?
   end
 
-  
+
 
 
   def self.latest_metric(project_id, metric_name)

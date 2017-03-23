@@ -121,10 +121,13 @@ var render_charts = function () {
           // 'yAxisUnit'
           // 'data'
         	success: function(result) {
-        		debugger
         		//Highcharts.chart(id, result);
-                drawHighCharts(id, result);
-        	}});
+            
+            drawHighCharts(id, result);
+        	}
+          }
+
+        );
     }
     $(".chart_place").each(function () {
         get_charts_json(this.id);
