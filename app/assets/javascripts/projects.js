@@ -122,7 +122,8 @@ var render_charts = function () {
           // 'data'
         	success: function(result) {
         		debugger
-        		Highcharts.chart(id, result);
+        		//Highcharts.chart(id, result);
+                drawHighCharts(id, result);
         	}});
     }
     $(".chart_place").each(function () {
