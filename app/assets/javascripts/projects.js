@@ -87,7 +87,6 @@ var ready = function () {
     });
     $(".expand_button").click(function (event) {
         var $targetRow = $("[id = 'expanded_row-project:{0}']".format($(this).attr('pid')))
-        //$targetRow.attr('style', 'display: blocked');
         debugger
         if (toggle($targetRow)) {
             containerID = $targetRow.find('.expanded_container').attr('id');
@@ -104,21 +103,21 @@ var render_charts = function () {
         var splited = id.split(".");
         var project_id = splited[0].split("#")[1];
         var metric = splited[1].split("#")[1];
-        $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
-            createTimeSeriesGraph(id, data);
-        });
-        // $.ajax({url: "projects/" + project_id + "/metrics/" + metric,
-        // 	success: function(result) {
-        // 		debugger
-        // 		//Highcharts.chart(id, result);
-        // 	}});
+        // $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
+        //     createTimeSeriesGraph(id, data);
+        // });
+        $.ajax({url: "projects/" + project_id + "/metrics/" + metric,
+        	success: function(result) {
+        		debugger
+        		Highcharts.chart(id, result);
+        	}});
     }
     $(".chart_place").each(function () {
         get_charts_json(this.id);
     });
 }
 
-//$(document).ready(render_charts)
+$(document).ready(render_charts)
 
 
 $(document).ready(ready)
