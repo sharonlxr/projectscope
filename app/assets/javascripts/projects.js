@@ -109,7 +109,8 @@ var render_charts = function () {
         $.ajax({url: "projects/" + project_id + "/metrics/" + metric,
         	success: function(result) {
         		debugger
-        		Highcharts.chart(id, result);
+        		//Highcharts.chart(id, result);
+                drawHighCharts(id, result);
         	}});
     }
     $(".chart_place").each(function () {

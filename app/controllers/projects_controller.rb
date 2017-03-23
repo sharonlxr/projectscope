@@ -81,7 +81,7 @@ class ProjectsController < ApplicationController
   end
 
   def get_metric_data
-    @data = {'message' => "GOOD STUFF HERE"}
+    @data = '{"chartType":"spline","titleText":"Demo","subtitleText":"Foo","xAxisTitleText":"Explanatory Var","xAxisUnit":"","yAxisTitleText":"Response Var","yAxisUnit":"","data":[[0,15],[10,-50],[20,-56.5],[30,-46.5],[40,-22.1],[50,-2.5],[60,-27.7],[70,-55.7],[80,-76.5]]}'
     render json: @data
   end
 
