@@ -100,13 +100,26 @@ var ready = function () {
 
 var render_charts = function () {
     var get_charts_json = function (id) {
+        // split
         var splited = id.split(".");
         var project_id = splited[0].split("#")[1];
         var metric = splited[1].split("#")[1];
+
         // $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
         //     createTimeSeriesGraph(id, data);
         // });
         $.ajax({url: "projects/" + project_id + "/metrics/" + metric,
+
+          // result is the json string from the gem.
+          // TODO: parse to javascript
+          // 'chartType'
+          // 'titleText'
+          // 'subTitleText'
+          // 'xAxisTitleText'
+          // "xAxisUnit"
+          // 'yAxisTitleText'
+          // 'yAxisUnit'
+          // 'data'
         	success: function(result) {
         		debugger
         		Highcharts.chart(id, result);
