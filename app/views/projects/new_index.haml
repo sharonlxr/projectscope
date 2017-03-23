@@ -19,17 +19,13 @@
     %tr
       %th{:class => @class}
         = link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
-      %th
-        = "Monitored Metrics"
+      - @metric_names.each do |metric_name|
+        %th
+          = metric_name
   %tbody
     - @projects.each do |project|
       %tr
-        %td{:valign => "botom", :align => "right"}
-          = link_to project.name, project
-          %button{:class => "expand_button", :pid => "#{project.id}"}
-            = "+"
-        %td
-          = render :partial => 'metrics', :locals => {:project => project}
+        = render :partial => 'metrics', :locals => {:project => project}
       %tr{:id => "expanded_row-project:#{project.id}", :style => "display: none; height: 200px"}
         %td{:colspan => "2"}
           = render :partial => 'expanded', :locals => {:project => project}
