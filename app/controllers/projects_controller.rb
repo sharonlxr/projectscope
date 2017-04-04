@@ -208,12 +208,12 @@ class ProjectsController < ApplicationController
     params['project']
   end
 
-  def order_by_project_name preferred_projects
+  def order_by_project_name(preferred_projects)
     session[:order] = "ASC" if session[:pre_click] != "project_name"
     preferred_projects.order_by_name(session[:order])
   end
 
-  def order_by_metric_name preferred_projects
+  def order_by_metric_name(preferred_projects)
     click_type = params[:type]
     session[:order] = "ASC" if session[:pre_click] != click_type
     preferred_projects.order_by_metric_score(click_type, session[:order])
