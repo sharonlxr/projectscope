@@ -59,13 +59,16 @@ class Project < ActiveRecord::Base
 
   def resample_metric(metric_name)
     credentials_hash = config_for(metric_name).options
+    debugger
     unless credentials_hash.empty?
       metric = ProjectMetrics.class_for(metric_name).new(credentials_hash)
+
       if (metric.refresh)
+
         self.metric_samples.create!(metric_name: metric_name,
                                     raw_data: metric.raw_data,
                                     score: metric.score,
-                                    image: metric.image
+                                    image: metric.json
         )
       end
     end
