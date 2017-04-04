@@ -54,7 +54,7 @@ class User < ActiveRecord::Base
     	end
     end
   end
-
+  
   def email_required?
     false
   end

@@ -4,11 +4,15 @@ ruby '2.3.1'
 
 # Gems for metrics to use
 gem 'project_metrics', git: 'https://github.com/AgileVentures/ProjectMetrics/'
-gem 'project_metric_code_climate', git: 'https://github.com/AgileVentures/project_metric_code_climate'
-gem 'project_metric_github', git: 'https://github.com/AgileVentures/project_metric_github'
-gem 'project_metric_slack', git: 'https://github.com/AgileVentures/project_metric_slack'
-gem 'project_metric_pivotal_tracker', git: 'https://github.com/AgileVentures/project_metric_pivotal_tracker'
-gem 'project_metric_slack_trends', git: 'https://github.com/AgileVentures/project_metric_slack_trends'
+# gem 'project_metric_code_climate', git: 'https://github.com/AgileVentures/project_metric_code_climate'
+# gem 'project_metric_github', git: 'https://github.com/AgileVentures/project_metric_github'
+# gem 'project_metric_slack', git: 'https://github.com/AgileVentures/project_metric_slack'
+# gem 'project_metric_pivotal_tracker', git: 'https://github.com/AgileVentures/project_metric_pivotal_tracker'
+# gem 'project_metric_slack_trends', git: 'https://github.com/AgileVentures/project_metric_slack_trends'
+gem 'project_metric_github', git: 'https://github.com/an-ju/project_metric_github'
+gem 'project_metric_pivotal_tracker', git: 'https://github.com/an-ju/project_metric_pivotal_tracker'
+
+gem 'highcharts-rails'
 
 # use Rails 3-style protected attributes rather than strong params
 gem 'protected_attributes'
@@ -49,6 +53,7 @@ gem 'timecop'
 # gem 'capistrano-rails', group: :development
 
 gem 'devise'
+gem 'json'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 
 gem 'bootstrap-sass', '~> 3.3.6'
@@ -93,4 +98,3 @@ group :production do
   gem 'rails_12factor'
   gem 'pg'
 end
-
