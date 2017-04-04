@@ -5,9 +5,9 @@
 #
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
-require 'project_metric_code_climate'
-require 'project_metric_slack_trends'
-require 'project_metric_pivotal_tracker'
+# require 'project_metric_code_climate'
+# require 'project_metric_slack_trends'
+# require 'project_metric_pivotal_tracker'
 
 User.delete_all
 Whitelist.delete_all

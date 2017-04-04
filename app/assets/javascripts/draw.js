@@ -65,42 +65,62 @@ function parseChartParams(JSONStr) {
               data: paramMap['data']
           }]
       };
-    }else if(JSONStr['chartType'] == "pie"){
-      var chartParams = {
-          chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false,
-              type: paramMap["chartType"]
-          },
-          title: {
-              text: paramMap["titleText"]
-          },
-          tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          },
-          plotOptions: {
-              pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                      enabled: false,
-                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                      style: {
-                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                      }
-                  }
-              }
-          },
-          series: paramMap['data']
-      };
+    }else if(JSONStr['chartType'] == "pie") {
+        var chartParams = {
+            chart: {
+                plotBackgroundColor: null,
+                plotBorderWidth: null,
+                plotShadow: false,
+                type: paramMap["chartType"]
+            },
+            title: {
+                text: paramMap["titleText"]
+            },
+            tooltip: {
+                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+            },
+            plotOptions: {
+                pie: {
+                    allowPointSelect: true,
+                    cursor: 'pointer',
+                    dataLabels: {
+                        enabled: false,
+                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                        style: {
+                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                        }
+                    }
+                }
+            },
+            series: paramMap['data']
+        };
+    }else if(JSONStr['chartType'] == 'bar') {
+        var chartParams = {
+            chart: {
+                type: 'bar'
+            },
+            title: {
+                text: paramMap['titleText']
+            },
+            series: paramMap['data']
+        }
     }else{
-      debugger
+        var chartParams = {
+            chart: {
+                type: paramMap['chartType']
+            },
+            title: {
+                text: paramMap['titleText']
+            },
+            series: paramMap['data']
+
+        }
     }
 
     return chartParams
 }
 
 function drawHighCharts(containerID, JSONStr) {
+    console.log(JSONStr);
     Highcharts.chart(containerID, parseChartParams(JSONStr));
 }
