@@ -85,7 +85,12 @@ class ProjectsController < ApplicationController
     @data = MetricSample.find_by(project_id:params[:id], metric_name:params[:metric])[:image]
     render json: @data
   end
-
+  
+  def new_edit
+    @metric_name = "TO_BE_ADDED"
+    @needed_params = ["PARAM1", "PARAM2"]
+    render :template => 'projects/new_metrics'
+  end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json

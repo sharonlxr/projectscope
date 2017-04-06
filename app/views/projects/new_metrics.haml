@@ -1,0 +1,16 @@
+%div.metric_block
+   %div.metric_name_div
+      %label
+         = @metric_name
+   %div.metric_action_div
+      %span{:class => "glyphicon glyphicon-star", :type => "submit"}
+   %div.metric_params_div
+      = form_tag update_metric_path, :method => :post do
+         - @needed_params.each do |param_name|
+            .input-group
+               .input-group-addon
+                  = param_name + ":"
+               = text_field_tag param_name
+      = submit_tag nil, class: "btn btn-primary"
+      
+   
