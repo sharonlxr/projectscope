@@ -87,12 +87,14 @@ class ProjectsController < ApplicationController
   end
   
   def new_edit
-<<<<<<< HEAD
-    debugger
     @project_name = @project.name
-=======
-    @project_name = "Demo Project"
->>>>>>> 7515e8c60f4bf6b142eacfa87286ce775262883b
+    @configs = {}
+    all_configs = @project.configs.select(:metric_name, :metrics_params, :token).map(&:attributes)
+    all_configs.each do |config|
+      puts config
+      @configs[config["metric_name"]] ||= []
+      @configs[config["metric_name"]] << {config["metrics_params"] => config["token"]}
+    end
     @metrics = ["Metric 1", "Metric 2", "Metric 3", "Metric 4", "Metric 5"]
     @needed_params = ["PARAM1", "PARAM2"]
     render :template => 'projects/new_metrics'

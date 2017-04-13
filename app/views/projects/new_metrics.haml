@@ -19,13 +19,14 @@
       %label
         = "Monitered Metrics"
     %div.panel-body
-      - @metrics.each do |metric_name|
+      - @configs.each do |metric_name, metric_params|
         %h4
-          = metric_name
-        - @needed_params.each do |param_name|
-          .input-group
-            .input-group-addon
-              = param_name + ":"
-            %input{:type => "text", :name => "metrics[#{metric_name}][#{param_name}]", :class => "form-control"}
+          = metric_name.titleize
+        - metric_params.each do |param|
+          - param.each do |name, value|
+            .input-group
+              .input-group-addon
+                = name + ":"
+              %input{:type => "text", :value => value, :name => "metrics[#{metric_name}][#{name}]", :class => "form-control"}
   = submit_tag "Finish", class: "btn btn-primary"
   = link_to 'Back', projects_path, class: "btn btn-primary"

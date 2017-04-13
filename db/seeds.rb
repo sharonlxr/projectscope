@@ -184,19 +184,18 @@ projects_list.each do |project|
                                  :score => rand(0.0..4.0).round(2),
                                  :image => dummies[metric][rand(3)],
                                  :created_at => date)
-                Config.create(:metric_name => metric,
-                				:project_id => project.id,
-                				:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
-                				:metrics_params => "TOKEN")
-								Config.create(:metric_name => metric,
-															:project_id => project.id,
-															:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
-															:metrics_params => "URL")
             end
-
-            end
-        end
+            Config.create(:metric_name => metric,
+        				:project_id => project.id,
+        				:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+        				:metrics_params => "TOKEN")
+    		Config.create(:metric_name => metric,
+    					:project_id => project.id,
+    					:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+    					:metrics_params => "URL")
+        end        
     end
+end
 
 
 
