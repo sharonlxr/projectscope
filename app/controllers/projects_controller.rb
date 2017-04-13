@@ -1,6 +1,6 @@
 require 'json'
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric, :new_edit]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
 
@@ -87,7 +87,8 @@ class ProjectsController < ApplicationController
   end
   
   def new_edit
-    @project_name@project_name = "Demo Project"
+    debugger
+    @project_name = @project.name
     @metrics = ["Metric 1", "Metric 2", "Metric 3", "Metric 4", "Metric 5"]
     @needed_params = ["PARAM1", "PARAM2"]
     render :template => 'projects/new_metrics'
@@ -123,11 +124,9 @@ class ProjectsController < ApplicationController
     date = DateTime.parse((Date.today - days_from_now.days).to_s)
     # debugger
     if params[:id].nil?
-      # debugger
       preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
       metrics = current_user.preferred_metrics
       @metrics = Project.latest_metrics_on_date preferred_projects, metrics, date
-      # debugger
       respond_to do |format|
         format.json { render json: { data: @metrics, date: date} }
       end
