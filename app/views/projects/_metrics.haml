@@ -1,5 +1,5 @@
 %td{:valign => "botom", :align => "right"}
-  = link_to project.name, project
+  = link_to project.name, "projects/#{project.id}/new_edit"
   %button{:class => "expand_button", :pid => "#{project.id}"}
     = "+"
 - project.latest_metric_samples.each do |sample|
