@@ -87,7 +87,8 @@ class ProjectsController < ApplicationController
   end
   
   def new_edit
-    @metric_name = "TO_BE_ADDED"
+    @project_name@project_name = "Demo Project"
+    @metrics = ["Metric 1", "Metric 2", "Metric 3", "Metric 4", "Metric 5"]
     @needed_params = ["PARAM1", "PARAM2"]
     render :template => 'projects/new_metrics'
   end
@@ -147,6 +148,11 @@ class ProjectsController < ApplicationController
       # debugger
 
     end
+  end
+
+  def new_update
+    debugger
+    render :template => 'projects/new_metrics'
   end
 
   # def show_metric
