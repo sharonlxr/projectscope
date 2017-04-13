@@ -14,6 +14,7 @@ Whitelist.delete_all
 Project.delete_all
 MetricSample.delete_all
 
+
 # dummy1_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/WebsiteOne'
 # dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
 
@@ -172,7 +173,7 @@ end_date = Date.today
 start_date = end_date - 7.days
 
 
-
+Config.delete_all
 
 projects_list.each do |project|
     ProjectMetrics.metric_names.each do |metric|
@@ -183,22 +184,19 @@ projects_list.each do |project|
                                  :score => rand(0.0..4.0).round(2),
                                  :image => dummies[metric][rand(3)],
                                  :created_at => date)
-                Config.create!(:metric_name => metric,
-                				:project_id => project_id,
-                				:token => "(0...50).map { ('a'..'z').to_a[rand(26)] }.join",
-                				:metrics_params => "Github" + (0...50).map { ('a'..'z').to_a[rand(26)] }.join)
+                Config.create(:metric_name => metric,
+                				:project_id => project.id,
+                				:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+                				:metrics_params => "TOKEN")
+								Config.create(:metric_name => metric,
+															:project_id => project.id,
+															:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+															:metrics_params => "URL")
+            end
+
             end
         end
     end
-
-    t.integer  "project_id"
-    t.string   "metric_name"
-    t.text     "encrypted_options"
-    t.datetime "created_at",           null: false
-    t.datetime "updated_at",           null: false
-    t.string   "encrypted_options_iv"
-    t.string   "metrics_params"
-    t.string   "token"
 
 
 
