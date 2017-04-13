@@ -24,6 +24,7 @@ ActiveRecord::Schema.define(version: 20170413213235) do
     t.string   "token"
   end
 
+
   add_index "configs", ["project_id"], name: "index_configs_on_project_id"
 
   create_table "metric_samples", force: :cascade do |t|
