@@ -87,8 +87,12 @@ class ProjectsController < ApplicationController
   end
   
   def new_edit
+<<<<<<< HEAD
     debugger
     @project_name = @project.name
+=======
+    @project_name = "Demo Project"
+>>>>>>> 7515e8c60f4bf6b142eacfa87286ce775262883b
     @metrics = ["Metric 1", "Metric 2", "Metric 3", "Metric 4", "Metric 5"]
     @needed_params = ["PARAM1", "PARAM2"]
     render :template => 'projects/new_metrics'
