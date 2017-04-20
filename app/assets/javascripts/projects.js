@@ -60,6 +60,7 @@ var request_for_metrics = function (days_from_now) {
 }
 
 var ready = function () {
+    render_charts();
     $("#date-slider").slider({
         value: 100,
         min: -$("#date-slider").attr("num_days_from_min"),
@@ -137,11 +138,8 @@ var render_charts = function () {
     });
 }
 
-$(document).ready(render_charts)
-
-
 $(document).ready(ready)
-//$(document).on('turbolinks:load', ready)
+$(document).on('turbolinks:load', ready)
 // var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")
 // metric_content.removeClass('outdated-metric')
 // metric_content.find(".metric_score").html(val.score)
