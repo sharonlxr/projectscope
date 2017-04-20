@@ -1,6 +1,6 @@
 require 'json'
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric, :new_edit]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
 
@@ -85,7 +85,20 @@ class ProjectsController < ApplicationController
     @data = MetricSample.find_by(project_id:params[:id], metric_name:params[:metric])[:image]
     render json: @data
   end
-
+  
+  def new_edit
+    @project_name = @project.name
+    @configs = {}
+    all_configs = @project.configs.select(:metric_name, :metrics_params, :token).map(&:attributes)
+    all_configs.each do |config|
+      puts config
+      @configs[config["metric_name"]] ||= []
+      @configs[config["metric_name"]] << {config["metrics_params"] => config["token"]}
+    end
+    @metrics = ["Metric 1", "Metric 2", "Metric 3", "Metric 4", "Metric 5"]
+    @needed_params = ["PARAM1", "PARAM2"]
+    render :template => 'projects/new_metrics'
+  end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
@@ -117,11 +130,9 @@ class ProjectsController < ApplicationController
     date = DateTime.parse((Date.today - days_from_now.days).to_s)
     # debugger
     if params[:id].nil?
-      # debugger
       preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
       metrics = current_user.preferred_metrics
       @metrics = Project.latest_metrics_on_date preferred_projects, metrics, date
-      # debugger
       respond_to do |format|
         format.json { render json: { data: @metrics, date: date} }
       end
@@ -142,6 +153,11 @@ class ProjectsController < ApplicationController
       # debugger
 
     end
+  end
+
+  def new_update
+    debugger
+    render :template => 'projects/new_metrics'
   end
 
   # def show_metric

@@ -14,6 +14,7 @@ Whitelist.delete_all
 Project.delete_all
 MetricSample.delete_all
 
+
 # dummy1_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/WebsiteOne'
 # dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
 
@@ -172,6 +173,8 @@ end_date = Date.today
 start_date = end_date - 7.days
 
 
+Config.delete_all
+
 projects_list.each do |project|
     ProjectMetrics.metric_names.each do |metric|
         if rand(100) % 3 != 0
@@ -182,9 +185,20 @@ projects_list.each do |project|
                                  :image => dummies[metric][rand(3)],
                                  :created_at => date)
             end
-        end
+            Config.create(:metric_name => metric,
+        				:project_id => project.id,
+        				:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+        				:metrics_params => "TOKEN")
+    		Config.create(:metric_name => metric,
+    					:project_id => project.id,
+    					:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+    					:metrics_params => "URL")
+        end        
     end
 end
+
+
+
 
 @user01 = User.create!(provider_username: "Clarkkkk", uid: "Clark",
     provider: "developer", role: "admin", password: Devise.friendly_token[0,20])
