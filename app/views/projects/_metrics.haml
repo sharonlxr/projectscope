@@ -2,7 +2,7 @@
   = link_to project.name, "projects/#{project.id}/new_edit"
   %button{:class => "expand_button", :pid => "#{project.id}"}
     = "+"
-- project.latest_metric_samples.each do |sample|
+- project.latest_metric_samples(perfered_metrics).each do |sample|
   %td
     - if !sample.nil?
       %p

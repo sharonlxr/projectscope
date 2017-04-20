@@ -22,10 +22,10 @@ class Project < ActiveRecord::Base
   attr_accessible :name, :configs_attributes
 
   scope :order_by_metric_score, -> (metric_name, order) {
-            joins(:metric_samples).where("metric_samples.metric_name = ?", metric_name)
-                                  .group(:id)
-                                  .having("metric_samples.created_at = MAX(metric_samples.created_at)")
-                                  .order("metric_samples.score #{order}") if ["ASC", "DESC"].include? order }
+    joins(:metric_samples).where("metric_samples.metric_name = ?", metric_name)
+        .group(:id)
+        .having("metric_samples.created_at = MAX(metric_samples.created_at)")
+        .order("metric_samples.score #{order}") if ["ASC", "DESC"].include? order }
   scope :order_by_name, -> (order) { order("name #{order}") if ["ASC", "DESC"].include? order }
 
   def config_for(metric)
@@ -47,9 +47,10 @@ class Project < ActiveRecord::Base
     puts "Hallo"
   end
 
-  def latest_metric_samples
-    ProjectMetrics.metric_names.map do |metric_name|
-        metric_samples.latest_for(metric_name)
+  def latest_metric_samples(metrics = nil)
+    metrics = ProjectMetrics.metric_names if metrics.nil?
+    metrics.map do |metric_name|
+      metric_samples.latest_for(metric_name)
     end
   end
 
@@ -72,15 +73,14 @@ class Project < ActiveRecord::Base
   end
 
 
-
   def latest_metrics_on_date projects, preferred_metrics, date
     projects.collect do |p|
       p.metric_samples
-       .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)",
-                  date.beginning_of_day,
-                  date.end_of_day,
-                  preferred_metrics)
-       .map { |m| p.attributes.merge(m.attributes) }
+          .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)",
+                 date.beginning_of_day,
+                 date.end_of_day,
+                 preferred_metrics)
+          .map { |m| p.attributes.merge(m.attributes) }
     end
   end
 end
