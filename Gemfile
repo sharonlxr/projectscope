@@ -11,6 +11,7 @@ gem 'project_metric_slack', git: 'https://github.com/an-ju/project_metric_slack'
 gem 'project_metric_slack_trends', git: 'https://github.com/an-ju/project_metric_slack_trends'
 gem 'project_metric_github', git: 'https://github.com/an-ju/project_metric_github'
 gem 'project_metric_pivotal_tracker', git: 'https://github.com/an-ju/project_metric_pivotal_tracker'
+gem 'project_metric_story_transition', git: 'https://github.com/an-ju/project_metric_story_transitions'
 
 gem 'highcharts-rails'
 
