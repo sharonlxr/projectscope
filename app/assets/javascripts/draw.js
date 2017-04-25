@@ -102,9 +102,40 @@ function draw_d3(containerID, plotdata) {
         x.domain(selection.map(x2.invert, x2));
         focus.selectAll(".dot")
             .attr("cx", function(d) { return x(d.occurred_at); })
-            .attr("cy", function(d) { return y(d.story_id); });
+            .attr("cy", function(d) { return y(d.story_id); })
+            .on("mouseover", function(d) {
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                div.html(d.story_id + "<br/>" + d.state)
+                    .style("left", d3.event.pageX + "px")
+                    .style("top", (d3.event.pageY-210) + "px");
+            })
+            .on("mouseout", function(d) {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
         focus.select(".axis--x").call(xAxis);
+        focus.selectAll('.valueline')
+            .attr("d", valueline_1)
+            .style("stroke", function(d) { return colors[d[0].state]; })
+            .on("mouseover", function(d) {
+                div.transition()
+                    .duration(200)
+                    .style("opacity", .9);
+                div.html(d[0].state + " to " + d[1].state)
+                    .style("left", d3.event.pageX + "px")
+                    .style("top", (d3.event.pageY-210) + "px");
+            })
+            .on("mouseout", function(d) {
+                div.transition()
+                    .duration(500)
+                    .style("opacity", 0);
+            });
     }
+    var colors = {'unscheduled': '#7cb5ec', 'unstarted': '#90ed7d', 'started': '#f7a35c', 'finished': '#8085e9',
+        'delivered': '#f15c80', 'accepted': '#e4d354', 'default': '#2b908f'};
 
     var margin = {top: 20, right: 20, bottom: 110, left: 50},
         margin2 = {top: 430, right: 20, bottom: 30, left: 40},
@@ -130,7 +161,12 @@ function draw_d3(containerID, plotdata) {
     container.style('width', width + margin.left + margin.right + "px")
              .style("height", height + margin.top + margin.bottom + "px");
 
+    var div = d3.select("#" + containerID).append("div")
+        .attr("class", "tooltip")
+        .style("opacity", 0);
+
     var svg = container.append("svg")
+        .attr("id", "fig-" + containerID)
         .attr("width", width + margin.left + margin.right)
         .attr("height", height + margin.top + margin.bottom);
 
@@ -148,20 +184,27 @@ function draw_d3(containerID, plotdata) {
         .attr("class", "context")
         .attr("transform", "translate(" + margin2.left + "," + margin2.top + ")");
 
+    var valueline_1 = d3.line()
+        .x(function(d) { return x(d.occurred_at); })
+        .y(function(d) { return y(d.story_id); });
+
     var data = plotdata.data;
-    console.log(data);
     var stories = data.stories;
     var transitions = data.transitions;
+    var story_transitions = {};
     transitions.forEach(function (d) {
         d.occurred_at = parseDate(d.occurred_at);
+        if(story_transitions[d.story_id] !== undefined) {
+            story_transitions[d.story_id].push(d);
+        } else {
+            story_transitions[d.story_id] = [d];
+        }
     });
+    story_transitions = to_array(story_transitions);
     x.domain(d3.extent(transitions, function(d) { return d.occurred_at; })).nice();
     y.domain(stories.map(function(d) {return d.id}));
     x2.domain(x.domain()).nice();
     y2.domain(y.domain());
-
-    console.log(x.domain());
-    console.log(y.domain());
 
     // append scatter plot to main chart area
     var dots = focus.append("g");
@@ -174,6 +217,16 @@ function draw_d3(containerID, plotdata) {
         .style("opacity", .5)
         .attr("cx", function(d) { return x(d.occurred_at); })
         .attr("cy", function(d) { return y(d.story_id); });
+
+    focus.selectAll(".story")
+        .data(story_transitions)
+        .enter().append("g")
+        .attr("class", 'story')
+        .append("path")
+        .attr("class", "valueline")
+        .attr("d", valueline_1)
+        .attr("clip-path", "url(#clip)")
+        .style("stroke", function(d) { return colors[d[0].state]; });
 
     focus.append("g")
         .attr("class", "axis axis--x")
@@ -231,4 +284,23 @@ function drawHighCharts(containerID, JSONStr) {
     else {
         console.log(JSONStr);
     }
+}
+
+function to_array(input_dict) {
+    var prev = undefined;
+    var result = [];
+    for (var key in input_dict) {
+        input_dict[key].sort(function(a, b) {
+            if (a.occurred_at < b.occurred_at) return -1;
+            if (a.occurred_at > b.occurred_at) return 1;
+            return 0;
+        }).forEach(function(d, i) {
+            if (prev !== undefined) {
+                result.push([prev, d]);
+            }
+            prev = d;
+        });
+        prev = undefined;
+    }
+    return result;
 }
