@@ -171,20 +171,19 @@ end
 end_date = Date.today
 start_date = end_date - 7.days
 
-
-projects_list.each do |project|
-    ProjectMetrics.metric_names.each do |metric|
-        if rand(100) % 3 != 0
-            start_date.upto(end_date) do |date|
-                MetricSample.create!(:metric_name => metric,
-                                 :project_id => project.id,
-                                 :score => rand(0.0..4.0).round(2),
-                                 :image => dummies[metric][rand(3)],
-                                 :created_at => date)
-            end
-        end
-    end
-end
+# projects_list.each do |project|
+#     ProjectMetrics.metric_names.each do |metric|
+#         if rand(100) % 3 != 0
+#             start_date.upto(end_date) do |date|
+#                 MetricSample.create!(:metric_name => metric,
+#                                  :project_id => project.id,
+#                                  :score => rand(0.0..4.0).round(2),
+#                                  :image => dummies[metric][rand(3)],
+#                                  :created_at => date)
+#             end
+#         end
+#     end
+# end
 
 @user01 = User.create!(provider_username: "Clarkkkk", uid: "Clark",
     provider: "developer", role: "admin", password: Devise.friendly_token[0,20])

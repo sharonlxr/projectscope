@@ -11,8 +11,7 @@
   %div#slider-progress-indicator
     Loading...
 %br/
-%div{:class => 'col-md-2'}
-%div{:class => 'col-md-8'}
+%div{:class => 'col-md-12'}
   %table#projectlist_new{:class => 'table'}
     %thead
       %tr
@@ -28,7 +27,6 @@
         %tr{:id => "expanded_row-project:#{project.id}", :style => "display: none; height: 200px"}
           %td{:colspan => "2"}
             = render :partial => 'expanded', :locals => {:project => project}
-%div{:class => 'col-md-2'}
 
 -unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
   %div
