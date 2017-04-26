@@ -13,7 +13,8 @@ function parseChartParams(JSONStr) {
               spacingTop: 0,
               spacingLeft: 0,
               spacingRight: 0,
-              height: 250
+              height: 300,
+              width: 200
           },
           title: {
               text: paramMap['titleText']
@@ -71,7 +72,13 @@ function parseChartParams(JSONStr) {
               plotBackgroundColor: null,
               plotBorderWidth: null,
               plotShadow: false,
-              type: paramMap["chartType"]
+              type: paramMap["chartType"],
+              spacingBottom: 0,
+              spacingTop: 0,
+              spacingLeft: 0,
+              spacingRight: 0,
+              height: 300,
+              width: 200
           },
           title: {
               text: paramMap["titleText"]
