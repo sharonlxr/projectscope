@@ -5,4 +5,5 @@ ProjectMetrics.configure do
   add_metric :project_metric_pivotal_tracker
   # add_metric :project_metric_slack_trends
   add_metric :project_metric_story_transition
+  add_metric :project_metric_point_estimation
 end
