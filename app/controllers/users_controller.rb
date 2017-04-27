@@ -13,8 +13,9 @@ class UsersController < ApplicationController
     debugger
     @selected_projects = Project.where(:id => params[:projects].try(:keys))
     selected_metrics = params[:metrics] || []
-    @preferred_metrics = selected_metrics.try(:keys).map do |metric_name|
-      {metric_name => selected_metrics[metric_name].try(:keys)}
+    @preferred_metrics = {}
+    selected_metrics.try(:keys).each do |metrics|
+      @preferred_metrics[metrics] = selected_metrics[metrics].try(:keys)
     end
     current_user.preferred_projects = @selected_projects
     current_user.preferred_metrics = @preferred_metrics
