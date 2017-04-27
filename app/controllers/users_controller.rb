@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   end
 
   def update
-    debugger
+
     @selected_projects = Project.where(:id => params[:projects].try(:keys))
     selected_metrics = params[:metrics] || []
     @preferred_metrics = {}
