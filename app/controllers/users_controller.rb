@@ -6,19 +6,19 @@ class UsersController < ApplicationController
     @all_projects = Project.all
     @all_metrics = ProjectMetrics.metric_names
     @preferred_projects = @user.preferred_projects
-    @preferred_metrics = @user.preferred_metrics
+    @preferred_metrics = @user.preferred_metrics[0]
   end
 
   def update
-
     @selected_projects = Project.where(:id => params[:projects].try(:keys))
     selected_metrics = params[:metrics] || []
     @preferred_metrics = {}
-    selected_metrics.try(:keys).each do |metrics|
-      @preferred_metrics[metrics] = selected_metrics[metrics].try(:keys)
+    selected_metrics.try(:keys).each do |metric|
+      @preferred_metrics[metric] = selected_metrics[metric].try(:keys)
     end
+    debugger
     current_user.preferred_projects = @selected_projects
-    current_user.preferred_metrics = @preferred_metrics
+    current_user.preferred_metrics = [@preferred_metrics]
     if current_user.save
       flash[:notice] = "Preference saved successfully."
     else
