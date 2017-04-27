@@ -66,6 +66,7 @@ function parseChartParams(JSONStr) {
               data: paramMap['data']
           }]
       };
+
     }else if(JSONStr['chartType'] == "pie"){
       var chartParams = {
           chart: {
@@ -101,13 +102,24 @@ function parseChartParams(JSONStr) {
           },
           series: paramMap['data']
       };
+
     }else{
-      debugger
+        var chartParams = {
+            chart: {
+                type: paramMap['chartType']
+            },
+            title: {
+                text: paramMap['titleText']
+            },
+            series: paramMap['data']
+
+        }
     }
 
     return chartParams
 }
 
 function drawHighCharts(containerID, JSONStr) {
+    console.log(JSONStr);
     Highcharts.chart(containerID, parseChartParams(JSONStr));
 }
