@@ -17,7 +17,7 @@
           %input{:type => "checkbox", :checked => (@preferred_metrics.include? metric), :class => 'metrics_checkbox'}
           = metric.camelcase
         %div.panel-body
-          - sub_metrics = ["SUB_1", "SUB_2", "SUB_3"]
+          - sub_metrics = @all_metrics
           - sub_metrics.each do |sub_metrics|
             = check_box_tag "metrics[#{metric}][#{sub_metrics}]", "checked", (@preferred_metrics.include? sub_metrics), :class => "sub_metrics_checkbox"
             = sub_metrics.camelcase

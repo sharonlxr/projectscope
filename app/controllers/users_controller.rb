@@ -10,9 +10,10 @@ class UsersController < ApplicationController
   end
 
   def update
-    debugger
+
     @selected_projects = Project.where(:id => params[:projects].try(:keys))
     @selected_metrics = params[:metrics].try(:keys)
+    debugger
     current_user.preferred_projects = @selected_projects
     current_user.preferred_metrics = @selected_metrics
     if current_user.save
