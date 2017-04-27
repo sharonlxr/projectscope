@@ -136,6 +136,13 @@ var render_charts = function () {
     $(".chart_place").each(function () {
         get_charts_json(this.id);
     });
+    $(".expand_metric").click(function(){
+        debugger
+        $(this).parent().find(".sub_chart_place").each(function(){
+          debugger
+          get_charts_json(this.id);
+        });
+    });
 }
 
 $(document).ready(ready)
@@ -168,11 +175,11 @@ var MetricPopup = {
             timeout: 5000,
             success: MetricPopup.showMetricInfo,
             error: function (xhrObj, textStatus, exception) {
-                alert('Error!');
+
             }
             // 'success' and 'error' functions will be passed 3 args
         });
-        return (false);
+        return (true);
     }
 
     , showMetricInfo: function (data, requestStatus, xhrObject) {
