@@ -156,7 +156,6 @@ class ProjectsController < ApplicationController
   end
 
   def new_update
-    debugger
     render :template => 'projects/new_metrics'
   end
 

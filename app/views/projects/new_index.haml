@@ -25,7 +25,7 @@
   %tbody
     - @projects.each do |project|
       %tr
-        = render :partial => 'metrics', :locals => {:project => project}
+        = render :partial => 'metrics', :locals => {:project => project, :perfered_metrics => @metric_names}
       %tr{:id => "expanded_row-project:#{project.id}", :style => "display: none; height: 200px"}
         %td{:colspan => "2"}
           = render :partial => 'expanded', :locals => {:project => project}
