@@ -44,9 +44,9 @@ function story_transition(containerID, plotdata) {
     var colors = {'unscheduled': '#7cb5ec', 'unstarted': '#90ed7d', 'started': '#f7a35c', 'finished': '#8085e9',
         'delivered': '#f15c80', 'accepted': '#e4d354', 'default': '#2b908f'};
 
-    var margin = {top: 20, right: 20, bottom: 110, left: 50},
-        margin2 = {top: 430, right: 20, bottom: 30, left: 40},
-        width = 960 - margin.left - margin.right,
+    var margin = {top: 10, right: 10, bottom: 110, left: 50},
+        margin2 = {top: 430, right: 10, bottom: 30, left: 40},
+        width = 800 - margin.left - margin.right,
         height = 500 - margin.top - margin.bottom,
         height2 = 500 - margin2.top - margin2.bottom;
 

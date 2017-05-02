@@ -21,6 +21,13 @@ GIT
       httparty
 
 GIT
+  remote: https://github.com/an-ju/project_metric_collective_overview
+  revision: 7ed1775bc60fee04bcd46421c0bafae5fcc2180a
+  specs:
+    project_metric_collective_overview (0.1.0)
+      octokit (~> 4.0)
+
+GIT
   remote: https://github.com/an-ju/project_metric_github
   revision: 5bed52a13e90708537e10b33d8e9cdf87a45131b
   specs:
@@ -55,6 +62,13 @@ GIT
     project_metric_slack_trends (0.0.1)
       rasem (~> 0.6.1)
       slack-ruby-client (>= 0.7.6)
+
+GIT
+  remote: https://github.com/an-ju/project_metric_story_overall.git
+  revision: 21d85657f4e554cc9c4ff6786c5335d566ddc384
+  specs:
+    project_metric_story_overall (0.1.0)
+      faraday (~> 0.1, >= 0.1.0.0)
 
 GIT
   remote: https://github.com/an-ju/project_metric_story_transitions
@@ -456,11 +470,13 @@ DEPENDENCIES
   phantomjs
   poltergeist
   project_metric_code_climate!
+  project_metric_collective_overview!
   project_metric_github!
   project_metric_pivotal_tracker!
   project_metric_point_estimation!
   project_metric_slack!
   project_metric_slack_trends!
+  project_metric_story_overall!
   project_metric_story_transition!
   project_metrics!
   protected_attributes
