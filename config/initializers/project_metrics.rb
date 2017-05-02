@@ -6,4 +6,6 @@ ProjectMetrics.configure do
   add_metric :project_metric_slack_trends
   add_metric :project_metric_story_transition
   add_metric :project_metric_point_estimation
+  add_metric :project_metric_story_overall
+  add_metric :project_metric_collective_overview
 end

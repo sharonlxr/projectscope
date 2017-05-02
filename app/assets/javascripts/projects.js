@@ -124,7 +124,6 @@ var render_charts = function () {
         get_charts_json(this.id);
     });
     $(".expand_metric").click(function(){
-        console.log($(this).parent);
         $(this).parent().find(".sub_chart_place").each(function(){
           get_charts_json(this.id);
         });

@@ -21,88 +21,70 @@ MetricSample.delete_all
 
 slack1 = '{
 							"chartType":"pie",
-							"titleText":"Activity",
+							"titleText":"Story Status",
 							"data":[{
-												"name": "Activity",
+												"name": "Story Status",
 												 "colorByPoint": true,
 										     "data": [{
-													 "name": "Calvin Yu",
+													 "name": "Delivered",
 													 "y": 56.33
 												 }, {
-													 "name": "Harry",
+													 "name": "Started",
 													 "y": 24.03,
 													 "sliced": true,
 													 "selected": true
 												 }, {
-													 "name": "Steven",
+													 "name": "Finished",
 													 "y": 10.38
 												 }, {
-													 "name": "Joseph",
-													 "y": 4.77
-										     }, {
-													 "name": "Levin",
-													 "y": 0.91
-										     }, {
-													 "name": "Clark",
-													 "y": 0.2
+													 "name": "Unstarted",
+													 "y": 9.26
 										     }]
 										 }]
 					}'
 slack2 = '{
 							"chartType":"pie",
-							"titleText":"Activity",
+							"titleText":"Story Status",
 							"data":[{
-												"name": "Activity",
+												"name": "Story Status",
 												 "colorByPoint": true,
 										     "data": [{
-													 "name": "Calvin Yu",
+													 "name": "Delivered",
 													 "y": 35.27
 												 }, {
-													 "name": "Harry",
+													 "name": "Started",
 													 "y": 33.10,
 													 "sliced": true,
 													 "selected": true
 												 }, {
-													 "name": "Steven",
+													 "name": "Finished",
 													 "y": 24.72
 												 }, {
-													 "name": "Joseph",
-													 "y": 19.60
-										     }, {
-													 "name": "Levin",
-													 "y": 6.42
-										     }, {
-													 "name": "Clark",
-													 "y": 9.91
+													 "name": "Unstarted",
+													 "y": 35.93
 										     }]
 										 }]
 					}'
 slack3 = '{
 							"chartType":"pie",
-							"titleText":"Activity",
+							"titleText":"Story Status",
 							"data":[{
-												"name": "Activity",
+												"name": "Story Status",
 												 "colorByPoint": "true",
 										     "data": [{
-													 "name": "Calvin Yu",
-													 "y": 10.13
+													 "name": "Delivered",
+													 "y": 31.73
 												 }, {
-													 "name": "Harry",
+													 "name": "Started",
 													 "y": 24.57,
 													 "sliced": true,
 													 "selected": true
 												 }, {
-													 "name": "Steven",
+													 "name": "Finished",
 													 "y": 18.12
 												 }, {
-													 "name": "Joseph",
-													 "y": 2.47
-										     }, {
-													 "name": "Levin",
-													 "y": 21.60
-										     }, {
-													 "name": "Clark",
-													 "y": 1.91
+													 "name": "Unstarted",
+													 "y": 4.38
 										     }]
 										 }]
 					}'
@@ -136,35 +118,42 @@ slack_trends3 = '{
 												[5, 9], [6, 5], [7, 8], [8, 5]]
 								}'
 
+gauge1 = '{"chartType" : "gauge", "titleText" : "Story Management GPA", "data" : {"score" : 3.5}}'
+gauge2 = '{"chartType" : "gauge", "titleText" : "Story Management GPA", "data" : {"score" : 2.3}}'
+gauge3 = '{"chartType" : "gauge", "titleText" : "Story Management GPA", "data" : {"score" : 1.6}}'
+
+collective_gauge1 = '{"chartType" : "gauge", "titleText" : "Collective Ownership GPA", "data" : {"score" : 3.5}}'
+collective_gauge2 = '{"chartType" : "gauge", "titleText" : "Collective Ownership GPA", "data" : {"score" : 2.3}}'
+collective_gauge3 = '{"chartType" : "gauge", "titleText" : "Collective Onwership GPA", "data" : {"score" : 1.6}}'
+
+story_1 = open('./db/fake_data/p1.json', 'r') { |f| f.read }
+story_2 = open('./db/fake_data/p2.json', 'r') { |f| f.read }
+story_3 = open('./db/fake_data/p3.json', 'r') { |f| f.read }
+
+point_est1 = open('./db/fake_data/point_est1.json', 'r') { |f| f.read }
+point_est2 = open('./db/fake_data/point_est2.json', 'r') { |f| f.read }
+point_est3 = open('./db/fake_data/point_est3.json', 'r') { |f| f.read }
 
 # slack_trends2 = File.read './db/images/slack_trends2.svg'
 # slack_trends3 = File.read './db/images/slack_trends3.svg'
 pivot1 = slack1
 pivot2 = slack2
+pivot3 = slack3
 github1 = slack_trends1
 github2 = slack_trends2
 github3 = slack_trends3
 
 
 dummies = Hash.new
-dummies["code_climate"] = [dummy1_code_climate,
-													 dummy2_code_climate,
-													 dummy1_code_climate]
-dummies["github"] = [github1,
-	                   github2,
-										 github3]
-dummies["slack"] = [slack1,
-	                  slack2,
-										slack3]
-dummies["pivotal_tracker"] = [pivot1,
-	                            pivot2,
-															pivot2]
-dummies["slack_trends"] = [slack_trends1,
-	                         slack_trends2,
-													 slack_trends3]
-
-dummies["story_transition"] = [pivot1, slack_trends1, github1]
-dummies["point_estimation"] = [pivot1, slack_trends1, github1]
+dummies["code_climate"] = [dummy1_code_climate, dummy2_code_climate, dummy1_code_climate]
+dummies["github"] = [github1, github2, github3]
+dummies["slack"] = [slack1, slack2,	slack3]
+dummies["pivotal_tracker"] = [pivot1, pivot2, pivot3]
+dummies["slack_trends"] = [slack_trends1, slack_trends2, slack_trends3]
+dummies["story_transition"] = [story_1, story_2, story_3]
+dummies["point_estimation"] = [point_est1, point_est2, point_est3]
+dummies["story_overall"] = [gauge1, gauge2, gauge3]
+dummies["collective_overview"] = [collective_gauge1, collective_gauge2, collective_gauge3]
 
 projects_list = []
 0.upto(10).each do |num|
@@ -178,7 +167,7 @@ start_date = end_date - 7.days
 
 projects_list.each do |project|
     ProjectMetrics.metric_names.each do |metric|
-        if rand(100) % 3 != 0
+        if TRUE
             start_date.upto(end_date) do |date|
                 MetricSample.create!(:metric_name => metric,
                                  :project_id => project.id,
@@ -197,31 +186,18 @@ projects_list.each do |project|
         end
     end
 end
-# projects_list.each do |project|
-#     ProjectMetrics.metric_names.each do |metric|
-#         if rand(100) % 3 != 0
-#             start_date.upto(end_date) do |date|
-#                 MetricSample.create!(:metric_name => metric,
-#                                  :project_id => project.id,
-#                                  :score => rand(0.0..4.0).round(2),
-#                                  :image => dummies[metric][rand(3)],
-#                                  :created_at => date)
-#             end
-#         end
-#     end
-# end
-
-
 
 
 @user01 = User.create!(provider_username: "Clarkkkk", uid: "Clark",
     provider: "developer", role: "admin", password: Devise.friendly_token[0,20], preferred_metrics: [{
-			"code_climate"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
-			"github"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
-			"pivotal_tracker"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
-			"slack"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
-			"slack_trends"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
-      "point_estimation"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
-      "story_transition"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"]
+			# "code_climate"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
+			# "github"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
+      "story_overall"=>["pivotal_tracker", "point_estimation", "story_transition"],
+			# "pivotal_tracker"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
+			# "slack"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
+			# "slack_trends"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
+      # "point_estimation"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
+      # "story_transition"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"]
+      "collective_overview"=>["code_climate", "github"]
 			}], preferred_projects: projects_list)
 Whitelist.create!(username: @user01.provider_username)

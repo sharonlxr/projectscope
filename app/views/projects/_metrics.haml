@@ -6,8 +6,8 @@
 - project.latest_metric_samples(preferred_metrics.keys).each do |sample|
   %td
     - if !sample.nil?
-      %p
-        = sample.try(:metric_name).titleize + " " + '%.2f'.try(:%,sample.try(:score) || 0.0)
+      -#%p
+      -#  = sample.try(:metric_name).titleize + " " + '%.2f'.try(:%,sample.try(:score) || 0.0)
       %div.chart_place{:id => "project-#{project.id}-metric-#{sample.try(:metric_name)}"}
         -# = "PLACEHOLDER"
         -#%span{:class => "metric_image"}#{raw sample.try(:image)}
@@ -15,7 +15,7 @@
         %p.expand_metric{:data => {:toggle=>"modal", :target=>"#myModal#{project.id}#{sample.try(:metric_name)}"}}
           expand
         %div.modal.fade{:id=>"myModal#{project.id}#{sample.try(:metric_name)}", :tabindex=>"-1", :role=>"dialog", :aria => {:labelledby=>"myModalLabel"}}
-          %div.modal-dialog
+          %div.modal-dialog.modal-lg
             %div.modal-content
               %div.modal-header
                 %h4.modal-title
@@ -23,5 +23,6 @@
               %div.modal-body
                 - preferred_metrics[sample.try(:metric_name)].each do |sub_metric|
                   %div.sub_chart_place{:id => "sub_project-#{project.id}-metric-#{sub_metric}"}
+                  %br
 
               %div.modal-footer

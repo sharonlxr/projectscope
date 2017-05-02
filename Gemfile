@@ -11,6 +11,8 @@ gem 'project_metric_github', git: 'https://github.com/an-ju/project_metric_githu
 gem 'project_metric_pivotal_tracker', git: 'https://github.com/an-ju/project_metric_pivotal_tracker'
 gem 'project_metric_story_transition', git: 'https://github.com/an-ju/project_metric_story_transitions'
 gem 'project_metric_point_estimation', git: 'https://github.com/an-ju/project_metric_point_estimation.git'
+gem 'project_metric_story_overall', git: 'https://github.com/an-ju/project_metric_story_overall.git'
+gem 'project_metric_collective_overview', git: 'https://github.com/an-ju/project_metric_collective_overview'
 
 gem 'highcharts-rails'
 

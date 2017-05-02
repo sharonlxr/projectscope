@@ -7,13 +7,7 @@ function parseChartParams(JSONStr) {
     if (JSONStr['chartType'] == "spline"){
       var chartParams = {
           chart: {
-              type: paramMap['chartType'],
-              spacingBottom: 0,
-              spacingTop: 0,
-              spacingLeft: 0,
-              spacingRight: 0,
-              height: 300,
-              width: 200
+              type: paramMap['chartType']
           },
           title: {
               text: paramMap['titleText']
@@ -44,16 +38,7 @@ function parseChartParams(JSONStr) {
     }else if(JSONStr['chartType'] == "pie"){
       var chartParams = {
           chart: {
-              plotBackgroundColor: null,
-              plotBorderWidth: null,
-              plotShadow: false,
-              type: paramMap["chartType"],
-              spacingBottom: 0,
-              spacingTop: 0,
-              spacingLeft: 0,
-              spacingRight: 0,
-              height: 300,
-              width: 200
+              type: paramMap["chartType"]
           },
           title: {
               text: paramMap["titleText"]
@@ -100,6 +85,8 @@ function drawHighCharts(containerID, JSONStr) {
         point_estimation(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
+    } else if (JSONStr['chartType'] === 'gauge') {
+        gauge(containerID, JSONStr)
     } else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
     }
