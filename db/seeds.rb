@@ -19,9 +19,6 @@ MetricSample.delete_all
 # dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
 
 
-
-
-
 slack1 = '{
 							"chartType":"pie",
 							"titleText":"Activity",
@@ -193,7 +190,7 @@ projects_list.each do |project|
     					:project_id => project.id,
     					:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
     					:metrics_params => "URL")
-        end        
+        end
     end
 end
 
@@ -201,5 +198,11 @@ end
 
 
 @user01 = User.create!(provider_username: "Clarkkkk", uid: "Clark",
-    provider: "developer", role: "admin", password: Devise.friendly_token[0,20])
+    provider: "developer", role: "admin", password: Devise.friendly_token[0,20], preferred_metrics: [{
+			"code_climate"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends"],
+			"github"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends"],
+			"pivotal_tracker"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends"],
+			"slack"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends"],
+			"slack_trends"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends"]	
+			}])
 Whitelist.create!(username: @user01.provider_username)

@@ -6,7 +6,8 @@ class UsersController < ApplicationController
     @all_projects = Project.all
     @all_metrics = ProjectMetrics.metric_names
     @preferred_projects = @user.preferred_projects
-    @preferred_metrics = @user.preferred_metrics[0]
+    debugger
+    @preferred_metrics = @user.preferred_metrics
   end
 
   def update

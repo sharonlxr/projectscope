@@ -9,6 +9,7 @@
       %div
         = check_box_tag "projects[#{project.id}]", 0, (@preferred_projects.include? project), :class => "project_checkbox"
         = label_tag "projects_#{project.id}", project.name
+  - @preferred_metrics = @preferred_metrics[0]
   %div#metric-preference-list
     %h4 Check Metrics to monitor:
     - @all_metrics.each do |metric|
