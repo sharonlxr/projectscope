@@ -8,16 +8,16 @@
 </head>
 <body>
 	<div class="col-md-12 header-bar">
-		<div class="col-md-9">		
+		<div class="col-md-9">
 			<h4>Welcome to ProjectScope</h4>
 		</div>
 		<div class="col-md-3" style="text-align: right;">
 			<% if user_signed_in? %>
-				<%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => "btn btn-md btn-default") %> 
+				<%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => "btn btn-md btn-default") %>
 			<% end %>
 		</div>
 	</div>
-	<div class="container" style="padding-top: 60px;">
+	<div class="ps_container" style="padding-top: 60px; width=200%">
 		<br>
 
 		<div class="row">
@@ -37,4 +37,3 @@
 	</div>
 </body>
 </html>
-    

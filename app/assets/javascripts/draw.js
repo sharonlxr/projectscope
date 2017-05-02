@@ -12,7 +12,8 @@ function parseChartParams(JSONStr) {
               spacingTop: 0,
               spacingLeft: 0,
               spacingRight: 0,
-              height: 250
+              height: 300,
+              width: 200
           },
           title: {
               text: paramMap['titleText']
@@ -39,45 +40,43 @@ function parseChartParams(JSONStr) {
               data: paramMap['data']
           }]
       };
-    }else if(JSONStr['chartType'] == "pie") {
-        var chartParams = {
-            chart: {
-                plotBackgroundColor: null,
-                plotBorderWidth: null,
-                plotShadow: false,
-                type: paramMap["chartType"]
-            },
-            title: {
-                text: paramMap["titleText"]
-            },
-            tooltip: {
-                pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-            },
-            plotOptions: {
-                pie: {
-                    allowPointSelect: true,
-                    cursor: 'pointer',
-                    dataLabels: {
-                        enabled: false,
-                        format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                        style: {
-                            color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                        }
-                    }
-                }
-            },
-            series: paramMap['data']
-        };
-    }else if(JSONStr['chartType'] == 'bar') {
-        var chartParams = {
-            chart: {
-                type: 'bar'
-            },
-            title: {
-                text: paramMap['titleText']
-            },
-            series: paramMap['data']
-        }
+
+    }else if(JSONStr['chartType'] == "pie"){
+      var chartParams = {
+          chart: {
+              plotBackgroundColor: null,
+              plotBorderWidth: null,
+              plotShadow: false,
+              type: paramMap["chartType"],
+              spacingBottom: 0,
+              spacingTop: 0,
+              spacingLeft: 0,
+              spacingRight: 0,
+              height: 300,
+              width: 200
+          },
+          title: {
+              text: paramMap["titleText"]
+          },
+          tooltip: {
+              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
+          },
+          plotOptions: {
+              pie: {
+                  allowPointSelect: true,
+                  cursor: 'pointer',
+                  dataLabels: {
+                      enabled: false,
+                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
+                      style: {
+                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
+                      }
+                  }
+              }
+          },
+          series: paramMap['data']
+      };
+
     }else{
         var chartParams = {
             chart: {
@@ -101,8 +100,7 @@ function drawHighCharts(containerID, JSONStr) {
         point_estimation(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
-    }
-    else {
+    } else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
     }
 }

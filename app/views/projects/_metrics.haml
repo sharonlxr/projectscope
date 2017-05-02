@@ -1,8 +1,9 @@
 %td{:valign => "botom", :align => "right"}
-  = link_to project.name, project
+  = link_to project.name, "projects/#{project.id}/new_edit"
   %button{:class => "expand_button", :pid => "#{project.id}"}
     = "+"
-- project.latest_metric_samples.each do |sample|
+- preferred_metrics = preferred_metrics[0]
+- project.latest_metric_samples(preferred_metrics.keys).each do |sample|
   %td
     - if !sample.nil?
       %p
@@ -10,3 +11,17 @@
       %div.chart_place{:id => "project-#{project.id}-metric-#{sample.try(:metric_name)}"}
         -# = "PLACEHOLDER"
         -#%span{:class => "metric_image"}#{raw sample.try(:image)}
+      %div.hello_world
+        %p.expand_metric{:data => {:toggle=>"modal", :target=>"#myModal#{project.id}#{sample.try(:metric_name)}"}}
+          expand
+        %div.modal.fade{:id=>"myModal#{project.id}#{sample.try(:metric_name)}", :tabindex=>"-1", :role=>"dialog", :aria => {:labelledby=>"myModalLabel"}}
+          %div.modal-dialog
+            %div.modal-content
+              %div.modal-header
+                %h4.modal-title
+                  = sample.try(:metric_name)
+              %div.modal-body
+                - preferred_metrics[sample.try(:metric_name)].each do |sub_metric|
+                  %div.sub_chart_place{:id => "sub_project-#{project.id}-metric-#{sub_metric}"}
+
+              %div.modal-footer

@@ -14,11 +14,9 @@ Whitelist.delete_all
 Project.delete_all
 MetricSample.delete_all
 
+
 # dummy1_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/WebsiteOne'
 # dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
-
-
-
 
 
 slack1 = '{
@@ -137,6 +135,8 @@ slack_trends3 = '{
 										"data" : [[0, 7], [1, 3], [2, 7], [3, 3], [4, 0],
 												[5, 9], [6, 5], [7, 8], [8, 5]]
 								}'
+
+
 # slack_trends2 = File.read './db/images/slack_trends2.svg'
 # slack_trends3 = File.read './db/images/slack_trends3.svg'
 pivot1 = slack1
@@ -163,6 +163,9 @@ dummies["slack_trends"] = [slack_trends1,
 	                         slack_trends2,
 													 slack_trends3]
 
+dummies["story_transition"] = [pivot1, slack_trends1, github1]
+dummies["point_estimation"] = [pivot1, slack_trends1, github1]
+
 projects_list = []
 0.upto(10).each do |num|
 	projects_list << Project.create!(:name => "Project #{num}")
@@ -171,6 +174,29 @@ end
 end_date = Date.today
 start_date = end_date - 7.days
 
+# Config.delete_all
+
+projects_list.each do |project|
+    ProjectMetrics.metric_names.each do |metric|
+        if rand(100) % 3 != 0
+            start_date.upto(end_date) do |date|
+                MetricSample.create!(:metric_name => metric,
+                                 :project_id => project.id,
+                                 :score => rand(0.0..4.0).round(2),
+                                 :image => dummies[metric][rand(3)],
+                                 :created_at => date)
+            end
+            Config.create(:metric_name => metric,
+        				:project_id => project.id,
+        				:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+        				:metrics_params => "TOKEN")
+    		Config.create(:metric_name => metric,
+    					:project_id => project.id,
+    					:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+    					:metrics_params => "URL")
+        end
+    end
+end
 # projects_list.each do |project|
 #     ProjectMetrics.metric_names.each do |metric|
 #         if rand(100) % 3 != 0
@@ -185,6 +211,17 @@ start_date = end_date - 7.days
 #     end
 # end
 
+
+
+
 @user01 = User.create!(provider_username: "Clarkkkk", uid: "Clark",
-    provider: "developer", role: "admin", password: Devise.friendly_token[0,20])
+    provider: "developer", role: "admin", password: Devise.friendly_token[0,20], preferred_metrics: [{
+			"code_climate"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
+			"github"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
+			"pivotal_tracker"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
+			"slack"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
+			"slack_trends"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
+      "point_estimation"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"],
+      "story_transition"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition"]
+			}], preferred_projects: projects_list)
 Whitelist.create!(username: @user01.provider_username)

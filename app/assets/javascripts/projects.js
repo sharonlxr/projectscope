@@ -4,9 +4,9 @@
 var update_metrics = function (data) {
     $.each(data, function (index, val) {
         $.each(val, function (index, val) {
-            var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")
-            metric_content.removeClass('outdated-metric')
-            metric_content.find(".metric_score").html(val.score)
+            var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric");
+            metric_content.removeClass('outdated-metric');
+            metric_content.find(".metric_score").html(val.score);
             metric_content.find(".metric_image").html(val.image)
         });
     });
@@ -67,8 +67,8 @@ var ready = function () {
         max: 0,
         step: 1,
         slide: function (event, ui) {
-            var days_from_now = -1 * ui.value
-            request_for_metrics(days_from_now)
+            var days_from_now = -1 * ui.value;
+            request_for_metrics(days_from_now);
             update_slider_indicator();
             $(".ui-slider").slider("disable");
         }
@@ -106,39 +106,32 @@ var render_charts = function () {
         var project_id = splited[1];
         var metric = splited[3];
 
-        // $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
-        //     createTimeSeriesGraph(id, data);
-        // });
         $.ajax({url: "projects/" + project_id + "/metrics/" + metric,
-
-          // result is the json string from the gem.
-          // TODO: parse to javascript
-          // 'chartType'
-          // 'titleText'
-          // 'subTitleText'
-          // 'xAxisTitleText'
-          // "xAxisUnit"
-          // 'yAxisTitleText'
-          // 'yAxisUnit'
-          // 'data'
-        	success: function(result) {
-        		//Highcharts.chart(id, result);
-
-            drawHighCharts(id, result);
-        	},
-          error: function(a, b, c){
-            debugger
-          }
-          }
-
-        );
+            success: function(result) {
+                drawHighCharts(id, result);
+            },
+            error: function(a, b, c) {
+                if (a.status !== 404) {
+                    console.log(a);
+                    console.log(b);
+                    console.log(c);
+                    debugger
+                }
+            }
+        });
     };
     $(".chart_place").each(function () {
         get_charts_json(this.id);
     });
+    $(".expand_metric").click(function(){
+        console.log($(this).parent);
+        $(this).parent().find(".sub_chart_place").each(function(){
+          get_charts_json(this.id);
+        });
+    });
 };
 
-// $(document).ready(ready);
+$(document).ready(ready);
 $(document).on('turbolinks:load', ready);
 // var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")
 // metric_content.removeClass('outdated-metric')
@@ -168,11 +161,11 @@ var MetricPopup = {
             timeout: 5000,
             success: MetricPopup.showMetricInfo,
             error: function (xhrObj, textStatus, exception) {
-                alert('Error!');
+
             }
             // 'success' and 'error' functions will be passed 3 args
         });
-        return (false);
+        return (true);
     }
 
     , showMetricInfo: function (data, requestStatus, xhrObject) {
