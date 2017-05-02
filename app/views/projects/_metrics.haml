@@ -8,7 +8,7 @@
     - if !sample.nil?
       %p
         = sample.try(:metric_name).titleize + " " + '%.2f'.try(:%,sample.try(:score) || 0.0)
-      %div.chart_place{:id => "project##{project.id}.metric:##{sample.try(:metric_name)}"}
+      %div.chart_place{:id => "project-#{project.id}-metric-#{sample.try(:metric_name)}"}
         -# = "PLACEHOLDER"
         -#%span{:class => "metric_image"}#{raw sample.try(:image)}
       %div.hello_world

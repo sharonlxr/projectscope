@@ -2,7 +2,6 @@
  * Created by stevenwuyinze on 3/22/17.
  */
 
-
 function parseChartParams(JSONStr) {
     var paramMap = JSONStr;
     if (JSONStr['chartType'] == "spline"){
@@ -27,11 +26,6 @@ function parseChartParams(JSONStr) {
                   margin: 0,
                   text: paramMap['xAxisTitleText']
               },
-              // labels: {
-              //     formatter: function () {
-              //         return this.value + paramMap['xAxisUnit'];
-              //     }
-              // },
               maxPadding: 0.01,
               // showLastLabel: true
           },
@@ -41,27 +35,7 @@ function parseChartParams(JSONStr) {
                   text: paramMap['yAxisTitleText']
               },
               maxPadding: 0.01
-              // labels: {
-              //     formatter: function () {
-              //         return this.value + paramMap['yAxisUnit'];
-              //     }
-              // },
-              //lineWidth: 2
           },
-          // legend: {
-          //     enabled: false
-          // },
-          // tooltip: {
-          //     headerFormat: '<b>{series.name}</b><br/>',
-          //     pointFormat: '{point.x} km: {point.y}°C'
-          // },
-          // plotOptions: {
-          //     spline: {
-          //         marker: {
-          //             enable: false
-          //         }
-          //     }
-          // },
           series: [{
               data: paramMap['data']
           }]
@@ -120,6 +94,33 @@ function parseChartParams(JSONStr) {
 }
 
 function drawHighCharts(containerID, JSONStr) {
-    console.log(JSONStr);
-    Highcharts.chart(containerID, parseChartParams(JSONStr));
+    if(JSONStr['chartType'] === 'd3') {
+        story_transition(containerID, JSONStr);
+    } else if (JSONStr['chartType'] === 'point_estimation') {
+        point_estimation(containerID, JSONStr);
+    } else if (JSONStr['chartType'] === 'github_pr') {
+        github_pr(containerID, JSONStr);
+    }
+    else {
+        Highcharts.chart(containerID, parseChartParams(JSONStr));
+    }
+}
+
+function to_array(input_dict) {
+    var prev = undefined;
+    var result = [];
+    for (var key in input_dict) {
+        input_dict[key].sort(function(a, b) {
+            if (a.occurred_at < b.occurred_at) return -1;
+            if (a.occurred_at > b.occurred_at) return 1;
+            return 0;
+        }).forEach(function(d, i) {
+            if (prev !== undefined) {
+                result.push([prev, d]);
+            }
+            prev = d;
+        });
+        prev = undefined;
+    }
+    return result;
 }

@@ -169,30 +169,42 @@ end
 end_date = Date.today
 start_date = end_date - 7.days
 
+# Config.delete_all
 
-Config.delete_all
-
-projects_list.each do |project|
-    ProjectMetrics.metric_names.each do |metric|
-        if rand(100) % 3 != 0
-            start_date.upto(end_date) do |date|
-                MetricSample.create!(:metric_name => metric,
-                                 :project_id => project.id,
-                                 :score => rand(0.0..4.0).round(2),
-                                 :image => dummies[metric][rand(3)],
-                                 :created_at => date)
-            end
-            Config.create(:metric_name => metric,
-        				:project_id => project.id,
-        				:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
-        				:metrics_params => "TOKEN")
-    		Config.create(:metric_name => metric,
-    					:project_id => project.id,
-    					:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
-    					:metrics_params => "URL")
-        end
-    end
-end
+# projects_list.each do |project|
+#     ProjectMetrics.metric_names.each do |metric|
+#         if rand(100) % 3 != 0
+#             start_date.upto(end_date) do |date|
+#                 MetricSample.create!(:metric_name => metric,
+#                                  :project_id => project.id,
+#                                  :score => rand(0.0..4.0).round(2),
+#                                  :image => dummies[metric][rand(3)],
+#                                  :created_at => date)
+#             end
+#             Config.create(:metric_name => metric,
+#         				:project_id => project.id,
+#         				:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+#         				:metrics_params => "TOKEN")
+#     		Config.create(:metric_name => metric,
+#     					:project_id => project.id,
+#     					:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+#     					:metrics_params => "URL")
+#         end
+#     end
+# end
+# projects_list.each do |project|
+#     ProjectMetrics.metric_names.each do |metric|
+#         if rand(100) % 3 != 0
+#             start_date.upto(end_date) do |date|
+#                 MetricSample.create!(:metric_name => metric,
+#                                  :project_id => project.id,
+#                                  :score => rand(0.0..4.0).round(2),
+#                                  :image => dummies[metric][rand(3)],
+#                                  :created_at => date)
+#             end
+#         end
+#     end
+# end
 
 
 
