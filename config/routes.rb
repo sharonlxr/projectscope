@@ -9,6 +9,7 @@ Rails.application.routes.draw do
     end
   	member do
   		post "/add_owner", :to => "projects#add_owner"
+      get '/metrics/:metric', :to => 'projects#get_metric_data'
   	end
   end
 
@@ -24,7 +25,7 @@ Rails.application.routes.draw do
 
   get '/dev', :to => 'projects#new_index', :as => 'new_index'
   get 'all_metrics/:id', :to => 'projects#all_metrics', :as => 'all_metrics'
-  get 'projects/:id/metrics/:metric', :to => 'projects#get_metric_data'
+  # get 'projects/:id/metrics/:metric', :to => 'projects#get_metric_data'
   get '/charts', :to => 'projects#charts'
   get 'projects/:id/new_edit', :to => 'projects#new_edit', :as => "new_edit_project"
   post 'projects/:id/new_update', :to => 'projects#new_update', :as => "update_metric"

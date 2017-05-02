@@ -2,8 +2,8 @@
   = link_to project.name, "projects/#{project.id}/new_edit"
   %button{:class => "expand_button", :pid => "#{project.id}"}
     = "+"
-  -perfered_metrics = perfered_metrics[0].keys
-- project.latest_metric_samples(perfered_metrics).each do |sample|
+- preferred_metrics = preferred_metrics[0]
+- project.latest_metric_samples(preferred_metrics.keys).each do |sample|
   %td
     - if !sample.nil?
       %p
@@ -18,11 +18,10 @@
           %div.modal-dialog
             %div.modal-content
               %div.modal-header
-
                 %h4.modal-title
-                  Modal Header
-
+                  = sample.try(:metric_name)
               %div.modal-body
-                %div.sub_chart_place{:id => "sub_project##{project.id}.metric:##{sample.try(:metric_name)}"}
+                - preferred_metrics[sample.try(:metric_name)].each do |sub_metric|
+                  %div.sub_chart_place{:id => "sub_project-#{project.id}-metric-#{sub_metric}"}
 
               %div.modal-footer

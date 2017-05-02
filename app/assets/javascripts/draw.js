@@ -100,8 +100,7 @@ function drawHighCharts(containerID, JSONStr) {
         point_estimation(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
-    }
-    else {
+    } else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
     }
 }

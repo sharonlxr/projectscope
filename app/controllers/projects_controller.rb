@@ -83,8 +83,12 @@ class ProjectsController < ApplicationController
 
   def get_metric_data
     #from @project to get metric
-    @data = MetricSample.find_by(project_id:params[:id], metric_name:params[:metric])[:image]
-    render json: @data
+    metric = MetricSample.find_by project_id:params[:id], metric_name:params[:metric]
+    if metric
+      render json: metric[:image]
+    else
+      render :json => {:error => "not found"}.to_json, :status => 404
+    end
   end
   
   def new_edit

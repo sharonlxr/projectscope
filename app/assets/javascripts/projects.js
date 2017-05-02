@@ -4,9 +4,9 @@
 var update_metrics = function (data) {
     $.each(data, function (index, val) {
         $.each(val, function (index, val) {
-            var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")
-            metric_content.removeClass('outdated-metric')
-            metric_content.find(".metric_score").html(val.score)
+            var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric");
+            metric_content.removeClass('outdated-metric');
+            metric_content.find(".metric_score").html(val.score);
             metric_content.find(".metric_image").html(val.image)
         });
     });
@@ -14,11 +14,11 @@ var update_metrics = function (data) {
 
 var update_date_label = function (new_date) {
     $("#date-label").html(new_date.split("T")[0]);
-}
+};
 
 var outdate_all_metrics = function () {
     $(".metric-content").addClass('outdated-metric')
-}
+};
 
 var update_slider_indicator = function (is_successful) {
     var indicator = $("#slider-progress-indicator");
@@ -34,7 +34,7 @@ var update_slider_indicator = function (is_successful) {
             indicator.addClass('slider-error-msg');
         }
     }
-}
+};
 // Global variable for days
 var days;
 var request_for_metrics = function (days_from_now) {
@@ -57,7 +57,7 @@ var request_for_metrics = function (days_from_now) {
             $(".ui-slider").slider("enable");
             update_slider_indicator(false);
         })
-}
+};
 
 var ready = function () {
     render_charts();
@@ -67,8 +67,8 @@ var ready = function () {
         max: 0,
         step: 1,
         slide: function (event, ui) {
-            var days_from_now = -1 * ui.value
-            request_for_metrics(days_from_now)
+            var days_from_now = -1 * ui.value;
+            request_for_metrics(days_from_now);
             update_slider_indicator();
             $(".ui-slider").slider("disable");
         }
@@ -97,56 +97,42 @@ var ready = function () {
         }
         //createTimeSeriesGraph($targetRow.select('expanded_container'), );
     })
-}
+};
 
 var render_charts = function () {
     var get_charts_json = function (id) {
         // split
-        var splited = id.split(".");
-        var project_id = splited[0].split("#")[1];
-        var metric = splited[1].split("#")[1];
+        var splited = id.split("-");
+        var project_id = splited[1];
+        var metric = splited[3];
 
-        // $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
-        //     createTimeSeriesGraph(id, data);
-        // });
         $.ajax({url: "projects/" + project_id + "/metrics/" + metric,
-
-          // result is the json string from the gem.
-          // TODO: parse to javascript
-          // 'chartType'
-          // 'titleText'
-          // 'subTitleText'
-          // 'xAxisTitleText'
-          // "xAxisUnit"
-          // 'yAxisTitleText'
-          // 'yAxisUnit'
-          // 'data'
-        	success: function(result) {
-        		//Highcharts.chart(id, result);
-
-            drawHighCharts(id, result);
-        	},
-          error: function(a, b, c){
-            debugger
-          }
-          }
-
-        );
-    }
+            success: function(result) {
+                drawHighCharts(id, result);
+            },
+            error: function(a, b, c) {
+                if (a.status !== 404) {
+                    console.log(a);
+                    console.log(b);
+                    console.log(c);
+                    debugger
+                }
+            }
+        });
+    };
     $(".chart_place").each(function () {
         get_charts_json(this.id);
     });
     $(".expand_metric").click(function(){
-        debugger
+        console.log($(this).parent);
         $(this).parent().find(".sub_chart_place").each(function(){
-          debugger
           get_charts_json(this.id);
         });
     });
-}
+};
 
-$(document).ready(ready)
-$(document).on('turbolinks:load', ready)
+$(document).ready(ready);
+$(document).on('turbolinks:load', ready);
 // var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")
 // metric_content.removeClass('outdated-metric')
 // metric_content.find(".metric_score").html(val.score)

@@ -6,7 +6,7 @@ class UsersController < ApplicationController
     @all_projects = Project.all
     @all_metrics = ProjectMetrics.metric_names
     @preferred_projects = @user.preferred_projects
-    debugger
+    # debugger
     @preferred_metrics = @user.preferred_metrics
   end
 
@@ -17,7 +17,6 @@ class UsersController < ApplicationController
     selected_metrics.try(:keys).each do |metric|
       @preferred_metrics[metric] = selected_metrics[metric].try(:keys)
     end
-    debugger
     current_user.preferred_projects = @selected_projects
     current_user.preferred_metrics = [@preferred_metrics]
     if current_user.save
