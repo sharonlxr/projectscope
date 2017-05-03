@@ -36,9 +36,9 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_pivotal_tracker
-  revision: 9dfa673f9c040aed3fb59f6e70f752824cdb4b98
+  revision: d18e96f2357556eef9ee10aa059257a9bdbe0e6d
   specs:
-    project_metric_pivotal_tracker (0.0.1)
+    project_metric_pivotal_tracker (0.1.0)
       tracker_api (~> 0.2.0)
 
 GIT

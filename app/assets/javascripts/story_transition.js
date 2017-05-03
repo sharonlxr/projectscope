@@ -4,6 +4,9 @@
 
 function story_transition(containerID, plotdata) {
     //create brush function redraw scatterplot with selection
+    if (!d3.select("#" + containerID).select('svg').empty()) {
+        return;
+    }
     function brushed() {
         var selection = d3.event.selection;
         x.domain(selection.map(x2.invert, x2));
