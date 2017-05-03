@@ -1,0 +1,23 @@
+{
+  "chartType":"pie",
+  "titleText":"Story Status",
+  "data":[{
+    "name": "Story Status",
+    "colorByPoint": "true",
+    "data": [{
+      "name": "Delivered",
+      "y": 31.73
+    }, {
+      "name": "Started",
+      "y": 24.57,
+      "sliced": true,
+      "selected": true
+    }, {
+      "name": "Finished",
+      "y": 18.12
+    }, {
+      "name": "Unstarted",
+      "y": 4.38
+    }]
+  }]
+}
