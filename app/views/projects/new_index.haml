@@ -13,7 +13,7 @@
     Loading...
 %br/
 %div{:class => 'col-md-12'}
-  %table#projectlist_new{:class => 'table'}
+  %table#projectlist_new{:class => 'table table-bordered'}
     %thead
       %tr
         %th{:class => @class}
@@ -23,7 +23,7 @@
             = metric_name
     %tbody
       - @projects.each do |project|
-        %tr
+        %tr{:align => 'center'}
           = render :partial => 'metrics', :locals => {:project => project, :preferred_metrics => preferred_metric_names}
         %tr{:id => "expanded_row-project:#{project.id}", :style => "display: none; height: 200px"}
           %td{:colspan => "2"}

@@ -86,8 +86,11 @@ function drawHighCharts(containerID, JSONStr) {
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'gauge') {
-        gauge(containerID, JSONStr)
-    } else {
+        gauge(containerID, JSONStr);
+    } else if (JSONStr['chartType'] === 'pivotal_tracker') {
+        pivotal_tracker(containerID, JSONStr);
+    }
+    else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
     }
 }

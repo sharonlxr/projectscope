@@ -6,18 +6,29 @@
     "colorByPoint": true,
     "data": [{
       "name": "Delivered",
-      "y": 35.27
+      "y": 30.00,
+      "color": "#f15c80"
     }, {
       "name": "Started",
-      "y": 33.10,
+      "y": 10.00,
       "sliced": true,
-      "selected": true
+      "color": "#f7a35c"
     }, {
       "name": "Finished",
-      "y": 24.72
+      "y": 30.00,
+      "color": "#8085e9"
+    }, {
+      "name": "Accepted",
+      "y": 10.00,
+      "color": "#e4d354"
     }, {
       "name": "Unstarted",
-      "y": 35.93
+      "y": 10.00,
+      "color": "#90ed7d"
+    }, {
+      "name": "Unscheduled",
+      "y": 10.00,
+      "color": "#7cb5ec"
     }]
   }]
 }
