@@ -24,5 +24,9 @@
                 - preferred_metrics[sample.try(:metric_name)].each do |sub_metric|
                   %div.sub_chart_place{:id => "sub_project-#{project.id}-metric-#{sub_metric}"}
                   %br
-
+                = form_tag "projects/#{project.id}/metrics/#{sample.try(:metric_name)}", :method => "put" do
+                  = label_tag :score, "Practice GPA"
+                  = text_field_tag :score
+                  %br
+                  = submit_tag "Submit"
               %div.modal-footer

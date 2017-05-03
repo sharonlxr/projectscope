@@ -1,6 +1,6 @@
 require 'json'
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric, :new_edit]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :new_edit, :update_metric]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
 
@@ -157,6 +157,19 @@ class ProjectsController < ApplicationController
       end
       # debugger
 
+    end
+  end
+
+  def update_metric
+    # TODO: Check parameters before update
+    @metric = MetricSample.find_by project_id:params[:id], metric_name:params[:metric]
+    data_dict = JSON.parse @metric[:image]
+    data_dict['data']['score'] = params[:score].to_f
+    @metric[:image] = data_dict.to_json
+    if @metric.save
+      redirect_to :back, notice: 'Grade was successfully updated.'
+    else
+      redirect_to :back, notice: 'Save failure'
     end
   end
 
