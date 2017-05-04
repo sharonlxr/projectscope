@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170413213235) do
+ActiveRecord::Schema.define(version: 20170504182626) do
 
   create_table "configs", force: :cascade do |t|
     t.integer  "project_id"
@@ -47,6 +47,18 @@ ActiveRecord::Schema.define(version: 20170413213235) do
 
   add_index "ownerships", ["project_id"], name: "index_ownerships_on_project_id"
   add_index "ownerships", ["user_id"], name: "index_ownerships_on_user_id"
+
+  create_table "project_grades", force: :cascade do |t|
+    t.float    "score"
+    t.string   "metric_name"
+    t.text     "comment"
+    t.text     "note"
+    t.integer  "project_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
+
+  add_index "project_grades", ["project_id"], name: "index_project_grades_on_project_id"
 
   create_table "projects", force: :cascade do |t|
     t.string   "name"
