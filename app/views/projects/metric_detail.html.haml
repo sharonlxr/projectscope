@@ -1,0 +1,15 @@
+%div.col-md-2
+  %div.navbar.navbar-fixed-left{style: 'position: fixed'}
+    %a.navbar-brand{heref: '#'}
+      = @practice_name.humanize
+    %ul.nav.navbar-nav
+      - @sub_metrics.each do |m|
+        %li{role: 'presentation'}
+          %a{href: '#'}
+            = m.humanize
+%div.sub_metric.col-md-10
+  - @sub_metrics.each do |metric|
+    %div.col-md-1
+    %div.col-md-10
+      = render partial: "sub_metrics/#{metric}", locals: {project: @project}
+    %div.col-md-1

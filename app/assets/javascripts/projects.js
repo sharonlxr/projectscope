@@ -106,7 +106,7 @@ var render_charts = function () {
         var project_id = splited[1];
         var metric = splited[3];
 
-        $.ajax({url: "projects/" + project_id + "/metrics/" + metric,
+        $.ajax({url: "/projects/" + project_id + "/metrics/" + metric,
             success: function(result) {
                 drawHighCharts(id, result);
             },
@@ -131,11 +131,7 @@ var render_charts = function () {
 };
 
 $(document).ready(ready);
-$(document).on('turbolinks:load', ready);
-// var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric")
-// metric_content.removeClass('outdated-metric')
-// metric_content.find(".metric_score").html(val.score)
-// metric_content.find(".metric_image").html(val.image)
+
 var MetricPopup = {
     setup: function () {
         // add hidden 'div' to end of page to display popup:

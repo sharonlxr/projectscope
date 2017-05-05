@@ -5,11 +5,11 @@ Rails.application.routes.draw do
     collection do
       post "/metrics_on_date", :to => "projects#metrics_on_date"
       get "/metrics_on_date_v2", :to => "projects#metrics_on_date_v2"
-      get '/show_metric', :to => 'projects#show_metric'
     end
   	member do
   		post "/add_owner", :to => "projects#add_owner"
       get '/metrics/:metric', :to => 'projects#get_metric_data'
+      get '/metrics/:metric/detail', to: 'projects#show_metric'
   	end
   end
 
