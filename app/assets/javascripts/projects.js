@@ -130,7 +130,9 @@ var render_charts = function () {
     });
 };
 
-$(document).ready(ready);
+// $(document).ready(ready);
+// $(window).on("load", ready);
+$(document).on('turbolinks:load', ready);
 
 var MetricPopup = {
     setup: function () {
