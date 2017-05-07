@@ -31,5 +31,5 @@ function pivotal_tracker(containerID, data) {
     });
     rows.append('td').html(function (d) {
         return d.current_state;
-    })
+    });
 }
