@@ -11,12 +11,12 @@ function pivotal_tracker(containerID, data) {
     }
     var tbl = container
         .append('table')
-        .attr('class', 'table');
-    var headers = tbl.append('tr');
+        .attr('class', 'table table-hover');
+    var headers = tbl.append('thead').append('tr');
     headers.append('th').html('ID');
     headers.append('th').html('Story Name');
     headers.append('th').html('Current State');
-    var rows = tbl.selectAll('tr')
+    var rows = tbl.append('tbody').selectAll('tr')
         .data(data.data)
       .enter()
         .append('tr')
@@ -31,5 +31,5 @@ function pivotal_tracker(containerID, data) {
     });
     rows.append('td').html(function (d) {
         return d.current_state;
-    })
+    });
 }

@@ -130,6 +130,12 @@ class ProjectsController < ApplicationController
     end
   end
 
+  def show_metric
+    @sub_metrics = current_user.preferred_metrics[0][params[:metric]]
+    @practice_name = params[:metric]
+    render template: 'projects/metric_detail'
+  end
+
   def metrics_on_date
     days_from_now = params[:days_from_now].to_i
     date = DateTime.parse((Date.today - days_from_now.days).to_s)
@@ -163,25 +169,6 @@ class ProjectsController < ApplicationController
   def new_update
     render :template => 'projects/new_metrics'
   end
-
-  # def show_metric
-  #   # debugger
-  #   # id = params[:id] # retrieve movie ID from URI route
-  #   days_from_now = params[:days_from_now].to_i
-  #   date = DateTime.parse((Date.today - days_from_now.days).to_s)
-  #   metric = [params[:metric]]
-  #   project = Project.find(params[:id])
-  #   @metrics = Project.latest_metrics_on_date project, metric, date
-  #   @metric = params[:metric]
-  #   respond_to do |format|
-  #     format.json{render json: {@metrics, date: date} }
-  #   end
-  #   # @days_from_now = params[:days_from_now]
-  #   # debugger
-  #   # respond_to do |format|
-  #   #   format.html { render(:partial => 'hello_world') }
-  #   # end
-  # end
 
   def add_owner
     new_username = params[:username]

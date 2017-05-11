@@ -1,0 +1,13 @@
+%div.col-md-2
+  %div#navbar.navbar.navbar-fixed-left{style: 'position: fixed'}
+    %a.navbar-brand{heref: '#'}
+      = @practice_name.humanize
+    %ul.nav.nav-tabs{role:'tablist'}
+      - @sub_metrics.each do |m|
+        %li{role: 'presentation'}
+          %a{href: "##{m}"}
+            = m.humanize
+%div#submetric_list.col-md-10
+  - @sub_metrics.each do |metric|
+    %div.container-fluid.sub-metric
+      = render partial: "sub_metrics/#{metric}", locals: {project: @project}

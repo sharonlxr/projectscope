@@ -20,20 +20,18 @@
 @import "font-awesome";
 
 html, body {
-  // position:absolute;
-  //
-  // margin-left: 13%;
   width: auto;
+  position: relative;
 }
 
 .header-bar {
-	background-color:#337ab7;
-	padding: 10px 0px;
-	color: white;
-	position: fixed;
-	z-index: 10;
-	top: 0;
-	left: 0;
-	right: 0;
-	width: 100%;
+  background-color:#337ab7;
+  padding: 10px 0px;
+  color: white;
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
 }
