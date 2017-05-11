@@ -1,6 +1,6 @@
 = stylesheet_link_tag 'index.scss'
 
-%h3#gap Project List Hello World We Are Developing This Page!
+%h3#gap Project Lists
 -preferred_metric_names = @metric_names
 -@metric_names = @metric_names[0].keys
 %div.slider-container
@@ -27,9 +27,9 @@
       - @projects.each do |project|
         %tr{:align => 'center'}
           = render :partial => 'metrics', :locals => {:project => project, :preferred_metrics => preferred_metric_names}
-        %tr{:id => "expanded_row-project:#{project.id}", :style => "display: none; height: 200px"}
-          %td{:colspan => "2"}
-            = render :partial => 'expanded', :locals => {:project => project}
+        -# %tr{:id => "expanded_row-project:#{project.id}", :style => "display: none; height: 200px"}
+        -#  %td{:colspan => "2"}
+        -#    = render :partial => 'expanded', :locals => {:project => project}
 
 -unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
   %div
