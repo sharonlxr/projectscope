@@ -1,0 +1,33 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Project Gradings</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Project</th>
+      <th>Metric name</th>
+      <th>Grade</th>
+      <th>Created at</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @project_gradings.each do |project_grading| %>
+      <tr>
+        <td><%= project_grading.project %></td>
+        <td><%= project_grading.metric_name %></td>
+        <td><%= project_grading.grade %></td>
+        <td><%= project_grading.created_at %></td>
+        <td><%= link_to 'Show', project_grading %></td>
+        <td><%= link_to 'Edit', edit_project_grading_path(project_grading) %></td>
+        <td><%= link_to 'Destroy', project_grading, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Project grading', new_project_grading_path %>
