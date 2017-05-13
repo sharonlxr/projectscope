@@ -15,6 +15,7 @@
 
 class MetricSample < ActiveRecord::Base
   belongs_to :project
+  has_many :comments
   attr_encrypted :raw_data, :key => Figaro.env.attr_encrypted_key!
 
   def self.latest_for metric_name

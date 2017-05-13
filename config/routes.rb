@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :comments
   resources :users, :only => [:show, :update], :path => "user"
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, :skip => [:password]
   resources :projects do
