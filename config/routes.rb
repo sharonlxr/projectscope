@@ -5,7 +5,6 @@ Rails.application.routes.draw do
   resources :projects do
     collection do
       post "/metrics_on_date", :to => "projects#metrics_on_date"
-      get "/metrics_on_date_v2", :to => "projects#metrics_on_date_v2"
     end
   	member do
   		post "/add_owner", :to => "projects#add_owner"

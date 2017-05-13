@@ -75,8 +75,7 @@ class Project < ActiveRecord::Base
     end
   end
 
-
-  def latest_metrics_on_date projects, preferred_metrics, date
+  def self.latest_metrics_on_date(projects, preferred_metrics, date)
     projects.collect do |p|
       p.metric_samples
           .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)",

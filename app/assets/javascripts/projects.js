@@ -95,13 +95,11 @@ var ready = function () {
                 createTimeSeriesGraph(containerID, data);
             });
         }
-        //createTimeSeriesGraph($targetRow.select('expanded_container'), );
     })
 };
 
 var render_charts = function () {
     var get_charts_json = function (id) {
-        // split
         var splited = id.split("-");
         var project_id = splited[1];
         var metric = splited[3];

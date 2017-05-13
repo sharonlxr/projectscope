@@ -10,8 +10,8 @@ class ProjectsController < ApplicationController
 
   def new_index
     @metric_names = current_user.preferred_metrics
-    # preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
-    preferred_projects = Project.all
+    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    # preferred_projects = Project.all
     if params[:type].nil? or params[:type] == "project_name"
       @projects = order_by_project_name preferred_projects
     else
