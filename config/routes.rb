@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   resources :users, :only => [:show, :update], :path => "user"
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, :skip => [:password]
   resources :projects do
-    resources :project_gradings
     collection do
       post "/metrics_on_date", :to => "projects#metrics_on_date"
       get "/metrics_on_date_v2", :to => "projects#metrics_on_date_v2"

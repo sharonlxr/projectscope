@@ -7,16 +7,7 @@
         %li{role: 'presentation'}
           %a{href: "##{m}"}
             = m.humanize
-%div#submetric_list.col-md-8
+%div#submetric_list.col-md-10
   - @sub_metrics.each do |metric|
     %div.container-fluid.sub-metric
       = render partial: "sub_metrics/#{metric}", locals: {project: @project}
-%div.col-md-2
-  %form#comment-form.form-horizontal
-    %div.form-group
-      %label.control-label
-        Comments
-      %textarea.form-control{rows: '3'}
-    %div.form-group
-      %button.btn.btn-primary{type: 'submit'}
-        Submit
