@@ -1,17 +1,6 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-var update_metrics = function (data) {
-    $.each(data, function (index, val) {
-        $.each(val, function (index, val) {
-            var metric_content = $("#project_" + val.project_id + "_" + val.metric_name + "_metric");
-            metric_content.removeClass('outdated-metric');
-            metric_content.find(".metric_score").html(val.score);
-            metric_content.find(".metric_image").html(val.image)
-        });
-    });
-};
-
 var update_date_label = function (new_date) {
     $("#date-label").html(new_date.split("T")[0]);
 };
@@ -36,27 +25,17 @@ var update_slider_indicator = function (is_successful) {
     }
 };
 // Global variable for days
-var days;
+var days = 0;
 var request_for_metrics = function (days_from_now) {
     days = days_from_now;
-    $.ajax({
-        url: 'projects/metrics_on_date',
-        type: 'POST',
-        dataType: 'json',
-        data: {days_from_now: days_from_now}
-    })
-        .done(function (data) {
-            outdate_all_metrics()
-            update_metrics(data["data"]);
-            update_date_label(data["date"]);
-            $(".ui-slider").slider("enable");
-            update_slider_indicator(true);
-        })
-        .fail(function () {
-            outdate_all_metrics()
-            $(".ui-slider").slider("enable");
-            update_slider_indicator(false);
-        })
+    //TODO: Add some transition state indicators.
+    // outdate_all_metrics();
+    // update_metrics(data["data"]);
+    // update_date_label(data["date"]);
+    // $(".ui-slider").slider("enable");
+    // update_slider_indicator(true);
+
+    render_charts();
 };
 
 var ready = function () {
@@ -69,8 +48,6 @@ var ready = function () {
         slide: function (event, ui) {
             var days_from_now = -1 * ui.value;
             request_for_metrics(days_from_now);
-            update_slider_indicator();
-            $(".ui-slider").slider("disable");
         }
     });
 
@@ -83,19 +60,9 @@ var ready = function () {
             return;
         }
         request_for_metrics(days_from_now);
-        update_slider_indicator();
+        // update_slider_indicator();
         date_slider.slider("value", -1 * days_from_now);
     });
-    $(".expand_button").click(function (event) {
-        var $targetRow = $("[id = 'expanded_row-project:{0}']".format($(this).attr('pid')))
-        debugger
-        if (toggle($targetRow)) {
-            containerID = $targetRow.find('.expanded_container').attr('id');
-            $.getJSON('https://www.highcharts.com/samples/data/jsonp.php?filename=usdeur.json&callback=?', function (data) {
-                createTimeSeriesGraph(containerID, data);
-            });
-        }
-    })
 };
 
 var render_charts = function () {
@@ -104,7 +71,7 @@ var render_charts = function () {
         var project_id = splited[1];
         var metric = splited[3];
 
-        $.ajax({url: "/projects/" + project_id + "/metrics/" + metric,
+        $.ajax({url: "/projects/" + project_id + "/metrics/" + metric + '?days_from_now=' + days,
             success: function(result) {
                 drawHighCharts(id, result);
             },
@@ -120,11 +87,6 @@ var render_charts = function () {
     };
     $(".chart_place").each(function () {
         get_charts_json(this.id);
-    });
-    $(".expand_metric").click(function(){
-        $(this).parent().find(".sub_chart_place").each(function(){
-          get_charts_json(this.id);
-        });
     });
 };
 

@@ -1,6 +1,7 @@
 require 'json'
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric, :new_edit]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner,
+                                     :show_metric, :new_edit, :get_metric_data]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
 
@@ -83,9 +84,12 @@ class ProjectsController < ApplicationController
 
   def get_metric_data
     #from @project to get metric
-    metric = MetricSample.find_by project_id:params[:id], metric_name:params[:metric]
+    days_from_now = params[:days_from_now] ? params[:days_from_now].to_i : 0
+    date = DateTime.parse((Date.today - days_from_now.days).to_s)
+    # metric = MetricSample.find_by project_id:params[:id], metric_name:params[:metric]
+    metric = @project.metric_on_date params[:metric], date
     if metric
-      render json: metric[:image]
+      render json: metric[0][:image]
     else
       render :json => {:error => "not found"}.to_json, :status => 404
     end
@@ -139,16 +143,14 @@ class ProjectsController < ApplicationController
   def metrics_on_date
     days_from_now = params[:days_from_now].to_i
     date = DateTime.parse((Date.today - days_from_now.days).to_s)
-    # debugger
     if params[:id].nil?
       preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
-      metrics = current_user.preferred_metrics
+      metrics = current_user.preferred_metrics[0].keys
       @metrics = Project.latest_metrics_on_date preferred_projects, metrics, date
       respond_to do |format|
         format.json { render json: { data: @metrics, date: date} }
       end
     else
-      # debugger
       preferred_projects = Project.where(:id => params[:id])
       metrics = params[:metric]
       @metrics = Project.latest_metrics_on_date preferred_projects, metrics, date
@@ -161,8 +163,6 @@ class ProjectsController < ApplicationController
           format.json { render json: { score: @metrics[0][0]['score'], image: @metrics[0][0]['image'] } }
         end
       end
-      # debugger
-
     end
   end
 
