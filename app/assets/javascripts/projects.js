@@ -1,12 +1,13 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
-var update_date_label = function (new_date) {
-    $("#date-label").html(new_date.split("T")[0]);
+var update_date_label = function (days_from_now) {
+    var today = new Date();
+    today.setDate(today.getDate()-days_from_now);
+    $("#date-label").html(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
 };
-
 var outdate_all_metrics = function () {
-    $(".metric-content").addClass('outdated-metric')
+    d3.selectAll('.chart_place').selectAll('*').remove();
 };
 
 var update_slider_indicator = function (is_successful) {
@@ -24,17 +25,26 @@ var update_slider_indicator = function (is_successful) {
         }
     }
 };
+
+var update_links = function () {
+    $('a').filter(function(index) { return $(this).text() === "see details"; }).each(function (index, elem) {
+        var new_href = elem.href.split('=');
+        if (new_href.length > 1) {
+            new_href = new_href[0] + '=' + days.toString();
+        } else {
+            new_href = new_href[0] + '?days_from_now=' + days.toString();
+        }
+        elem.href = new_href;
+    })
+};
 // Global variable for days
 var days = 0;
 var request_for_metrics = function (days_from_now) {
     days = days_from_now;
     //TODO: Add some transition state indicators.
-    // outdate_all_metrics();
-    // update_metrics(data["data"]);
-    // update_date_label(data["date"]);
-    // $(".ui-slider").slider("enable");
-    // update_slider_indicator(true);
-
+    outdate_all_metrics();
+    update_date_label(days);
+    update_links();
     render_charts();
 };
 
@@ -60,9 +70,12 @@ var ready = function () {
             return;
         }
         request_for_metrics(days_from_now);
-        // update_slider_indicator();
+        update_date_label(days);
+        update_links();
         date_slider.slider("value", -1 * days_from_now);
     });
+    update_date_label(days);
+    $("#date-slider").slider("value", -1 * days);
 };
 
 var render_charts = function () {
@@ -81,6 +94,8 @@ var render_charts = function () {
                     console.log(b);
                     console.log(c);
                     debugger
+                } else {
+                    //TODO: Add some place holder for data not found
                 }
             }
         });
@@ -93,57 +108,3 @@ var render_charts = function () {
 // $(document).ready(ready);
 // $(window).on("load", ready);
 $(document).on('turbolinks:load', ready);
-
-var MetricPopup = {
-    setup: function () {
-        // add hidden 'div' to end of page to display popup:
-        var popupDiv = $('<div id="metricInfo"><a id="closeLink" href="#" style="position: static">close</a><div class = "metric_score"></div><div class = "metric_image"></div></div>');
-        popupDiv.hide().appendTo($('body'));
-        $('.expand_link').each(function () {
-            var expand = $(this);
-            expand.on('click', MetricPopup.getMetricInfo);
-        })
-    }
-
-    , getMetricInfo: function () {
-        // debugger
-        $.ajax({
-            type: 'POST',
-            url: 'projects/metrics_on_date',
-            data: {
-                id: $(this).attr('proj_id'),
-                metric: $(this).attr('metric'),
-                days_from_now: days
-            },
-            timeout: 5000,
-            success: MetricPopup.showMetricInfo,
-            error: function (xhrObj, textStatus, exception) {
-
-            }
-            // 'success' and 'error' functions will be passed 3 args
-        });
-        return (true);
-    }
-
-    , showMetricInfo: function (data, requestStatus, xhrObject) {
-        // center a floater 1/2 as wide and 1/4 as tall as screen
-        var oneFourth = Math.ceil($(window).width() / 4);
-        // debugger;
-        $('#metricInfo').find(".metric_score").html(data['score']);
-        $('#metricInfo').find(".metric_image").html(data['image']);
-        $('#metricInfo').css({'left': oneFourth, 'width': 2 * oneFourth, 'top': 300, 'position': 'fixed'}).show();
-
-
-        // debugger;
-        // make the Close link in the hidden element work
-        $('#closeLink').click(MetricPopup.hideMetricInfo);
-        // debugger;
-        return (false);  // prevent default link action
-    }
-
-    , hideMetricInfo: function () {
-        $('#metricInfo').hide();
-        return (false);
-    }
-};
-$(MetricPopup.setup);

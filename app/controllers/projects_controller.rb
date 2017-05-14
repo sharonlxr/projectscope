@@ -88,7 +88,7 @@ class ProjectsController < ApplicationController
     date = DateTime.parse((Date.today - days_from_now.days).to_s)
     # metric = MetricSample.find_by project_id:params[:id], metric_name:params[:metric]
     metric = @project.metric_on_date params[:metric], date
-    if metric
+    if metric.length > 0
       render json: metric[0][:image]
     else
       render :json => {:error => "not found"}.to_json, :status => 404
@@ -137,6 +137,10 @@ class ProjectsController < ApplicationController
   def show_metric
     @sub_metrics = current_user.preferred_metrics[0][params[:metric]]
     @practice_name = params[:metric]
+    @days_from_now = params[:days_from_now]? params[:days_from_now] : 0
+
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
     render template: 'projects/metric_detail'
   end
 
