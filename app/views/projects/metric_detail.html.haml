@@ -18,9 +18,22 @@
         %li{role: 'presentation'}
           %a{href: "##{m}"}
             = m.humanize
-%div#submetric_list.col-md-10
+%div#submetric_list.col-md-8
   - @sub_metrics.each do |metric|
     %div.container-fluid.sub-metric
       = render partial: "sub_metrics/#{metric}", locals: {project: @project}
+%div.col-md-2
+  %br/
+  = form_tag comments_path, id: 'comment_form' do
+    = hidden_field_tag 'metric_name', @practice_name
+    = hidden_field_tag 'project_id', @project.id
+    %div.form-group
+      %textarea.form-control{placeholder: 'Comments', rows: 3}
+    %div.form-group
+      %button.btn.btn-danger
+        Clear
+      %button.btn.btn-primary{type:'submit'}
+        Submit
+
 :javascript
   days = #{@days_from_now};
