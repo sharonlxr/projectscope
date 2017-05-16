@@ -24,16 +24,16 @@
       = render partial: "sub_metrics/#{metric}", locals: {project: @project}
 %div.col-md-2
   %br/
-  = form_tag comments_path, id: 'comment_form' do
-    = hidden_field_tag 'metric_name', @practice_name
-    = hidden_field_tag 'project_id', @project.id
-    %div.form-group
-      %textarea.form-control{placeholder: 'Comments', rows: 3}
-    %div.form-group
-      %button.btn.btn-danger
-        Clear
-      %button.btn.btn-primary{type:'submit'}
-        Submit
+  = render partial: 'comment_form', locals: {practice_name: @practice_name, project: @project,
+                                             days_from_now: @days_from_now, parent_metric: @parent_metric}
+- if @parent_metric
+  - @parent_metric.comments.each do |comment|
+    - params = JSON.parse(comment.params)
+    %div.comments{style: "left:#{params['offset_left']}px;top:#{params['offset_top']}px"}
+      %p.bg-primary
+        = comment.content
 
 :javascript
   days = #{@days_from_now};
+  parent_metric = {'id': #{@parent_metric.id}, 'metric_name': '#{@parent_metric.metric_name}'};
+  global_project_id = #{@project.id};

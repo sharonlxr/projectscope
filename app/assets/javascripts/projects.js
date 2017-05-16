@@ -1,13 +1,71 @@
 // Place all the behaviors and hooks related to the matching controller here.
 // All this logic will automatically be available in application.js.
 
+// Global variables
+var days = 0;
+var parent_metric = null;
+var global_project_id = null;
+
 var update_date_label = function (days_from_now) {
     var today = new Date();
     today.setDate(today.getDate()-days_from_now);
     $("#date-label").html(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
 };
+
 var outdate_all_metrics = function () {
     d3.selectAll('.chart_place').selectAll('*').remove();
+};
+
+var update_parent_metric = function () {
+    if (parent_metric) {
+        console.log(days);
+        $.ajax({url: "/projects/" + global_project_id.toString() + "/metrics/" + parent_metric.metric_name + '?days_from_now=' + days,
+            success: function(metric) {
+                console.log(metric);
+                parent_metric['metric_name'] = metric.metric_name;
+                parent_metric['id'] = metric.id;
+                $.ajax({
+                    url: "/metric_samples/" + parent_metric.id + "/comments",
+                    success: function (comments) {
+                        console.log(comments);
+                        d3.selectAll('.comments').remove();
+                        d3.select('body').selectAll('.comments')
+                            .data(comments).enter()
+                            .append('div')
+                            .style('top', function (d) {
+                                return JSON.parse(d.params).offset_top + 'px';
+                            })
+                            .style('left', function (d) {
+                                return JSON.parse(d.params).offset_left + 'px';
+                            })
+                            .attr('class', 'comments')
+                            .append('p')
+                            .attr('class', 'bg-primary')
+                            .html(function (d) {
+                                return d.content;
+                            });
+                    },
+                    error: function (a, b, c) {
+                        if (a.status != 404) {
+                            console.log(a);
+                            console.log(b);
+                            console.log(c);
+                        } else {
+                        }
+                    }
+                })
+            },
+            error: function(a, b, c) {
+                if (a.status !== 404) {
+                    console.log(a);
+                    console.log(b);
+                    console.log(c);
+                } else {
+                    //TODO: Add some place holder for data not found
+                }
+            }
+        });
+    }
 };
 
 var update_slider_indicator = function (is_successful) {
@@ -37,8 +95,7 @@ var update_links = function () {
         elem.href = new_href;
     })
 };
-// Global variable for days
-var days = 0;
+
 var request_for_metrics = function (days_from_now) {
     days = days_from_now;
     //TODO: Add some transition state indicators.
@@ -46,6 +103,7 @@ var request_for_metrics = function (days_from_now) {
     update_date_label(days);
     update_links();
     render_charts();
+    update_parent_metric();
 };
 
 var ready = function () {
@@ -70,8 +128,6 @@ var ready = function () {
             return;
         }
         request_for_metrics(days_from_now);
-        update_date_label(days);
-        update_links();
         date_slider.slider("value", -1 * days_from_now);
     });
     update_date_label(days);
@@ -93,7 +149,6 @@ var render_charts = function () {
                     console.log(a);
                     console.log(b);
                     console.log(c);
-                    debugger
                 } else {
                     //TODO: Add some place holder for data not found
                 }

@@ -24,7 +24,11 @@ class CommentsController < ApplicationController
   # POST /comments
   # POST /comments.json
   def create
-    @comment = Comment.new(comment_params)
+    if params.has_key? :comment
+      @comment = Comment.new(comment_params)
+    else
+      @comment = Comment.new(general_comment_params)
+    end
 
     respond_to do |format|
       if @comment.save
@@ -61,6 +65,11 @@ class CommentsController < ApplicationController
     end
   end
 
+  # GET /metric_samples/:metric_sample_id/comments
+  def comments_for_metric_sample
+    render json: MetricSample.find(params[:metric_sample_id]).comments
+  end
+
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_comment
@@ -69,7 +78,32 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:metric_sample_id, :user_id, :ctype, :content, :params, :created_at,
-                                      :metric_name, :project_id, :days_from_now)
+      params.require(:comment).permit(:metric_sample_id, :user_id, :ctype, :content, :params, :created_at,)
+    end
+
+    def general_comment_params
+      #TODO: check the user is current user and has access to change the project
+      # params.permit(:content, :params, :metric_sample_id, :user_id, :ctype)
+      # params.permit(:content, :params, :project_id, :days_from_now, :metric_name, :ctype, :user_id)
+      # days_from_now = params[:days_from_now].to_i
+      # date = DateTime.parse((Date.today - days_from_now.days).to_s)
+      # metric = Project.find(params[:project_id]).metric_on_date(params[:metric_name], date)
+      # metric_sample_id = metric.length > 0? metric[0].id : -1
+      # {
+      #     content: params[:content],
+      #     params: params[:params],
+      #     user_id: current_user.id,
+      #     ctype: params[:ctype],
+      #     metric_sample_id: metric_sample_id,
+      #     created_at: Time.now
+      # }
+      {
+          content: params[:content],
+          params: params[:params],
+          user_id: current_user.id,
+          ctype: params[:ctype],
+          metric_sample_id: params[:metric_sample_id],
+          created_at: Time.now
+      }
     end
 end
