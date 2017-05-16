@@ -29,18 +29,15 @@ var update_parent_metric = function () {
                     success: function (comments) {
                         console.log(comments);
                         d3.selectAll('.comments').remove();
-                        d3.select('body').selectAll('.comments')
+                        d3.select('#comment_column').selectAll('.comments')
                             .data(comments).enter()
                             .append('div')
                             .style('top', function (d) {
                                 return JSON.parse(d.params).offset_top + 'px';
                             })
-                            .style('left', function (d) {
-                                return JSON.parse(d.params).offset_left + 'px';
-                            })
-                            .attr('class', 'comments')
+                            .attr('class', 'comments well')
                             .append('p')
-                            .attr('class', 'bg-primary')
+                            .attr('class', 'comment-contents')
                             .html(function (d) {
                                 return d.content;
                             });

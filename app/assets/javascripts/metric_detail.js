@@ -19,13 +19,12 @@ $(document).on('turbolinks:load', function () {
         }).success(function (json) {
             $('#content').val('');
             var params = JSON.parse(json['params']);
-            d3.select('body')
+            d3.select('#comment_column')
                 .append('div')
                 .style('top', params['offset_top'] + 'px')
-                .style('left', params['offset_left'] + 'px')
-                .attr('class', 'comments')
+                .attr('class', 'comments well')
                 .append('p')
-                .attr('class', 'bg-primary')
+                .attr('class', 'comment-contents')
                 .html(json['content']);
         });
         return false; // prevents normal behaviour
