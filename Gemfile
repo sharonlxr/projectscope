@@ -60,6 +60,7 @@ gem 'omniauth-github', github: 'intridea/omniauth-github'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"
+gem 'bootswatch-rails', '~>3.3.5'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'sprockets-rails', '~> 3.1.1'

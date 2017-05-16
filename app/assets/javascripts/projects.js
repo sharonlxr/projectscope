@@ -18,16 +18,13 @@ var outdate_all_metrics = function () {
 
 var update_parent_metric = function () {
     if (parent_metric) {
-        console.log(days);
         $.ajax({url: "/projects/" + global_project_id.toString() + "/metrics/" + parent_metric.metric_name + '?days_from_now=' + days,
             success: function(metric) {
-                console.log(metric);
                 parent_metric['metric_name'] = metric.metric_name;
                 parent_metric['id'] = metric.id;
                 $.ajax({
                     url: "/metric_samples/" + parent_metric.id + "/comments",
                     success: function (comments) {
-                        console.log(comments);
                         d3.selectAll('.comments').remove();
                         d3.select('#comment_column').selectAll('.comments')
                             .data(comments).enter()
