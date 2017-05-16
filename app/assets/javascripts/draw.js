@@ -78,7 +78,9 @@ function parseChartParams(JSONStr) {
     return chartParams
 }
 
-function drawHighCharts(containerID, JSONStr) {
+function drawHighCharts(containerID, metric_sample) {
+    var JSONStr = JSON.parse(metric_sample.image);
+    $('#'+containerID).attr('metric_sample', metric_sample.id);
     if(JSONStr['chartType'] === 'd3') {
         story_transition(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'point_estimation') {

@@ -54,6 +54,13 @@ class Project < ActiveRecord::Base
     end
   end
 
+  def metric_on_date(metric, date)
+    metric_samples.where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name is ?",
+               date.beginning_of_day,
+               date.end_of_day,
+               metric)
+  end
+
   def resample_all_metrics
     ProjectMetrics.metric_names.each { |metric_name| resample_metric metric_name }
   end
@@ -75,8 +82,7 @@ class Project < ActiveRecord::Base
     end
   end
 
-
-  def latest_metrics_on_date projects, preferred_metrics, date
+  def self.latest_metrics_on_date(projects, preferred_metrics, date)
     projects.collect do |p|
       p.metric_samples
           .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)",
