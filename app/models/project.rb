@@ -55,10 +55,7 @@ class Project < ActiveRecord::Base
   end
 
   def metric_on_date(metric, date)
-    metric_samples.where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name is ?",
-               date.beginning_of_day,
-               date.end_of_day,
-               metric)
+    metric_samples.where(created_at: (date.beginning_of_day..date.end_of_day), metric_name: metric)
   end
 
   def resample_all_metrics
@@ -72,7 +69,6 @@ class Project < ActiveRecord::Base
       metric = ProjectMetrics.class_for(metric_name).new(credentials_hash)
 
       if (metric.refresh)
-
         self.metric_samples.create!(metric_name: metric_name,
                                     raw_data: metric.raw_data,
                                     score: metric.score,
@@ -85,10 +81,7 @@ class Project < ActiveRecord::Base
   def self.latest_metrics_on_date(projects, preferred_metrics, date)
     projects.collect do |p|
       p.metric_samples
-          .where("metric_samples.created_at BETWEEN ? AND ? AND metric_samples.metric_name in (?)",
-                 date.beginning_of_day,
-                 date.end_of_day,
-                 preferred_metrics)
+          .where(created_at: (date.beginning_of_day..date.end_of_day), metric_name: preferred_metrics)
           .map { |m| p.attributes.merge(m.attributes) }
     end
   end
