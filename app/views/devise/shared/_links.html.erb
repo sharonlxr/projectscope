@@ -4,8 +4,9 @@
   <% end -%>
 <% end -%>
 
-<%= link_to "Dev Log-in", passthru_path("Clark"), class: "btn btn-default" %><br/>
-
+<%= link_to "Dev Admin", passthru_path("uadmin"), class: "btn btn-default" %><br/>
+<%= link_to "Dev Instructor", passthru_path("uinstructor"), class: "btn btn-default" %><br/>
+<%= link_to "Dev Student", passthru_path("ustudent"), class: "btn btn-default" %><br/>
 
 <%- if controller_name != 'sessions' %>
   <%= link_to "Log in", new_session_path(resource_name) %><br />
@@ -14,7 +15,6 @@
 <%- if devise_mapping.registerable? && controller_name != 'registrations' %>
   <%= link_to "Sign up", new_registration_path(resource_name) %><br />
 <% end -%>
-
 
 <%- if devise_mapping.confirmable? && controller_name != 'confirmations' %>
   <%= link_to "Didn't receive confirmation instructions?", new_confirmation_path(resource_name) %><br />

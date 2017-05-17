@@ -17,7 +17,8 @@
     %thead
       %tr
         %th{:class => @class}
-          = link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
+          -# = link_to "Project Name", projects_path(:type => "project_name"), :id => "project_name", :method => :get
+          Project Name
         - @metric_names.each do |metric_name|
           %th
             = metric_name
@@ -26,11 +27,7 @@
         %tr{:align => 'center'}
           = render :partial => 'metrics', :locals => {:project => project, :preferred_metrics => preferred_metric_names}
 
--unless current_user.role.eql?("instructor") or current_user.role.eql?("admin")
-  %div
-    = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
-
--else
+-if current_user.is_instructor? or current_user.is_admin?
   %div{:class => 'col-md-12'}
     = link_to 'Privilege Control', whitelists_path, :class => "btn btn-primary"
     = link_to 'Preference', user_path(current_user), :class => "btn btn-primary"
