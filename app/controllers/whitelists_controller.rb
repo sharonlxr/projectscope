@@ -1,5 +1,6 @@
 class WhitelistsController < ApplicationController
   before_action :check_if_coach
+  load_and_authorize_resource
 
   # GET /whitelists
   def index

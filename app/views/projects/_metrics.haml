@@ -1,11 +1,12 @@
 %td{:valign => "botom", :align => "right"}
-  = link_to project.name, "projects/#{project.id}/new_edit"
+  - if current_user.is_student? and not current_user.is_owner_of? project
+    = project.name
+  - else
+    = link_to project.name, "projects/#{project.id}/new_edit"
 - preferred_metrics = preferred_metrics[0]
 - project.latest_metric_samples(preferred_metrics.keys).each do |sample|
   %td
     - if !sample.nil?
-      -#%p
-      -#  = sample.try(:metric_name).titleize + " " + '%.2f'.try(:%,sample.try(:score) || 0.0)
       %div.chart_place{:id => "project-#{project.id}-metric-#{sample.try(:metric_name)}"}
       %div.hello_world
         %p

@@ -4,29 +4,14 @@ class ProjectsController < ApplicationController
                                      :show_metric, :new_edit, :get_metric_data]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
-
+  load_and_authorize_resource
 
   # GET /projects
   # GET /projects.json
-
-  def new_index
-    @metric_names = current_user.preferred_metrics
-    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
-    # preferred_projects = Project.all
-    if params[:type].nil? or params[:type] == "project_name"
-      @projects = order_by_project_name preferred_projects
-    else
-      @projects = order_by_metric_name preferred_projects
-    end
-    update_session
-
-    metric_min_date = MetricSample.min_date || Date.today
-    @num_days_from_today = (Date.today - metric_min_date).to_i
-  end
-
   def index
     @metric_names = current_user.preferred_metrics
     preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    # preferred_projects = Project.all
     if params[:type].nil? or params[:type] == "project_name"
       @projects = order_by_project_name preferred_projects
     else
@@ -144,32 +129,6 @@ class ProjectsController < ApplicationController
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
     render template: 'projects/metric_detail'
-  end
-
-  def metrics_on_date
-    days_from_now = params[:days_from_now].to_i
-    date = DateTime.parse((Date.today - days_from_now.days).to_s)
-    if params[:id].nil?
-      preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
-      metrics = current_user.preferred_metrics[0].keys
-      @metrics = Project.latest_metrics_on_date preferred_projects, metrics, date
-      respond_to do |format|
-        format.json { render json: { data: @metrics, date: date} }
-      end
-    else
-      preferred_projects = Project.where(:id => params[:id])
-      metrics = params[:metric]
-      @metrics = Project.latest_metrics_on_date preferred_projects, metrics, date
-      if (@metrics == [[]])
-        respond_to do |format|
-          format.json { render json: { score: "", image: "Project Information Needs to be Updated." } }
-        end
-      else
-        respond_to do |format|
-          format.json { render json: { score: @metrics[0][0]['score'], image: @metrics[0][0]['image'] } }
-        end
-      end
-    end
   end
 
   def new_update

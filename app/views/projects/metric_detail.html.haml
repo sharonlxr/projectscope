@@ -24,8 +24,9 @@
       = render partial: "sub_metrics/#{metric}", locals: {project: @project}
 %div.col-md-2#comment_column
   %br/
-  = render partial: 'comment_form', locals: {practice_name: @practice_name, project: @project,
-                                             days_from_now: @days_from_now, parent_metric: @parent_metric}
+  - if can? :create, :comment
+    = render partial: 'comment_form', locals: {practice_name: @practice_name, project: @project,
+                                               days_from_now: @days_from_now, parent_metric: @parent_metric}
   - if @parent_metric
     - @parent_metric.comments.each do |comment|
       - params = JSON.parse(comment.params)

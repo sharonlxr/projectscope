@@ -96,17 +96,18 @@ projects_list.each do |project|
     end
 end
 
+preferred_metrics = [{
+                         'story_overall'=>["pivotal_tracker", "point_estimation", "slack", "story_transition"],
+                         'collective_overview'=>["code_climate", "github"]
+                     }]
 
-@user01 = User.create!(provider_username: "Clarkkkk", uid: "Clark",
-    provider: "developer", role: "admin", password: Devise.friendly_token[0,20], preferred_metrics: [{
-			# "code_climate"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
-			# "github"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
-      "story_overall"=>["pivotal_tracker", "point_estimation", "slack", "story_transition"],
-			# "pivotal_tracker"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
-			# "slack"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
-			# "slack_trends"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
-      # "point_estimation"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"],
-      # "story_transition"=>["code_climate", "github", "pivotal_tracker", "slack", "slack_trends", "point_estimation", "story_transition", "story_overall"]
-      "collective_overview"=>["code_climate", "github"]
-			}], preferred_projects: projects_list)
+@user01 = User.create!(provider_username: "Admin", uid: "uadmin", email: 'uadmin@example.com',
+                       provider: "developer", role: User::ADMIN, password: Devise.friendly_token[0,20],
+                       preferred_metrics: preferred_metrics, preferred_projects: projects_list)
+@user02 = User.create!(provider_username: "Instructor", uid: "uinstructor", email: 'uinstructor@example.com',
+											 provider: "developer", role: User::INSTRUCTOR, password: Devise.friendly_token[0,20],
+											 preferred_metrics: preferred_metrics, preferred_projects: projects_list)
+@user03 = User.create!(provider_username: "Student", uid: "ustudent", email: 'ustudent@example.com',
+											 provider: "developer", role: User::STUDENT, password: Devise.friendly_token[0,20],
+											 preferred_metrics: preferred_metrics, preferred_projects: projects_list)
 Whitelist.create!(username: @user01.provider_username)
