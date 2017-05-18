@@ -4,9 +4,9 @@
   <% end -%>
 <% end -%>
 
-<%= link_to "Dev Admin", passthru_path("uadmin"), class: "btn btn-default" %><br/>
-<%= link_to "Dev Instructor", passthru_path("uinstructor"), class: "btn btn-default" %><br/>
-<%= link_to "Dev Student", passthru_path("ustudent"), class: "btn btn-default" %><br/>
+<%= button_to "Dev Admin", passthru_path("uadmin"), class: "btn btn-default", method: 'get' %>
+<%= button_to "Dev Instructor", passthru_path("uinstructor"), class: "btn btn-default", method: 'get' %>
+<%= button_to "Dev Student", passthru_path("ustudent"), class: "btn btn-default", method: 'get' %>
 
 <%- if controller_name != 'sessions' %>
   <%= link_to "Log in", new_session_path(resource_name) %><br />

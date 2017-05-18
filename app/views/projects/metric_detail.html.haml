@@ -24,7 +24,7 @@
       = render partial: "sub_metrics/#{metric}", locals: {project: @project}
 %div.col-md-2#comment_column
   %br/
-  - if current_user.is_admin? or current_user.is_instructor?
+  - if can? :create, :comment
     = render partial: 'comment_form', locals: {practice_name: @practice_name, project: @project,
                                                days_from_now: @days_from_now, parent_metric: @parent_metric}
   - if @parent_metric

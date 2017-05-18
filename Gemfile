@@ -54,9 +54,12 @@ gem 'timecop'
 # Use Capistrano for deployment
 # gem 'capistrano-rails', group: :development
 
+# Authorization and authentification
 gem 'devise'
-gem 'json'
+gem 'cancan'
 gem 'omniauth-github', github: 'intridea/omniauth-github'
+
+gem 'json'
 
 gem 'bootstrap-sass', '~> 3.3.6'
 gem "font-awesome-rails"

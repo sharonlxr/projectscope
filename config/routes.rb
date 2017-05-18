@@ -24,7 +24,5 @@ Rails.application.routes.draw do
 
   get '/login/:id', :to => 'application#passthru', :as => 'passthru'
 
-  get '/dev', :to => 'projects#new_index', :as => 'new_index'
-
-  root 'projects#new_index'
+  root 'projects#index'
 end
