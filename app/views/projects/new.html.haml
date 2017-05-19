@@ -1,4 +1,5 @@
-%h1 Editing Project Config
+%h1
+  New Project
 
 = form_for @project do |f|
   %div.panel.panel-default
@@ -17,16 +18,15 @@
   %div{:class => "panel panel-default"}
     %div.panel-heading
       %label
-        = "Monitered Metrics"
+        Metric Params
     %div.panel-body
-      - @configs.each do |metric_name, metric_params|
+      - @credentials.each_pair do |website, params|
         %h4
-          = metric_name.titleize
-        - metric_params.each do |param|
-          - param.each do |name, value|
-            %div.input-group
-              %div.input-group-addon
-                = name + ":"
-              %input{:type => "text", :value => value, :name => "project[configs][#{metric_name}][#{name}]", :class => "form-control"}
-  = submit_tag "Finish", class: "btn btn-primary"
-  = link_to 'Back', projects_path, class: "btn btn-primary"
+          = website.to_s.titleize
+        - params.each do |param|
+          %div.input-group
+            %div.input-group-addon
+              = param.to_s.split('_')[1..-1].join('_').titleize
+            %input{:type => "text", :name => "project[configs][#{param}]", :class => "form-control"}
+  = submit_tag "Create", class: "btn btn-primary"
+= link_to 'Back', projects_path
