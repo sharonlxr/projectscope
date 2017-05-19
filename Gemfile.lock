@@ -8,71 +8,71 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/ProjectMetrics/
-  revision: d87606a974d377e1642abbc0371e06f87c543182
+  revision: 368e9d4e94abef4ea196ea3decc44a7d23628396
   specs:
     project_metrics (0.1.0)
       activesupport
 
 GIT
   remote: https://github.com/an-ju/project_metric_code_climate
-  revision: cbf1b65aa8a770947c1d35d3ddf0f086dd1e21a3
+  revision: 703afc7be32621ccd0e7404446ed0f8cd946315e
   specs:
-    project_metric_code_climate (0.0.5)
+    project_metric_code_climate (0.1.0)
       httparty
 
 GIT
   remote: https://github.com/an-ju/project_metric_collective_overview
-  revision: 7ed1775bc60fee04bcd46421c0bafae5fcc2180a
+  revision: b56a85a0dab1337a6480a8f39fd3cf79fb369c65
   specs:
     project_metric_collective_overview (0.1.0)
       octokit (~> 4.0)
 
 GIT
   remote: https://github.com/an-ju/project_metric_github
-  revision: 5bed52a13e90708537e10b33d8e9cdf87a45131b
+  revision: 15bd08639f20067e7375b48d153c6fbbffccadb7
   specs:
     project_metric_github (0.1.0)
       octokit
 
 GIT
   remote: https://github.com/an-ju/project_metric_pivotal_tracker
-  revision: d18e96f2357556eef9ee10aa059257a9bdbe0e6d
+  revision: 9e2e03f1df41f8e0122e0c1236d517d4b422b16e
   specs:
     project_metric_pivotal_tracker (0.1.0)
       tracker_api (~> 0.2.0)
 
 GIT
   remote: https://github.com/an-ju/project_metric_point_estimation.git
-  revision: b38f79e3917a2bb909425f8321abf30f810d1289
+  revision: b5631e88b2e6e044639e16cde29d614bcc898404
   specs:
     project_metric_point_estimation (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
 
 GIT
   remote: https://github.com/an-ju/project_metric_slack
-  revision: f0e2a83a761087542c089f2b1226942d7c083bb8
+  revision: fbb2f6193be00267f235a750018871dabf52feea
   specs:
-    project_metric_slack (0.0.0)
+    project_metric_slack (0.1.0)
       slack-ruby-client (>= 0.7.6)
 
 GIT
   remote: https://github.com/an-ju/project_metric_slack_trends
-  revision: d60a50bad6aaaae7d4410c162346ff63bb9e9635
+  revision: 553fc622786c9815389a3b701f303cbd0c88a36b
   specs:
-    project_metric_slack_trends (0.0.1)
+    project_metric_slack_trends (0.1.0)
       rasem (~> 0.6.1)
       slack-ruby-client (>= 0.7.6)
 
 GIT
   remote: https://github.com/an-ju/project_metric_story_overall.git
-  revision: 21d85657f4e554cc9c4ff6786c5335d566ddc384
+  revision: 26523fe57c0eb02d8cd41aaeb3a8dcdac55b9493
   specs:
     project_metric_story_overall (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
 
 GIT
   remote: https://github.com/an-ju/project_metric_story_transitions
-  revision: e481c11026f16988d5a8709d43352bea84c075d1
+  revision: 60e9f23c9a4dbaab02c984a055c175dd966313c6
   specs:
     project_metric_story_transition (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
@@ -123,7 +123,7 @@ GEM
     arel (6.0.4)
     attr_encrypted (3.0.3)
       encryptor (~> 3.0.0)
-    autoprefixer-rails (6.7.7.2)
+    autoprefixer-rails (7.1.1)
       execjs
     axiom-types (0.1.1)
       descendants_tracker (~> 0.0.4)
@@ -177,25 +177,25 @@ GEM
       multi_test (>= 0.1.2)
     cucumber-core (1.5.0)
       gherkin (~> 4.0)
-    cucumber-rails (1.4.5)
+    cucumber-rails (1.5.0)
       capybara (>= 1.1.2, < 3)
       cucumber (>= 1.3.8, < 4)
-      mime-types (>= 1.16, < 4)
+      mime-types (>= 1.17, < 4)
       nokogiri (~> 1.5)
-      railties (>= 3, < 5.1)
+      railties (>= 4, < 5.2)
     cucumber-rails-training-wheels (1.0.0)
       cucumber-rails (>= 1.1.1)
     cucumber-wire (0.0.1)
-    database_cleaner (1.5.3)
-    debug_inspector (0.0.2)
+    database_cleaner (1.6.1)
+    debug_inspector (0.0.3)
     declarative (0.0.9)
     declarative-option (0.1.0)
     descendants_tracker (0.0.4)
       thread_safe (~> 0.3, >= 0.3.1)
-    devise (4.2.1)
+    devise (4.3.0)
       bcrypt (~> 3.0)
       orm_adapter (~> 0.1)
-      railties (>= 4.1.0, < 5.1)
+      railties (>= 4.1.0, < 5.2)
       responders
       warden (~> 1.2.3)
     diff-lcs (1.3)
@@ -222,18 +222,18 @@ GEM
       thor (~> 0.14)
     font-awesome-rails (4.7.0.2)
       railties (>= 3.2, < 5.2)
-    gherkin (4.1.1)
+    gherkin (4.1.3)
     gli (2.16.0)
     globalid (0.4.0)
       activesupport (>= 4.2.0)
-    haml (5.0.0)
+    haml (5.0.1)
       temple (>= 0.8.0)
       tilt
     hashdiff (0.3.4)
     hashie (3.5.5)
     highcharts-rails (5.0.7)
       railties (>= 3.1)
-    httparty (0.14.0)
+    httparty (0.15.5)
       multi_xml (>= 0.5.2)
     i18n (0.8.1)
     ice_nine (0.11.2)
@@ -242,11 +242,11 @@ GEM
       phantomjs
       rack (>= 1.2.1)
       rake
-    jasmine-core (2.6.1)
+    jasmine-core (2.6.2)
     jasmine-jquery-rails (2.0.3)
-    jbuilder (2.6.3)
-      activesupport (>= 3.0.0, < 5.2)
-      multi_json (~> 1.2)
+    jbuilder (2.6.4)
+      activesupport (>= 3.0.0)
+      multi_json (>= 1.2)
     jquery-rails (4.3.1)
       rails-dom-testing (>= 1, < 3)
       railties (>= 4.2.0)
@@ -268,12 +268,12 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2016.0521)
     mini_portile2 (2.1.0)
-    minitest (5.10.1)
+    minitest (5.10.2)
     multi_json (1.12.1)
     multi_test (0.1.2)
     multi_xml (0.6.0)
     multipart-post (2.0.0)
-    nokogiri (1.7.1)
+    nokogiri (1.7.2)
       mini_portile2 (~> 2.1.0)
     oauth2 (1.3.1)
       faraday (>= 0.8, < 0.12)
@@ -296,10 +296,10 @@ GEM
       capybara (~> 2.1)
       cliver (~> 0.3.1)
       websocket-driver (>= 0.2.0)
-    protected_attributes (1.1.3)
+    protected_attributes (1.1.4)
       activemodel (>= 4.0.1, < 5.0)
     public_suffix (2.0.5)
-    rack (1.6.5)
+    rack (1.6.8)
     rack-test (0.6.3)
       rack (>= 1.0)
     rails (4.2.6)
@@ -341,25 +341,25 @@ GEM
     responders (2.4.0)
       actionpack (>= 4.2.0, < 5.3)
       railties (>= 4.2.0, < 5.3)
-    rspec-core (3.5.4)
-      rspec-support (~> 3.5.0)
-    rspec-expectations (3.5.0)
+    rspec-core (3.6.0)
+      rspec-support (~> 3.6.0)
+    rspec-expectations (3.6.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-mocks (3.5.0)
+      rspec-support (~> 3.6.0)
+    rspec-mocks (3.6.0)
       diff-lcs (>= 1.2.0, < 2.0)
-      rspec-support (~> 3.5.0)
-    rspec-rails (3.5.2)
+      rspec-support (~> 3.6.0)
+    rspec-rails (3.6.0)
       actionpack (>= 3.0)
       activesupport (>= 3.0)
       railties (>= 3.0)
-      rspec-core (~> 3.5.0)
-      rspec-expectations (~> 3.5.0)
-      rspec-mocks (~> 3.5.0)
-      rspec-support (~> 3.5.0)
-    rspec-support (3.5.0)
+      rspec-core (~> 3.6.0)
+      rspec-expectations (~> 3.6.0)
+      rspec-mocks (~> 3.6.0)
+      rspec-support (~> 3.6.0)
+    rspec-support (3.6.0)
     safe_yaml (1.0.4)
-    sass (3.4.23)
+    sass (3.4.24)
     sass-rails (5.0.6)
       railties (>= 4.0.0, < 6)
       sass (~> 3.1)
@@ -376,7 +376,7 @@ GEM
       docile (~> 1.1.0)
       json (>= 1.8, < 3)
       simplecov-html (~> 0.10.0)
-    simplecov-html (0.10.0)
+    simplecov-html (0.10.1)
     slack-ruby-client (0.8.1)
       activesupport
       faraday (>= 0.9)
@@ -409,7 +409,7 @@ GEM
       virtus
     turbolinks (5.0.1)
       turbolinks-source (~> 5)
-    turbolinks-source (5.0.1)
+    turbolinks-source (5.0.3)
     tzinfo (1.2.3)
       thread_safe (~> 0.1)
     uber (0.1.0)

@@ -7,8 +7,6 @@ Rails.application.routes.draw do
   		post "/add_owner", :to => "projects#add_owner"
       get '/metrics/:metric', :to => 'projects#get_metric_data'
       get '/metrics/:metric/detail', to: 'projects#show_metric'
-      get '/new_edit', :to => 'projects#new_edit', :as => 'new_edit_project'
-      post '/new_update', :to => 'projects#new_update', :as => 'update_metric'
   	end
   end
   resources :whitelists do

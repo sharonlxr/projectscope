@@ -1,7 +1,7 @@
 require 'json'
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner,
-                                     :show_metric, :new_edit, :get_metric_data]
+                                     :show_metric, :get_metric_data]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
   load_and_authorize_resource
@@ -11,7 +11,6 @@ class ProjectsController < ApplicationController
   def index
     @metric_names = current_user.preferred_metrics
     preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
-    # preferred_projects = Project.all
     if params[:type].nil? or params[:type] == "project_name"
       @projects = order_by_project_name preferred_projects
     else
@@ -35,30 +34,40 @@ class ProjectsController < ApplicationController
   # GET /projects/new
   def new
     @project = Project.new
+    @credentials = ProjectMetrics.metric_names\
+                       .flat_map { |m| ProjectMetrics.class_for(m).credentials }\
+                       .uniq\
+                       .group_by { |name| name.to_s.split('_')[0].to_sym }
   end
 
   # GET /projects/1/edit
   def edit
-    @owners = @project.owners
-    @project.configs.each do |config|
-      name = config.metric_name
-      if config.klass.respond_to?(:credentials)
-        config.options.each_pair do |key,_val|
-            @existed_configs[name] << key.to_sym
-        end
-      end
+    @configs = {}
+    all_configs = @project.configs.select(:metric_name, :metrics_params, :token).map(&:attributes)
+    all_configs.each do |config|
+      @configs[config["metric_name"]] ||= []
+      @configs[config["metric_name"]] << {config["metrics_params"] => config["token"]}
     end
   end
 
   # POST /projects
   # POST /projects.json
   def create
-    @project = Project.new(project_params)
+    update_params = project_params
+    config_params = update_params.delete 'configs'
+    @project = Project.new(update_params)
+    ProjectMetrics.metric_names.each do |m|
+      ProjectMetrics.class_for(m).credentials.each do |param|
+        if config_params.has_key? param.to_s
+          @project.configs << Config.new(metric_name: m, metrics_params: param, token: config_params[param])
+        end
+      end
+    end
     respond_to do |format|
       if @project.save
         current_user.preferred_projects << @project
         current_user.owned_projects << @project
-        format.html { redirect_to @project, notice: 'Project was successfully created.' }
+        format.html { redirect_to projects_path, notice: 'Project was successfully created.' }
         format.json { render :show, status: :created, location: @project }
       else
         format.html { render :new }
@@ -79,28 +88,23 @@ class ProjectsController < ApplicationController
       render :json => {:error => "not found"}.to_json, :status => 404
     end
   end
-  
-  def new_edit
-    @project_name = @project.name
-    @configs = {}
-    all_configs = @project.configs.select(:metric_name, :metrics_params, :token).map(&:attributes)
-    all_configs.each do |config|
-      puts config
-      @configs[config["metric_name"]] ||= []
-      @configs[config["metric_name"]] << {config["metrics_params"] => config["token"]}
-    end
-    @metrics = ["Metric 1", "Metric 2", "Metric 3", "Metric 4", "Metric 5"]
-    @needed_params = ["PARAM1", "PARAM2"]
-    render :template => 'projects/new_metrics'
-  end
 
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
-    @project.attributes = project_params
+    update_params = project_params
+    config_params = update_params.delete 'configs'
+    notice = ''
+    @project.configs.each do |config|
+      if config_params.has_key? config.metric_name and config_params[config.metric_name].has_key? config.metrics_params
+        config.token = config_params[config.metric_name][config.metrics_params]
+        notice += "Failed to update config #{config.metric_name}: #{config.metrics_params}\n" unless config.save
+      end
+    end
+    @project.attributes = update_params
     respond_to do |format|
       if @project.save
-        format.html { redirect_to projects_path, notice: 'Project was successfully updated.' }
+        format.html { redirect_to projects_path, notice: 'Project was successfully updated.' + notice }
         format.json { render :show, status: :ok, location: @project }
       else
         format.html { render :edit }
@@ -129,10 +133,6 @@ class ProjectsController < ApplicationController
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
     render template: 'projects/metric_detail'
-  end
-
-  def new_update
-    render :template => 'projects/new_metrics'
   end
 
   def add_owner
@@ -165,19 +165,7 @@ class ProjectsController < ApplicationController
 
   # Never trust parameters from the scary internet, only allow the white list through.
   def project_params
-    # Grab new option keys/vals from params, and incorporate them into
-    #  the configs existing keys/vals.
-    # Example: given params['config']['code_climate']
-    #  BEFORE: {"options"=>{"token"=>"xyz", "user"=>"fox"}, "new"=>["a", "2", "b", "3"]}
-    #  AFTER:  {"options"=>{"token"=>"xyz", "user"=>"fox", "a" => "2", "b" => "3"}
-    params['project']['configs_attributes'].each_pair do |index, v|
-      v['options'] ||= {}
-      # ingest new options from new[] array
-      v['options'].merge!(Hash[*(v.delete('new'))])
-      # delete options with blank values
-      v['options'].delete_if { |k,v| v.blank? }
-    end
-    params['project']
+    params[:project]
   end
 
   def order_by_project_name(preferred_projects)
