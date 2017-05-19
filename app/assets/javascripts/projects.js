@@ -79,7 +79,7 @@ var update_slider_indicator = function (is_successful) {
 };
 
 var update_links = function () {
-    $('a').filter(function(index) { return $(this).text() === "see details"; }).each(function (index, elem) {
+    $('.detail-link').each(function (index, elem) {
         var new_href = elem.href.split('=');
         if (new_href.length > 1) {
             new_href = new_href[0] + '=' + days.toString();
@@ -144,6 +144,7 @@ var render_charts = function () {
                     console.log(b);
                     console.log(c);
                 } else {
+
                     //TODO: Add some place holder for data not found
                 }
             }
