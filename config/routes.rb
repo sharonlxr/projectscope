@@ -9,10 +9,10 @@ Rails.application.routes.draw do
       get '/metrics/:metric/detail', to: 'projects#show_metric'
   	end
   end
-  resources :whitelists do
+  resources :whitelists, :only => [:index] do
     member do
-      get 'upgrade', :to => 'whitelists#upgrade', :as => 'upgrade_user'
-      get 'downgrade', :to => 'whitelists#downgrade', :as => 'downgrade_user'
+      put 'upgrade', :to => 'whitelists#upgrade'
+      put 'downgrade', :to => 'whitelists#downgrade'
     end
   end
 
