@@ -22,13 +22,30 @@
   - @sub_metrics.each do |metric|
     %div.container-fluid.sub-metric
       = render partial: "sub_metrics/#{metric}", locals: {project: @project}
+  = form_tag comments_path, id: 'grade_form', class: 'form-inline' do
+    = hidden_field_tag 'ctype', 'grade'
+    = hidden_field_tag 'metric_sample_id', @parent_metric ? @parent_metric.id : 0
+    = hidden_field_tag 'params', '{}'
+    %div.form-group
+      %label.sr-only{for: 'content'}
+        Grade
+      %div.input-group
+        %div.input-group-addon
+          GPA
+        %input.form-control#content{type: 'text', name: 'content', form: 'grade_form'}
+        %div.input-group-addon
+          \/4.0
+    %div.form-group
+      %button.btn.btn-primary{role: 'submit'}
+        Submit
+
 %div.col-md-2#comment_column
   %br/
   - if can? :create, :comment
     = render partial: 'comment_form', locals: {practice_name: @practice_name, project: @project,
                                                days_from_now: @days_from_now, parent_metric: @parent_metric}
   - if @parent_metric
-    - @parent_metric.comments.each do |comment|
+    - @parent_metric.comments.where(ctype: 'general_comment').each do |comment|
       - params = JSON.parse(comment.params)
       %div.well.comments{style: "top:#{params['offset_top']}px"}
         %p.comment-contents

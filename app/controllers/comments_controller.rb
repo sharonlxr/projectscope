@@ -31,10 +31,11 @@ class CommentsController < ApplicationController
     else
       @comment = Comment.new(general_comment_params)
     end
+    @comment.update_metric_sample if @comment.ctype.eql? 'grade'
 
     respond_to do |format|
       if @comment.save
-        format.html { redirect_to @comment, notice: 'Comment was successfully created.' }
+        format.html { redirect_to projects_path, notice: 'Project was successfully graded.' }
         format.json { render :show, status: :created, location: @comment }
       else
         format.html { render :new }
@@ -69,7 +70,7 @@ class CommentsController < ApplicationController
 
   # GET /metric_samples/:metric_sample_id/comments
   def comments_for_metric_sample
-    render json: MetricSample.find(params[:metric_sample_id]).comments
+    render json: MetricSample.find(params[:metric_sample_id]).comments.where(ctype: 'general_comment')
   end
 
   private
