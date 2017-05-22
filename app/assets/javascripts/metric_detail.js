@@ -8,8 +8,8 @@ $(document).on('turbolinks:load', function () {
             'offset_top': $(this).offset().top,
             'offset_left': $(this).offset().left
         };
-        $('#params').attr('value', JSON.stringify(params));
-        $('#metric_sample_id').attr('value', parent_metric.id);
+        d3.select('#comment_form').select('#params').attr('value', JSON.stringify(params));
+        d3.select('#comment_form').select('#metric_sample_id').attr('value', parent_metric.id);
         var valuesToSubmit = $(this).serialize();
         $.ajax({
             type: $(this).attr('method'),
@@ -17,7 +17,7 @@ $(document).on('turbolinks:load', function () {
             data: valuesToSubmit,
             dataType: "JSON" // you want a difference between normal and ajax-calls, and json is standard
         }).success(function (json) {
-            $('#content').val('');
+            $('#comment_form #content').val('');
             var params = JSON.parse(json['params']);
             d3.select('#comment_column')
                 .append('div')
