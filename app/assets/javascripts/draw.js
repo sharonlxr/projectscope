@@ -93,6 +93,10 @@ function drawHighCharts(containerID, metric_sample) {
         pivotal_tracker(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'code_climate') {
         index_score(containerID, JSONStr.data.GPA, 0.0, 4.0);
+    } else if (JSONStr['chartType'] === 'test_coverage') {
+        index_score(containerID, JSONStr.data.coverage, 0.0, 100.0)
+    } else if (JSONStr['chartType'] === 'pull_requests') {
+        pull_requests(containerID, JSONStr.data);
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));

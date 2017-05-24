@@ -7,34 +7,34 @@ GIT
       omniauth-oauth2 (>= 1.4.0, < 2.0)
 
 GIT
-  remote: https://github.com/an-ju/ProjectMetrics/
+  remote: https://github.com/an-ju/ProjectMetrics.git
   revision: 368e9d4e94abef4ea196ea3decc44a7d23628396
   specs:
     project_metrics (0.1.0)
       activesupport
 
 GIT
-  remote: https://github.com/an-ju/project_metric_code_climate
-  revision: baf888d936edccb81e3225ec05e4a8cad27c27a8
+  remote: https://github.com/an-ju/project_metric_code_climate.git
+  revision: cc947acc8ebe148475fbdb6d116b62acd58f7774
   specs:
     project_metric_code_climate (0.1.0)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_collective_overview
+  remote: https://github.com/an-ju/project_metric_collective_overview.git
   revision: b56a85a0dab1337a6480a8f39fd3cf79fb369c65
   specs:
     project_metric_collective_overview (0.1.0)
       octokit (~> 4.0)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_github
+  remote: https://github.com/an-ju/project_metric_github.git
   revision: 15bd08639f20067e7375b48d153c6fbbffccadb7
   specs:
     project_metric_github (0.1.0)
       octokit
 
 GIT
-  remote: https://github.com/an-ju/project_metric_pivotal_tracker
+  remote: https://github.com/an-ju/project_metric_pivotal_tracker.git
   revision: 9e2e03f1df41f8e0122e0c1236d517d4b422b16e
   specs:
     project_metric_pivotal_tracker (0.1.0)
@@ -48,14 +48,21 @@ GIT
       faraday (~> 0.1, >= 0.1.0.0)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_slack
+  remote: https://github.com/an-ju/project_metric_pull_requests.git
+  revision: 66b5e9804ccac1b06d01e8bf90edcd27024e8ea7
+  specs:
+    project_metric_pull_requests (0.1.0)
+      octokit
+
+GIT
+  remote: https://github.com/an-ju/project_metric_slack.git
   revision: fbb2f6193be00267f235a750018871dabf52feea
   specs:
     project_metric_slack (0.1.0)
       slack-ruby-client (>= 0.7.6)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_slack_trends
+  remote: https://github.com/an-ju/project_metric_slack_trends.git
   revision: 553fc622786c9815389a3b701f303cbd0c88a36b
   specs:
     project_metric_slack_trends (0.1.0)
@@ -70,11 +77,17 @@ GIT
       faraday (~> 0.1, >= 0.1.0.0)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_story_transitions
+  remote: https://github.com/an-ju/project_metric_story_transitions.git
   revision: 60e9f23c9a4dbaab02c984a055c175dd966313c6
   specs:
     project_metric_story_transition (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
+
+GIT
+  remote: https://github.com/an-ju/project_metric_test_coverage.git
+  revision: b13eb76d1bcad5a4fbf1d2210a9853198f3ecaef
+  specs:
+    project_metric_test_coverage (0.1.0)
 
 GEM
   remote: https://rubygems.org/
@@ -476,10 +489,12 @@ DEPENDENCIES
   project_metric_github!
   project_metric_pivotal_tracker!
   project_metric_point_estimation!
+  project_metric_pull_requests!
   project_metric_slack!
   project_metric_slack_trends!
   project_metric_story_overall!
   project_metric_story_transition!
+  project_metric_test_coverage!
   project_metrics!
   protected_attributes
   rails (= 4.2.6)

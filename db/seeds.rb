@@ -54,6 +54,13 @@ github1 = File.read './db/fake_data/spline1.json'
 github2 = File.read './db/fake_data/spline2.json'
 github3 = File.read './db/fake_data/spline3.json'
 
+test_coverage1 = File.read './db/fake_data/test_coverage1.json'
+test_coverage2 = File.read './db/fake_data/test_coverage2.json'
+test_coverage3 = File.read './db/fake_data/test_coverage3.json'
+
+pull_requests1 = File.read './db/fake_data/pull_requests1.json'
+pull_requests2 = File.read './db/fake_data/pull_requests2.json'
+pull_requests3 = File.read './db/fake_data/pull_requests3.json'
 
 dummies = Hash.new
 dummies["code_climate"] = [code_climate1, code_climate2, code_climate3]
@@ -65,6 +72,8 @@ dummies["story_transition"] = [story_1, story_2, story_3]
 dummies["point_estimation"] = [point_est1, point_est2, point_est3]
 dummies["story_overall"] = [gauge1, gauge2, gauge3]
 dummies["collective_overview"] = [collective_gauge1, collective_gauge2, collective_gauge3]
+dummies["test_coverage"] = [test_coverage1, test_coverage2, test_coverage3]
+dummies["pull_requests"] = [pull_requests1, pull_requests2, pull_requests3]
 
 projects_list = []
 0.upto(10).each do |num|
@@ -99,9 +108,9 @@ projects_list.each do |project|
 end
 
 preferred_metrics = [{
-                         'story_overall'=>["pivotal_tracker", "point_estimation", "story_transition"],
-                         'collective_overview'=>["code_climate", "github"],
-                         'code_climate' => ['code_climate']
+                         'code_climate' => ['code_climate'],
+                         'test_coverage' => ['test_coverage'],
+                         'pull_requests' => ['pull_requests']
                      }]
 
 @user01 = User.create!(provider_username: "Admin", uid: "uadmin", email: 'uadmin@example.com',

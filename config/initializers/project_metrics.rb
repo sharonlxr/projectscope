@@ -8,4 +8,6 @@ ProjectMetrics.configure do
   add_metric :project_metric_point_estimation
   add_metric :project_metric_story_overall
   add_metric :project_metric_collective_overview
+  add_metric :project_metric_test_coverage
+  add_metric :project_metric_pull_requests
 end
