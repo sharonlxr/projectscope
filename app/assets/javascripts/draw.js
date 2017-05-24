@@ -91,6 +91,8 @@ function drawHighCharts(containerID, metric_sample) {
         gauge(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'pivotal_tracker') {
         pivotal_tracker(containerID, JSONStr);
+    } else if (JSONStr['chartType'] === 'code_climate') {
+        index_score(containerID, JSONStr.data.GPA, 0.0, 4.0);
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));

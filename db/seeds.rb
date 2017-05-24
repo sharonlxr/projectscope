@@ -19,14 +19,16 @@ MetricSample.delete_all
 # dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
 
 
-slack1 = File.read './db/fake_data/pie1.json'
-slack2 = File.read './db/fake_data/pie2.json'
-slack3 = File.read './db/fake_data/pie3.json'
-dummy1_code_climate = slack1
-dummy2_code_climate = slack3
-slack_trends1 = File.read './db/fake_data/spline1.json'
-slack_trends2 = File.read './db/fake_data/spline2.json'
-slack_trends3 = File.read './db/fake_data/spline3.json'
+# slack1 = File.read './db/fake_data/pie1.json'
+# slack2 = File.read './db/fake_data/pie2.json'
+# slack3 = File.read './db/fake_data/pie3.json'
+# slack_trends1 = File.read './db/fake_data/spline1.json'
+# slack_trends2 = File.read './db/fake_data/spline2.json'
+# slack_trends3 = File.read './db/fake_data/spline3.json'
+
+code_climate1 = File.read './db/fake_data/codeclimate1.json'
+code_climate2 = File.read './db/fake_data/codeclimate2.json'
+code_climate3 = File.read './db/fake_data/codeclimate3.json'
 
 gauge1 = '{"chartType" : "gauge", "titleText" : "Story Management GPA", "data" : {"score" : 3.5}}'
 gauge2 = '{"chartType" : "gauge", "titleText" : "Story Management GPA", "data" : {"score" : 2.3}}'
@@ -48,17 +50,17 @@ pivot1 = File.read './db/fake_data/stories1.json'
 pivot2 = File.read './db/fake_data/stories2.json'
 pivot3 = File.read './db/fake_data/stories3.json'
 
-github1 = slack_trends1
-github2 = slack_trends2
-github3 = slack_trends3
+github1 = File.read './db/fake_data/spline1.json'
+github2 = File.read './db/fake_data/spline2.json'
+github3 = File.read './db/fake_data/spline3.json'
 
 
 dummies = Hash.new
-dummies["code_climate"] = [dummy1_code_climate, dummy2_code_climate, dummy1_code_climate]
+dummies["code_climate"] = [code_climate1, code_climate2, code_climate3]
 dummies["github"] = [github1, github2, github3]
-dummies["slack"] = [slack1, slack2,	slack3]
+# dummies["slack"] = [slack1, slack2,	slack3]
 dummies["pivotal_tracker"] = [pivot1, pivot2, pivot3]
-dummies["slack_trends"] = [slack_trends1, slack_trends2, slack_trends3]
+# dummies["slack_trends"] = [slack_trends1, slack_trends2, slack_trends3]
 dummies["story_transition"] = [story_1, story_2, story_3]
 dummies["point_estimation"] = [point_est1, point_est2, point_est3]
 dummies["story_overall"] = [gauge1, gauge2, gauge3]
@@ -97,8 +99,9 @@ projects_list.each do |project|
 end
 
 preferred_metrics = [{
-                         'story_overall'=>["pivotal_tracker", "point_estimation", "slack", "story_transition"],
-                         'collective_overview'=>["code_climate", "github"]
+                         'story_overall'=>["pivotal_tracker", "point_estimation", "story_transition"],
+                         'collective_overview'=>["code_climate", "github"],
+                         'code_climate' => ['code_climate']
                      }]
 
 @user01 = User.create!(provider_username: "Admin", uid: "uadmin", email: 'uadmin@example.com',
