@@ -89,6 +89,13 @@ GIT
   specs:
     project_metric_test_coverage (0.1.0)
 
+GIT
+  remote: https://github.com/an-ju/project_metric_travis_ci.git
+  revision: 76f53fb94dc5bd3c428f57dfa9415b7abacd079e
+  specs:
+    project_metric_travis_ci (0.1.0)
+      faraday (~> 0.1, >= 0.1.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -495,6 +502,7 @@ DEPENDENCIES
   project_metric_story_overall!
   project_metric_story_transition!
   project_metric_test_coverage!
+  project_metric_travis_ci!
   project_metrics!
   protected_attributes
   rails (= 4.2.6)

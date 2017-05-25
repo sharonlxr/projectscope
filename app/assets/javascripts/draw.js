@@ -97,6 +97,8 @@ function drawHighCharts(containerID, metric_sample) {
         index_score(containerID, JSONStr.data.coverage, 0.0, 100.0)
     } else if (JSONStr['chartType'] === 'pull_requests') {
         pull_requests(containerID, JSONStr.data);
+    } else if (JSONStr['chartType'] === 'travis_ci') {
+        travis_ci(containerID, JSONStr.data);
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
