@@ -74,6 +74,10 @@ github_flow1 = File.read './db/fake_data/github_flow1.json'
 github_flow2 = File.read './db/fake_data/github_flow2.json'
 github_flow3 = File.read './db/fake_data/github_flow3.json'
 
+tracker_velocity1 = File.read './db/fake_data/tracker_velocity1.json'
+tracker_velocity2 = File.read './db/fake_data/tracker_velocity2.json'
+tracker_velocity3 = File.read './db/fake_data/tracker_velocity3.json'
+
 dummies = Hash.new
 dummies["code_climate"] = [code_climate1, code_climate2, code_climate3]
 dummies["github"] = [github1, github2, github3]
@@ -89,6 +93,7 @@ dummies["pull_requests"] = [pull_requests1, pull_requests2, pull_requests3]
 dummies["travis_ci"] = [travis_ci1, travis_ci2, travis_ci3]
 dummies["github_files"] = [github_files1, github_files2, github_files3]
 dummies["github_flow"] = [github_flow1, github_flow2, github_flow3]
+dummies["tracker_velocity"] = [tracker_velocity1, tracker_velocity2, tracker_velocity3]
 
 projects_list = []
 0.upto(10).each do |num|
@@ -128,7 +133,8 @@ preferred_metrics = [{
                          'pull_requests' => [],
                          'travis_ci' => [],
                          'github_files' => [],
-                         'github_flow' => []
+                         'github_flow' => [],
+                         'tracker_velocity' => []
                      }]
 
 @user01 = User.create!(provider_username: "Admin", uid: "uadmin", email: 'uadmin@example.com',

@@ -13,4 +13,5 @@ ProjectMetrics.configure do
   add_metric :project_metric_travis_ci
   add_metric :project_metric_github_files
   add_metric :project_metric_github_flow
+  add_metric :project_metric_tracker_velocity
 end

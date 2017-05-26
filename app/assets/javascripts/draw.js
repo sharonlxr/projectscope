@@ -103,6 +103,8 @@ function drawHighCharts(containerID, metric_sample) {
         stacked_bar(containerID, JSONStr, ['model', 'view', 'controller', 'test', 'db', 'other']);
     } else if (JSONStr['chartType'] === 'github_flow') {
         bar_chart(containerID, JSONStr.data);
+    } else if (JSONStr['chartType'] === 'tracker_velocity') {
+        stacked_bar(containerID, JSONStr, ['unscheduled', 'unstarted', 'started', 'finished', 'delivered', 'accepted', 'rejected'])
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));

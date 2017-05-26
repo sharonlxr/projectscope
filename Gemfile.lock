@@ -42,7 +42,7 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_github_flow.git
-  revision: 0bcc1627ddd31a530fb37271c4a004fbbe304ae9
+  revision: 2974287d8fb67dfbe1f4f517918e75a014237c3c
   specs:
     project_metric_github_flow (0.1.0)
       octokit (~> 4.0)
@@ -102,6 +102,13 @@ GIT
   revision: b13eb76d1bcad5a4fbf1d2210a9853198f3ecaef
   specs:
     project_metric_test_coverage (0.1.0)
+
+GIT
+  remote: https://github.com/an-ju/project_metric_tracker_velocity.git
+  revision: 7e6556bf9a24449912a00cced6fa1660b83e87df
+  specs:
+    project_metric_tracker_velocity (0.1.0)
+      faraday
 
 GIT
   remote: https://github.com/an-ju/project_metric_travis_ci.git
@@ -466,7 +473,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    xpath (2.0.0)
+    xpath (2.1.0)
       nokogiri (~> 1.3)
 
 PLATFORMS
@@ -518,6 +525,7 @@ DEPENDENCIES
   project_metric_story_overall!
   project_metric_story_transition!
   project_metric_test_coverage!
+  project_metric_tracker_velocity!
   project_metric_travis_ci!
   project_metrics!
   protected_attributes

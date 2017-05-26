@@ -32,7 +32,7 @@ function stacked_bar(containerID, data, stacked_items) {
             })
             .style('float', 'left')
             .html(function (d) {
-                return d[0];
+                return d[0] > 0 ? d[0] : '';
             });
     } else {
         d3.select('#' + containerID)
