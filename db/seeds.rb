@@ -134,7 +134,7 @@ preferred_metrics = [{
                          'travis_ci' => [],
                          'github_files' => [],
                          'github_flow' => [],
-                         'tracker_velocity' => []
+                         'point_estimation' => []
                      }]
 
 @user01 = User.create!(provider_username: "Admin", uid: "uadmin", email: 'uadmin@example.com',

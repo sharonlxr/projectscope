@@ -56,7 +56,7 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_point_estimation.git
-  revision: b5631e88b2e6e044639e16cde29d614bcc898404
+  revision: 836426326a0ed6131034403243fa141edf21e28f
   specs:
     project_metric_point_estimation (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)

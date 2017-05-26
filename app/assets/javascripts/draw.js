@@ -84,7 +84,9 @@ function drawHighCharts(containerID, metric_sample) {
     if(JSONStr['chartType'] === 'd3') {
         story_transition(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'point_estimation') {
-        point_estimation(containerID, JSONStr);
+        var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
+        console.log(new_data);
+        stacked_bar(containerID, new_data, JSONStr.data.series);
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'gauge') {
@@ -108,6 +110,18 @@ function drawHighCharts(containerID, metric_sample) {
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
+    }
+}
+
+function concat_arrays(data, series) {
+    if (series.length !== data.length) {
+        return data
+    } else {
+        var new_data = {};
+        data.forEach(function (d, i) {
+            new_data[series[i]] = d;
+        });
+        return new_data;
     }
 }
 
