@@ -11,4 +11,5 @@ ProjectMetrics.configure do
   add_metric :project_metric_test_coverage
   add_metric :project_metric_pull_requests
   add_metric :project_metric_travis_ci
+  add_metric :project_metric_github_files
 end

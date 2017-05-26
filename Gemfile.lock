@@ -34,6 +34,13 @@ GIT
       octokit
 
 GIT
+  remote: https://github.com/an-ju/project_metric_github_files.git
+  revision: 834a5d32f97a00277feb62ab3ff510757a464e5b
+  specs:
+    project_metric_github_files (0.1.0)
+      octokit (~> 4.0)
+
+GIT
   remote: https://github.com/an-ju/project_metric_pivotal_tracker.git
   revision: 9e2e03f1df41f8e0122e0c1236d517d4b422b16e
   specs:
@@ -494,6 +501,7 @@ DEPENDENCIES
   project_metric_code_climate!
   project_metric_collective_overview!
   project_metric_github!
+  project_metric_github_files!
   project_metric_pivotal_tracker!
   project_metric_point_estimation!
   project_metric_pull_requests!

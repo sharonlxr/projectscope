@@ -16,6 +16,7 @@ gem 'project_metric_collective_overview', git: 'https://github.com/an-ju/project
 gem 'project_metric_test_coverage', git: 'https://github.com/an-ju/project_metric_test_coverage.git'
 gem 'project_metric_pull_requests', git: 'https://github.com/an-ju/project_metric_pull_requests.git'
 gem 'project_metric_travis_ci', git: 'https://github.com/an-ju/project_metric_travis_ci.git'
+gem 'project_metric_github_files', git: 'https://github.com/an-ju/project_metric_github_files.git'
 
 gem 'highcharts-rails'
 
