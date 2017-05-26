@@ -101,6 +101,8 @@ function drawHighCharts(containerID, metric_sample) {
         travis_ci(containerID, JSONStr.data);
     } else if (JSONStr['chartType'] === 'github_files') {
         stacked_bar(containerID, JSONStr, ['model', 'view', 'controller', 'test', 'db', 'other']);
+    } else if (JSONStr['chartType'] === 'github_flow') {
+        bar_chart(containerID, JSONStr.data);
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
