@@ -78,6 +78,10 @@ tracker_velocity1 = File.read './db/fake_data/tracker_velocity1.json'
 tracker_velocity2 = File.read './db/fake_data/tracker_velocity2.json'
 tracker_velocity3 = File.read './db/fake_data/tracker_velocity3.json'
 
+point_distribution1 = File.read './db/fake_data/tracker_distribution1.json'
+point_distribution2 = File.read './db/fake_data/tracker_distribution2.json'
+point_distribution3 = File.read './db/fake_data/tracker_distribution3.json'
+
 dummies = Hash.new
 dummies["code_climate"] = [code_climate1, code_climate2, code_climate3]
 dummies["github"] = [github1, github2, github3]
@@ -86,7 +90,7 @@ dummies["pivotal_tracker"] = [pivot1, pivot2, pivot3]
 # dummies["slack_trends"] = [slack_trends1, slack_trends2, slack_trends3]
 dummies["story_transition"] = [story_1, story_2, story_3]
 dummies["point_estimation"] = [point_est1, point_est2, point_est3]
-dummies["story_overall"] = [gauge1, gauge2, gauge3]
+dummies["story_overall"] = [point_distribution1, point_distribution2, point_distribution3]
 dummies["collective_overview"] = [collective_gauge1, collective_gauge2, collective_gauge3]
 dummies["test_coverage"] = [test_coverage1, test_coverage2, test_coverage3]
 dummies["pull_requests"] = [pull_requests1, pull_requests2, pull_requests3]
@@ -134,7 +138,7 @@ preferred_metrics = [{
                          'travis_ci' => [],
                          'github_files' => [],
                          'github_flow' => [],
-                         'point_estimation' => []
+                         'story_overall' => []
                      }]
 
 @user01 = User.create!(provider_username: "Admin", uid: "uadmin", email: 'uadmin@example.com',

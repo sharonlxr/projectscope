@@ -85,7 +85,6 @@ function drawHighCharts(containerID, metric_sample) {
         story_transition(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'point_estimation') {
         var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
-        console.log(new_data);
         stacked_bar(containerID, new_data, JSONStr.data.series);
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
@@ -107,6 +106,9 @@ function drawHighCharts(containerID, metric_sample) {
         bar_chart(containerID, JSONStr.data);
     } else if (JSONStr['chartType'] === 'tracker_velocity') {
         stacked_bar(containerID, JSONStr, ['unscheduled', 'unstarted', 'started', 'finished', 'delivered', 'accepted', 'rejected'])
+    } else if (JSONStr['chartType'] === 'point_distribution') {
+        var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
+        stacked_bar(containerID, new_data, JSONStr.data.series);
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
