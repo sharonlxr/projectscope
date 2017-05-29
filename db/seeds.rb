@@ -19,9 +19,6 @@ MetricSample.delete_all
 # dummy2_code_climate = ProjectMetrics.class_for('code_climate').new url: 'http://github.com/AgileVentures/project_metric_slack'
 
 
-# slack1 = File.read './db/fake_data/pie1.json'
-# slack2 = File.read './db/fake_data/pie2.json'
-# slack3 = File.read './db/fake_data/pie3.json'
 # slack_trends1 = File.read './db/fake_data/spline1.json'
 # slack_trends2 = File.read './db/fake_data/spline2.json'
 # slack_trends3 = File.read './db/fake_data/spline3.json'
@@ -82,10 +79,14 @@ point_distribution1 = File.read './db/fake_data/tracker_distribution1.json'
 point_distribution2 = File.read './db/fake_data/tracker_distribution2.json'
 point_distribution3 = File.read './db/fake_data/tracker_distribution3.json'
 
+slack1 = File.read './db/fake_data/slack1.json'
+slack2 = File.read './db/fake_data/slack2.json'
+slack3 = File.read './db/fake_data/slack3.json'
+
 dummies = Hash.new
 dummies["code_climate"] = [code_climate1, code_climate2, code_climate3]
 dummies["github"] = [github1, github2, github3]
-# dummies["slack"] = [slack1, slack2,	slack3]
+dummies["slack"] = [slack1, slack2,	slack3]
 dummies["pivotal_tracker"] = [pivot1, pivot2, pivot3]
 # dummies["slack_trends"] = [slack_trends1, slack_trends2, slack_trends3]
 dummies["story_transition"] = [story_1, story_2, story_3]
@@ -138,7 +139,7 @@ preferred_metrics = [{
                          'travis_ci' => [],
                          'github_files' => [],
                          'github_flow' => [],
-                         'story_overall' => []
+                         'slack' => []
                      }]
 
 @user01 = User.create!(provider_username: "Admin", uid: "uadmin", email: 'uadmin@example.com',

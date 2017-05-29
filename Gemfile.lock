@@ -70,7 +70,7 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_slack.git
-  revision: fbb2f6193be00267f235a750018871dabf52feea
+  revision: d9eec67a10f56dd2fab7246e3fed93a70dad04ae
   specs:
     project_metric_slack (0.1.0)
       slack-ruby-client (>= 0.7.6)
@@ -85,7 +85,7 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_story_overall.git
-  revision: 26523fe57c0eb02d8cd41aaeb3a8dcdac55b9493
+  revision: 6f6b28a34c6d9854425cd9e49870225c4a689722
   specs:
     project_metric_story_overall (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)

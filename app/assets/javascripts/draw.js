@@ -109,6 +109,9 @@ function drawHighCharts(containerID, metric_sample) {
     } else if (JSONStr['chartType'] === 'point_distribution') {
         var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
         stacked_bar(containerID, new_data, JSONStr.data.series);
+    } else if (JSONStr['chartType'] === 'slack') {
+        var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
+        stacked_bar(containerID, new_data, JSONStr.data.series);
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
