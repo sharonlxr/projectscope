@@ -1,41 +1,54 @@
 GIT
   remote: git://github.com/intridea/omniauth-github.git
-  revision: a893c2bc45d3c869ada960fddca97d6cba28082d
+  revision: 239ce68117a13a1c91dc954ece151006a3854728
   specs:
-    omniauth-github (1.2.3)
+    omniauth-github (1.3.0)
       omniauth (~> 1.5)
       omniauth-oauth2 (>= 1.4.0, < 2.0)
 
 GIT
-  remote: https://github.com/an-ju/ProjectMetrics/
+  remote: https://github.com/an-ju/ProjectMetrics.git
   revision: 368e9d4e94abef4ea196ea3decc44a7d23628396
   specs:
     project_metrics (0.1.0)
       activesupport
 
 GIT
-  remote: https://github.com/an-ju/project_metric_code_climate
-  revision: 703afc7be32621ccd0e7404446ed0f8cd946315e
+  remote: https://github.com/an-ju/project_metric_code_climate.git
+  revision: cc947acc8ebe148475fbdb6d116b62acd58f7774
   specs:
     project_metric_code_climate (0.1.0)
-      httparty
 
 GIT
-  remote: https://github.com/an-ju/project_metric_collective_overview
+  remote: https://github.com/an-ju/project_metric_collective_overview.git
   revision: b56a85a0dab1337a6480a8f39fd3cf79fb369c65
   specs:
     project_metric_collective_overview (0.1.0)
       octokit (~> 4.0)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_github
+  remote: https://github.com/an-ju/project_metric_github.git
   revision: 15bd08639f20067e7375b48d153c6fbbffccadb7
   specs:
     project_metric_github (0.1.0)
       octokit
 
 GIT
-  remote: https://github.com/an-ju/project_metric_pivotal_tracker
+  remote: https://github.com/an-ju/project_metric_github_files.git
+  revision: 834a5d32f97a00277feb62ab3ff510757a464e5b
+  specs:
+    project_metric_github_files (0.1.0)
+      octokit (~> 4.0)
+
+GIT
+  remote: https://github.com/an-ju/project_metric_github_flow.git
+  revision: 2974287d8fb67dfbe1f4f517918e75a014237c3c
+  specs:
+    project_metric_github_flow (0.1.0)
+      octokit (~> 4.0)
+
+GIT
+  remote: https://github.com/an-ju/project_metric_pivotal_tracker.git
   revision: 9e2e03f1df41f8e0122e0c1236d517d4b422b16e
   specs:
     project_metric_pivotal_tracker (0.1.0)
@@ -43,20 +56,27 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_point_estimation.git
-  revision: b5631e88b2e6e044639e16cde29d614bcc898404
+  revision: 836426326a0ed6131034403243fa141edf21e28f
   specs:
     project_metric_point_estimation (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_slack
-  revision: fbb2f6193be00267f235a750018871dabf52feea
+  remote: https://github.com/an-ju/project_metric_pull_requests.git
+  revision: 66b5e9804ccac1b06d01e8bf90edcd27024e8ea7
+  specs:
+    project_metric_pull_requests (0.1.0)
+      octokit
+
+GIT
+  remote: https://github.com/an-ju/project_metric_slack.git
+  revision: d9eec67a10f56dd2fab7246e3fed93a70dad04ae
   specs:
     project_metric_slack (0.1.0)
       slack-ruby-client (>= 0.7.6)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_slack_trends
+  remote: https://github.com/an-ju/project_metric_slack_trends.git
   revision: 553fc622786c9815389a3b701f303cbd0c88a36b
   specs:
     project_metric_slack_trends (0.1.0)
@@ -65,16 +85,36 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_story_overall.git
-  revision: 26523fe57c0eb02d8cd41aaeb3a8dcdac55b9493
+  revision: 6f6b28a34c6d9854425cd9e49870225c4a689722
   specs:
     project_metric_story_overall (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
 
 GIT
-  remote: https://github.com/an-ju/project_metric_story_transitions
+  remote: https://github.com/an-ju/project_metric_story_transitions.git
   revision: 60e9f23c9a4dbaab02c984a055c175dd966313c6
   specs:
     project_metric_story_transition (0.1.0)
+      faraday (~> 0.1, >= 0.1.0.0)
+
+GIT
+  remote: https://github.com/an-ju/project_metric_test_coverage.git
+  revision: b13eb76d1bcad5a4fbf1d2210a9853198f3ecaef
+  specs:
+    project_metric_test_coverage (0.1.0)
+
+GIT
+  remote: https://github.com/an-ju/project_metric_tracker_velocity.git
+  revision: 7e6556bf9a24449912a00cced6fa1660b83e87df
+  specs:
+    project_metric_tracker_velocity (0.1.0)
+      faraday
+
+GIT
+  remote: https://github.com/an-ju/project_metric_travis_ci.git
+  revision: 76f53fb94dc5bd3c428f57dfa9415b7abacd079e
+  specs:
+    project_metric_travis_ci (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
 
 GEM
@@ -233,8 +273,6 @@ GEM
     hashie (3.5.5)
     highcharts-rails (5.0.7)
       railties (>= 3.1)
-    httparty (0.15.5)
-      multi_xml (>= 0.5.2)
     i18n (0.8.1)
     ice_nine (0.11.2)
     jasmine (2.6.0)
@@ -435,7 +473,7 @@ GEM
     websocket-driver (0.6.5)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.2)
-    xpath (2.0.0)
+    xpath (2.1.0)
       nokogiri (~> 1.3)
 
 PLATFORMS
@@ -477,12 +515,18 @@ DEPENDENCIES
   project_metric_code_climate!
   project_metric_collective_overview!
   project_metric_github!
+  project_metric_github_files!
+  project_metric_github_flow!
   project_metric_pivotal_tracker!
   project_metric_point_estimation!
+  project_metric_pull_requests!
   project_metric_slack!
   project_metric_slack_trends!
   project_metric_story_overall!
   project_metric_story_transition!
+  project_metric_test_coverage!
+  project_metric_tracker_velocity!
+  project_metric_travis_ci!
   project_metrics!
   protected_attributes
   rails (= 4.2.6)

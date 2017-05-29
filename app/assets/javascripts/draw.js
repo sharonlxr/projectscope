@@ -84,16 +84,49 @@ function drawHighCharts(containerID, metric_sample) {
     if(JSONStr['chartType'] === 'd3') {
         story_transition(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'point_estimation') {
-        point_estimation(containerID, JSONStr);
+        var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
+        stacked_bar(containerID, new_data, JSONStr.data.series);
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'gauge') {
         gauge(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'pivotal_tracker') {
         pivotal_tracker(containerID, JSONStr);
+    } else if (JSONStr['chartType'] === 'code_climate') {
+        index_score(containerID, JSONStr.data.GPA, 0.0, 4.0);
+    } else if (JSONStr['chartType'] === 'test_coverage') {
+        index_score(containerID, JSONStr.data.coverage, 0.0, 100.0)
+    } else if (JSONStr['chartType'] === 'pull_requests') {
+        pull_requests(containerID, JSONStr.data);
+    } else if (JSONStr['chartType'] === 'travis_ci') {
+        travis_ci(containerID, JSONStr.data);
+    } else if (JSONStr['chartType'] === 'github_files') {
+        stacked_bar(containerID, JSONStr, ['model', 'view', 'controller', 'test', 'db', 'other']);
+    } else if (JSONStr['chartType'] === 'github_flow') {
+        bar_chart(containerID, JSONStr.data);
+    } else if (JSONStr['chartType'] === 'tracker_velocity') {
+        stacked_bar(containerID, JSONStr, ['unscheduled', 'unstarted', 'started', 'finished', 'delivered', 'accepted', 'rejected'])
+    } else if (JSONStr['chartType'] === 'point_distribution') {
+        var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
+        stacked_bar(containerID, new_data, JSONStr.data.series);
+    } else if (JSONStr['chartType'] === 'slack') {
+        var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
+        stacked_bar(containerID, new_data, JSONStr.data.series);
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));
+    }
+}
+
+function concat_arrays(data, series) {
+    if (series.length !== data.length) {
+        return data
+    } else {
+        var new_data = {};
+        data.forEach(function (d, i) {
+            new_data[series[i]] = d;
+        });
+        return new_data;
     }
 }
 
