@@ -31,9 +31,14 @@ function stacked_bar(containerID, data, stacked_items) {
                 return 100 * parseFloat(d[0]) / valsum + '%';
             })
             .style('float', 'left')
+            .attr('data-toggle', 'tooltip')
+            .attr('title', function (d) {
+                return d[1];
+            })
             .html(function (d) {
                 return d[0] > 0 ? d[0] : '';
             });
+        $('[data-toggle="tooltip"]').tooltip();
     } else {
         d3.select('#' + containerID)
             .style('width', '100%')
