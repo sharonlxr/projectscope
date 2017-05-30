@@ -4,6 +4,9 @@
 
 function bar_chart(containerID, data) {
     var container = d3.select('#' + containerID);
+    if (!container.select('svg').empty()) {
+        container.select('svg').remove();
+    }
     var margin = {top: 1, right: 2, bottom: 1, left: 2};
     var height = d3.max([parseFloat(container.style('height').slice(0, -2)), 30]);
     var width = 150;
