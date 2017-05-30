@@ -139,6 +139,10 @@ preferred_metrics = [{
                          'travis_ci' => [],
                          'github_files' => [],
                          'github_flow' => [],
+                     }, {
+                         'tracker_velocity' => [],
+                         'point_estimation' => [],
+                         'story_overall' => [],
                          'slack' => []
                      }]
 
