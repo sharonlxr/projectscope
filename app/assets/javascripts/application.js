@@ -23,3 +23,4 @@
 //= require highcharts/modules/solid-gauge
 
 //= require d3
+//= require d3-tip

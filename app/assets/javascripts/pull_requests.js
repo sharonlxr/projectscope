@@ -18,22 +18,31 @@ function pull_requests(containerID, data) {
             .style('background-color', 'green')
             .style('width', (100.0 * open / data.total) + '%')
             .style('float', 'left')
+            .attr('data-toggle', 'tooltip')
+            .attr('title', 'open')
             .html(open);
         container.append('div')
             .style('background-color', 'red')
             .style('width', (100.0 * (data.total - open) / data.total) + '%')
             .style('float', 'left')
+            .attr('data-toggle', 'tooltip')
+            .attr('title', 'closed')
             .html(data.closed);
         container.append('br');
         container.append('div')
             .style('background-color', 'green')
             .style('width', (100.0 * commented / data.total) + '%')
             .style('float', 'left')
+            .attr('data-toggle', 'tooltip')
+            .attr('title', 'commented')
             .html(data.commented);
         container.append('div')
             .style('background-color', 'red')
             .style('width', (100.0 * (data.total - commented) / data.total) + '%')
             .style('float', 'left')
+            .attr('data-toggle', 'tooltip')
+            .attr('title', 'uncommented')
             .html(data.total - data.commented);
+        $('[data-toggle="tooltip"]').tooltip();
     }
 }

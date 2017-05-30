@@ -10,6 +10,7 @@ class ProjectsController < ApplicationController
   # GET /projects.json
   def index
     @metric_names = current_user.preferred_metrics
+    @current_page = params.has_key?(:page) ? (params[:page].to_i - 1) : 0
     preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
     if params[:type].nil? or params[:type] == "project_name"
       @projects = order_by_project_name preferred_projects

@@ -10,7 +10,12 @@ function travis_ci(containerID, data) {
             .style('background-color', color)
             .style('width', (100.0 * success_rate) + '%')
             .style('float', 'left')
+            .attr('data-toggle', 'tooltip')
+            .attr('title', function (d) {
+                return 'State: ' + data.current_state + '.' + ' Total builds: ' + data.total_builds;
+            })
             .html(success_rate.toPrecision(2));
+        $('[data-toggle="tooltip"]').tooltip();
     } else {
         d3.select('#' + containerID)
             .style('background-color', 'gray')

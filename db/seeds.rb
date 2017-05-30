@@ -136,9 +136,13 @@ preferred_metrics = [{
                          'code_climate' => [],
                          'test_coverage' => [],
                          'pull_requests' => [],
-                         'travis_ci' => [],
                          'github_files' => [],
                          'github_flow' => [],
+                     }, {
+                         'travis_ci' => [],
+                         'tracker_velocity' => [],
+                         'point_estimation' => [],
+                         'story_overall' => [],
                          'slack' => []
                      }]
 
