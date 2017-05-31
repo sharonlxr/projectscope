@@ -27,9 +27,8 @@ class ProjectsController < ApplicationController
   # GET /projects/1.json
   def show
     @owners = @project.owners
-    @report_metrics = [ {name: 'report_1', comments: [1,2,3], gpa: 3.9},
-                        {name: 'report_2', comments: [1,2,3,4,5], gpa: 3.5},
-                        {name: 'report_3', comments: [], gpa: 3.0}]
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
   end
 
   # GET /projects/new
@@ -125,7 +124,10 @@ class ProjectsController < ApplicationController
   end
 
   def show_metric
-    @sub_metrics = current_user.preferred_metrics[0][params[:metric]]
+    total_hash = current_user.preferred_metrics.inject(Hash.new) do |sum, elem|
+      sum.update(elem)
+    end
+    @sub_metrics = total_hash[params[:metric]]
     @practice_name = params[:metric]
     @days_from_now = params[:days_from_now]? params[:days_from_now].to_i : 0
     @parent_metric = @project.metric_on_date params[:metric], DateTime.parse((Date.today - @days_from_now.days).to_s)

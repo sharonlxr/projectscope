@@ -14,4 +14,9 @@ ProjectMetrics.configure do
   add_metric :project_metric_github_files
   add_metric :project_metric_github_flow
   add_metric :project_metric_tracker_velocity
+
+  add_hierarchy report: [{ title: :github,
+                            contents: [] },
+                          { title: :pivotal_tracker,
+                            contents: [] }]
 end

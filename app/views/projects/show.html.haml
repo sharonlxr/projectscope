@@ -1,5 +1,17 @@
 %h1
   = @project.name
+
+%div.slider-container.col-md-12
+  %div
+    Current date:
+    = fa_icon "angle-left", :class => "btn btn-default btn-sm date-nav", :id => "day-before"
+    %strong{:id => "date-label"}= Date.today.to_s
+    = fa_icon "angle-right", :class => "btn btn-default btn-sm date-nav", :id => "day-after"
+  %br/
+  %div{:id => "date-slider", :num_days_from_min => @num_days_from_today }
+  %div#slider-progress-indicator
+    Loading...
+
 %div.col-md-6
   %h2
     Reports
@@ -9,21 +21,17 @@
         %th
           Practice Name
         %th
-          GPA
-        %th
           Report
     %tbody
-      - @report_metrics.each do |m|
+      - @project.report.each do |m|
         %tr
           %td
-            = m[:name]
+            = m[:metric_name]
           %td
-            = m[:gpa]
-          %td
-            %a{href: '#'}
+            %a{href: "/projects/#{@project.id}/metrics/#{m[:metric_name]}/detail"}
               Report
               %span.badge
-                = m[:comments].length
+                = m.comments.length
 
 %div.col-md-6
   %h2
@@ -31,10 +39,16 @@
   %table.table.table-striped
     %tbody
       - current_user.preferred_metrics.each do |page|
-        - page.keys.each do |metric|
-          - sample = @project.metric_on_date(metric, Date.today)[0]
+        - @project.latest_metric_samples(page.keys).each do |sample|
           %tr
             %td
-              = sample.metric_name
+              %a.detail-link{href:"/projects/#{@project.id}/metrics/#{sample.metric_name}/detail", style: 'width:100%;height:100%;'}
+                = sample.metric_name
+                %span.badge
+                  = sample.comments.length
             %td{style: 'text-align: center'}
               %div.chart_place{:id => "project-#{@project.id}-metric-#{sample.try(:metric_name)}"}
+
+%div.col-md-12
+  %h2
+    Other Teams

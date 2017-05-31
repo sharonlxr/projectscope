@@ -43,8 +43,14 @@ class Project < ActiveRecord::Base
     metrics_name_ary.uniq
   end
 
-  def charts
-    puts "Hallo"
+  def report
+    ProjectMetrics.hierarchies(:report).map do |r|
+      latest_metric_sample r[:title]
+    end
+  end
+
+  def latest_metric_sample(metric)
+    metric_samples.latest_for metric
   end
 
   def latest_metric_samples(metrics = nil)
