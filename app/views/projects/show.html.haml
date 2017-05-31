@@ -28,7 +28,7 @@
           %td
             = m[:metric_name]
           %td
-            %a{href: "/projects/#{@project.id}/metrics/#{m[:metric_name]}/detail"}
+            %a{href: "/projects/#{@project.id}/metrics/#{m[:metric_name]}/report"}
               Report
               %span.badge
                 = m.comments.length

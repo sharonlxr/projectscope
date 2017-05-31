@@ -1,7 +1,7 @@
 require 'json'
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner,
-                                     :show_metric, :get_metric_data]
+                                     :show_metric, :show_report, :get_metric_data]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
   load_and_authorize_resource
@@ -133,6 +133,17 @@ class ProjectsController < ApplicationController
     @parent_metric = @project.metric_on_date params[:metric], DateTime.parse((Date.today - @days_from_now.days).to_s)
     @parent_metric = @parent_metric.length > 0 ? @parent_metric[0] : false
 
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
+    render template: 'projects/metric_detail'
+  end
+
+  def show_report
+    report = ProjectMetrics.hierarchies(:report).select { |m| m[:title].eql? params[:metric].to_sym }.first
+    @sub_metrics = report[:contents]
+    @practice_name = report[:title].to_s
+    @days_from_now = 0
+    @parent_metric = @project.latest_metric_sample params[:metric]
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
     render template: 'projects/metric_detail'
