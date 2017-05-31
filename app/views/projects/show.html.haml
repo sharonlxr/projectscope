@@ -1,11 +1,40 @@
-%p
-  %strong Name:
+%h1
   = @project.name
+%div.col-md-6
+  %h2
+    Reports
+  %table.table.table-striped
+    %thead
+      %tr
+        %th
+          Practice Name
+        %th
+          GPA
+        %th
+          Report
+    %tbody
+      - @report_metrics.each do |m|
+        %tr
+          %td
+            = m[:name]
+          %td
+            = m[:gpa]
+          %td
+            %a{href: '#'}
+              Report
+              %span.badge
+                = m[:comments].length
 
-%p
-  %strong Config:
-  = render :partial => 'config', :collection => @project.configs
-
-= link_to 'Edit', edit_project_path(@project) 
-= " | "
-= link_to 'Back', projects_path
+%div.col-md-6
+  %h2
+    Metrics
+  %table.table.table-striped
+    %tbody
+      - current_user.preferred_metrics.each do |page|
+        - page.keys.each do |metric|
+          - sample = @project.metric_on_date(metric, Date.today)[0]
+          %tr
+            %td
+              = sample.metric_name
+            %td{style: 'text-align: center'}
+              %div.chart_place{:id => "project-#{@project.id}-metric-#{sample.try(:metric_name)}"}

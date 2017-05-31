@@ -26,10 +26,10 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    # debugger
-    @readonly = true
     @owners = @project.owners
-    render :template => 'projects/edit'
+    @report_metrics = [ {name: 'report_1', comments: [1,2,3], gpa: 3.9},
+                        {name: 'report_2', comments: [1,2,3,4,5], gpa: 3.5},
+                        {name: 'report_3', comments: [], gpa: 3.0}]
   end
 
   # GET /projects/new
