@@ -5,7 +5,7 @@
 function pull_requests(containerID, data) {
     if (data.total === 0) {
         d3.select('#' + containerID)
-            .style('background-color', 'gray')
+            .append('div')
             .style('width', '100%')
             .style('float', 'left')
             .html('No Pull Request');
@@ -14,6 +14,7 @@ function pull_requests(containerID, data) {
         var commented = data.commented === 0 ? 0.5 : data.commented;
         var container = d3.select('#' + containerID)
             .style('width', '100%');
+        container.selectAll('div').remove();
         container.append('div')
             .style('background-color', 'green')
             .style('width', (100.0 * open / data.total) + '%')
