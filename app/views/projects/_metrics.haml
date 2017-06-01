@@ -7,4 +7,4 @@
   %td
     - if !sample.nil?
       %a.detail-link{href:"projects/#{project.id}/metrics/#{sample.metric_name}/detail", style: 'width:100%;height:100%;'}
-        %div.chart_place{:id => "project-#{project.id}-metric-#{sample.try(:metric_name)}"}
+        %div.chart_place{:id => "project-#{project.id}-#{@display_type}-#{sample.try(:metric_name)}"}

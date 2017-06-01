@@ -132,22 +132,39 @@ var render_charts = function () {
     var get_charts_json = function (id) {
         var splited = id.split("-");
         var project_id = splited[1];
+        var chart_type = splited[2];
         var metric = splited[3];
-
-        $.ajax({url: "/projects/" + project_id + "/metrics/" + metric + '?days_from_now=' + days,
-            success: function(result) {
-                drawHighCharts(id, result);
-            },
-            error: function(a, b, c) {
-                if (a.status !== 404) {
-                    console.log(a);
-                    console.log(b);
-                    console.log(c);
-                } else {
-                    //TODO: Add some place holder for data not found
+        if (chart_type === 'metric') {
+            $.ajax({url: "/projects/" + project_id + "/metrics/" + metric + '?days_from_now=' + days,
+                success: function(result) {
+                    drawMetricCharts(id, result);
+                },
+                error: function(a, b, c) {
+                    if (a.status !== 404) {
+                        console.log(a);
+                        console.log(b);
+                        console.log(c);
+                    } else {
+                        //TODO: Add some place holder for data not found
+                    }
                 }
-            }
-        });
+            });
+        } else if (chart_type === 'series') {
+            $.ajax({url: "/projects/" + project_id + "/metrics/" + metric + '/series?days_from_now=' + days,
+                success: function(result) {
+                    drawSeriesCharts(id, result);
+                },
+                error: function(a, b, c) {
+                    if (a.status !== 404) {
+                        console.log(a);
+                        console.log(b);
+                        console.log(c);
+                    } else {
+                        //TODO: Add some place holder for data not found
+                    }
+                }
+            });
+        }
     };
     $(".chart_place").each(function () {
         get_charts_json(this.id);

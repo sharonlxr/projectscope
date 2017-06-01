@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   	member do
   		post "/add_owner", :to => "projects#add_owner"
       get '/metrics/:metric', :to => 'projects#get_metric_data'
+      get '/metrics/:metric/series', :to => 'projects#get_metric_series'
       get '/metrics/:metric/detail', to: 'projects#show_metric'
       get '/metrics/:metric/report', to: 'projects#show_report'
   	end

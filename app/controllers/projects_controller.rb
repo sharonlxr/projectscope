@@ -1,7 +1,7 @@
 require 'json'
 class ProjectsController < ApplicationController
-  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner,
-                                     :show_metric, :show_report, :get_metric_data]
+  before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner, :show_metric, :show_report,
+                                     :get_metric_data, :get_metric_series]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
   load_and_authorize_resource
@@ -17,12 +17,8 @@ class ProjectsController < ApplicationController
       end
     end
     @current_page = params.has_key?(:page) ? (params[:page].to_i - 1) : 0
-    preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
-    if params[:type].nil? or params[:type] == "project_name"
-      @projects = order_by_project_name preferred_projects
-    else
-      @projects = order_by_metric_name preferred_projects
-    end
+    @display_type = params.has_key?(:type) ? (params[:type]) : 'metric'
+    @projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
     update_session
 
     metric_min_date = MetricSample.min_date || Date.today
@@ -34,6 +30,7 @@ class ProjectsController < ApplicationController
   def show
     @owners = @project.owners
     @current_page = params.has_key?(:page) ? (params[:page].to_i - 1) : 0
+    @display_type = params.has_key?(:type) ? (params[:type]) : 'metric'
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
   end
@@ -83,19 +80,6 @@ class ProjectsController < ApplicationController
     end
   end
 
-  def get_metric_data
-    #from @project to get metric
-    days_from_now = params[:days_from_now] ? params[:days_from_now].to_i : 0
-    date = DateTime.parse((Date.today - days_from_now.days).to_s)
-    # metric = MetricSample.find_by project_id:params[:id], metric_name:params[:metric]
-    metric = @project.metric_on_date params[:metric], date
-    if metric.length > 0
-      render json: metric[0]
-    else
-      render :json => {:error => "not found"}.to_json, :status => 404
-    end
-  end
-
   # PATCH/PUT /projects/1
   # PATCH/PUT /projects/1.json
   def update
@@ -130,6 +114,7 @@ class ProjectsController < ApplicationController
     end
   end
 
+  # GET /projects/:id/metrics/:metric/detail
   def show_metric
     total_hash = current_user.preferred_metrics.inject(Hash.new) do |sum, elem|
       sum.update(elem)
@@ -145,6 +130,7 @@ class ProjectsController < ApplicationController
     render template: 'projects/metric_detail'
   end
 
+  # GET /projects/:id/metrics/:metric/report
   def show_report
     report = ProjectMetrics.hierarchies(:report).select { |m| m[:title].eql? params[:metric].to_sym }.first
     @sub_metrics = report[:contents]
@@ -154,6 +140,30 @@ class ProjectsController < ApplicationController
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
     render template: 'projects/metric_detail'
+  end
+
+  # GET /projects/:id/metrics/:metric
+  def get_metric_data
+    days_from_now = params[:days_from_now] ? params[:days_from_now].to_i : 0
+    date = DateTime.parse((Date.today - days_from_now.days).to_s)
+    metric = @project.metric_on_date params[:metric], date
+    if metric.length > 0
+      render json: metric.last
+    else
+      render :json => {:error => "not found"}, :status => 404
+    end
+  end
+
+  # GET /projects/:id/metrics/:metric/series
+  def get_metric_series
+    metric_samples = @project.metric_samples.where(metric_name: params[:metric])
+    if metric_samples.length > 0
+      render json: metric_samples.sort_by { |m| m.created_at }.map do |metric|
+        metric.attributes.delete 'encrypted_raw_data'
+      end
+    else
+      render json: {:error => 'not found'}, status: 404
+    end
   end
 
   def add_owner
