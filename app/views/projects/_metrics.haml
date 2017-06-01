@@ -2,7 +2,7 @@
   - if current_user.is_student? and not current_user.is_owner_of? project
     = project.name
   - else
-    = link_to project.name, edit_project_path(project.id)
+    = link_to project.name, project_path(project.id)
 - preferred_metrics = preferred_metrics
 - project.latest_metric_samples(preferred_metrics.keys).each do |sample|
   %td
