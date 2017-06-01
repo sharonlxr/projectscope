@@ -9,6 +9,9 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
+    if current_user.is_student? && current_user.project.nil?
+      redirect_to init_user_path current_user
+    end
     @metric_names = current_user.preferred_metrics
     @current_page = params.has_key?(:page) ? (params[:page].to_i - 1) : 0
     preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects

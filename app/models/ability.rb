@@ -34,6 +34,7 @@ class Ability
       can :manage, :all
     else
       can :read, :all
+      can [:init_new, :init_update], User
       can [:show_metric, :get_metric_data], Project
     end
   end
