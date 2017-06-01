@@ -19,4 +19,17 @@ ProjectMetrics.configure do
                             contents: [] },
                           { title: :pivotal_tracker,
                             contents: [] }]
+  add_hierarchy metric: [[
+                             :code_climate,
+                             :test_coverage,
+                             :pull_requests,
+                             :github_files,
+                             :github_flow,
+                         ], [
+                             :travis_ci,
+                             :tracker_velocity,
+                             :point_estimation,
+                             :story_overall,
+                             :slack
+                         ]]
 end

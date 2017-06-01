@@ -53,6 +53,23 @@
             %td{style: 'text-align: center'}
               %div.chart_place{:id => "project-#{@project.id}-metric-#{sample.try(:metric_name)}"}
 
-%div.col-md-12
+- metric_names = ProjectMetrics.hierarchies :metric
+%div.col-md-6
   %h2
     Other Teams
+%div.col-md-6
+  %nav{style: 'float: right'}
+    %ul.pagination
+      - metric_names.each_with_index do |m, index|
+        - if index == @current_page
+          %li.active
+            %a{href: project_path(@project, page: index+1)}
+              = index + 1
+        - else
+          %li
+            %a{href: project_path(@project, page: index+1)}
+              = index + 1
+
+= render :partial => 'metric_table',
+         :locals => { metric_names: metric_names[@current_page],
+                      projects: Project.all.reject { |p| p.id == @project.id } }
