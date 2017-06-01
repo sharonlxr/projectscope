@@ -7,6 +7,7 @@ function travis_ci(containerID, data) {
         var color = data.current_state === 'passed' ? 'green' : 'red';
         var success_rate = parseFloat(data.success_builds) / parseFloat(data.total_builds);
         d3.select('#' + containerID)
+            .append('div')
             .style('background-color', color)
             .style('width', (100.0 * success_rate) + '%')
             .style('float', 'left')
@@ -18,9 +19,8 @@ function travis_ci(containerID, data) {
         $('[data-toggle="tooltip"]').tooltip();
     } else {
         d3.select('#' + containerID)
-            .style('background-color', 'gray')
+            .append('div')
             .style('width', 100.0 + '%')
-            .style('float', 'left')
-            .html('No build found.');
+            .html('No Data');
     }
 }

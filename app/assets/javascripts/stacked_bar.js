@@ -41,8 +41,8 @@ function stacked_bar(containerID, data, stacked_items) {
         $('[data-toggle="tooltip"]').tooltip();
     } else {
         d3.select('#' + containerID)
+            .append('div')
             .style('width', '100%')
-            .style('background-color', 'gray')
             .html('No Data');
     }
 }
