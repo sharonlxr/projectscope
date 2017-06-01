@@ -28,6 +28,21 @@ class UsersController < ApplicationController
     redirect_to user_path(current_user)
   end
 
+  def init_new
+    @user = User.find params[:id]
+    @projects = Project.all
+  end
+
+  def init_update
+    @user = User.find params[:id]
+    @user.project = Project.find params[:project_id].to_i
+    if @user.save
+      redirect_to project_path @user.project
+    else
+      redirect_to :back, notice: 'Error update user!'
+    end
+  end
+
   private
 
   def validate_current_user

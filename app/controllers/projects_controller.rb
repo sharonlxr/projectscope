@@ -1,7 +1,7 @@
 require 'json'
 class ProjectsController < ApplicationController
   before_action :set_project, only: [:show, :edit, :update, :destroy, :add_owner,
-                                     :show_metric, :get_metric_data]
+                                     :show_metric, :show_report, :get_metric_data]
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
   load_and_authorize_resource
@@ -9,7 +9,13 @@ class ProjectsController < ApplicationController
   # GET /projects
   # GET /projects.json
   def index
-    @metric_names = current_user.preferred_metrics
+    if current_user.is_student?
+      if current_user.project.nil?
+        redirect_to init_user_path current_user
+      else
+        redirect_to project_path current_user.project
+      end
+    end
     @current_page = params.has_key?(:page) ? (params[:page].to_i - 1) : 0
     preferred_projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
     if params[:type].nil? or params[:type] == "project_name"
@@ -26,10 +32,10 @@ class ProjectsController < ApplicationController
   # GET /projects/1
   # GET /projects/1.json
   def show
-    # debugger
-    @readonly = true
     @owners = @project.owners
-    render :template => 'projects/edit'
+    @current_page = params.has_key?(:page) ? (params[:page].to_i - 1) : 0
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
   end
 
   # GET /projects/new
@@ -125,12 +131,26 @@ class ProjectsController < ApplicationController
   end
 
   def show_metric
-    @sub_metrics = current_user.preferred_metrics[0][params[:metric]]
+    total_hash = current_user.preferred_metrics.inject(Hash.new) do |sum, elem|
+      sum.update(elem)
+    end
+    @sub_metrics = total_hash[params[:metric]]
     @practice_name = params[:metric]
     @days_from_now = params[:days_from_now]? params[:days_from_now].to_i : 0
     @parent_metric = @project.metric_on_date params[:metric], DateTime.parse((Date.today - @days_from_now.days).to_s)
     @parent_metric = @parent_metric.length > 0 ? @parent_metric[0] : false
 
+    metric_min_date = MetricSample.min_date || Date.today
+    @num_days_from_today = (Date.today - metric_min_date).to_i
+    render template: 'projects/metric_detail'
+  end
+
+  def show_report
+    report = ProjectMetrics.hierarchies(:report).select { |m| m[:title].eql? params[:metric].to_sym }.first
+    @sub_metrics = report[:contents]
+    @practice_name = report[:title].to_s
+    @days_from_now = 0
+    @parent_metric = @project.latest_metric_sample params[:metric]
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
     render template: 'projects/metric_detail'

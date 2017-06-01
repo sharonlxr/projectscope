@@ -33,7 +33,7 @@ class User < ActiveRecord::Base
   has_and_belongs_to_many :selected_projects, :foreign_key => "user_id", :class_name => "Project"
   has_many :ownerships
   has_many :owned_projects, :class_name => "Project", :through => :ownerships, :source => :project
-
+  belongs_to :project
 
   after_initialize :set_default_preferred_metrics
 
