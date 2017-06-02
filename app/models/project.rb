@@ -29,7 +29,8 @@ class Project < ActiveRecord::Base
   scope :order_by_name, -> (order) { order("name #{order}") if ["ASC", "DESC"].include? order }
 
   def config_for(metric)
-    configs.where(:metric_name => metric).first || configs.build(:metric_name => metric)
+    configs.where metric_name: metric
+    # configs.where(:metric_name => metric).first || configs.build(:metric_name => metric)
   end
 
   # These two functions need further revisions.
@@ -61,7 +62,7 @@ class Project < ActiveRecord::Base
   end
 
   def metric_on_date(metric, date)
-    metric_samples.where(created_at: (date.beginning_of_day..date.end_of_day), metric_name: metric)
+    metric_samples.where(created_at: (date.beginning_of_day.utc..date.end_of_day.utc), metric_name: metric)
   end
 
   def resample_all_metrics
@@ -69,18 +70,16 @@ class Project < ActiveRecord::Base
   end
 
   def resample_metric(metric_name)
-    credentials_hash = config_for(metric_name).options
-    debugger
+    credentials_hash = config_for(metric_name).inject(Hash.new) do |chash, config|
+      chash.update config.metrics_params.to_sym => config.token
+    end
     unless credentials_hash.empty?
       metric = ProjectMetrics.class_for(metric_name).new(credentials_hash)
-
-      if (metric.refresh)
-        self.metric_samples.create!(metric_name: metric_name,
-                                    raw_data: metric.raw_data,
-                                    score: metric.score,
-                                    image: metric.json
-        )
-      end
+      metric.refresh
+      self.metric_samples.create!( metric_name: metric_name,
+                                   raw_data: metric.raw_data,
+                                   score: metric.score,
+                                   image: metric.image )
     end
   end
 

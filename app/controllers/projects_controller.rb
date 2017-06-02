@@ -18,7 +18,8 @@ class ProjectsController < ApplicationController
     end
     @current_page = params.has_key?(:page) ? (params[:page].to_i - 1) : 0
     @display_type = params.has_key?(:type) ? (params[:type]) : 'metric'
-    @projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    # @projects = current_user.preferred_projects.empty? ? Project.all : current_user.preferred_projects
+    @projects = Project.all
     update_session
 
     metric_min_date = MetricSample.min_date || Date.today
@@ -145,7 +146,7 @@ class ProjectsController < ApplicationController
   # GET /projects/:id/metrics/:metric
   def get_metric_data
     days_from_now = params[:days_from_now] ? params[:days_from_now].to_i : 0
-    date = DateTime.parse((Date.today - days_from_now.days).to_s)
+    date = Date.today - days_from_now.days
     metric = @project.metric_on_date params[:metric], date
     if metric.length > 0
       render json: metric.last
