@@ -159,9 +159,13 @@ class ProjectsController < ApplicationController
   def get_metric_series
     metric_samples = @project.metric_samples.where(metric_name: params[:metric])
     if metric_samples.length > 0
-      render json: metric_samples.sort_by { |m| m.created_at }.map do |metric|
-        metric.attributes.delete 'encrypted_raw_data'
+      metric_samples = metric_samples.sort_by { |m| m.created_at }.map &:attributes
+      metric_samples = metric_samples.map do |m|
+        m.delete('encrypted_raw_data')
+        m.delete('encrypted_raw_data_iv')
+        m.update datetime: m['created_at'].strftime('%Y-%m-%dT%H:%M')
       end
+      render json: metric_samples
     else
       render json: {:error => 'not found'}, status: 404
     end

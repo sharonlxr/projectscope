@@ -3,9 +3,9 @@
  */
 
 function score_series(containerID, metric_samples) {
-    var parseTime = d3.utcParse("%Y-%m-%dT%H:%M:%S.%LZ");
+    var parseTime = d3.utcParse("%Y-%m-%dT%H:%M");
     var plotdata = metric_samples.map(function (d) {
-        return { date: parseTime(d.created_at), score: parseFloat(d.score) };
+        return { date: parseTime(d.datetime), score: parseFloat(d.score) };
     });
     var container = d3.select('#' + containerID);
     var margin = {top: 1, right: 2, bottom: 1, left: 2};
