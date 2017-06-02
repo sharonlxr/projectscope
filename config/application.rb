@@ -36,5 +36,6 @@ module ProjectscopeMvp
       g.template_engine :erb
       g.test_framework  :rspec
     end
+    config.time_zone = 'Pacific Time (US & Canada)'
   end
 end

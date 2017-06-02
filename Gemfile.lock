@@ -35,7 +35,7 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_github_files.git
-  revision: 834a5d32f97a00277feb62ab3ff510757a464e5b
+  revision: 982813b9435160044ca9bbdf90799e035611e3fc
   specs:
     project_metric_github_files (0.1.0)
       octokit (~> 4.0)
@@ -56,14 +56,14 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_point_estimation.git
-  revision: 836426326a0ed6131034403243fa141edf21e28f
+  revision: 50264071597c8ca4be24a93af2bdb51f1b747a29
   specs:
     project_metric_point_estimation (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
 
 GIT
   remote: https://github.com/an-ju/project_metric_pull_requests.git
-  revision: 66b5e9804ccac1b06d01e8bf90edcd27024e8ea7
+  revision: 217b3ba3b07ee2893674d8658512b3ffa59dec0e
   specs:
     project_metric_pull_requests (0.1.0)
       octokit
@@ -85,7 +85,7 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_story_overall.git
-  revision: 6f6b28a34c6d9854425cd9e49870225c4a689722
+  revision: d504cf3269342abd96fd41b65aae86186fb9fa35
   specs:
     project_metric_story_overall (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)
@@ -105,14 +105,14 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_tracker_velocity.git
-  revision: 7e6556bf9a24449912a00cced6fa1660b83e87df
+  revision: 9a737b064a9fcbbb4e9aa1a835859dd822fffebd
   specs:
     project_metric_tracker_velocity (0.1.0)
       faraday
 
 GIT
   remote: https://github.com/an-ju/project_metric_travis_ci.git
-  revision: 7d375a59fe2bd5c80d4df7f78742f85fba25aa90
+  revision: 4bacccff8fd5e9cced12b7c40579402bff196e78
   specs:
     project_metric_travis_ci (0.1.0)
       faraday (~> 0.1, >= 0.1.0.0)

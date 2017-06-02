@@ -145,7 +145,7 @@ var render_charts = function () {
                         console.log(b);
                         console.log(c);
                     } else {
-                        //TODO: Add some place holder for data not found
+                        drawDataNotFound(id);
                     }
                 }
             });
@@ -160,7 +160,7 @@ var render_charts = function () {
                         console.log(b);
                         console.log(c);
                     } else {
-                        //TODO: Add some place holder for data not found
+                        drawDataNotFound(id);
                     }
                 }
             });

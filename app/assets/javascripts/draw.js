@@ -123,6 +123,13 @@ function drawSeriesCharts(containerID, metric_samples) {
     score_series(containerID, metric_samples);
 }
 
+function drawDataNotFound(containerID) {
+    d3.select('#' + containerID)
+        .append('div')
+        .style('width', '100%')
+        .html('Not Found');
+}
+
 function concat_arrays(data, series) {
     if (series.length !== data.length) {
         return data

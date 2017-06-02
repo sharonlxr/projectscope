@@ -7,8 +7,7 @@ function pull_requests(containerID, data) {
         d3.select('#' + containerID)
             .append('div')
             .style('width', '100%')
-            .style('float', 'left')
-            .html('No Pull Request');
+            .html('No Data');
     } else {
         var open = data.open === 0 ? 0.5 : data.open;
         var commented = data.commented === 0 ? 0.5 : data.commented;
