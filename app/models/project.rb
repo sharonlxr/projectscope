@@ -75,7 +75,17 @@ class Project < ActiveRecord::Base
     end
     unless credentials_hash.empty?
       metric = ProjectMetrics.class_for(metric_name).new(credentials_hash)
-      metric.refresh
+      begin
+        metric.refresh
+      rescue Exception => e
+        logger.fatal "Metric #{metric_name} for project #{name} exception: #{e.message}"
+        puts "Metric #{metric_name} for project #{name} exception: #{e.message}"
+        return
+      rescue Error => err
+        logger.fatal "Metric #{metric_name} for project #{name} error: #{err.message}"
+        puts "Metric #{metric_name} for project #{name} error: #{err.message}"
+        return
+      end
       self.metric_samples.create!( metric_name: metric_name,
                                    raw_data: metric.raw_data,
                                    score: metric.score,
