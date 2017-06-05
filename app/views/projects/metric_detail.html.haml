@@ -20,10 +20,12 @@
     %div{style: 'text-align:center'}
       %div.chart_place{id: "project-#{@project.id}-ondate-#{@metric_name}-#{mc_pair.first}"}
     %br
-    - mc_pair.last.each do |comment|
-      %p
-        = comment.content
-      %br
+    %table.table-striped.table
+      %tbody
+        - mc_pair.last.each do |comment|
+          %tr
+            %td
+              = comment.content
 %div.col-md-2
   - if can? :create, :comment
     = render partial: 'comment_form'
