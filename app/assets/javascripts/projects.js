@@ -164,6 +164,21 @@ var render_charts = function () {
                     }
                 }
             });
+        } else if (chart_type === 'ondate') {
+            $.ajax({url: "/projects/" + project_id + "/metrics/" + metric + '?days_from_now=' + splited[4],
+                success: function(result) {
+                    drawMetricCharts(id, result);
+                },
+                error: function(a, b, c) {
+                    if (a.status !== 404) {
+                        console.log(a);
+                        console.log(b);
+                        console.log(c);
+                    } else {
+                        drawDataNotFound(id);
+                    }
+                }
+            });
         }
     };
     $(".chart_place").each(function () {

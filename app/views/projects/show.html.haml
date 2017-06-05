@@ -43,6 +43,8 @@
                   = sample.comments.length
             %td{style: 'text-align: center'}
               %div.chart_place{:id => "project-#{@project.id}-metric-#{sample.try(:metric_name)}"}
+            %td{style: 'text-align: center'}
+              %div.chart_place{id: "project-#{@project.id}-series-#{sample.try(:metric_name)}"}
 
 - metric_names = ProjectMetrics.hierarchies :metric
 %div.col-md-6
