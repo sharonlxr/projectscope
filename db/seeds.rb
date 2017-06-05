@@ -111,25 +111,27 @@ start_date = end_date - 7.days
 # Config.delete_all
 
 projects_list.each do |project|
-    ProjectMetrics.metric_names.each do |metric|
-        if TRUE
-            start_date.upto(end_date) do |date|
-                MetricSample.create!(:metric_name => metric,
+  ProjectMetrics.metric_names.each do |metric|
+    if TRUE
+      start_date.upto(end_date) do |date|
+        m = MetricSample.create!(:metric_name => metric,
                                  :project_id => project.id,
                                  :score => rand(0.0..4.0).round(2),
                                  :image => dummies[metric][rand(3)],
                                  :created_at => date)
-            end
-            Config.create(:metric_name => metric,
-        				:project_id => project.id,
-        				:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
-        				:metrics_params => "TOKEN")
-    		Config.create(:metric_name => metric,
-    					:project_id => project.id,
-    					:token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
-    					:metrics_params => "URL")
+        rand(3).times do
+          m.comments << Comment.new(content: "Comment on #{date} for #{metric}", ctype: 'general_comment', params: '{}')
         end
+      end
+      ProjectMetrics.class_for(metric).credentials.each do |param|
+        Config.create(:metric_name => metric,
+                      :project_id => project.id,
+                      :token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+                      :metrics_params => param)
+
+      end
     end
+  end
 end
 
 preferred_metrics = [{

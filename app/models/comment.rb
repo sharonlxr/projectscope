@@ -11,4 +11,8 @@ class Comment < ActiveRecord::Base
     metric_sample.score = content.to_f
     metric_sample.save
   end
+
+  def general_comment?
+    ctype.eql? 'general_comment'
+  end
 end

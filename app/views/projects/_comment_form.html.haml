@@ -2,7 +2,7 @@
   = hidden_field_tag 'ctype', 'general_comment'
   = hidden_field_tag 'params', '{}'
   = hidden_field_tag 'user_id', current_user.id
-  = hidden_field_tag 'metric_sample_id', parent_metric.id
+  = hidden_field_tag 'metric_sample_id', @parent_metric.id
   %div.form-group
     %textarea.form-control#content{placeholder: 'Comments', rows: 3, name: 'content', form: 'comment_form'}
   %div.form-group

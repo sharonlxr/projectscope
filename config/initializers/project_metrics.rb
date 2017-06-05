@@ -18,7 +18,7 @@ ProjectMetrics.configure do
   add_hierarchy report: [{ title: :github,
                             contents: [] },
                           { title: :pivotal_tracker,
-                            contents: [] }]
+                            contents: [:pivotal_tracker, :story_transition] }]
   add_hierarchy metric: [[
                              :code_climate,
                              :test_coverage,
