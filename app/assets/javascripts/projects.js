@@ -101,6 +101,7 @@ var request_for_metrics = function (days_from_now) {
 };
 
 var ready = function () {
+    outdate_all_metrics();
     render_charts();
     $("#date-slider").slider({
         value: 100,
