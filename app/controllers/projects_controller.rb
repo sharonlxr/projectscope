@@ -117,17 +117,12 @@ class ProjectsController < ApplicationController
 
   # GET /projects/:id/metrics/:metric/detail
   def show_metric
-    total_hash = current_user.preferred_metrics.inject(Hash.new) do |sum, elem|
-      sum.update(elem)
-    end
-    @sub_metrics = total_hash[params[:metric]]
-    @practice_name = params[:metric]
-    @days_from_now = params[:days_from_now]? params[:days_from_now].to_i : 0
-    @parent_metric = @project.metric_on_date params[:metric], DateTime.parse((Date.today - @days_from_now.days).to_s)
-    @parent_metric = @parent_metric.length > 0 ? @parent_metric[0] : false
+    @metric_name = params[:metric]
 
-    metric_min_date = MetricSample.min_date || Date.today
-    @num_days_from_today = (Date.today - metric_min_date).to_i
+    @comments = @project.metric_samples.where(metric_name: @metric_name).sort_by { |elem| Time.now-elem.created_at }
+    @comments = @comments.map { |metric_sample| [days_ago(metric_sample.created_at), metric_sample.comments] }
+
+    @parent_metric = @project.latest_metric_sample params[:metric]
     render template: 'projects/metric_detail'
   end
 
@@ -140,7 +135,7 @@ class ProjectsController < ApplicationController
     @parent_metric = @project.latest_metric_sample params[:metric]
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
-    render template: 'projects/metric_detail'
+    render template: 'projects/metric_report'
   end
 
   # GET /projects/:id/metrics/:metric
@@ -220,6 +215,9 @@ class ProjectsController < ApplicationController
     session[:pre_click] = params[:type]
   end
 
+  def days_ago(t)
+    days = (Time.now - t).to_i / (24*3600)
+  end
 
   # get path: projects/:id/
   # param metric_name string:"github"
