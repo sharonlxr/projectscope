@@ -23,9 +23,10 @@
     %table.table-striped.table
       %tbody
         - mc_pair.last.each do |comment|
-          %tr
-            %td
-              = comment.content
+          - if can? :read, comment
+            %tr
+              %td
+                = comment.content
 %div.col-md-2
   - if can? :create, :comment
     = render partial: 'comment_form'

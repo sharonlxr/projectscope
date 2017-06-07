@@ -1,5 +1,5 @@
 class WhitelistsController < ApplicationController
-  before_action :check_if_coach
+  load_and_authorize_resource
 
   # GET /whitelists
   def index
@@ -38,13 +38,6 @@ class WhitelistsController < ApplicationController
       flash[:notice] = "User is deleted successfully."
     end
     redirect_to whitelists_path
-  end
-  
-  def check_if_coach
-    unless current_user.role.eql?("admin") or current_user.role.eql?("instructor")
-       flash[:notice] = "You have no privilege to manipulate privilege control."
-       redirect_to projects_url
-    end
   end
 
   def upgrade
