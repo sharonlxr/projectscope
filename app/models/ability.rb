@@ -33,9 +33,10 @@ class Ability
     if user.is_admin? or user.is_instructor?
       can :manage, :all
     else
-      can :read, :all
       can [:init_new, :init_update], User
-      can [:show_metric, :get_metric_data], Project
+      can [:show_metric, :get_metric_data, :get_metric_series], Project
+      can :manage, Project, :id => user.project.id
+      can :read, Comment, :metric_sample => { :project_id => user.project.id }
     end
   end
 end

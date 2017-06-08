@@ -46,10 +46,11 @@
                                                days_from_now: @days_from_now, parent_metric: @parent_metric}
   - if @parent_metric
     - @parent_metric.comments.where(ctype: 'general_comment').each do |comment|
-      - params = JSON.parse(comment.params)
-      %div.well.comments{style: "top:#{params['offset_top']}px"}
-        %p.comment-contents
-          = comment.content
+      - if can? :read, comment
+        - params = JSON.parse(comment.params)
+        %div.well.comments{style: "top:#{params['offset_top']}px"}
+          %p.comment-contents
+            = comment.content
 
 :javascript
   days = #{@days_from_now};
