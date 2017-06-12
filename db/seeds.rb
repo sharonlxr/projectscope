@@ -123,7 +123,7 @@ projects_list.each do |project|
           m.comments << Comment.new(content: "Comment on #{date} for #{metric}",
                                     ctype: 'general_comment',
                                     params: '{}',
-                                    created_at: date)
+                                    created_at: date.beginning_of_day)
         end
       end
       ProjectMetrics.class_for(metric).credentials.each do |param|
