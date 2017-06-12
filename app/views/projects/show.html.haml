@@ -26,7 +26,7 @@
           %td
             = cmnt.content
           %td{style: 'text-align: center'}
-            %div.chart_place{:id => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}"}
+            %div.chart_place{:id => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}-#{cmnt.id}"}
           %td.btn-default.btn.btn-sm{onclick: "read_comment(#{cmnt.id})"}
             Mark as read
 %div.col-md-6
