@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170601022920) do
+ActiveRecord::Schema.define(version: 20170612211747) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "metric_sample_id"
@@ -19,8 +19,9 @@ ActiveRecord::Schema.define(version: 20170601022920) do
     t.string   "ctype"
     t.text     "content"
     t.text     "params"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "status",           default: "unread"
   end
 
   add_index "comments", ["metric_sample_id"], name: "index_comments_on_metric_sample_id"

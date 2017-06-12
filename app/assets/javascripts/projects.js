@@ -187,6 +187,23 @@ var render_charts = function () {
     });
 };
 
+function read_comment(comment_id) {
+    $.ajax({
+        url: "/comments/" + comment_id + "",
+        type: 'PUT',
+        data: { comment: { status: 'read' } },
+        dataType: "json",
+        success: function (result) {
+            d3.select('#comment_' + comment_id).remove();
+        },
+        error: function (a, b, c) {
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+    });
+}
+
 // $(document).ready(ready);
 // $(window).on("load", ready);
 $(document).on('turbolinks:load', ready);

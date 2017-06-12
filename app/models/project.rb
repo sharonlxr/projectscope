@@ -100,4 +100,8 @@ class Project < ActiveRecord::Base
           .map { |m| p.attributes.merge(m.attributes) }
     end
   end
+
+  def comments
+    metric_samples.flat_map { |ms| ms.comments.where(ctype: 'general_comment') }.sort_by { |cmnt| Time.now - cmnt.created_at }
+  end
 end
