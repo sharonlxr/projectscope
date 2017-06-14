@@ -24,7 +24,7 @@
       %tbody
         - mc_pair.last.each do |comment|
           - if can? :read, comment
-            %tr
+            %tr{class: comment.unread? ? 'success' : 'active'}
               %td
                 = comment.content
 %div.col-md-2

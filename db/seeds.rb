@@ -120,7 +120,10 @@ projects_list.each do |project|
                                  :image => dummies[metric][rand(3)],
                                  :created_at => date)
         rand(3).times do
-          m.comments << Comment.new(content: "Comment on #{date} for #{metric}", ctype: 'general_comment', params: '{}')
+          m.comments << Comment.new(content: "Comment on #{date} for #{metric}",
+                                    ctype: 'general_comment',
+                                    params: '{}',
+                                    created_at: date.beginning_of_day)
         end
       end
       ProjectMetrics.class_for(metric).credentials.each do |param|

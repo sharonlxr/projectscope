@@ -15,4 +15,8 @@ class Comment < ActiveRecord::Base
   def general_comment?
     ctype.eql? 'general_comment'
   end
+
+  def unread?
+    status.eql? 'unread'
+  end
 end

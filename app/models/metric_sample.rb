@@ -27,4 +27,8 @@ class MetricSample < ActiveRecord::Base
 	earliest_metric.created_at.to_date unless earliest_metric.nil?
   end
 
+  def days_ago
+    (Date.today - created_at.to_date).to_i
+  end
+
 end
