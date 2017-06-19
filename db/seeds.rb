@@ -159,6 +159,5 @@ preferred_metrics = [{
 											 preferred_metrics: preferred_metrics, preferred_projects: projects_list)
 @user03 = User.create!(provider_username: "Student", uid: "ustudent", email: 'ustudent@example.com',
 											 provider: "developer", role: User::STUDENT, password: Devise.friendly_token[0,20],
-											 preferred_metrics: preferred_metrics, preferred_projects: projects_list,
-                       project_id: Project.all.first.id)
+											 preferred_metrics: preferred_metrics, preferred_projects: projects_list)
 Whitelist.create!(username: @user01.provider_username)
