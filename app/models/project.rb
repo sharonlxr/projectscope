@@ -71,6 +71,7 @@ class Project < ActiveRecord::Base
 
   def resample_metric(metric_name)
     credentials_hash = config_for(metric_name).inject(Hash.new) do |chash, config|
+      return if config.token.empty? or config.nil?
       chash.update config.metrics_params.to_sym => config.token
     end
     unless credentials_hash.empty?
