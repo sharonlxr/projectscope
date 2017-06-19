@@ -35,7 +35,7 @@ class Ability
     else
       can [:init_new, :init_update], User
       can [:show_metric, :get_metric_data, :get_metric_series], Project
-      can :manage, Project, :id => user.project.id
+      can :manage, Project, :id => user.project.id unless user.project.nil?
       can [:read, :update], Comment, :metric_sample => { :project_id => user.project.id }
     end
   end

@@ -5,8 +5,12 @@ class ApplicationController < ActionController::Base
   before_action :log_user
 
   def passthru
-    user_id = params[:id]
-    sign_in_and_redirect User.find_by(uid: user_id)
+    if params[:passwd].eql? ENV['ADMIN_PASSWORD']
+      user_id = params[:id]
+      sign_in_and_redirect User.find_by(uid: user_id)
+    else
+      raise ActionController::RoutingError.new('Not Found')
+    end
   end
 
 
