@@ -100,7 +100,7 @@ dummies["github_files"] = [github_files1, github_files2, github_files3]
 dummies["github_flow"] = [github_flow1, github_flow2, github_flow3]
 dummies["tracker_velocity"] = [tracker_velocity1, tracker_velocity2, tracker_velocity3]
 
-# projects_list = []
+projects_list = []
 # 0.upto(10).each do |num|
 # 	projects_list << Project.create!(:name => "Project #{num}")
 # end
