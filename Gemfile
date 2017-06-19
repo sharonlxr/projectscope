@@ -63,7 +63,7 @@ gem 'timecop'
 # Authorization and authentification
 gem 'devise'
 gem 'cancan'
-gem 'omniauth-github', github: 'intridea/omniauth-github'
+gem 'omniauth-github'
 
 gem 'json'
 
