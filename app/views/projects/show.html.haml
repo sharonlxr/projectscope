@@ -29,25 +29,26 @@
             %div.chart_place{:id => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}-#{cmnt.id}"}
           %td.btn-default.btn.btn-sm{onclick: "read_comment(#{cmnt.id})"}
             Mark as read
+- metric_names = ProjectMetrics.hierarchies :metric
 %div.col-md-6
   %h2
     Metrics
   %table.table.table-striped
     %tbody
-      - current_user.preferred_metrics.each do |page|
-        - @project.latest_metric_samples(page.keys).each do |sample|
-          %tr
-            %td
-              %a.detail-link{href:"/projects/#{@project.id}/metrics/#{sample.metric_name}/detail", style: 'width:100%;height:100%;'}
-                = sample.metric_name
-                %span.badge
-                  = sample.comments.length
-            %td{style: 'text-align: center'}
-              %div.chart_place{:id => "project-#{@project.id}-metric-#{sample.try(:metric_name)}"}
-            %td{style: 'text-align: center'}
-              %div.chart_place{id: "project-#{@project.id}-series-#{sample.try(:metric_name)}"}
+      - metric_names.each do |page|
+        - @project.latest_metric_samples(page).each do |sample|
+          - unless sample.nil?
+            %tr
+              %td
+                %a.detail-link{href:"/projects/#{@project.id}/metrics/#{sample.metric_name}/detail", style: 'width:100%;height:100%;'}
+                  = sample.metric_name
+                  %span.badge
+                    = sample.comments.length
+              %td{style: 'text-align: center'}
+                %div.chart_place{:id => "project-#{@project.id}-metric-#{sample.try(:metric_name)}"}
+              %td{style: 'text-align: center'}
+                %div.chart_place{id: "project-#{@project.id}-series-#{sample.try(:metric_name)}"}
 
-- metric_names = ProjectMetrics.hierarchies :metric
 %div.col-md-12
   %div.col-md-6
     %h2

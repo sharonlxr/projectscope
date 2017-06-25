@@ -101,41 +101,41 @@ dummies["github_flow"] = [github_flow1, github_flow2, github_flow3]
 dummies["tracker_velocity"] = [tracker_velocity1, tracker_velocity2, tracker_velocity3]
 
 projects_list = []
-0.upto(10).each do |num|
-	projects_list << Project.create!(:name => "Project #{num}")
-end
+# 0.upto(10).each do |num|
+# 	projects_list << Project.create!(:name => "Project #{num}")
+# end
 
 end_date = Date.today
 start_date = end_date - 7.days
 
 # Config.delete_all
 
-projects_list.each do |project|
-  ProjectMetrics.metric_names.each do |metric|
-    if TRUE
-      start_date.upto(end_date) do |date|
-        m = MetricSample.create!(:metric_name => metric,
-                                 :project_id => project.id,
-                                 :score => rand(0.0..4.0).round(2),
-                                 :image => dummies[metric][rand(3)],
-                                 :created_at => date)
-        rand(3).times do
-          m.comments << Comment.new(content: "Comment on #{date} for #{metric}",
-                                    ctype: 'general_comment',
-                                    params: '{}',
-                                    created_at: date.beginning_of_day)
-        end
-      end
-      ProjectMetrics.class_for(metric).credentials.each do |param|
-        Config.create(:metric_name => metric,
-                      :project_id => project.id,
-                      :token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
-                      :metrics_params => param)
-
-      end
-    end
-  end
-end
+# projects_list.each do |project|
+#   ProjectMetrics.metric_names.each do |metric|
+#     if TRUE
+#       start_date.upto(end_date) do |date|
+#         m = MetricSample.create!(:metric_name => metric,
+#                                  :project_id => project.id,
+#                                  :score => rand(0.0..4.0).round(2),
+#                                  :image => dummies[metric][rand(3)],
+#                                  :created_at => date)
+#         rand(3).times do
+#           m.comments << Comment.new(content: "Comment on #{date} for #{metric}",
+#                                     ctype: 'general_comment',
+#                                     params: '{}',
+#                                     created_at: date.beginning_of_day)
+#         end
+#       end
+#       ProjectMetrics.class_for(metric).credentials.each do |param|
+#         Config.create(:metric_name => metric,
+#                       :project_id => project.id,
+#                       :token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join,
+#                       :metrics_params => param)
+#
+#       end
+#     end
+#   end
+# end
 
 preferred_metrics = [{
                          'code_climate' => [],
@@ -159,6 +159,5 @@ preferred_metrics = [{
 											 preferred_metrics: preferred_metrics, preferred_projects: projects_list)
 @user03 = User.create!(provider_username: "Student", uid: "ustudent", email: 'ustudent@example.com',
 											 provider: "developer", role: User::STUDENT, password: Devise.friendly_token[0,20],
-											 preferred_metrics: preferred_metrics, preferred_projects: projects_list,
-                       project_id: Project.all.first.id)
+											 preferred_metrics: preferred_metrics, preferred_projects: projects_list)
 Whitelist.create!(username: @user01.provider_username)
