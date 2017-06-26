@@ -182,6 +182,12 @@ class ProjectsController < ApplicationController
     redirect_to project_path(@project)
   end
 
+  # POST /log
+  def write_log
+    logger.info "Log from remote: #{params['message']}"
+    render json: { message: 'Success' }
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

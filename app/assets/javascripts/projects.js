@@ -184,7 +184,9 @@ var render_charts = function () {
     };
     $(".chart_place").each(function () {
         get_charts_json(this.id);
+        this.mouseenter(write_log('Mouse over ' + this.id));
     });
+
 };
 
 function read_comment(comment_id) {
@@ -202,6 +204,23 @@ function read_comment(comment_id) {
             console.log(c);
         }
     });
+}
+
+function write_log(msg) {
+    $.ajax({
+        url: "/log",
+        type: 'POST',
+        data: { message: msg },
+        dataType: "json",
+        success: function (r) {
+            return;
+        },
+        error: function (a, b, c) {
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+    })
 }
 
 // $(document).ready(ready);

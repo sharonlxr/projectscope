@@ -14,7 +14,7 @@ Rails.application.routes.draw do
       get '/metrics/:metric/series', :to => 'projects#get_metric_series'
       get '/metrics/:metric/detail', to: 'projects#show_metric'
       get '/metrics/:metric/report', to: 'projects#show_report'
-  	end
+    end
   end
   resources :whitelists, :only => [:index] do
     member do
@@ -28,6 +28,7 @@ Rails.application.routes.draw do
       :as => 'metric_sample_comments'
 
   get '/login/:id', :to => 'application#passthru', :as => 'passthru'
+  post '/log', to: 'projects#write_log'
 
   root 'projects#index'
 end
