@@ -5,6 +5,7 @@
 var days = 0;
 var parent_metric = null;
 var global_project_id = null;
+var keep_log = false;
 
 var update_date_label = function (days_from_now) {
     var today = new Date();
@@ -181,10 +182,14 @@ var render_charts = function () {
                 }
             });
         }
+        if (keep_log) {
+            $('#' + id).on('mouseenter', function () {
+                write_log('Mouse over: ' + id);
+            });
+        }
     };
     $(".chart_place").each(function () {
         get_charts_json(this.id);
-        this.mouseenter(write_log('Mouse over ' + this.id));
     });
 
 };

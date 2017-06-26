@@ -73,3 +73,6 @@
 = render :partial => 'metric_table',
          :locals => { metric_names: metric_names[@current_page],
                       projects: Project.all.reject { |p| p.id == @project.id } }
+
+:javascript
+  keep_log=true;
