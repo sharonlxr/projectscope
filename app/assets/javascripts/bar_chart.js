@@ -17,7 +17,7 @@ function bar_chart(containerID, data) {
     var tool_tip = d3.tip()
         .attr("class", "d3-tip")
         .offset([-8, 0])
-        .html(function(d) { return d[1] + ": " + d[0]; });
+        .html(function(d) { return d[1] + ": " + Math.round(d[0]); });
     svg.call(tool_tip);
     data.data = data.data.map(function (d) {
         return parseFloat(d) > 0 ? parseFloat(d) : 0.1;
