@@ -3,7 +3,6 @@
  */
 
 function github_pr(containerID, plotdata) {
-    console.log(plotdata.data);
     var plot_data = plotdata.data.map(function (d) {
         return {
             x: d.comments.length-0.5+Math.random(),
@@ -16,7 +15,6 @@ function github_pr(containerID, plotdata) {
     });
     var closed_data = plot_data.filter(function (d) { return d.state === 'closed' });
     var open_data = plot_data.filter(function (d) { return d.state === 'open' });
-    console.log(closed_data);
     Highcharts.chart(containerID, {
         chart: {
             type: 'scatter',

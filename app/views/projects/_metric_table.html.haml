@@ -6,7 +6,7 @@
           Team Name
         - metric_names.each do |metric_name|
           %th
-            = metric_name.to_s.titleize
+            = METRIC_NAMES[metric_name]
             %span.glyphicon.glyphicon-question-sign{type: 'button', 'data-toggle': 'modal', 'data-target': "##{metric_name}_explanation"}
 
     %tbody
@@ -25,7 +25,7 @@
             %span{'aria-hidden': 'true'}
               Close
           %h4.modal-title{id: "#{metric_name}_label"}
-            = metric_name.to_s.titleize
+            = METRIC_NAMES[metric_name]
         %div.modal-body
           = render partial: "metric_explanations/#{metric_name}"
         %div.modal-footer
