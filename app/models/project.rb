@@ -78,6 +78,8 @@ class Project < ActiveRecord::Base
       metric = ProjectMetrics.class_for(metric_name).new(credentials_hash)
       begin
         metric.refresh
+        image = metric.image
+        score = metric.score
       rescue Exception => e
         logger.fatal "Metric #{metric_name} for project #{name} exception: #{e.message}"
         puts "Metric #{metric_name} for project #{name} exception: #{e.message}"
@@ -89,8 +91,8 @@ class Project < ActiveRecord::Base
       end
       self.metric_samples.create!( metric_name: metric_name,
                                    raw_data: metric.raw_data,
-                                   score: metric.score,
-                                   image: metric.image )
+                                   score: score,
+                                   image: image )
     end
   end
 
