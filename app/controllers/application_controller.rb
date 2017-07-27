@@ -21,8 +21,7 @@ class ApplicationController < ActionController::Base
 
   def log_user
     if current_user
-      logger.info "User Email: #{current_user.email}"
-      logger.info "User Role: #{current_user.role}"
+      logger.info "USER #{current_user.provider_username} AS #{current_user.role}"
     end
   end
 

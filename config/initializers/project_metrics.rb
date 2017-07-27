@@ -33,3 +33,16 @@ ProjectMetrics.configure do
                              :slack
                          ]]
 end
+
+METRIC_NAMES = {
+    code_climate: 'Code Climate',
+    test_coverage: 'Test Coverage',
+    pull_requests: 'PR Status',
+    github_files: 'Edited Lines',
+    github_flow: 'Commit Frequency',
+    travis_ci: 'Build Status',
+    tracker_velocity: 'Story Status',
+    point_estimation: 'Story Points',
+    story_overall: 'Story Assignment',
+    slack: 'Message Counting'
+}
