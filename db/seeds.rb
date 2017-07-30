@@ -75,13 +75,21 @@ tracker_velocity1 = File.read './db/fake_data/tracker_velocity1.json'
 tracker_velocity2 = File.read './db/fake_data/tracker_velocity2.json'
 tracker_velocity3 = File.read './db/fake_data/tracker_velocity3.json'
 
-point_distribution1 = File.read './db/fake_data/tracker_distribution1.json'
-point_distribution2 = File.read './db/fake_data/tracker_distribution2.json'
-point_distribution3 = File.read './db/fake_data/tracker_distribution3.json'
+# point_distribution1 = File.read './db/fake_data/tracker_distribution1.json'
+# point_distribution2 = File.read './db/fake_data/tracker_distribution2.json'
+# point_distribution3 = File.read './db/fake_data/tracker_distribution3.json'
+
+story_overall1 = File.read './db/fake_data/story_overall1.json'
+story_overall2 = File.read './db/fake_data/story_overall2.json'
+story_overall3 = File.read './db/fake_data/story_overall3.json'
 
 slack1 = File.read './db/fake_data/slack1.json'
 slack2 = File.read './db/fake_data/slack2.json'
 slack3 = File.read './db/fake_data/slack3.json'
+
+point_distribution1 = File.read './db/fake_data/point_distribution1.json'
+point_distribution2 = File.read './db/fake_data/point_distribution2.json'
+point_distribution3 = File.read './db/fake_data/point_distribution3.json'
 
 dummies = Hash.new
 dummies["code_climate"] = [code_climate1, code_climate2, code_climate3]
@@ -91,7 +99,7 @@ dummies["pivotal_tracker"] = [pivot1, pivot2, pivot3]
 # dummies["slack_trends"] = [slack_trends1, slack_trends2, slack_trends3]
 dummies["story_transition"] = [story_1, story_2, story_3]
 dummies["point_estimation"] = [point_est1, point_est2, point_est3]
-dummies["story_overall"] = [point_distribution1, point_distribution2, point_distribution3]
+dummies["story_overall"] = [story_overall1, story_overall2, story_overall3]
 dummies["collective_overview"] = [collective_gauge1, collective_gauge2, collective_gauge3]
 dummies["test_coverage"] = [test_coverage1, test_coverage2, test_coverage3]
 dummies["pull_requests"] = [pull_requests1, pull_requests2, pull_requests3]
@@ -99,10 +107,11 @@ dummies["travis_ci"] = [travis_ci1, travis_ci2, travis_ci3]
 dummies["github_files"] = [github_files1, github_files2, github_files3]
 dummies["github_flow"] = [github_flow1, github_flow2, github_flow3]
 dummies["tracker_velocity"] = [tracker_velocity1, tracker_velocity2, tracker_velocity3]
+dummies["point_distribution"] = [point_distribution1, point_distribution2, point_distribution3]
 
 projects_list = []
 0.upto(10).each do |num|
-	projects_list << Project.create!(:name => "Project #{num}")
+  projects_list << Project.create!(:name => "Project #{num}")
 end
 
 end_date = Date.today
