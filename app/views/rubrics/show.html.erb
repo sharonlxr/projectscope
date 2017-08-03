@@ -1,0 +1,19 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Iteration:</strong>
+  <%= @rubric.iteration %>
+</p>
+
+<p>
+  <strong>Metric name:</strong>
+  <%= @rubric.metric_name %>
+</p>
+
+<p>
+  <strong>Params:</strong>
+  <%= @rubric.params %>
+</p>
+
+<%= link_to 'Edit', edit_rubric_path(@rubric) %> |
+<%= link_to 'Back', rubrics_path %>
