@@ -4,78 +4,16 @@
 
 function parseChartParams(JSONStr) {
     var paramMap = JSONStr;
-    if (JSONStr['chartType'] == "spline"){
-      var chartParams = {
-          chart: {
-              type: paramMap['chartType']
-          },
-          title: {
-              text: paramMap['titleText']
-          },
-          subtitle: {
-              text: paramMap['subtitleText']
-          },
-          xAxis: {
-              title: {
-                  margin: 0,
-                  text: paramMap['xAxisTitleText']
-              },
-              maxPadding: 0.01,
-              // showLastLabel: true
-          },
-          yAxis: {
-              title: {
-                  margin: 0,
-                  text: paramMap['yAxisTitleText']
-              },
-              maxPadding: 0.01
-          },
-          series: [{
-              data: paramMap['data']
-          }]
-      };
-
-    }else if(JSONStr['chartType'] == "pie"){
-      var chartParams = {
-          chart: {
-              type: paramMap["chartType"]
-          },
-          title: {
-              text: paramMap["titleText"]
-          },
-          tooltip: {
-              pointFormat: '{series.name}: <b>{point.percentage:.1f}%</b>'
-          },
-          plotOptions: {
-              pie: {
-                  allowPointSelect: true,
-                  cursor: 'pointer',
-                  dataLabels: {
-                      enabled: false,
-                      format: '<b>{point.name}</b>: {point.percentage:.1f} %',
-                      style: {
-                          color: (Highcharts.theme && Highcharts.theme.contrastTextColor) || 'black'
-                      }
-                  }
-              }
-          },
-          series: paramMap['data']
-      };
-
-    }else{
-        var chartParams = {
-            chart: {
-                type: paramMap['chartType']
-            },
-            title: {
-                text: paramMap['titleText']
-            },
-            series: paramMap['data']
-
-        }
-    }
-
-    return chartParams
+    var chartParams = {
+        chart: {
+            type: paramMap['chartType']
+        },
+        title: {
+            text: paramMap['titleText']
+        },
+        series: paramMap['data']
+    };
+    return chartParams;
 }
 
 function drawMetricCharts(containerID, metric_sample) {
@@ -113,6 +51,12 @@ function drawMetricCharts(containerID, metric_sample) {
     } else if (JSONStr['chartType'] === 'slack') {
         var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
         stacked_bar(containerID, new_data, JSONStr.data.series);
+    } else if (JSONStr['chartType'] === 'tracker_velocity_v2') {
+        velocity(containerID, metric_sample);
+    } else if (JSONStr['chartType'] === 'point_distribution_v2') {
+        bar_chart(containerID, JSONStr.data);
+    } else if (JSONStr['chartType'] === 'story_overall_v2') {
+        story_overall(containerID, JSONStr.data);
     }
     else {
         Highcharts.chart(containerID, parseChartParams(JSONStr));

@@ -8,7 +8,7 @@ gem 'project_metric_code_climate', git: 'https://github.com/an-ju/project_metric
 gem 'project_metric_slack', git: 'https://github.com/an-ju/project_metric_slack.git'
 gem 'project_metric_slack_trends', git: 'https://github.com/an-ju/project_metric_slack_trends.git'
 gem 'project_metric_github', git: 'https://github.com/an-ju/project_metric_github.git'
-gem 'project_metric_pivotal_tracker', git: 'https://github.com/an-ju/project_metric_pivotal_tracker.git'
+# gem 'project_metric_pivotal_tracker', git: 'https://github.com/an-ju/project_metric_pivotal_tracker.git'
 gem 'project_metric_story_transition', git: 'https://github.com/an-ju/project_metric_story_transitions.git'
 gem 'project_metric_point_estimation', git: 'https://github.com/an-ju/project_metric_point_estimation.git'
 gem 'project_metric_story_overall', git: 'https://github.com/an-ju/project_metric_story_overall.git'
@@ -19,6 +19,7 @@ gem 'project_metric_travis_ci', git: 'https://github.com/an-ju/project_metric_tr
 gem 'project_metric_github_files', git: 'https://github.com/an-ju/project_metric_github_files.git'
 gem 'project_metric_github_flow', git: 'https://github.com/an-ju/project_metric_github_flow.git'
 gem 'project_metric_tracker_velocity', git: 'https://github.com/an-ju/project_metric_tracker_velocity.git'
+gem 'project_metric_point_distribution', git: 'https://github.com/an-ju/project_metric_point_distribution.git'
 
 gem 'highcharts-rails'
 
