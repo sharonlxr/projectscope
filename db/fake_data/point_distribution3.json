@@ -2,5 +2,7 @@
   "chartType":"point_distribution_v2",
   "textTitle":"Point Distribution",
   "data":{
+    "data": [],
+    "series": []
   }
 }

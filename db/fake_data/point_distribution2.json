@@ -2,11 +2,7 @@
   "chartType":"point_distribution_v2",
   "textTitle":"Point Distribution",
   "data":{
-    "User1":10,
-    "User2":20,
-    "User3":3,
-    "User4":2,
-    "User5":5,
-    "User6":10
+    "data": [10, 20, 3, 2, 5, 10],
+    "series": ["user1", "user2", "user3", "user4", "user5", "user6"]
   }
 }

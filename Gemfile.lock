@@ -41,7 +41,7 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_point_distribution.git
-  revision: 6704ef4237e89d1581a9c5a1febbf77d093de5df
+  revision: 685d330026eb178fc30a01a351d4a52f934f2b72
   specs:
     project_metric_point_distribution (0.1.0)
       faraday (~> 0.12.0)

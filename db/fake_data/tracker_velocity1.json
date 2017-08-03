@@ -1,7 +1,7 @@
 {
   "chartType":"tracker_velocity_v2",
   "titleText":"Tracker Velocity",
-  "data": {
+  "data":{
     "-1":1,
     "1":7,
     "2":9
