@@ -9,12 +9,13 @@ Rails.application.routes.draw do
     end
   end
   resources :projects do
-  	member do
-  		post "/add_owner", :to => "projects#add_owner"
-      get '/metrics/:metric', :to => 'projects#get_metric_data'
-      get '/metrics/:metric/series', :to => 'projects#get_metric_series'
+    member do
+      post "/add_owner", to: "projects#add_owner"
+      get '/metrics/:metric', to: 'projects#get_metric_data'
+      get '/metrics/:metric/series', to: 'projects#get_metric_series'
       get '/metrics/:metric/detail', to: 'projects#show_metric'
       get '/metrics/:metric/report', to: 'projects#show_report'
+      get '/grades/:iid', to: 'rubrics#project_grade'
     end
   end
   resources :whitelists, :only => [:index] do

@@ -17,12 +17,16 @@
   </div>
   <div class="field">
     <%= f.label :metric_name %><br>
-    <%= f.text_field :metric_name %>
+    <%= collection_select :rubric, :metric_name, ProjectMetrics.metric_names, :to_s, :humanize %>
   </div>
   <div class="field">
-    <%= f.label :params %><br>
-    <%= f.text_area :params %>
+    <%= label_tag :maximal, 'Max' %><br>
+    <%= number_field_tag 'rubric[params][max]', @params[:max] %>
   </div>
+    <div class="field">
+      <%= label_tag :weight, 'Weight' %><br>
+      <%= number_field_tag 'rubric[params][weight]', @params[:weight] %>
+    </div>
   <div class="actions">
     <%= f.submit %>
   </div>

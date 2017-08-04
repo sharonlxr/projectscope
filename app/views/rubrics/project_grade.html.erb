@@ -1,0 +1,23 @@
+
+<div class="col-md-2"></div>
+<div class="col-md-10">
+  <table class="table table-bordered">
+    <tbody>
+    <%- @rubrics.each_with_index do |r, i| %>
+        <%- r_params = JSON.parse(r.params) %>
+        <tr>
+          <th>
+            <%= r.metric_name.humanize %>
+          </th>
+          <td>
+            <%= @metric_samples[i].nil? ? -1 : @metric_samples[i].score %>
+          </td>
+          <td>
+            <%= r_params['max'] %>
+          </td>
+        </tr>
+    <%- end %>
+    </tbody>
+  </table>
+</div>
+<div class="col-md-2"></div>
