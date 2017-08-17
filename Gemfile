@@ -81,7 +81,7 @@ group :development, :test do
   gem 'byebug'
   gem 'dotenv-rails'
   gem 'annotate'
-  gem 'better_errors'
+  gem 'better_errors', '2.2.0'
   gem 'binding_of_caller'
   gem "jasmine"
   gem 'jasmine-jquery-rails'
