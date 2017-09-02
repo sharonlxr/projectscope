@@ -89,10 +89,16 @@ class Project < ActiveRecord::Base
         puts "Metric #{metric_name} for project #{name} error: #{err.message}"
         return
       end
-      self.metric_samples.create!( metric_name: metric_name,
-                                   raw_data: metric.raw_data,
-                                   score: score,
-                                   image: image )
+      metric_sample = self.metric_samples.create(
+        metric_name: metric_name,
+        raw_data: metric.raw_data,
+        score: score,
+        image: image
+      )
+      name_index = "project_metric_#{metric_name}".to_sym
+      if ProjectMetrics.callback(name_index)
+        MetricParameter.create_parameter metric_name, metric_sample
+      end
     end
   end
 

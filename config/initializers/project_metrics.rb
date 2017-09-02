@@ -15,6 +15,7 @@ ProjectMetrics.configure do
   add_metric :project_metric_github_flow
   add_metric :project_metric_tracker_velocity
   add_metric :project_metric_point_distribution
+  add_metric :project_metric_story_quality, callback: true
 
   add_hierarchy report: [{ title: :github,
                             contents: [] },

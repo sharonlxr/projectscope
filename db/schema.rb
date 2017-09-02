@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170824184828) do
+ActiveRecord::Schema.define(version: 20170831234149) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "metric_sample_id"
@@ -45,8 +45,9 @@ ActiveRecord::Schema.define(version: 20170824184828) do
     t.string   "metric_name"
     t.text     "parameters"
     t.integer  "metric_sample_id"
-    t.datetime "created_at",       null: false
-    t.datetime "updated_at",       null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.integer  "state",            default: 0
   end
 
   add_index "metric_parameters", ["metric_sample_id"], name: "index_metric_parameters_on_metric_sample_id"

@@ -121,7 +121,7 @@ Config.delete_all
 
 projects_list.each do |project|
   ProjectMetrics.metric_names.each do |metric|
-    if TRUE
+    if dummies.key?(metric)
       start_date.upto(end_date) do |date|
         m = MetricSample.create!(:metric_name => metric,
                                  :project_id => project.id,
