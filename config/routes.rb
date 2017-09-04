@@ -1,4 +1,10 @@
 Rails.application.routes.draw do
+  get 'metric_parameter/index'
+
+  get 'metric_parameter/show'
+
+  get 'metric_parameter/update'
+
   resources :rubrics
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, :skip => [:password]
   resources :comments

@@ -97,7 +97,8 @@ class Project < ActiveRecord::Base
       )
       name_index = "project_metric_#{metric_name}".to_sym
       if ProjectMetrics.callback(name_index)
-        MetricParameter.create_parameter metric_name, metric_sample
+        attributes = metric.get_params(metric_sample, MetricParameter.latest_params_for(metric_name))
+        MetricParameter.create(attributes)
       end
     end
   end
