@@ -1,0 +1,23 @@
+<h1>Metric Parameters for <%=@project.name %></h1>
+<div class="col-md-2"></div>
+<div class="col-md-8">
+<table class="table table-striped">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>State</th>
+      <th>Update</th>
+    </tr>
+  </thead>
+  <tbody>
+    <%- @metric_parameters.each do |metric_parameter| %>
+      <tr>
+        <td><%= metric_parameter.title.humanize %></td>
+        <td><%= metric_parameter.state %></td>
+        <td><%= link_to 'Update', edit_metric_parameter_path(metric_parameter.id) %><td>
+      </tr>
+    <%- end %>
+  </tbody>
+</table>
+</div>
+<div class="col-md-2"></div>

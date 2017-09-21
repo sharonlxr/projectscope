@@ -6,7 +6,8 @@ class MetricParameter < ActiveRecord::Base
 
   def self.create_parameter(metric_name, metric_sample)
     params = ProjectMetrics.class_for(metric_name).get_params(
-
+      metric_sample,
+      metric_sample.latest_params_for(metric_name)
     )
     create params
   end

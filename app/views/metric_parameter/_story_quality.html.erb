@@ -1,0 +1,9 @@
+<%- @parameters.each_pair do |sid, sparam| %>
+    <%- if sparam['state'] == 0 %>
+        <h3><%= "Story #{sid}" %></h3>
+        <div class="field">
+            <%= f.label :smart %><br>
+            <%= number_field_tag "metric_parameter[#{sid}][smart]" %>
+        </div>
+    <%- end %>
+<%- end %>

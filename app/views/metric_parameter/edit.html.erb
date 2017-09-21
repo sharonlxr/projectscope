@@ -1,0 +1,5 @@
+<h1>MetricParameter#Edit</h1>
+<%= form_for(@metric_parameter) do |f| %>
+    <%= render partial: @metric_parameter.metric_name, locals: {f: f} %>
+    <%= submit_tag 'Submit' %>
+<% end %>

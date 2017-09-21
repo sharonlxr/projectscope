@@ -1,14 +1,9 @@
 Rails.application.routes.draw do
-  get 'metric_parameter/index'
-
-  get 'metric_parameter/show'
-
-  get 'metric_parameter/update'
-
   resources :rubrics
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }, :skip => [:password]
+  resources :metric_parameter, only: %I[index show edit update]
   resources :comments
-  resources :users, :only => [:show, :update] do
+  resources :users, only: %I[show update] do
     member do
       get 'init', to: 'users#init_new'
       patch 'init', to: 'users#init_update'
