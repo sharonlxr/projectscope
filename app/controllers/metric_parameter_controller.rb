@@ -14,6 +14,8 @@ class MetricParameterController < ApplicationController
 
   def edit
     @parameters = JSON.parse(@metric_parameter.parameters)
+    @metric_sample = @metric_parameter.metric_sample
+    @samples = JSON.parse(@metric_sample.image)['data']
   end
 
   def update
@@ -27,6 +29,8 @@ class MetricParameterController < ApplicationController
     end
     @metric_parameter.parameters = old_params.to_json
     @metric_parameter.save
+    flash[:notice] = 'Parameter successfully updated!'
+    redirect_to edit_metric_parameter_path(@metric_parameter)
   end
 
   private

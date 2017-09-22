@@ -5,12 +5,13 @@
     <tbody>
     <%- @rubrics.each_with_index do |r, i| %>
         <%- r_params = JSON.parse(r.params) %>
+        <%- score = @metric_samples[i].nil? ? -1 : @metric_samples[i].score %>
         <tr>
           <th>
             <%= r.metric_name.humanize %>
           </th>
-          <td>
-            <%= @metric_samples[i].nil? ? -1 : @metric_samples[i].score %>
+          <td bgcolor=<%=bgcolor_for_score(score, r_params['max'])%>>
+            <%= score %>
           </td>
           <td>
             <%= r_params['max'] %>
