@@ -29,6 +29,7 @@ class MetricParameterController < ApplicationController
     end
     @metric_parameter.parameters = old_params.to_json
     @metric_parameter.save
+    @metric_parameter.update_sample
     flash[:notice] = 'Parameter successfully updated!'
     redirect_to edit_metric_parameter_path(@metric_parameter)
   end

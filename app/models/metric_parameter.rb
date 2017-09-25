@@ -16,4 +16,8 @@ class MetricParameter < ActiveRecord::Base
     MetricParameter.where(metric_name: metric_name).order(:created_at).last
   end
 
+  def update_sample
+    metric_sample.update_sample parameters
+  end
+
 end

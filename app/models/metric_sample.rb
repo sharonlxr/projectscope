@@ -23,12 +23,38 @@ class MetricSample < ActiveRecord::Base
   end
 
   def self.min_date
-	earliest_metric = MetricSample.order(:created_at).first
-	earliest_metric.created_at.to_date unless earliest_metric.nil?
+    earliest_metric = MetricSample.order(:created_at).first
+    earliest_metric.created_at.to_date unless earliest_metric.nil?
   end
 
   def days_ago
     (Date.today - created_at.to_date).to_i
+  end
+
+  # Update score and image based on user inputs
+  def update_sample(metric_parameter)
+    send(metric_name.to_sym, JSON.parse(metric_parameter))
+  end
+
+  private
+
+  def story_quality(mp)
+    avg_smart = mp.inject(0.0) { |sum, (_, v)| sum + v['smart'].to_i } / mp.length
+    avg_complexity = mp.inject(0.0) { |sum, (_, v)| sum + v['complexity'].to_i } / mp.length
+    self.score = avg_smart
+    old_image = JSON.parse(image)
+    old_image['data'] = old_image['data'].map do |story|
+      sid = story['id'].to_s
+      return story unless mp.key? sid
+      story.update(\
+        avg_smart: avg_smart,
+        avg_complexity: avg_complexity,
+        smart: mp[sid]['smart'],
+        complexity: mp[sid]['complexity']
+      )
+    end
+    self.image = old_image.to_json
+    save
   end
 
 end
