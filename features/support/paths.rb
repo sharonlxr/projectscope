@@ -17,6 +17,8 @@ module NavigationHelpers
         '/'
       when /^the projects page$/ then
         '/projects'
+      when /^the new project page$/ then
+        '/projects/new'
       when /^the edit page for project "(.*)"$/ then
         "/projects/#{Project.find_by(name: $1).id}/edit"
       when /^the login page/ then

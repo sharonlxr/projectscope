@@ -13,4 +13,4 @@ Feature: edit existing project and its config/credentials info
       | project      | metric_name  | key     | value                                         |
       | LocalSupport | code_climate | url     | 1234                                          |
     And I am on the edit page for project "LocalSupport"
-    Then the config value "1234" should not appear in the page
+    Then the config value "1234" should not cuappear in the page

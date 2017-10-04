@@ -10,7 +10,7 @@
       %div.input-group
         %div.input-group-addon
           = "Project Name:"
-        %input{:type => "text", :name => "project[name]", :class => "form-control", :value => @project.name}
+        %input{:type => "text", :name => "project[name]", :class => "form-control", :value => @project.name, id: 'project_name'}
       %div.input-group
         %div.input-group-addon
           = "Project Owner:"
@@ -27,6 +27,6 @@
           %div.input-group
             %div.input-group-addon
               = param.to_s.split('_')[1..-1].join('_').titleize
-            %input{:type => "text", :name => "project[configs][#{param}]", :class => "form-control"}
+            %input{type: "text", name: "project[configs][#{param}]", class: "form-control param-input", id: "#{param}"}
   = submit_tag "Create", class: "btn btn-primary"
 = link_to 'Back', projects_path
