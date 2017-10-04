@@ -27,6 +27,8 @@ module NavigationHelpers
         '/whitelists'
       when /^the whitelist management page/ then
         '/whitelists/new'
+      when /^team selection page for student "(.*)"/ then
+        "/users/#{User.find_by(provider_username: $1).id}/init"
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #
