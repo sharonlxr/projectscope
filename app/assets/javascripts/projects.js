@@ -3,6 +3,8 @@
 
 // Global variables
 var days = 0;
+var current_progress = 0;
+var total_number = 0;
 // var parent_metric = null;
 var global_project_id = null;
 var keep_log = false;
@@ -11,10 +13,14 @@ var update_date_label = function (days_from_now) {
     var today = new Date();
     today.setDate(today.getDate()-days_from_now);
     $("#date-label").html(today.getFullYear()+'-'+(today.getMonth()+1)+'-'+today.getDate());
+    d3.select('#day-before').classed('disabled', false);
+    d3.select('#day-after').classed('disabled', false);
 };
 
 var outdate_all_metrics = function () {
     d3.selectAll('.chart_place').selectAll('*').remove();
+    d3.select('#day-before').classed('disabled', true);
+    d3.select('#day-after').classed('disabled', true);
 };
 
 // var update_parent_metric = function () {
@@ -95,9 +101,9 @@ var request_for_metrics = function (days_from_now) {
     days = days_from_now;
     //TODO: Add some transition state indicators.
     outdate_all_metrics();
-    update_date_label(days);
     update_links();
     render_charts();
+    // update_date_label(days);
     // update_parent_metric();
 };
 
@@ -106,6 +112,7 @@ var ready = function () {
     render_charts();
 
     $(".date-nav").unbind().click(function (event) {
+        outdate_all_metrics();
         days += this.id === "day-before" ? 1 : -1;
         if (days < 0) {
             days = 0;
@@ -113,7 +120,7 @@ var ready = function () {
         }
         request_for_metrics(days);
     });
-    update_date_label(days);
+    // update_date_label(days);
 };
 
 var render_charts = function () {
@@ -126,8 +133,10 @@ var render_charts = function () {
             $.ajax({url: "/projects/" + project_id + "/metrics/" + metric + '?days_from_now=' + days,
                 success: function(result) {
                     drawMetricCharts(id, result);
+                    check_progress();
                 },
                 error: function(a, b, c) {
+                    check_progress();
                     if (a.status !== 404) {
                         console.log(a);
                         console.log(b);
@@ -141,8 +150,10 @@ var render_charts = function () {
             $.ajax({url: "/projects/" + project_id + "/metrics/" + metric + '/series?days_from_now=' + days,
                 success: function(result) {
                     drawSeriesCharts(id, result);
+                    check_progress();
                 },
                 error: function(a, b, c) {
+                    check_progress();
                     if (a.status !== 404) {
                         console.log(a);
                         console.log(b);
@@ -156,8 +167,10 @@ var render_charts = function () {
             $.ajax({url: "/projects/" + project_id + "/metrics/" + metric + '?days_from_now=' + splited[4],
                 success: function(result) {
                     drawMetricCharts(id, result);
+                    check_progress();
                 },
                 error: function(a, b, c) {
+                    check_progress();
                     if (a.status !== 404) {
                         console.log(a);
                         console.log(b);
@@ -174,10 +187,11 @@ var render_charts = function () {
             });
         }
     };
+    total_number = $(".chart_place").length;
+    current_progress = 0;
     $(".chart_place").each(function () {
         get_charts_json(this.id);
     });
-
 };
 
 function read_comment(comment_id) {
@@ -212,6 +226,13 @@ function write_log(msg) {
             console.log(c);
         }
     })
+}
+
+function check_progress() {
+    current_progress += 1;
+    if (current_progress === total_number) {
+        update_date_label(days);
+    }
 }
 
 // $(document).ready(ready);
