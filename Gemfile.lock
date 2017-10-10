@@ -432,7 +432,7 @@ GEM
     vcr (3.0.3)
     warden (1.2.7)
       rack (>= 1.0)
-    web-console (2.3.0)
+    web-console (2.3.1)
       activemodel (>= 4.0)
       binding_of_caller (>= 0.7.2)
       railties (>= 4.0)
@@ -517,7 +517,7 @@ DEPENDENCIES
   webmock
 
 RUBY VERSION
-   ruby 2.3.0p0
+   ruby 2.3.1p0
 
 BUNDLED WITH
    1.15.4
