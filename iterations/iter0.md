@@ -1,26 +1,22 @@
 ## Iteration 0
 
 Entry video
----
-URL: https://youtu.be/0qMtzclG9Is
+-----------
+URL: 
+
+
 
 Development Environment Setup Screencast
----
-Junyu Wang: https://youtu.be/pPfSiQsZm5I
+----------------------------------------
+Luke Larson: https://youtu.be/mqGLGiVu8Rs
 
-Jiacheng Wu: https://youtu.be/x8AOtKAzmaQ
+Jacob Green:
 
-Shuotong Wu: http://youtu.be/-65Oz8VtzDw?hd=1
+Peijie Li:
 
-Yibing Chen: https://youtu.be/U1Z-9KzoL7c
+Sharon Li:
 
-Jiawei Jiang: https://youtu.be/ClqYbe2Ipnc
+Leyla Shams:
 
-Pivotal Tracker Project
----
-URL: https://www.pivotaltracker.com/n/projects/1886749
-
-Heroku
----
-URL: https://projectscope-cs169-junyu.herokuapp.com/
+Zixuan Ge:
 
