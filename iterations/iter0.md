@@ -1,6 +1,7 @@
 ## Iteration 0
 
 ### TeamScope
+[Overall README](./README.md)
 #### CodeClimate badge showing project's current GPA
 [![Code Climate](https://codeclimate.com/github/rails/rails/badges/gpa.svg)](https://codeclimate.com/github/rails/rails)
 #### Code Climate badge showing percent code coverage
