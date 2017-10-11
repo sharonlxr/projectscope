@@ -1,19 +1,10 @@
 ## Iteration 0
 
-### TeamScope
-[Overall README](./README.md)
-#### CodeClimate badge showing project's current GPA
-[![Code Climate](https://codeclimate.com/github/rails/rails/badges/gpa.svg)](https://codeclimate.com/github/rails/rails)
-#### Code Climate badge showing percent code coverage
-[![Test Coverage](https://codeclimate.com/github/rails/rails/badges/coverage.svg)](https://codeclimate.com/github/rails/rails/coverage)
 
-#### Travis CI badge showing build status for master branch (should be "passing")
-[![Build Status](https://travis-ci.org/PeijieLi/projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
-#### Link to deployed app on Heroku
-https://young-headland-90238.herokuapp.com/users/sign_in
-#### Link to Pivotal Tracker project
-https://www.pivotaltracker.com/n/projects/2118219
-#### A brief explanation of the customer's business need that the app addresses, including a link to the customer's website
+### TeamScope
+[Overall README](./iterations/README.md)
+
+
 
 #### Initial customer meeting has taken place, with 2-minute filmed interview summarizing results
 Entry video
