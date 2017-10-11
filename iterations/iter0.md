@@ -1,6 +1,14 @@
 ## Iteration 0
 
-### TeamScope
+### TeamScope 
+
+
+A dashboard for teachers and students to track and visualize live metrics for progress and success in small engineering teams. TeamScope allows teachers to follow students as they work through a project, checking their adherence to protocols such as test driven development, pair programming, and point estimation for stories in real time. 
+
+Teachers create and manage classes of students, comparing metrics across groups in order to ensure good practices across a project’s lifecycle. Teachers can also send comments to project groups for more personalized feedback on the group’s metrics. This ensures constant feedback for students on their projects, allowing them to better measure successes, and practice software engineering techniques.
+
+website: http://acelab.berkeley.edu/research/teamscope/
+
 #### CodeClimate badge showing project's current GPA
 [![Code Climate](https://codeclimate.com/github/rails/rails/badges/gpa.svg)](https://codeclimate.com/github/rails/rails)
 #### Code Climate badge showing percent code coverage
