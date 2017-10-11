@@ -7,7 +7,7 @@
 [![Test Coverage](https://codeclimate.com/github/rails/rails/badges/coverage.svg)](https://codeclimate.com/github/rails/rails/coverage)
 
 #### Travis CI badge showing build status for master branch (should be "passing")
-MISSING FOR NOW(Build succeed but error in one test)
+https://travis-ci.org/PeijieLi/projectscope.svg?branch=master
 #### Link to deployed app on Heroku
 https://young-headland-90238.herokuapp.com/users/sign_in
 #### Link to Pivotal Tracker project
