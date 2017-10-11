@@ -1,18 +1,8 @@
 ## Iteration 0
 
-### TeamScope
-#### CodeClimate badge showing project's current GPA
-[![Code Climate](https://codeclimate.com/github/PeijieLi/projectscope/badges/gpa.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
-#### Code Climate badge showing percent code coverage
-[![Test Coverage](https://codeclimate.com/github/PeijieLi/projectscope/badges/coverage.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
 
-#### Travis CI badge showing build status for master branch (should be "passing")
-[![Build Status](https://travis-ci.org/PeijieLi/projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
-#### Link to deployed app on Heroku
-https://young-headland-90238.herokuapp.com/users/sign_in
-#### Link to Pivotal Tracker project
-https://www.pivotaltracker.com/n/projects/2118219
-#### A brief explanation of the customer's business need that the app addresses, including a link to the customer's website
+### TeamScope
+[Overall README](./README.md)
 
 #### Initial customer meeting has taken place, with 2-minute filmed interview summarizing results
 Entry video
@@ -25,13 +15,13 @@ Development Environment Setup Screencast
 ----------------------------------------
 Luke Larson: https://youtu.be/mqGLGiVu8Rs
 
-Jacob Green:
+Jacob Green: https://www.youtube.com/watch?v=CBjZf4Uecek&feature=youtu.be
 
 Peijie Li: https://youtu.be/9SwN5Rbu0Og
 
 Sharon Li: https://youtu.be/aTH2VwmiUN8
 
-Leyla Shams:
+Leyla Shams: https://youtu.be/-Gg5Z2PFgko
 
 Zixuan Ge: https://www.youtube.com/watch?v=fCCjcRHNgCc
 
