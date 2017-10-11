@@ -4,9 +4,14 @@
 ### TeamScope
 [Overall README](./iterations/README.md)
 
-
 #### CodeClimate badge showing project's current GPA
+<<<<<<< HEAD
 [![Maintainability](https://api.codeclimate.com/v1/badges/2d6c1206183ffae95132/maintainability)](https://codeclimate.com/github/sharonlxr/projectscope/maintainability)
+=======
+[![Code Climate](https://codeclimate.com/github/PeijieLi/projectscope/badges/gpa.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
+#### Code Climate badge showing percent code coverage
+[![Test Coverage](https://codeclimate.com/github/PeijieLi/projectscope/badges/coverage.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
+>>>>>>> 8281a6c578f9e0b53215b8db07dd56dd62c54415
 
 #### Code Climate badge showing percent code coverage
 [![Test Coverage](https://codeclimate.com/github/sharonlxr/projectscope/coverage.svg)](https://codeclimate.com/github/sharonlxr/projectscope)
