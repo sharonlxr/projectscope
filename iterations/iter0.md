@@ -25,7 +25,7 @@ Development Environment Setup Screencast
 ----------------------------------------
 Luke Larson: https://youtu.be/mqGLGiVu8Rs
 
-Jacob Green:
+Jacob Green: https://www.youtube.com/watch?v=CBjZf4Uecek&feature=youtu.be
 
 Peijie Li: https://youtu.be/9SwN5Rbu0Og
 
