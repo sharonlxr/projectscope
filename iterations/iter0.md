@@ -4,12 +4,7 @@
 ### TeamScope
 [Overall README](./README.md)
 
-<<<<<<< HEAD
 
-
-=======
-#### Initial customer meeting has taken place, with 2-minute filmed interview summarizing results
->>>>>>> 8281a6c578f9e0b53215b8db07dd56dd62c54415
 Entry video
 -----------
 
