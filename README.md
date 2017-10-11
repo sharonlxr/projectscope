@@ -6,10 +6,10 @@
 
 
 #### CodeClimate badge showing project's current GPA
-[![Code Climate](https://codeclimate.com/github/rails/rails/badges/gpa.svg)](https://codeclimate.com/github/rails/rails)
-#### Code Climate badge showing percent code coverage
-[![Test Coverage](https://codeclimate.com/github/rails/rails/badges/coverage.svg)](https://codeclimate.com/github/rails/rails/coverage)
+[![Maintainability](https://api.codeclimate.com/v1/badges/2d6c1206183ffae95132/maintainability)](https://codeclimate.com/github/sharonlxr/projectscope/maintainability)
 
+#### Code Climate badge showing percent code coverage
+[![Test Coverage](https://codeclimate.com/github/sharonlxr/projectscope/coverage.svg)](https://codeclimate.com/github/sharonlxr/projectscope)
 #### Travis CI badge showing build status for master branch (should be "passing")
 [![Build Status](https://travis-ci.org/PeijieLi/projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
 #### Link to deployed app on Heroku
@@ -24,5 +24,5 @@ https://www.pivotaltracker.com/n/projects/2118219
  +website: http://acelab.berkeley.edu/research/teamscope/
 
 #### Videos
-[Videos Content](./iterations/iter0.md)
+[Videos](./iterations/iter0.md)
 
