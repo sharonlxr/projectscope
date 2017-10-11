@@ -2,9 +2,9 @@
 
 ### TeamScope
 #### CodeClimate badge showing project's current GPA
-[![Code Climate](https://codeclimate.com/github/rails/rails/badges/gpa.svg)](https://codeclimate.com/github/rails/rails)
+[![Code Climate](https://codeclimate.com/github/PeijieLi/projectscope/badges/gpa.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
 #### Code Climate badge showing percent code coverage
-[![Test Coverage](https://codeclimate.com/github/rails/rails/badges/coverage.svg)](https://codeclimate.com/github/rails/rails/coverage)
+[![Test Coverage](https://codeclimate.com/github/PeijieLi/projectscope/badges/coverage.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
 
 #### Travis CI badge showing build status for master branch (should be "passing")
 [![Build Status](https://travis-ci.org/PeijieLi/projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
