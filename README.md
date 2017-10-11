@@ -3,18 +3,11 @@
 
 ### TeamScope
 [Overall README](./iterations/README.md)
-
 #### CodeClimate badge showing project's current GPA
-<<<<<<< HEAD
-[![Maintainability](https://api.codeclimate.com/v1/badges/2d6c1206183ffae95132/maintainability)](https://codeclimate.com/github/sharonlxr/projectscope/maintainability)
-=======
-[![Code Climate](https://codeclimate.com/github/PeijieLi/projectscope/badges/gpa.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
+ [![Maintainability](https://api.codeclimate.com/v1/badges/0fc061899e0596b63f9f/maintainability)](https://codeclimate.com/github/PeijieLi/projectscope/maintainability)
 #### Code Climate badge showing percent code coverage
-[![Test Coverage](https://codeclimate.com/github/PeijieLi/projectscope/badges/coverage.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
->>>>>>> 8281a6c578f9e0b53215b8db07dd56dd62c54415
+ [![Test Coverage](https://codeclimate.com/github/PeijieLi/projectscope/badges/coverage.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
 
-#### Code Climate badge showing percent code coverage
-[![Test Coverage](https://codeclimate.com/github/sharonlxr/projectscope/coverage.svg)](https://codeclimate.com/github/sharonlxr/projectscope)
 #### Travis CI badge showing build status for master branch (should be "passing")
 [![Build Status](https://travis-ci.org/PeijieLi/projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
 #### Link to deployed app on Heroku
