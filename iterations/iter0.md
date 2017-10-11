@@ -2,7 +2,7 @@
 
 
 ### TeamScope
-[Overall README](./iterations/README.md)
+[Overall README](./README.md)
 
 
 
