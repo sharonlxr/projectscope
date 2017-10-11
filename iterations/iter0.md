@@ -6,15 +6,17 @@
 
 
 
-#### Initial customer meeting has taken place, with 2-minute filmed interview summarizing results
 Entry video
 -----------
+
+#### Initial customer meeting has taken place, with 2-minute filmed interview summarizing results
 URL: https://www.youtube.com/watch?v=bk9rM8TrdC0&feature=youtu.be
 
 
-#### Screencast of each member showing successful development environment
 Development Environment Setup Screencast
 ----------------------------------------
+
+#### Screencast of each member showing successful development environment
 Luke Larson: https://youtu.be/mqGLGiVu8Rs
 
 Jacob Green: https://www.youtube.com/watch?v=CBjZf4Uecek&feature=youtu.be
