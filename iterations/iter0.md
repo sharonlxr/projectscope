@@ -8,7 +8,7 @@
 [![Test Coverage](https://codeclimate.com/github/rails/rails/badges/coverage.svg)](https://codeclimate.com/github/rails/rails/coverage)
 
 #### Travis CI badge showing build status for master branch (should be "passing")
-MISSING FOR NOW
+[![Build Status](https://travis-ci.org/PeijieLi/projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
 #### Link to deployed app on Heroku
 https://young-headland-90238.herokuapp.com/users/sign_in
 #### Link to Pivotal Tracker project
@@ -28,11 +28,11 @@ Luke Larson: https://youtu.be/mqGLGiVu8Rs
 
 Jacob Green:
 
-Peijie Li:
+Peijie Li: https://youtu.be/9SwN5Rbu0Og
 
 Sharon Li: https://youtu.be/aTH2VwmiUN8
 
-Leyla Shams:
+Leyla Shams: https://youtu.be/-Gg5Z2PFgko
 
 Zixuan Ge: https://www.youtube.com/watch?v=fCCjcRHNgCc
 
