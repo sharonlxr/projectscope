@@ -3,11 +3,10 @@
 
 ### TeamScope
 [Overall README](./iterations/README.md)
-
 #### CodeClimate badge showing project's current GPA
-[![Code Climate](https://codeclimate.com/github/PeijieLi/projectscope/badges/gpa.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
+ [![Maintainability](https://api.codeclimate.com/v1/badges/0fc061899e0596b63f9f/maintainability)](https://codeclimate.com/github/PeijieLi/projectscope/maintainability)
 #### Code Climate badge showing percent code coverage
-[![Test Coverage](https://codeclimate.com/github/PeijieLi/projectscope/badges/coverage.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
+ [![Test Coverage](https://codeclimate.com/github/PeijieLi/projectscope/badges/coverage.svg)](https://codeclimate.com/github/PeijieLi/projectscope)
 
 #### Travis CI badge showing build status for master branch (should be "passing")
 [![Build Status](https://travis-ci.org/PeijieLi/projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
@@ -23,5 +22,5 @@ https://www.pivotaltracker.com/n/projects/2118219
  +website: http://acelab.berkeley.edu/research/teamscope/
 
 #### Videos
-[Videos Content](./iterations/iter0.md)
+[Videos](./iterations/iter0.md)
 
