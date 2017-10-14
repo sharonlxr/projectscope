@@ -1,5 +1,5 @@
 # @Peijie
-Feature: Instructor creates a task for an iterations
+Feature: Instructor creates a task for an iteration
   As an instructor
   I want to add different tasks to an iteration
   So that students will know what they need to do in the iteration.
@@ -20,9 +20,9 @@ Scenario: Instructor create a new task
     And I fill in "Task_name" with "todo1"
     And I fill in "Task_description" with "first todo"
     And I press "Create Task"
-    Then I should see "Successfully created task"
+    Then I should be redirect to dashboard page
+    And I should see "Successfully created task"
     And I should see "todo1" under "Iteration-1"
-    And I should be redirect to dashboard page
 
 Scenario: task creation must specify task name
     When I follow "Add new task"
