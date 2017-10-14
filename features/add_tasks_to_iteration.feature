@@ -17,14 +17,14 @@ Scenario: Instructor can create a task
     
 Scenario: Instructor create a new task
     When I follow "Add new task"
-    And I fill in "Task_name" with "todo1"
+    And I fill in "Task_title" with "todo1"
     And I fill in "Task_description" with "first todo"
     And I press "Create Task"
     Then I should be redirect to dashboard page
     And I should see "Successfully created task"
     And I should see "todo1" under "Iteration-1"
 
-Scenario: task creation must specify task name
+Scenario: task creation must specify task title
     When I follow "Add new task"
     And I fill in "Task_description" with "first todo"
     And I press "Create Task"
@@ -34,7 +34,7 @@ Scenario: task creation must specify task name
 
 Scenario: task creation must specify task description
     When I follow "Add new task"
-    And I fill in "Task_name" with "todo1"
+    And I fill in "Task_title" with "todo1"
     And I press "Create Task"
     Then I should see "Please fill in all required fields"
     And I should not see "Successfully created task"
