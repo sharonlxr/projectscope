@@ -1,33 +1,66 @@
 Feature: add and edit tasks to exisiting iteration
 
   As an instructor
-  So that I can build the tasks list for each iteration for students
-  I want to add a task and specify title,discription and parents.
+  I want to add different tasks to an iteration and order the tasks
+  So that students will know what they need to do in the iteration.
+  Background: I am on the instructor-dashboard page
+    Given I am logged in
+    Given I am on the dashboard page
+    And I am under "Iteration-1"
+  
+  Scenario: Instructor should see a link to add task
+	  Then I should see a link to "Add Task"
 
+  Scenario: Instructor can create a task
+    When I follow "Add new task"
+    Then I should be on task creation page for "Iteration-1"
+    
+Scenario: Instructor create a new task
+    When I follow "Add new task"
+    And I fill in "Task_title" with "todo1"
+    And I fill in "Task_description" with "first todo"
+    And I press "Create Task"
+    Then I should be redirect to dashboard page
+    And I should see "Successfully created task"
+    And I should see "todo1" under "Iteration-1"
+
+Scenario: task creation must specify task title
+    When I follow "Add new task"
+    And I fill in "Task_description" with "first todo"
+    And I press "Create Task"
+    Then I should see "Please fill in all required fields"
+    And I should not see "Successfully created task"
+    And I should be on task creation page for "Iteration-1"
+
+Scenario: task creation must specify task description
+    When I follow "Add new task"
+    And I fill in "Task_title" with "todo1"
+    And I press "Create Task"
+    Then I should see "Please fill in all required fields"
+    And I should not see "Successfully created task"
+    And I should be on task creation page for "Iteration-1"
+    
   Scenario: add first task for a iteration
-    Given I am logged in
-    And I will go to the iteration dashboard page
-    And I press "create new tasks"
-    And I fill in title with "customer meeting"
-    And I fill in description with "talk with customer"
-    And I press "Create"
-    Then I should see "customer meeting" 
-  Scenario: add more task for a iteration
-    Given I am logged in
-    And I will go to the iteration dashboard page
-    And I press "create new tasks"
-    And I fill in title with "create low-fi"
-    And I fill in description with "mock up after the meeting"
-    And I check "customer" as parents
-    And I press "Create"
-    Then I should see "create low-fi" 
-   Scenario: edit existing task
-    Given I am logged in
-    And I will go to the iteration dashboard page
-    And I select "customer meeting" and press edit
-    And I fill in title with "first official meeting"
-    And I fill in description with "Meeting customer for first time and learn their need"
 
-    And I press "Save"
-    Then I should see "first official meeting" 
+    And I press "Add new task"
+    And I fill in "Task_title" with "customer meeting"
+    And I fill in "Task_description" with "talk with customer"
+    Then I should see "Successfully created task"
+    And I should see "customer meeting" under "Iteration-1"
+  Scenario: add more task for a iteration
+    And I press "Add new task"
+    And I fill in "Task_title" with "create low-fi"
+    And I fill in "Task_description" with "mock up after the meeting"
+    And I check "customer" as parents
+    And I press "Create Task"
+    Then I should see "Successfully created task"
+    And I should see "customer meeting" under "Iteration-1"
+    
+   Scenario: edit existing task
+    And I select "customer meeting" and press edit
+    And I fill in "Task_title" with "first official meeting"
+    And I fill in "Task_description" with "Meeting customer for first time and learn their need"
+    And I press "Save Task"
+    # Then I should see "first official meeting" 
+    Then I should see "Successfully save changes"
 
