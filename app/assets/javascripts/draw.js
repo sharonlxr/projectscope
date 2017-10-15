@@ -22,8 +22,9 @@ function drawMetricCharts(containerID, metric_sample) {
     if(JSONStr['chartType'] === 'd3') {
         story_transition(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'point_estimation') {
-        var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
-        stacked_bar(containerID, new_data, JSONStr.data.series);
+        point_estimation(containerID, metric_sample);
+        // var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
+        // stacked_bar(containerID, new_data, JSONStr.data.series);
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'gauge') {
