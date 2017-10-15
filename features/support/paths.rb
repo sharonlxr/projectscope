@@ -11,6 +11,7 @@ module NavigationHelpers
   # step definition in web_steps.rb
   #
   def path_to(page_name)
+
     case page_name
 
       when /^the home\s?page$/
@@ -30,6 +31,12 @@ module NavigationHelpers
       when /^team selection page for student "(.*)"/ then
         "/users/#{User.find_by(provider_username: $1).id}/init"
       when /^the dashboard page/ then
+        pending
+      when /^the "create new iteration" page/ then
+        pending
+      when /^the "iteration dashboard" page/ then
+        pending
+      when /^the "instructor dashboard" page/ then
         pending
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
