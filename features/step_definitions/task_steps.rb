@@ -22,3 +22,7 @@ end
 Given(/^I select "([^"]*)" and press edit$/) do |task|
   pending # Write code here that turns the phrase above into concrete actions
 end
+
+Given (/^I create Task "([^"]*)" to "([^"]*)"$/) do |title, description|
+  pending
+end
