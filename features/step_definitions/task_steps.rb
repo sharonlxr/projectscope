@@ -26,3 +26,7 @@ end
 Given (/^I create Task "([^"]*)" to "([^"]*)"$/) do |title, description|
   pending
 end
+
+And (/^I  am on Iteration "([^"]*)"$/) do |iter|
+  pending
+end
