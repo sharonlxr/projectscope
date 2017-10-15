@@ -7,6 +7,7 @@ Feature: add and edit tasks to exisiting iteration
   Background: I am on the instructor-dashboard page
     Given I am logged in
     And I am on the dashboard page
+    And I am on Iteration "iter0"
 
   Scenario: Instructor should see a link to add task
 	  Then I should see a link to "Add Task"
