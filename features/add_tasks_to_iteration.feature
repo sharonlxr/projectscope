@@ -9,7 +9,7 @@ Feature: add and edit tasks to exisiting iteration
     And I am under "Iteration-1"
   
   Scenario: Instructor should see a link to add task
-	  Then I should see a link to "Add Task"
+	Then I should see a link to "Add Task"
 
   Scenario: Instructor can create a task
     When I follow "Add new task"
@@ -49,6 +49,11 @@ Feature: add and edit tasks to exisiting iteration
     And I should see "customer meeting" under "Iteration-1"
   
   Scenario: add more task for a iteration
+    And I press "Add new task"
+    And I fill in "Task_title" with "customer meeting"
+    And I fill in "Task_description" with "talk with customer"
+    Then I should see "Successfully created task"
+    And I should see "customer meeting" under "Iteration-1"
     And I press "Add new task"
     And I fill in "Task_title" with "create low-fi"
     And I fill in "Task_description" with "mock up after the meeting"
