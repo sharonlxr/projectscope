@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612211747) do
+ActiveRecord::Schema.define(version: 20171016191458) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "metric_sample_id"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20170612211747) do
   end
 
   add_index "configs", ["project_id"], name: "index_configs_on_project_id"
+
+  create_table "iterations", force: :cascade do |t|
+    t.string   "name"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "tasks_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "metric_samples", force: :cascade do |t|
     t.integer  "project_id"
@@ -78,6 +87,18 @@ ActiveRecord::Schema.define(version: 20170612211747) do
 
   add_index "projects_users", ["project_id"], name: "index_projects_users_on_project_id"
   add_index "projects_users", ["user_id"], name: "index_projects_users_on_user_id"
+
+  create_table "tasks", force: :cascade do |t|
+    t.string   "title"
+    t.string   "description"
+    t.datetime "created_at",   null: false
+    t.datetime "updated_at",   null: false
+    t.integer  "task_id"
+    t.integer  "iteration_id"
+  end
+
+  add_index "tasks", ["iteration_id"], name: "index_tasks_on_iteration_id"
+  add_index "tasks", ["task_id"], name: "index_tasks_on_task_id"
 
   create_table "users", force: :cascade do |t|
     t.string   "provider_username",      default: "",        null: false
