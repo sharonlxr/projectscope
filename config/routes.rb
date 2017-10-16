@@ -8,8 +8,8 @@ Rails.application.routes.draw do
     end
   end
   resources :projects do
-  	member do
-  		post "/add_owner", :to => "projects#add_owner"
+    member do
+      post "/add_owner", :to => "projects#add_owner"
       get '/metrics/:metric', :to => 'projects#get_metric_data'
       get '/metrics/:metric/series', :to => 'projects#get_metric_series'
       get '/metrics/:metric/detail', to: 'projects#show_metric'
@@ -18,8 +18,15 @@ Rails.application.routes.draw do
   end
   resources :whitelists, :only => [:index] do
     member do
-      put 'upgrade', :to => 'whitelists#upgrade'
-      put 'downgrade', :to => 'whitelists#downgrade'
+      put 'upgrade', to: 'whitelists#upgrade'
+      put 'downgrade', to: 'whitelists#downgrade'
+    end
+  end
+  resources :metric_samples, only: [:index] do
+    member do
+      get '/:metric/series', to: 'projects#get_metric_series'
+      get '/:metric/detail', to: 'projects#show_metric'
+      get '/:metric/report', to: 'projects#show_report'
     end
   end
 
