@@ -1,0 +1,13 @@
+%h1 Create New Tasks for =@iteration.name
+
+= form_tag create_new_task(@iteration), :method => :post do
+    = label :task, :title, 'Title'
+    = text_field :task, 'title'
+    
+    = label :task, :description, 'Description'
+    = text_field :task, 'description'
+    
+    - @all_tasks.each do |t|
+        = t
+        = check_box_tag "tasks[#{t}]",true
+    = submit_tag 'Create'
