@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170612211747) do
+ActiveRecord::Schema.define(version: 20171016073006) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "metric_sample_id"
@@ -39,6 +39,15 @@ ActiveRecord::Schema.define(version: 20170612211747) do
   end
 
   add_index "configs", ["project_id"], name: "index_configs_on_project_id"
+
+  create_table "iterations", force: :cascade do |t|
+    t.string   "name"
+    t.date     "start"
+    t.date     "end"
+    t.integer  "tasks_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "metric_samples", force: :cascade do |t|
     t.integer  "project_id"
