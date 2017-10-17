@@ -58,9 +58,11 @@ function drawMetricCharts(containerID, metric_sample) {
         bar_chart(containerID, JSONStr.data);
     } else if (JSONStr['chartType'] === 'story_overall_v2') {
         story_overall(containerID, JSONStr.data);
+    } else if (JSONStr['chartType'] ==='smart_story') {
+        smart_story(containerID, metric_sample);
     }
     else {
-        Highcharts.chart(containerID, parseChartParams(JSONStr));
+        error_message(containerID, metric_sample);
     }
 }
 
@@ -105,4 +107,11 @@ function to_array(input_dict) {
         prev = undefined;
     }
     return result;
+}
+
+function error_message(containerID, metric_sample) {
+    d3.select('#' + containerID)
+        .html('metric not supported: ' + JSON.parse(metric_sample.image)['chartType']);
+    console.log('metric not supported:');
+    console.log(metric_sample);
 }
