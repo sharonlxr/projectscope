@@ -14,11 +14,11 @@ Feature: add a new iteration
   Scenario: create a new iteration
     Given I am logged in
     And I am on the "iteration dashboard" page
-    Then I should see the "New Iteration" link
-    And I follow "New Iteration"
-    Then I should be on the new iteration page
-    Then I should see the "save iteration" button
-    And I press "save iteration"
+    Then I should see the "New Iteration" button
+    And I press "New Iteration"
+    Then I should be on the "edit iteration index 1" page
+    Then I should see the "Save Iteration" link
+    And I follow "Save Iteration"
     Then I should be on the "iteration dashboard" page
   
   @wip

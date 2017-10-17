@@ -38,6 +38,8 @@ module NavigationHelpers
         iterations_path
       when /^the "instructor dashboard" page/ then
         projects_path
+      when /^the "edit iteration index (.*)" page/ then
+        edit_iteration_path($1)
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #

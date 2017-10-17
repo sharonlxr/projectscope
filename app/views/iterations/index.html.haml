@@ -1,2 +1,2 @@
-
-= link_to "New Iteration", new_iteration_path, :class => "btn btn-primary"
+= form_tag iterations_path, :method => :post do
+    = submit_tag "New Iteration", :class => "btn btn-primary"

@@ -9,3 +9,7 @@ end
 Then(/^I should see the "(.*)" link/) do |link_name|
   page.should have_link(link_name)
 end
+
+Then(/^I should see the "(.*)" button/) do |button_name|
+  page.should have_button(button_name)
+end
