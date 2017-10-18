@@ -1,6 +1,6 @@
 class IterationsController < ApplicationController
   def index
-    
+    @iterations = Iteration.order(id: :asc).reverse_order.limit(10)
   end
   
   def create
@@ -14,7 +14,6 @@ class IterationsController < ApplicationController
   end
   
   def edit
-    
   end
   
   def update

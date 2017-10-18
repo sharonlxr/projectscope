@@ -21,20 +21,18 @@ Feature: add a new iteration
     And I follow "Save Iteration"
     Then I should be on the "iteration dashboard" page
   
-  @wip
   Scenario: view an iteration I've created
     Given I am logged in
     And I have "3" iterations created
     And I am on the "iteration dashboard" page
     Then I should see "3" iterations
     
-  @wip
   Scenario: I can edit an existing iteration
     Given I am logged in
-    And I am on the "iteration dashboard" page
     And I have "iteration_1, iteration_2" iterations created
-    Then I should see "iteration_1" button
-    When I press "iteration_1"
+    And I am on the "iteration dashboard" page
+    Then I should see the "iteration_1" link
+    When I follow "iteration_1"
     Then I should be on the "iteration_1 edit" page
   
   @wip
