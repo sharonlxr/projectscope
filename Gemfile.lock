@@ -113,9 +113,9 @@ GIT
 
 GIT
   remote: https://github.com/an-ju/project_metric_travis_ci.git
-  revision: 4bacccff8fd5e9cced12b7c40579402bff196e78
+  revision: a9ea680c791f706d40c7c931e59eb24af80b2ff5
   specs:
-    project_metric_travis_ci (0.1.0)
+    project_metric_travis_ci (0.2.0)
       faraday (~> 0.1, >= 0.1.0.0)
 
 GEM
