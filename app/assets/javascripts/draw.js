@@ -22,8 +22,9 @@ function drawMetricCharts(containerID, metric_sample) {
     if(JSONStr['chartType'] === 'd3') {
         story_transition(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'point_estimation') {
-        var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
-        stacked_bar(containerID, new_data, JSONStr.data.series);
+        point_estimation(containerID, metric_sample);
+        // var new_data = {data: concat_arrays(JSONStr.data.data, JSONStr.data.series)};
+        // stacked_bar(containerID, new_data, JSONStr.data.series);
     } else if (JSONStr['chartType'] === 'github_pr') {
         github_pr(containerID, JSONStr);
     } else if (JSONStr['chartType'] === 'gauge') {
@@ -57,9 +58,11 @@ function drawMetricCharts(containerID, metric_sample) {
         bar_chart(containerID, JSONStr.data);
     } else if (JSONStr['chartType'] === 'story_overall_v2') {
         story_overall(containerID, JSONStr.data);
+    } else if (JSONStr['chartType'] ==='smart_story') {
+        smart_story(containerID, metric_sample);
     }
     else {
-        Highcharts.chart(containerID, parseChartParams(JSONStr));
+        error_message(containerID, metric_sample);
     }
 }
 
@@ -104,4 +107,11 @@ function to_array(input_dict) {
         prev = undefined;
     }
     return result;
+}
+
+function error_message(containerID, metric_sample) {
+    d3.select('#' + containerID)
+        .html('metric not supported: ' + JSON.parse(metric_sample.image)['chartType']);
+    console.log('metric not supported:');
+    console.log(metric_sample);
 }
