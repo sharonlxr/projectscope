@@ -21,8 +21,8 @@ ProjectMetrics.configure do
                             contents: [] },
                           { title: :pivotal_tracker,
                             contents: %I[pivotal_tracker story_transition] }]
-  add_hierarchy metric: [%I[code_climate test_coverage pull_requests github_files github_flow],
-                         %I[travis_ci smart_story point_estimation story_overall point_distribution]]
+  add_hierarchy metric: [%I[code_climate test_coverage pull_requests smart_story point_estimation],
+                         %I[travis_ci github_files github_flow story_overall point_distribution]]
 end
 
 METRIC_NAMES = {
