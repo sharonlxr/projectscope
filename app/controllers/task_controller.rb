@@ -11,7 +11,7 @@ class TaskController < ApplicationController
     end
     #create new tasks
     def create
-        @iteration = Task.find(params[:iter])
+        @iteration = Iteration.find(params[:iter])
         @tasks = Task.where("iteration_id",@iteration.id)
         if !@tasks
             @tasks =[]
