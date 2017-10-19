@@ -4,7 +4,7 @@ class TaskController < ApplicationController
         #get the iteration going to be added to
         @iteration = Iteration.find(params[:iter])
         #get the list of current tasks in the iteration selected
-        @all_tasks = Task.where("iteration_id",@iteration.id).uniq.pluck(:title)
+        @all_tasks =  Task.joins(:iteration).where('iteration_id': params[:iter]).uniq.pluck(:title)
         if !@all_tasks
             @all_tasks =[]
         end
@@ -12,7 +12,7 @@ class TaskController < ApplicationController
     #create new tasks
     def create
         @iteration = Iteration.find(params[:iter])
-        @tasks = Task.where("iteration_id",@iteration.id)
+        @tasks = Task.joins(:iteration).where('iteration_id': params[:iter])
         if !@tasks
             @tasks =[]
         end

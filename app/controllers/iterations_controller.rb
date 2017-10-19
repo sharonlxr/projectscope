@@ -13,7 +13,12 @@ class IterationsController < ApplicationController
   def edit
 
     @iteration = Iteration.find(params[:id])
-    @tasks = Task.where('iteration_id',params[:id])
+    @tasks = Task.joins(:iteration).where('iteration_id': params[:id])
+    @tasks.each do|e|
+      puts e.title
+      puts e.iteration_id
+    end
+    # @tasks = Task.joins(:iteration).where('iteration_id' ,@iteration.id)
 
 
   end
