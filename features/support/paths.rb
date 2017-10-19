@@ -33,11 +33,15 @@ module NavigationHelpers
       when /^the dashboard page/ then
         pending
       when /^the "create new iteration" page/ then
-        pending
+        new_iteration_path
       when /^the "iteration dashboard" page/ then
-        pending
+        iterations_path
       when /^the "instructor dashboard" page/ then
-        '/projects'
+        projects_path
+      when /^the "edit iteration index (.*)" page/ then
+        edit_iteration_path($1)
+      when /^the "iteration_(.*) edit" page/ then
+        edit_iteration_path($1)
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #

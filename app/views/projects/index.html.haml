@@ -27,6 +27,7 @@
 %div{:class => 'col-md-12'}
   -if can? :create, :project
     = link_to 'Create New Project', new_project_path, :class => "btn btn-primary"
+    = link_to "Iterations", iterations_path, :class => "btn btn-primary"
   -if can? :manage, :whitelist
     = link_to 'Privilege Control', whitelists_path, :class => "btn btn-primary"
 
