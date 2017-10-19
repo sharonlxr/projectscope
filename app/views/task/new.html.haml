@@ -1,5 +1,6 @@
-%h1 Create New Tasks for =@iteration.name
-
+%h1 Create New Tasks for #{@iteration.name}
+- if flash[:message]
+    %p= flash[:message]
 = form_tag create_new_task_path(@iteration.id), :method => :post do
     = label :task, :title, 'Title'
     = text_field(:task,:title)

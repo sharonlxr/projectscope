@@ -11,13 +11,18 @@ class TaskController < ApplicationController
     end
     #create new tasks
     def create
-        @iteration = Task.find(params[:iter])
+        @iteration = Iteration.find(params[:iter])
         @tasks = Task.where("iteration_id",@iteration.id)
         if !@tasks
             @tasks =[]
         end
         parants_param = params[:tasks]
         task_param = params[:task]
+        if task_param[:title].nil?or task_param[:description].nil? or task_param[:title].empty? or task_param[:description].empty?
+            flash[:message]="Please fill in all required fields"
+            redirect_to new_task_view_path(params[:iter])
+            return
+        end
         new_task = Task.new
         new_task.title=task_param[:title]
         new_task.description=task_param[:description]
