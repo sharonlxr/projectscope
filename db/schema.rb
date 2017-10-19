@@ -11,11 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20171016191458) do
-=======
-ActiveRecord::Schema.define(version: 20171016073006) do
->>>>>>> d852b08e28895a2f04e67ab6e6f5aad3b9422714
 
   create_table "comments", force: :cascade do |t|
     t.integer  "metric_sample_id"

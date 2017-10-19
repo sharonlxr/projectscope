@@ -20,24 +20,27 @@ class TaskController < ApplicationController
         task_param = params[:task]
         if task_param[:title].nil?or task_param[:description].nil? or task_param[:title].empty? or task_param[:description].empty?
             flash[:message]="Please fill in all required fields"
+            puts("redirect because empty")
             redirect_to new_task_view_path(params[:iter])
             return
         end
         new_task = Task.new
         new_task.title=task_param[:title]
         new_task.description=task_param[:description]
+        new_task.iteration = @iteration
         new_task.save
         #added all the checked tasks to parents
        
         @tasks.each do |p|
-            if !p.title.nil?
-                if parants_param[p.title]=="true"
+            if !p.title.nil? 
+                if !parants_param.nil? and parants_param[p.title]=="true"
                     new_task.add_parent(p)
                 end
             end
         end
         ##need to add display message and direct to some page 
         flash[:message]= "Successfully created task"
+        puts(edit_iteration_path(params[:iter]))
         redirect_to edit_iteration_path(params[:iter])
     end
 end
