@@ -2,7 +2,7 @@ class TaskController < ApplicationController
     #load the form for new task
     def new
         #get the iteration going to be added to
-        @iteration = Task.find(params[:iter])
+        @iteration = Iteration.find(params[:iter])
         #get the list of current tasks in the iteration selected
         @all_tasks = Task.where("iteration_id",@iteration.id).uniq.pluck(:title)
         if !@all_tasks
