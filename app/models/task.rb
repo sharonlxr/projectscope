@@ -12,10 +12,10 @@ class Task < ActiveRecord::Base
         self.save
     end
     # add an list of tasks to parents tasks
-    def add_parents(parents)
-        parents.each do|p|
-            self.parents.push(p)
-        end
-        self.save
-    end
+    # def add_parents(parents)
+    #     parents.each do|p|
+    #         self.parents.push(p)
+    #     end
+    #     self.save
+    # end
 end
