@@ -3,7 +3,8 @@ Given(/^I am under "([^"]*)"$/) do |page|
 end
 
 Then(/^I should see a link to "([^"]*)"$/) do |web|
-  pending # Write code here that turns the phrase above into concrete actions
+  steps %Q{ I should see the "#{web}" link}
+   # Write code here that turns the phrase above into concrete actions
 end
 
 Then(/^I should be redirect to dashboard page$/) do
@@ -27,6 +28,11 @@ Given (/^I create Task "([^"]*)" to "([^"]*)"$/) do |title, description|
   pending
 end
 
-And (/^I  am on Iteration "([^"]*)"$/) do |iter|
-  pending
-end
+# And (/^I  am on Iteration "([^"]*)"$/) do |iter|
+#   steps %Q{
+#     And I have "iteration_1, iteration_2" iterations created
+#     And I am on the "iteration dashboard" page
+#     Then I should see the "iteration_1" link
+#     When I follow "iteration_1"
+#   }
+# end

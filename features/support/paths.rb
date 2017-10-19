@@ -31,7 +31,8 @@ module NavigationHelpers
       when /^team selection page for student "(.*)"/ then
         "/users/#{User.find_by(provider_username: $1).id}/init"
       when /^the dashboard page/ then
-        pending
+        iterations_path
+     
       when /^the "create new iteration" page/ then
         new_iteration_path
       when /^the "iteration dashboard" page/ then
@@ -42,6 +43,9 @@ module NavigationHelpers
         edit_iteration_path($1)
       when /^the "iteration_(.*) edit" page/ then
         edit_iteration_path($1)
+      when /^task creation page for "(.*)"/ then
+      
+        new_task_view_path(Iteration.find_by_name($1).id)
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #

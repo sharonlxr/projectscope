@@ -18,6 +18,7 @@ Then(/^I should see "(.*)" iterations$/) do |arg1|
 end
 
 Then(/^I should see the "(.*)" link/) do |link_name|
+  
   page.should have_link(link_name)
 end
 

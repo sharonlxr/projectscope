@@ -14,6 +14,8 @@ class IterationsController < ApplicationController
   end
   
   def edit
+    @iteration = Iteration.find(params[:id])
+    puts(@iteration.name)
   end
   
   def update

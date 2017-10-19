@@ -6,19 +6,24 @@ Feature: add and edit tasks to exisiting iteration
   
   Background: I am on the instructor-dashboard page
     Given I am logged in
-    And I am on the dashboard page
-    And I am on Iteration "iter0"
+    And I have "iteration_1" iterations created
+    And I am on the "iteration dashboard" page
+    # And I am on the dashboard page
+    And I follow "iteration_1"
+    # Then I should be on the "iteration_1 edit" page
 
   Scenario: Instructor should see a link to add task
-	  Then I should see a link to "Add Task"
+    Then I should see the "Add new task" link
+	 # Then I should see a link to "Add new task"
 
   Scenario: Instructor can create a task
-    When I follow "Add new task"
-    Then I should be on task creation page
+    
+    Then I follow "Add new task"
+    Then I should be on task creation page for "iteration_1"
     
   Scenario: Instructor create a new task for the first time
     When I follow "Add new task"
-    And I fill in "Task_title" with "todo1"
+    And I fill in "task_title" with "todo1"
     And I fill in "Task_description" with "first todo"
     And I press "Create Task"
     Then I should be redirect to dashboard page
