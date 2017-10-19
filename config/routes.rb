@@ -30,7 +30,7 @@ Rails.application.routes.draw do
   get '/login/:id', :to => 'application#passthru', :as => 'passthru'
   post '/log', to: 'projects#write_log'
   
-  resources :iterations, :except => [:show]
+  resources :iterations, :except => [:show, :new]
 
   root 'projects#index'
 
