@@ -1,11 +1,11 @@
-
+%p= link_to "Back", iterations_path
 - if flash[:message]
     %p= flash[:message]
 
 
 %table#Tasks
     %tbody
-        %h2 #{@iteration.name} Tasks:
+        %h2 "#{@iteration.name}" Tasks:
         %tr
             %th= "Title"
             %th="Description"
@@ -19,7 +19,7 @@
 %br
 .btn.btn-primary= link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
 
-%h2 Edit Iteration:
+%h2 Edit Iteration "#{@iteration.name}":
 = form_tag iteration_path(@iteration.id), :method => :put do
     %br
     = label :iteration, :name, 'Name: '
