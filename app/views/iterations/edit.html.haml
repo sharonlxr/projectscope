@@ -5,8 +5,8 @@
 
 %table#Tasks
     %tbody
-        %h2 "#{@iteration.name}" Tasks:
         -if !@tasks.empty?
+            %h2 "#{@iteration.name}" Tasks:
             %tr
                 %th= "Title"
                 %th="Description"
