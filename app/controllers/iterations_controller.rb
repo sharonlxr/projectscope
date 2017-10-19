@@ -6,7 +6,7 @@ class IterationsController < ApplicationController
   def create
     #create a new, default Iteration and redirect to the edit page for that iteration
     require "date"
-    n = Iteration.create!(:name => "new_iteration", :start => Date.new(1997, 1, 3), :end => Date.new(2017,10,17))
+    n = Iteration.create!(:name => "new_iteration", :start => Date.today, :end => Date.today + 7)
     redirect_to edit_iteration_path(n.id)
   end
   
@@ -29,6 +29,7 @@ class IterationsController < ApplicationController
   end
   
   def destroy
+    Iteration.find(params[:id]).destroy
     redirect_to iterations_path
   end
   
