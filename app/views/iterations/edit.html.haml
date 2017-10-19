@@ -1,3 +1,4 @@
+
 - if flash[:message]
     %p= flash[:message]
 %table#Tasks
@@ -10,3 +11,17 @@
 = link_to "Save Iteration", iterations_path
 
 = link_to "Add new task", new_task_view_path(@iteration.id)
+
+= form_tag iteration_path(@iteration.id), :method => :put do
+
+  = label :iteration, :name, 'Name'
+  = text_field :iteration, 'name'
+
+  = label :iteration, :start, 'Start Date'
+  = date_select :iteration, "start"
+
+  = label :iteration, :end, 'End Date'
+  = date_select :iteration, :end
+
+  = submit_tag 'Save Iteration', :class => "btn btn-primary"
+

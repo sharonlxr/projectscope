@@ -17,8 +17,8 @@ Feature: add a new iteration
     Then I should see the "New Iteration" button
     And I press "New Iteration"
     Then I should be on the "edit iteration index 1" page
-    Then I should see the "Save Iteration" link
-    And I follow "Save Iteration"
+    Then I should see the "Save Iteration" button
+    And I press "Save Iteration"
     Then I should be on the "iteration dashboard" page
   
   Scenario: view an iteration I've created
@@ -35,17 +35,16 @@ Feature: add a new iteration
     When I follow "iteration_1"
     Then I should be on the "iteration_1 edit" page
   
-  @wip
   Scenario: I can add a start date, end date, and title to an iteration
     Given I am logged in
-    And I am on the "create new iteration" page
-    And I fill in "iteration title" with "iter title"
-    And I fill in "start date" with "01/03/2017"
-    And I fill in "end date" with "01/10/2017"
-    And I press "save iteration"
-    Then I should see "iter title, 01/03/2017, 01/10/2017"
+    And I am on the "iteration dashboard" page
+    And I press "New Iteration"
+    And I fill in "Name" with "iter title"
+    And I fill in "start" date with "1/4/1997"
+    And I fill in "end" date with "1/1/2016"
+    And I press "Save Iteration"
+    Then I should see each "iter title, 1997-04-01, 2016-01-01"
     
-  @wip
   Scenario: I see no iterations before any created
     Given I am on the "iteration dashboard" page
     Then I should not see "iteration"
