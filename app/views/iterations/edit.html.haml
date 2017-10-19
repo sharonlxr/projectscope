@@ -6,7 +6,7 @@
 %table#Tasks
     %tbody
         -if !@tasks.empty?
-            %h2 "#{@iteration.name}" Tasks:
+            %h2 Current Tasks:
             %tr
                 %th= "Title"
                 %th="Description"
@@ -16,9 +16,7 @@
                 %td= link_to t.title, edit_task_path(t.id)
                 %td= t.description
                 // %td= iteration.end
-                
-%br
-.btn.btn-primary= link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
+
 
 %h2 Edit Iteration "#{@iteration.name}":
 = form_tag iteration_path(@iteration.id), :method => :put do
@@ -36,4 +34,5 @@
     %br
     %br
     = submit_tag 'Save Iteration', :class => "btn btn-primary"
+    .btn.btn-primary= link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
 
