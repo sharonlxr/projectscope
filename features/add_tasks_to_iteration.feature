@@ -57,12 +57,12 @@ Feature: add and edit tasks to exisiting iteration
     Then I should see "Successfully created task"
     And I should see "customer meeting"
     
-  Scenario: edit existing task
-    Given I create Task "customer meeting" to "meet with customer"
-    When I select "customer meeting" and press edit
-    And I fill in "task_title" with "first official meeting"
-    And I fill in "task_description" with "Meeting customer for first time and learn their need"
-    And I press "Save Task"
-    Then I should see "Successfully save changes"
-    And I should see "first official meeting"
-    And I should not see "customer meeting"
+  # Scenario: edit existing task
+  #   Given I create Task "customer meeting" to "meet with customer"
+  #   When I select "customer meeting" and press edit
+  #   And I fill in "task_title" with "first official meeting"
+  #   And I fill in "task_description" with "Meeting customer for first time and learn their need"
+  #   And I press "Save Task"
+  #   Then I should see "Successfully save changes"
+  #   And I should see "first official meeting"
+  #   And I should not see "customer meeting"
