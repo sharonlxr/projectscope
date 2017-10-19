@@ -8,20 +8,20 @@
                 %td= link_to t.title, edit_task_path(t.id)
                 %td= t.description
                 // %td= iteration.end
-= link_to "Save Iteration", iterations_path
+
 
 = link_to "Add new task", new_task_view_path(@iteration.id)
 
 = form_tag iteration_path(@iteration.id), :method => :put do
 
-  = label :iteration, :name, 'Name'
-  = text_field :iteration, 'name'
-
-  = label :iteration, :start, 'Start Date'
-  = date_select :iteration, "start"
-
-  = label :iteration, :end, 'End Date'
-  = date_select :iteration, :end
-
-  = submit_tag 'Save Iteration', :class => "btn btn-primary"
+    = label :iteration, :name, 'Name'
+    = text_field :iteration, 'name'
+    
+    = label :iteration, :start, 'Start Date'
+    = date_select :iteration, "start"
+    
+    = label :iteration, :end, 'End Date'
+    = date_select :iteration, :end
+    
+    = submit_tag 'Save Iteration', :class => "btn btn-primary"
 
