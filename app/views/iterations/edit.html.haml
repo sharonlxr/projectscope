@@ -6,9 +6,10 @@
 %table#Tasks
     %tbody
         %h2 "#{@iteration.name}" Tasks:
-        %tr
-            %th= "Title"
-            %th="Description"
+        -if !@tasks.empty?
+            %tr
+                %th= "Title"
+                %th="Description"
             
         - @tasks.each do |t|
             %tr
