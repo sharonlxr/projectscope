@@ -1,4 +1,12 @@
-
+- if flash[:message]
+    %p= flash[:message]
+%table#Tasks
+    %tbody
+        - @tasks.each do |t|
+            %tr
+                %td= link_to t.title, edit_task_path(t.id)
+                %td= t.description
+                // %td= iteration.end
 = link_to "Save Iteration", iterations_path
 
 = link_to "Add new task", new_task_view_path(@iteration.id)

@@ -26,9 +26,9 @@ Feature: add and edit tasks to exisiting iteration
     And I fill in "task_title" with "todo1"
     And I fill in "task_description" with "first todo"
     And I press "Create Task"
-    Then I should be redirect to dashboard page
+    Then I should be on dashboard for "iteration_1"
     And I should see "Successfully created task"
-    And I should see "todo1"
+    And I should see "first todo"
 
   Scenario: task creation must specify task title
     When I follow "Add new task"
@@ -36,7 +36,7 @@ Feature: add and edit tasks to exisiting iteration
     And I press "Create Task"
     Then I should see "Please fill in all required fields"
     And I should not see "Successfully created task"
-    And I should be on task creation page
+    And I should be on task creation page for "iteration_1"
 
   Scenario: task creation must specify task description
     When I follow "Add new task"
@@ -44,14 +44,15 @@ Feature: add and edit tasks to exisiting iteration
     And I press "Create Task"
     Then I should see "Please fill in all required fields"
     And I should not see "Successfully created task"
-    And I should be on task creation page
+    And I should be on task creation page for "iteration_1"
   
   Scenario: add more task for a iteration
     Given I create Task "customer meeting" to "meet with customer"
     When I follow "Add new task"
     And I fill in "task_title" with "create low-fi"
     And I fill in "task_description" with "mock up after the meeting"
-    And I check "customer meeting" as parents
+    And I should see "customer meeting"
+    And I check "tasks[customer meeting]"
     And I press "Create Task"
     Then I should see "Successfully created task"
     And I should see "customer meeting"

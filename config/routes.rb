@@ -39,8 +39,8 @@ Rails.application.routes.draw do
   
   resources :iterations, :except => [:show]
   get '/task/:iter/new', :to =>'task#new', :as => 'new_task_view'
-  post '/task/:iter/create', :to=>'task#create', :as => 'create_new_task'
-  
+  post '/task/:iter/create', :to =>'task#create', :as => 'create_new_task'
+  get '/task/:id/edit', :to =>'task#edit', :as =>'edit_task'
   root 'projects#index'
 
 end

@@ -46,12 +46,14 @@ module NavigationHelpers
       when /^task creation page for "(.*)"/ then
       
         new_task_view_path(Iteration.find_by_name($1).id)
+     
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #
       #   when /^(.*)'s profile page$/i
       #     user_profile_path(User.find_by_login($1))
-
+      when /^dashboard for "(.*)"/ then
+        edit_iteration_path(Iteration.find_by_name($1).id)
       else
         begin
           page_name =~ /^the (.*) page$/

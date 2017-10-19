@@ -30,13 +30,14 @@ class TaskController < ApplicationController
         #added all the checked tasks to parents
        
         @tasks.each do |p|
-            
-            if p.title and parants_param[p.title]=="true"
-                new_task.add_parent(p)
+            if !p.title.nil?
+                if parants_param[p.title]=="true"
+                    new_task.add_parent(p)
+                end
             end
         end
         ##need to add display message and direct to some page 
-        flash[:message]= ""
-        redirect_to iterations_path
+        flash[:message]= "Successfully created task"
+        redirect_to edit_iteration_path(params[:iter])
     end
 end
