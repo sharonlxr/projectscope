@@ -1,2 +1,12 @@
+= form_tag iteration_path(@iteration.id), :method => :put do
 
-= link_to "Save Iteration", iterations_path, :class => "btn btn-primary"
+  = label :iteration, :name, 'Name'
+  = text_field :iteration, 'name'
+
+  = label :iteration, :start, 'Start Date'
+  = date_select :iteration, "start"
+
+  = label :iteration, :end, 'End Date'
+  = date_select :iteration, :end
+
+  = submit_tag 'Save Iteration', :class => "btn btn-primary"
