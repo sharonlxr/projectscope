@@ -1,27 +1,38 @@
 
 - if flash[:message]
     %p= flash[:message]
+
+
 %table#Tasks
     %tbody
+        %h2 #{@iteration.name} Tasks:
+        %tr
+            %th= "Title"
+            %th="Description"
+            
         - @tasks.each do |t|
             %tr
                 %td= link_to t.title, edit_task_path(t.id)
                 %td= t.description
                 // %td= iteration.end
+                
+%br
+.btn.btn-primary= link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
 
-
-= link_to "Add new task", new_task_view_path(@iteration.id)
-
+%h2 Edit Iteration:
 = form_tag iteration_path(@iteration.id), :method => :put do
-
-    = label :iteration, :name, 'Name'
+    %br
+    = label :iteration, :name, 'Name: '
     = text_field :iteration, 'name'
-    
-    = label :iteration, :start, 'Start Date'
+    %br
+    %br
+    = label :iteration, :start, 'Start Date: '
     = date_select :iteration, "start"
-    
-    = label :iteration, :end, 'End Date'
+    %br
+    %br
+    = label :iteration, :end, 'End Date: '
     = date_select :iteration, :end
-    
+    %br
+    %br
     = submit_tag 'Save Iteration', :class => "btn btn-primary"
 
