@@ -4,10 +4,10 @@
 ### TeamScope
 [Overall README](./iterations/README.md)
 #### CodeClimate badge showing project's current GPA
- [![Maintainability](https://api.codeclimate.com/v1/badges/0fc061899e0596b63f9f/maintainability)](https://codeclimate.com/github/PeijieLi/cs169projectscope/maintainability)
+[![Maintainability](https://api.codeclimate.com/v1/badges/f110c3a7cd4b257abdd3/maintainability)](https://codeclimate.com/github/PeijieLi/cs169projectscope/maintainability)
 #### Code Climate badge showing percent code coverage
- [![Test Coverage](https://codeclimate.com/github/PeijieLi/cs169projectscope/badges/coverage.svg)](https://codeclimate.com/github/PeijieLi/cs169projectscope/coverage)
-
+ [![Test Coverage](https://api.codeclimate.com/v1/badges/f110c3a7cd4b257abdd3/test_coverage)](https://codeclimate.com/github/PeijieLi/cs169projectscope/test_coverage)
+ 
 #### Travis CI badge showing build status for master branch (should be "passing")
 [![Build Status](https://travis-ci.org/PeijieLi/cs169projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
 #### Link to deployed app on Heroku
