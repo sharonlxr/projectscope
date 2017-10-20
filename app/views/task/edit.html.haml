@@ -1,7 +1,7 @@
 %h1 Edit New Task #{@task.title}
 - if flash[:message]
     %p= flash[:message]
-= form_tag update_task_path(@task.id), :method => :post do
+= form_tag update_task_path(@task.id), :method => :put do
     .form_row
         .form-group
         = label :task, :title, 'Title: '
@@ -15,6 +15,10 @@
         .form_row
             %p{:style => "font-weight: bold;"} Parent Tasks:
             .form_row
-            // to do, retrive parents from task
+            // to do, retrive parents from task db
     .form-group
         = submit_tag 'Edit Task', :class => "btn btn-primary"
+        
+%br
+= form_tag update_task_path(@task.id), :method => :delete do
+    = submit_tag 'Delete Task', :class => "btn btn-primary"

@@ -45,6 +45,29 @@ class TaskController < ApplicationController
     end
     #edit an existing task
     def edit
+        
         @task = Task.find(params[:id])
+        
+    end
+    
+    def update
+    
+        #retreive form submission paramaters from the total paramaters
+        task_params = params["task"]
+        to_sub = {} #this is the new array we will pass to Task to create a new iteration
+        to_sub["title"] = task_params["title"]
+        to_sub["description"] = task_params["description"]
+        # to do: extra updated parents from  params
+        #to_sub["parent"] = task_params["..."]
+        @task = Task.find(params[:id])
+        @task.update_attributes!(to_sub)
+        redirect_to iterations_path
+    end
+  
+    def destroy
+        Task.find(params[:id]).destroy
+        # to do @iteration not working
+        # @iteration = Iteration.where('tasks_id': params[:id])
+        # redirect_to edit_iteration_path(@iteration.id)
     end
 end
