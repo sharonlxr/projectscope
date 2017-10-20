@@ -57,7 +57,7 @@ class TaskController < ApplicationController
         to_sub = {} #this is the new array we will pass to Task to create a new iteration
         to_sub["title"] = task_params["title"]
         to_sub["description"] = task_params["description"]
-        # to do: extra updated parents from  params
+        # 2. to do: extract updated parents from  params
         #to_sub["parent"] = task_params["..."]
         @task = Task.find(params[:id])
         @task.update_attributes!(to_sub)
@@ -66,7 +66,7 @@ class TaskController < ApplicationController
   
     def destroy
         Task.find(params[:id]).destroy
-        # to do @iteration not working
+        # 3. to do @iteration not working
         # @iteration = Iteration.where('tasks_id': params[:id])
         # redirect_to edit_iteration_path(@iteration.id)
     end
