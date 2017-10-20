@@ -60,14 +60,17 @@ class TaskController < ApplicationController
         # 2. to do: extract updated parents from  params
         #to_sub["parent"] = task_params["..."]
         @task = Task.find(params[:id])
+        @iteration = @task.iteration.id
         @task.update_attributes!(to_sub)
-        redirect_to iterations_path
+        redirect_to edit_iteration_path(@iteration)
     end
   
     def destroy
-        Task.find(params[:id]).destroy
+   
         # 3. to do @iteration not working
-        # @iteration = Iteration.where('tasks_id': params[:id])
-        # redirect_to edit_iteration_path(@iteration.id)
+        @task = Task.find(params[:id])
+        @iteration = @task.iteration.id
+        Task.find(params[:id]).destroy
+        redirect_to edit_iteration_path(@iteration)
     end
 end

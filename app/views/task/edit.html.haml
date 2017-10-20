@@ -17,7 +17,7 @@
             .form_row
             // 1. to do, retrive parents from task db
     .form-group
-        = submit_tag 'Edit Task', :class => "btn btn-primary"
+        = submit_tag 'Save Edit', :class => "btn btn-primary"
         
 %br
 = form_tag update_task_path(@task.id), :method => :delete do
