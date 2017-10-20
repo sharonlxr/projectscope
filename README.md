@@ -9,7 +9,7 @@
  [![Test Coverage](https://api.codeclimate.com/v1/badges/f110c3a7cd4b257abdd3/test_coverage)](https://codeclimate.com/github/PeijieLi/cs169projectscope/test_coverage)
  
 #### Travis CI badge showing build status for master branch (should be "passing")
-[![Build Status](https://travis-ci.org/PeijieLi/cs169projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
+[![Build Status](https://travis-ci.org/PeijieLi/projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/projectscope)
 #### Link to deployed app on Heroku
 https://young-headland-90238.herokuapp.com/users/sign_in
 #### Link to Pivotal Tracker project
