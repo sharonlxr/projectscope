@@ -3,14 +3,14 @@
     %p= flash[:message]
 
 
-%table#Tasks
-    %tbody
+%table.table#Tasks
+    %thead
         -if !@tasks.empty?
             %h2 Current Tasks:
             %tr
                 %th= "Title"
                 %th="Description"
-            
+    %tbody        
         - @tasks.each do |t|
             %tr
                 %td= link_to t.title, edit_task_path(t.id)
@@ -18,12 +18,14 @@
                 // %td= iteration.end
 
 
+.btn.btn-primary= link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
+
 %h2 Edit Iteration "#{@iteration.name}":
 = form_tag iteration_path(@iteration.id), :method => :put do
     %br
-    = label :iteration, :name, 'Name: '
-    = text_field :iteration, 'name'
-    %br
+    .form-group
+        = label :iteration, :name, 'Name: '
+        = text_field :iteration, 'name', class: "form-control"
     %br
     = label :iteration, :start, 'Start Date: '
     = date_select :iteration, "start"
@@ -33,11 +35,12 @@
     = date_select :iteration, :end
     %br
     %br
+    
     = submit_tag 'Save Iteration', :class => "btn btn-primary"
-    .btn.btn-primary
-    = link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
-
-
+    
+    
+%br
 = form_tag iteration_path(@iteration.id), :method => :delete do
     = submit_tag 'Delete Iteration', :class => "btn btn-primary"
+
 
