@@ -34,5 +34,10 @@
     %br
     %br
     = submit_tag 'Save Iteration', :class => "btn btn-primary"
-    .btn.btn-primary= link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
+    .btn.btn-primary
+    = link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
+
+
+= form_tag iteration_path(@iteration.id), :method => :delete do
+    = submit_tag 'Delete Iteration', :class => "btn btn-primary"
 

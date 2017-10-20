@@ -39,12 +39,29 @@ Feature: add a new iteration
     Given I am logged in
     And I am on the "iteration dashboard" page
     And I press "New Iteration"
+    Then I should be on the "edit iteration index 1" page
     And I fill in "Name" with "iter title"
-    And I fill in "start" date with "1/4/1997"
-    And I fill in "end" date with "1/1/2016"
+    And I fill in "start" date with "10/15/2017"
+    And I fill in "end" date with "10/22/2017"
     And I press "Save Iteration"
-    Then I should see each "iter title, 1997-04-01, 2016-01-01"
+    Then I should see each "iter title, 2017-10-15, 2017-10-22"
+    
     
   Scenario: I see no iterations before any created
     Given I am on the "iteration dashboard" page
     Then I should not see "iteration"
+    
+  Scenario:  I should be able to delete an iteration
+    Given I have "iteration_1, iteration_2" iterations created
+    And I am on the "iteration dashboard" page 
+    And I follow "iteration_1"
+    And I press "Delete Iteration"
+    Then I should be on the "iteration dashboard" page
+    And I should not see "iteration_1"
+    
+  Scenario: Iterations should be ordered by most recent first by default
+    Given I am on the "iteration dashboard" page
+    And I have "first_iteration" iterations created
+    And I have "second_iteration" iterations created
+    And I am on the "iteration dashboard" page
+    Then I should see "second_iteration" before "first_iteration"

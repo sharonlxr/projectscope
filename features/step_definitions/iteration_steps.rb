@@ -29,10 +29,10 @@ end
 Then /^I fill in "(.*)" date with "(.*)"/ do |name, value|
   months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"]
   vals = value.split("/")
-  
+
   select vals[2], :from => 'iteration_' + name + '_1i'
-  select months[(vals[1].to_i - 1)], :from => 'iteration_' + name + '_2i'
-  select vals[0], :from => 'iteration_' + name + '_3i'
+  select months[(vals[0].to_i - 1)], :from => 'iteration_' + name + '_2i'
+  select vals[1], :from => 'iteration_' + name + '_3i'
   
 end
 
@@ -42,4 +42,6 @@ Then /^I should see each "(.*)"/ do |string|
     step %Q[I should see "#{s}"]
   end
 end
+
+
 
