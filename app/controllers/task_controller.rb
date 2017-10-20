@@ -43,4 +43,8 @@ class TaskController < ApplicationController
         puts(edit_iteration_path(params[:iter]))
         redirect_to edit_iteration_path(params[:iter])
     end
+    #edit an existing task
+    def edit
+        @task = Task.find(params[:id])
+    end
 end
