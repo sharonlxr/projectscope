@@ -66,8 +66,16 @@ Feature: add and edit tasks to exisiting iteration
     Then I should see "Successfully save changes"
     And I should see "first official meeting"
     And I should not see "customer meeting"
-  
 
+
+   Scenario: copy tasks button available
+    Given I create Task "todo1" to "todo in iter1"
+    And I go back to iteration dashboard
+    And I have "iteration_2" iterations created
+    And I am on the "iteration dashboard" page
+    And I follow "iteration_2"
+    Then I should see "copy from other iteration"
+   
    Scenario: copy tasks from existing iteration
     Given I create Task "todo1" to "todo in iter1"
     And I go back to iteration dashboard

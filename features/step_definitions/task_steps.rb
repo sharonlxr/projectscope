@@ -33,6 +33,37 @@ Given (/^I create Task "([^"]*)" to "([^"]*)"$/) do |title, description|
   t1.save
   # pending
 end
+Given("I go back to iteration dashboard") do
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then("I select {string} to copy") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given("Create team {string}") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then("I should see graph for {string}") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then("I follow the graph for {string}") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Then("I edit {string}") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given("I am logged in as {string}") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
+
+Given("I select {string}") do |string|
+  pending # Write code here that turns the phrase above into concrete actions
+end
 
 # And (/^I  am on Iteration "([^"]*)"$/) do |iter|
 #   steps %Q{

@@ -1,8 +1,8 @@
 Feature: publish tasks to all the teams and edit for each team
 
   As an instructor
-  I want to add different tasks to an iteration and order the tasks
-  So that students will know what they need to do in the iteration.
+  I want to edit tasks for each team.
+  So every time can have customized tasks.
   
   Background: I am on the instructor-dashboard page
     Given Create team "team1"
