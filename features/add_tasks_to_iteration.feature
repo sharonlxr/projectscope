@@ -57,12 +57,43 @@ Feature: add and edit tasks to exisiting iteration
     Then I should see "Successfully created task"
     And I should see "customer meeting"
     
-  # Scenario: edit existing task
-  #   Given I create Task "customer meeting" to "meet with customer"
-  #   When I select "customer meeting" and press edit
-  #   And I fill in "task_title" with "first official meeting"
-  #   And I fill in "task_description" with "Meeting customer for first time and learn their need"
-  #   And I press "Save Task"
-  #   Then I should see "Successfully save changes"
-  #   And I should see "first official meeting"
-  #   And I should not see "customer meeting"
+  Scenario: edit existing task
+    Given I create Task "customer meeting" to "meet with customer"
+    When I select "customer meeting" and press edit
+    And I fill in "task_title" with "first official meeting"
+    And I fill in "task_description" with "Meeting customer for first time and learn their need"
+    And I press "Save Task"
+    Then I should see "Successfully save changes"
+    And I should see "first official meeting"
+    And I should not see "customer meeting"
+  
+  Scenario: publish task to students and see team's general graph
+    Given I create Task "customer meeting" to "meet with customer"
+    When I follow "Add new task"
+    And I fill in "task_title" with "create low-fi"
+    And I fill in "task_description" with "mock up after the meeting"
+    And I should see "customer meeting"
+    And I check "tasks[customer meeting]"
+    And I press "Create Task"
+    Then I should see "Successfully created task"
+    And I should see "customer meeting"
+    Then I press "publish tasks"
+    And I am on the "tasks are published" page
+    Then I should see 
+    
+  Scenario: copy tasks from existing iteration
+    And I press "back"
+    And I have "iteration_2" iterations created
+    And I am on the "iteration dashboard" page
+    And I follow "iteration_2"
+    Then I should see "copy from other iteration"
+    
+   Scenario: copy tasks from existing iteration
+    Given I create Task "todo1" to "todo in iter1"
+    And I press "back"
+    And I have "iteration_2" iterations created
+    And I am on the "iteration dashboard" page
+    And I follow "iteration_2"
+    Then I select "iteration_1" to copy
+    Then I press "copy"
+    Then I should see "todo1"
