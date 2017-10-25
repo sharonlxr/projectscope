@@ -67,28 +67,7 @@ Feature: add and edit tasks to exisiting iteration
     And I should see "first official meeting"
     And I should not see "customer meeting"
   
-  Scenario: publish task to students and see team's general graph
-    Given I create Task "customer meeting" to "meet with customer"
-    When I follow "Add new task"
-    And I fill in "task_title" with "create low-fi"
-    And I fill in "task_description" with "mock up after the meeting"
-    And I should see "customer meeting"
-    And I check "tasks[customer meeting]"
-    And I press "Create Task"
-    Then I should see "Successfully created task"
-    And I should see "customer meeting"
-    Then I press "publish tasks"
-    And I am on the "tasks are published" page
-    Then I should see bar graph for "team1"
-    Then I should see bar graph for "team2"
-    
-  Scenario: copy tasks from existing iteration
-    And I go back to iteration dashboard
-    And I have "iteration_2" iterations created
-    And I am on the "iteration dashboard" page
-    And I follow "iteration_2"
-    Then I should see "copy from other iteration"
-    
+
    Scenario: copy tasks from existing iteration
     Given I create Task "todo1" to "todo in iter1"
     And I go back to iteration dashboard
