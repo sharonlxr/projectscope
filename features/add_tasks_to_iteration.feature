@@ -79,11 +79,18 @@ Feature: add and edit tasks to exisiting iteration
     And I should see "customer meeting"
     Then I press "publish tasks"
     And I am on the "tasks are published" page
+<<<<<<< HEAD
     Then I should see bar graph for "team1"
     Then I should see bar graph for "team2"
     
   Scenario: copy tasks from existing iteration
     And I go back to iteration dashboard
+=======
+    Then I should see 
+    
+  Scenario: copy tasks from existing iteration
+    And I press "back"
+>>>>>>> dbd46e574a6b5c86df1ceb634bb7a1232a5f24cc
     And I have "iteration_2" iterations created
     And I am on the "iteration dashboard" page
     And I follow "iteration_2"
@@ -91,7 +98,11 @@ Feature: add and edit tasks to exisiting iteration
     
    Scenario: copy tasks from existing iteration
     Given I create Task "todo1" to "todo in iter1"
+<<<<<<< HEAD
     And I go back to iteration dashboard
+=======
+    And I press "back"
+>>>>>>> dbd46e574a6b5c86df1ceb634bb7a1232a5f24cc
     And I have "iteration_2" iterations created
     And I am on the "iteration dashboard" page
     And I follow "iteration_2"
