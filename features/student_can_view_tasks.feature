@@ -3,7 +3,7 @@ Feature: publish tasks to all the teams and edit for each team
   As a student
   I want to see the tasks assigned to us for each iteration
   
-  Background: I am on the instructor-dashboard page
+  Background: I am on the team-dashboard page
     Given Create team "team1"
     Given I am logged in
     And I have "iteration_1" iterations created
