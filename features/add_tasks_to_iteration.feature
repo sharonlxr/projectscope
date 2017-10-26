@@ -75,7 +75,10 @@ Feature: add and edit tasks to exisiting iteration
     And I am on the "iteration dashboard" page
     And I follow "iteration_2"
     Then I should see "copy from other iteration"
+<<<<<<< HEAD
    
+=======
+>>>>>>> d5fd9dd89962d721ea3a9f2221f0c21968b05c7c
    Scenario: copy tasks from existing iteration
     Given I create Task "todo1" to "todo in iter1"
     And I go back to iteration dashboard
