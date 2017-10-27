@@ -1,4 +1,4 @@
-Feature: publish tasks to all the teams and edit for each team
+Feature: student can view tasks for each iteration
 
   As a student
   I want to see the tasks assigned to us for each iteration
