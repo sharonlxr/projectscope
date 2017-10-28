@@ -40,7 +40,6 @@ class User < ActiveRecord::Base
   ADMIN = "admin"
   INSTRUCTOR = "instructor"
   STUDENT = "student"
-
   def self.from_omniauth(auth)
     email = auth.info.email.nil? ? auth.extra.raw_info.email : auth.info.email
     login = auth.extra.raw_info.login

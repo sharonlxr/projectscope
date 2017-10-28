@@ -43,34 +43,60 @@ class TaskController < ApplicationController
         puts(edit_iteration_path(params[:iter]))
         redirect_to edit_iteration_path(params[:iter])
     end
+
     #edit an existing task
     def edit
-        
-        @task = Task.find(params[:id])
-        
+        @task = Task.find( params[:id])
+        @all_parents =  Task.where('iteration_id': @task.iteration_id)
+        @selected_parents = @task.parents
     end
     
     def update
+        @task = Task.find( params[:id])
+        @tasks = Task.where('iteration_id': @task.iteration_id)
+        if !@tasks
+            @tasks =[]
+        end
+        parants_param = params[:tasks]
+        task_param = params[:task]
+        @task.title = task_param[:title]
+        @task.description = task_param[:description]
+        @task.parents.clear
+        @task.save!
+        @tasks.each do |p|
+            if !p.title.nil? 
+                if !parants_param.nil? and parants_param[p.title]=="true"
+                    @task.add_parent(p)
+                end
+            end
+        end
+   
+        ##need to add display message and direct to some page 
+        flash[:message]= "Successfully saved the change"
+   
+        redirect_to edit_iteration_path(@task.iteration_id)
     
         #retreive form submission paramaters from the total paramaters
-        task_params = params["task"]
-        to_sub = {} #this is the new array we will pass to Task to create a new iteration
-        to_sub["title"] = task_params["title"]
-        to_sub["description"] = task_params["description"]
-        # 2. to do: extract updated parents from  params
-        #to_sub["parent"] = task_params["..."]
-        @task = Task.find(params[:id])
-        @iteration = @task.iteration.id
-        @task.update_attributes!(to_sub)
-        redirect_to edit_iteration_path(@iteration)
+        # task_params = params["task"]
+        # to_sub = {} #this is the new array we will pass to Task to create a new iteration
+        # to_sub["title"] = task_params["title"]
+        # to_sub["description"] = task_params["description"]
+        # # 2. to do: extract updated parents from  params
+        # #to_sub["parent"] = task_params["..."]
+        # @task = Task.find(params[:id])
+        # @iteration = @task.iteration.id
+        # @task.update_attributes!(to_sub)
+        # @selected_parents = @task.parents
+        # @all_parents = Task.where('iteration_id': params[:iter]).uniq.pluck(:title)
+        
+        # redirect_to edit_iteration_path(@iteration)
     end
   
     def destroy
-   
-        # 3. to do @iteration not working
         @task = Task.find(params[:id])
         @iteration = @task.iteration.id
         Task.find(params[:id]).destroy
         redirect_to edit_iteration_path(@iteration)
     end
+
 end

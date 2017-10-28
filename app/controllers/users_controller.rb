@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     @preferred_projects = @user.preferred_projects
     # debugger
     @preferred_metrics = @user.preferred_metrics
+    session[:user_id]=params[:id]
   end
 
   def update

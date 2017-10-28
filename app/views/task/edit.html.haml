@@ -16,6 +16,9 @@
             %p{:style => "font-weight: bold;"} Parent Tasks:
             .form_row
             // 1. to do, retrive parents from task db
+            - @all_parents.each do |t|
+                = t.title
+                = check_box_tag "tasks[#{t.title}]", true, (@selected_parents.include? t)
     .form-group
         = submit_tag 'Save Edit', :class => "btn btn-primary"
         
