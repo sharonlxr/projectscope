@@ -47,6 +47,9 @@ module NavigationHelpers
       when /^task creation page for "(.*)"/ then
       
         new_task_view_path(Iteration.find_by_name($1).id)
+        
+      when /^the "view project '(.*)'" page/ then
+        project_path(Project.find_by(name: $1).id)
 
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
