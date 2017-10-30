@@ -19,6 +19,7 @@
 
 
 .btn.btn-primary= link_to "Add new task", new_task_view_path(@iteration.id), :style => "color: white;text-decoration: none;"
+.btn.btn-primary= link_to "Publish tasks", publish_tasks_path(@iteration.id), :style => "color: white;text-decoration: none;"
 
 %h2 Iteration "#{@iteration.name}":
 = form_tag iteration_path(@iteration.id), :method => :put do

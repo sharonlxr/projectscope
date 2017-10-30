@@ -44,7 +44,9 @@ Rails.application.routes.draw do
   get '/task/:id/edit', :to =>'task#edit', :as =>'edit_task'
   put '/task/:id', :to=>'task#update', :as =>'update_task'
   delete '/task/:id', :to=>'task#destroy'
-
+  get '/iteration/student/show', :to=>'iterations#student_show', :as =>'student_iteration'
+  get '/task/student/show/:iter', :to=>'task#task_student_show', :as =>'show_students_task'
+  get '/task/publish/:iter', :to=>'task#publish', :as=>'publish_tasks'
   root 'projects#index'
 
 end

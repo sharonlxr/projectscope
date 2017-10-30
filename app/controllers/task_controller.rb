@@ -9,6 +9,18 @@ class TaskController < ApplicationController
             @all_tasks =[]
         end
     end
+    def publish
+        @iteration = Iteration.find(params[:iter])
+        @all_tasks =  Task.where('iteration_id': params[:iter])
+        #to do : copy the tasks to all the teams
+        
+        redirect_to edit_iteration_path(params[:iter])
+    end
+    def task_student_show
+        @iteration = Iteration.find(params[:iter])
+        #get the list of current tasks in the iteration selected
+        @tasks =  Task.where('iteration_id': params[:iter])
+    end
     #create new tasks
     def create
         @iteration = Iteration.find(params[:iter])
@@ -49,6 +61,9 @@ class TaskController < ApplicationController
         @task = Task.find( params[:id])
         @all_parents =  Task.where('iteration_id': @task.iteration_id)
         @selected_parents = @task.parents
+    end
+    
+    def publish
     end
     
     def update
