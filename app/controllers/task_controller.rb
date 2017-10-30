@@ -12,8 +12,34 @@ class TaskController < ApplicationController
     def publish
         @iteration = Iteration.find(params[:iter])
         @all_tasks =  Task.where('iteration_id': params[:iter])
+        #to do : eliminate all the copied task
+        all_old_copied_tasks = StudentTask.where('iteration_id': params[:iter])
+        all_old_copied_tasks.each do|e|
+            e.destroy
+        end
         #to do : copy the tasks to all the teams
-        
+        teams = Project.all
+        teams.each do |team|
+            map = Hash.new
+            # copy the tasks for a team
+            @all_tasks.each do|t|
+                new_student_task = StudentTask.new
+                new_student_task.project = team
+                new_student_task.title = t.title
+                new_student_task.description = t.description
+                new_student_task.iteration = t.iteration
+                new_student_task.save
+                map[t.id]=new_student_task
+            end
+            # copy the parents 
+             @all_tasks.each do|t|
+                new_task = map[t.id]
+                t.parents.each do |p|
+                    new_parent_task = map[p.id]
+                    new_task.add_parent(new_parent_task)
+                end
+            end
+        end
         redirect_to edit_iteration_path(params[:iter])
     end
     def task_student_show
