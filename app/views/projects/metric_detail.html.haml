@@ -29,7 +29,7 @@
               %td
                 = comment.content
 %div.col-md-2
-  - if can? :create, :comment
+  - if can? :create, Comment
     = render partial: 'comment_form'
 
 :javascript
