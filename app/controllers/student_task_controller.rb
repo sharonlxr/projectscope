@@ -27,14 +27,14 @@ class StudentTaskController < ApplicationController
         end
         parents_param = params[:tasks]
         task_param = params[:task]
-        @task.title = task_param[:title]
-        @task.description = task_param[:description]
-        @task.parents.clear
-        @task.save!
+        @target_task.title = task_param[:title]
+        @target_task.description = task_param[:description]
+        @target_task.parents.clear
+        @target_task.save!
         @tasks.each do |p|
             if !p.title.nil? 
                 if !parents_param.nil? and parents_param[p.title]=="true"
-                    @task.add_parent(p)
+                    @target_task.add_parent(p)
                 end
             end
         end
