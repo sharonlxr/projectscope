@@ -48,10 +48,14 @@ Feature: add a new iteration
     
     
   Scenario: I see no iterations before any created
-    Given I am on the "iteration dashboard" page
+    Given I am logged in
+    And I am on the "iteration dashboard" page
+    # Given I am on the "iteration dashboard" page
     Then I should not see "iteration"
     
   Scenario:  I should be able to delete an iteration
+     Given I am logged in
+    # And I am on the "iteration dashboard" page
     Given I have "iteration_1, iteration_2" iterations created
     And I am on the "iteration dashboard" page 
     And I follow "iteration_1"
@@ -60,6 +64,8 @@ Feature: add a new iteration
     And I should not see "iteration_1"
     
   Scenario: Iterations should be ordered by most recent first by default
+     Given I am logged in
+    # And I am on the "iteration dashboard" page
     Given I am on the "iteration dashboard" page
     And I have "first_iteration" iterations created
     And I have "second_iteration" iterations created

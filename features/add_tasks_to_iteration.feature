@@ -59,17 +59,22 @@ Feature: add and edit tasks to exisiting iteration
     
   Scenario: edit existing task
     Given I create Task "customer meeting" to "meet with customer"
-    When I select "customer meeting" and press edit
+    And I am on the "iteration dashboard" page
+    # And I am on the dashboard page
+    And I follow "iteration_1"
+    When I follow "customer meeting"
+    # When I select "customer meeting" and press edit
     And I fill in "task_title" with "first official meeting"
     And I fill in "task_description" with "Meeting customer for first time and learn their need"
-    And I press "Save Task"
-    Then I should see "Successfully save changes"
+    And I press "Save Edit"
+    Then I should see "Successfully saved the changes"
     And I should see "first official meeting"
     And I should not see "customer meeting"
 
 
    Scenario: copy tasks button available
     Given I create Task "todo1" to "todo in iter1"
+    
     And I go back to iteration dashboard
     And I have "iteration_2" iterations created
     And I am on the "iteration dashboard" page

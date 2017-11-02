@@ -21,7 +21,11 @@ Given(/^I check "([^"]*)" as parents$/) do |parent_task|
 end
 
 Given(/^I select "([^"]*)" and press edit$/) do |task|
-  pending # Write code here that turns the phrase above into concrete actions
+  steps %Q{ 
+    Given I follow "#{task}"
+    # Then I press "Edit"
+  }
+  # pending # Write code here that turns the phrase above into concrete actions
 end
 
 Given (/^I create Task "([^"]*)" to "([^"]*)"$/) do |title, description|
@@ -62,7 +66,9 @@ Given("I am logged in as {string}") do |string|
 end
 
 Given("I select {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  steps %Q{ I follow "#{string}"}
+  # pending # Write code here that turns the phrase above into concrete actions
+  
 end
 
 # And (/^I  am on Iteration "([^"]*)"$/) do |iter|

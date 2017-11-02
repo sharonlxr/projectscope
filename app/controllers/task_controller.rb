@@ -12,6 +12,7 @@ class TaskController < ApplicationController
     def publish
         @iteration = Iteration.find(params[:iter])
         @all_tasks =  Task.where('iteration_id': params[:iter])
+        puts @all_tasks[0]
         #to do : eliminate all the copied task
         all_old_copied_tasks = StudentTask.where('iteration_id': params[:iter])
         all_old_copied_tasks.each do|e|
@@ -20,9 +21,11 @@ class TaskController < ApplicationController
         #to do : copy the tasks to all the teams
         teams = Project.all
         teams.each do |team|
+            
             map = Hash.new
             # copy the tasks for a team
             @all_tasks.each do|t|
+             
                 new_student_task = StudentTask.new
                 new_student_task.project = team
                 new_student_task.title = t.title
@@ -89,8 +92,7 @@ class TaskController < ApplicationController
         @selected_parents = @task.parents
     end
     
-    def publish
-    end
+  
     
     def update
         @task = Task.find( params[:id])
@@ -113,7 +115,7 @@ class TaskController < ApplicationController
         end
    
         ##need to add display message and direct to some page 
-        flash[:message]= "Successfully saved the change"
+        flash[:message]= "Successfully saved the changes"
    
         redirect_to edit_iteration_path(@task.iteration_id)
     
