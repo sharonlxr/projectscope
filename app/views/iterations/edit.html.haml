@@ -39,7 +39,7 @@
     
     = submit_tag 'Save Iteration', :class => "btn btn-primary"
     
-    
+%h2 Copy tasks to "#{@iteration.name}":    
 %br
 = form_tag copy_iterations_path(:id =>@iteration.id), :method => :put do
 
