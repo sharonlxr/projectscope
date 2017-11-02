@@ -1,0 +1,11 @@
+%table.table
+    %thead
+        %h2 Team #{@team.name}:
+        %tr
+            %th= "Title"
+            %th= "Description"
+    %tbody
+        - @tasks.each do |task|
+            %tr
+                %td= task.title
+                %td= task.description
