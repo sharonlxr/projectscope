@@ -20,6 +20,30 @@ class StudentTaskController < ApplicationController
     def saveChange
         @target_task = StudentTask.find(params[:id])
         #get all the information from the form submitted and save the change to targe task
+        team = current_user.project
+        @tasks = StudentTask.where('iteration_id': @target_task.iteration_id, 'project_id': team.id)
+        if !@tasks
+            @tasks =[]
+        end
+        parents_param = params[:tasks]
+        task_param = params[:task]
+        @task.title = task_param[:title]
+        @task.description = task_param[:description]
+        @task.parents.clear
+        @task.save!
+        @tasks.each do |p|
+            if !p.title.nil? 
+                if !parents_param.nil? and parents_param[p.title]=="true"
+                    @task.add_parent(p)
+                end
+            end
+        end
+   
+        ##need to add display message and direct to some page 
+        flash[:message]= "Successfully saved the change"
+   
+        ## to do: need to redirect
+        
     end
     
     #change the status of a task from student
