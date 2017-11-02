@@ -45,7 +45,7 @@ Rails.application.routes.draw do
   put '/task/:id', :to=>'task#update', :as =>'update_task'
   delete '/task/:id', :to=>'task#destroy'
   get '/iteration/student/show', :to=>'iterations#student_show', :as =>'student_iteration'
-  get '/task/student/show/:iter', :to=>'task#task_student_show', :as =>'show_students_task'
+  get '/task/student/show/:iter', :to=>'student_task#index', :as =>'show_students_task'
   get '/task/publish/:iter', :to=>'task#publish', :as=>'publish_tasks'
   
   get '/student_task/index/:iter', :to=>'student_task#index', :as=>'team_index'
@@ -56,7 +56,7 @@ Rails.application.routes.draw do
   get '/student_task/:team/new/:iter', :to=>'student_task#new', :as=>'new_student_task'
   put '/student_task/:team/new/:iter', :to=>'student_task#create', :as=>'create_new_student_task'
   delete '/student_task/:id/destroy', :to=>'student_task#destroy', :as=>'delete_student_task'
-  
+  get '/studenta_task/detail/:id', :to=>'student_task#detail', :as=>'detail_student_task'
   put '/iteration/:id/copy', :to=>'iterations#copy', :as=>'copy_iterations'
   root 'projects#index'
 
