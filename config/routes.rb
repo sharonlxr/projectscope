@@ -59,6 +59,7 @@ Rails.application.routes.draw do
   delete '/student_task/:id/destroy', :to=>'student_task#destroy', :as=>'delete_student_task'
   get '/studenta_task/detail/:id', :to=>'student_task#detail', :as=>'detail_student_task'
   put '/iteration/:id/copy', :to=>'iterations#copy', :as=>'copy_iterations'
+  put '/student_task/:id/status', :to=>'student_task#update_status', :as=>'update_status'
   root 'projects#index'
 
 end

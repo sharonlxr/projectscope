@@ -9,4 +9,5 @@ class StudentTask < ActiveRecord::Base
     def get_parents
         self.parents.map {|p| "\"#{p.title}\""}.join(',')
     end
+  
 end

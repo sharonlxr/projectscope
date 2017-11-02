@@ -6,6 +6,7 @@
             %th= "Description"
             %th= "Parents"
             %th= "Status"
+            
     %tbody
         - @tasks.each do |task|
             %tr
@@ -13,3 +14,6 @@
                 %td= task.description
                 %td= task.get_parents
                 %td= task.status
+               
+    
+

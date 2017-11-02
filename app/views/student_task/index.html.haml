@@ -4,9 +4,19 @@
         %tr
             %th= "Title"
             %th="Description"
+            %th="Parents"
+            %th="Status"
     %tbody        
         - @tasks.each do |t|
             %tr
                 %td= link_to t.title, detail_student_task_path(t.id)
                 %td= t.description
+                %td= t.get_parents
+                %td= t.status
+                %td
+                    = form_tag update_status_path(t.id), :method => :put do 
+                      
+                        = select_tag(:status,options_for_select([["In Screen", "In Screen"], ["In Process", "In Process"], ["Finished", "Finished"]]))
+                        
+                        = submit_tag 'Save'
                 

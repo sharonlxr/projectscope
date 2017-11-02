@@ -103,17 +103,12 @@ class StudentTaskController < ApplicationController
     end
     
     #change the status of a task from student
-    def updateStatus
-        
-    end
-    
-    #show the graph for all the teams for instructor
-    def showAllForInstructor
-        @iter = params[:iter]
-        @tasks = StudentTask.where('iteration_id': @iter)
-        @teams = Project.all
-        #to do: display the graph for each team
-        
+
+    def update_status
+        task = StudentTask.find( params[:id])
+        task.status = (params[:status])
+        task.save
+        redirect_to team_index_path(task.iteration_id)
     end
     
     #show the detailed graph of a team for instructor
