@@ -50,7 +50,7 @@ Rails.application.routes.draw do
   
   get '/student_task/index/:iter', :to=>'student_task#index', :as=>'team_index'
   get '/student_task/edit/:id', :to=>'student_task#edit', :as=>'edit_student_task'
-  get '/student_task/showTeams/:iter', :to=>'student_task#showAllForInstuctor', :as=>'show_all_team'
+  get '/student_task/showTeams/:iter', :to=>'student_task#showAllForInstructor', :as=>'show_all_team'
   get '/student_task/showTeam/:iter/:team', :to=>'student_task#showATeamForInstructor', :as=>'show_a_team'
   put '/student_task/:id/edit', :to=>'student_task#saveChange', :as=>'save_student_task'
   get '/student_task/:team/new/:iter', :to=>'student_task#new', :as=>'new_student_task'

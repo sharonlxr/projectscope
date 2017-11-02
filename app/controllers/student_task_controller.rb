@@ -108,7 +108,7 @@ class StudentTaskController < ApplicationController
     end
     
     #show the graph for all the teams for instructor
-    def showAllForInstuctor
+    def showAllForInstructor
         @iter = params[:iter]
         @tasks = StudentTask.where('iteration_id': @iter)
         @teams = Project.all
@@ -118,9 +118,9 @@ class StudentTaskController < ApplicationController
     
     #show the detailed graph of a team for instructor
     def showATeamForInstructor
-        @team = params[:team]
+        @team = Project.find(params[:team])
         iter = params[:iter]
-        @tasks = StudentTask.where('iteration_id': iter, 'project_id': @team)
+        @tasks = StudentTask.where('iteration_id': iter, 'project_id': @team.id)
         #todo: diplay the tasks 
     end
 end
