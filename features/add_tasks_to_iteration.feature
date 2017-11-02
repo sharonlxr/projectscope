@@ -74,7 +74,6 @@ Feature: add and edit tasks to exisiting iteration
 
    Scenario: copy tasks button available
     Given I create Task "todo1" to "todo in iter1"
-    
     And I go back to iteration dashboard
     And I have "iteration_2" iterations created
     And I am on the "iteration dashboard" page

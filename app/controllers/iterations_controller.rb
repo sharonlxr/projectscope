@@ -26,6 +26,7 @@ class IterationsController < ApplicationController
   def edit
   
     @iteration = Iteration.find(params[:id])
+    @iterations = Iteration.all
     @tasks = Task.where('iteration_id': params[:id])
     # @tasks = Task.joins(:iteration).where('iteration_id': params[:id])
     @tasks.each do|e|
@@ -56,4 +57,33 @@ class IterationsController < ApplicationController
     redirect_to iterations_path
   end
   
+  def copy
+  
+    @to = Iteration.find(params[:id])
+    @selected_params = params[:iterations]
+
+    @iterations = Iteration.all
+    @iterations.each do|i|
+
+      if @selected_params[i.id.to_s]=="true"
+    
+        @tasks = Task.where('iteration_id',i.id)
+        map = {}
+        @tasks.each do|t|
+          new_task = Task.new
+          new_task.title= t.title
+          new_task.description=t.description
+          new_task.iteration_id=@to.id
+          new_task.save
+          map[t.id]=new_task
+        end
+        @tasks.each do|t|
+          t.parents.each do|p|
+             t.add_parent(map[p.id])
+          end
+        end
+      end
+    end
+    redirect_to edit_iteration_path(@to.id)
+  end
 end

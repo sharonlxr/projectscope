@@ -56,6 +56,8 @@ Rails.application.routes.draw do
   get '/student_task/:team/new/:iter', :to=>'student_task#new', :as=>'new_student_task'
   put '/student_task/:team/new/:iter', :to=>'student_task#create', :as=>'create_new_student_task'
   delete '/student_task/:id/destroy', :to=>'student_task#destroy', :as=>'delete_student_task'
+  
+  put '/iteration/:id/copy', :to=>'iterations#copy', :as=>'copy_iterations'
   root 'projects#index'
 
 end
