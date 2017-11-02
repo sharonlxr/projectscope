@@ -95,14 +95,12 @@ ActiveRecord::Schema.define(version: 20171030051702) do
     t.datetime "updated_at",      null: false
     t.integer  "project_id"
     t.integer  "iteration_id"
-    t.integer  "studenttask_id"
     t.integer  "student_task_id"
   end
 
   add_index "student_tasks", ["iteration_id"], name: "index_student_tasks_on_iteration_id"
   add_index "student_tasks", ["project_id"], name: "index_student_tasks_on_project_id"
   add_index "student_tasks", ["student_task_id"], name: "index_student_tasks_on_student_task_id"
-  add_index "student_tasks", ["studenttask_id"], name: "index_student_tasks_on_studenttask_id"
 
   create_table "tasks", force: :cascade do |t|
     t.string   "title"
