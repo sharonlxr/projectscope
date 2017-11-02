@@ -76,18 +76,22 @@ Feature: add and edit tasks to exisiting iteration
 
    Scenario: copy tasks button available
     Given I create Task "todo1" to "todo in iter1"
-    And I go back to iteration dashboard
+ 
     And I have "iteration_2" iterations created
     And I am on the "iteration dashboard" page
     And I follow "iteration_2"
-    Then I should see "copy from other iteration"
+    And I follow "Edit Iteration"
+    Then I should see "Copy tasks to"
+   
+    
 
    Scenario: copy tasks from existing iteration
     Given I create Task "todo1" to "todo in iter1"
-    And I go back to iteration dashboard
+  
     And I have "iteration_2" iterations created
     And I am on the "iteration dashboard" page
     And I follow "iteration_2"
-    Then I select "iteration_1" to copy
-    Then I press "copy"
+    And I follow "Edit Iteration"
+    Then I check "iterations[1]" 
+    Then I press "Copy"
     Then I should see "todo1"
