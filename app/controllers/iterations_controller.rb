@@ -1,9 +1,15 @@
 class IterationsController < ApplicationController
-
+  def show
+    @iteration = Iteration.find(params[:id])
+    @tasks = Task.where('iteration_id': @iteration.id)
+    @teams = Project.all
+    @student_tasks = StudentTask.where('iteration_id': @iteration.id)
+  end
   def index
     puts "current_user:"
     puts current_user.role
-    if current_user.is_student? or current_user.is_admin?
+    if current_user.is_student?
+      # or current_user.is_admin?
       puts "in student view"
       redirect_to student_iteration_path()
       return
@@ -15,7 +21,7 @@ class IterationsController < ApplicationController
     #create a new, default Iteration and redirect to the edit page for that iteration
     require "date"
     n = Iteration.create!(:name => "new_iteration", :start => Date.today, :end => Date.today + 7)
-    redirect_to edit_iteration_path(n.id)
+    redirect_to show_iteration_path(n.id)
   end
   def student_show
     puts "student show"
@@ -48,7 +54,7 @@ class IterationsController < ApplicationController
     to_sub["end"] = Date.new(iteration_params["end(1i)"].to_i, iteration_params["end(2i)"].to_i, iteration_params["end(3i)"].to_i)
     @iteration = Iteration.find params[:id]
     @iteration.update_attributes!(to_sub)
-    redirect_to iterations_path
+    redirect_to show_iteration_path(params[:id])
   end
   
   def destroy

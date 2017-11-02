@@ -4,8 +4,12 @@
         %tr
             %th= "Title"
             %th= "Description"
+            %th= "Parents"
+            %th= "Status"
     %tbody
         - @tasks.each do |task|
             %tr
-                %td= task.title
+                %td= link_to task.title, edit_student_task_path(task.id)
                 %td= task.description
+                %td= task.get_parents
+                %td= task.status

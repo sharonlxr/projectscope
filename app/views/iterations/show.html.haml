@@ -1,0 +1,41 @@
+%p= link_to "Back", iterations_path
+- if flash[:message]
+    %p= flash[:message]
+
+.btn.btn-primary= link_to "Edit Iteration", edit_iteration_path(@iteration.id), :style => "color: white;text-decoration: none;"
+
+
+%table.table#Tasks
+    %thead
+        -if !@tasks.empty?
+            %h2 Current Tasks Template:
+            %tr
+                %th= "Title"
+                %th="Description"
+    %tbody        
+        - @tasks.each do |t|
+            %tr
+                %td= t.title
+                %td= t.description
+                // %td= iteration.end
+
+
+
+%table.table
+    %thead
+        %h2 Teams:
+        %tr
+            %th= "Teams"
+            %th= "Tasks"
+    %tbody
+        - @teams.each do |team|
+            %tr
+                %td= link_to team.name, show_a_team_path(:iter =>@iteration.id, :team =>team.id)
+                %td
+                    
+                    -@student_tasks.where('project_id':team.id).each do |t|
+                        %td
+                            
+                            %td= t.title
+                            
+                            %td= t.status

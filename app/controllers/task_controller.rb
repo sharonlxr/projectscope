@@ -43,7 +43,7 @@ class TaskController < ApplicationController
                 end
             end
         end
-        redirect_to edit_iteration_path(params[:iter])
+        redirect_to show_iteration_path(params[:iter])
     end
     def task_student_show
         @iteration = Iteration.find(params[:iter])
@@ -117,7 +117,7 @@ class TaskController < ApplicationController
         ##need to add display message and direct to some page 
         flash[:message]= "Successfully saved the changes"
    
-        redirect_to edit_iteration_path(@task.iteration_id)
+        redirect_to show_iteration_path(@task.iteration_id)
     
         #retreive form submission paramaters from the total paramaters
         # task_params = params["task"]

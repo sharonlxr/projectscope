@@ -39,6 +39,7 @@ Rails.application.routes.draw do
   
 
   resources :iterations, :except => [:show]
+  get '/iteration/:id', :to =>'iterations#show', :as=> 'show_iteration'
   get '/task/:iter/new', :to =>'task#new', :as => 'new_task_view'
   post '/task/:iter/create', :to =>'task#create', :as => 'create_new_task'
   get '/task/:id/edit', :to =>'task#edit', :as =>'edit_task'
@@ -50,7 +51,7 @@ Rails.application.routes.draw do
   
   get '/student_task/index/:iter', :to=>'student_task#index', :as=>'team_index'
   get '/student_task/edit/:id', :to=>'student_task#edit', :as=>'edit_student_task'
-  get '/student_task/showTeams/:iter', :to=>'student_task#showAllForInstructor', :as=>'show_all_team'
+  
   get '/student_task/showTeam/:iter/:team', :to=>'student_task#showATeamForInstructor', :as=>'show_a_team'
   put '/student_task/:id/edit', :to=>'student_task#saveChange', :as=>'save_student_task'
   get '/student_task/:team/new/:iter', :to=>'student_task#new', :as=>'new_student_task'

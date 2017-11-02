@@ -8,7 +8,7 @@
     %tbody
         - @iterations.each do |iteration|
             %tr
-                %td= link_to iteration.name, edit_iteration_path(iteration.id)
+                %td= link_to iteration.name, show_iteration_path(iteration.id)
                 %td= iteration.start
                 %td= iteration.end
 
