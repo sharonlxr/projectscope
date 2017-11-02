@@ -4,6 +4,10 @@ class StudentTaskController < ApplicationController
     def index
         team = current_user.project
         iter = params[:iter]
+        #testing only purpose
+        if team==nil
+            team = Project.all[0]
+        end
         @tasks = StudentTask.where('iteration_id': iter, 'project_id': team.id)
         #to do : display the tasks in the view
         
