@@ -3,7 +3,20 @@
     %p= flash[:message]
 
 .btn.btn-primary= link_to "Edit Iteration", edit_iteration_path(@iteration.id), :style => "color: white;text-decoration: none;"
-
+%table.table#Tasks
+    %thead
+        
+      
+        %tr
+            %th= "Iteration Name"
+            %th="Start"
+            %th="End"
+    %tbody        
+        
+        %tr
+            %td= @iteration.name
+            %td= @iteration.start
+            %td= @iteration.end
 
 %table.table#Tasks
     %thead

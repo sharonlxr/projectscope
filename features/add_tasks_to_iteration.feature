@@ -10,6 +10,7 @@ Feature: add and edit tasks to exisiting iteration
     And I am on the "iteration dashboard" page
     # And I am on the dashboard page
     And I follow "iteration_1"
+    And I follow "Edit Iteration"
     # Then I should be on the "iteration_1 edit" page
 
   Scenario: Instructor should see a link to add task
@@ -62,6 +63,7 @@ Feature: add and edit tasks to exisiting iteration
     And I am on the "iteration dashboard" page
     # And I am on the dashboard page
     And I follow "iteration_1"
+    And I follow "Edit Iteration"
     When I follow "customer meeting"
     # When I select "customer meeting" and press edit
     And I fill in "task_title" with "first official meeting"

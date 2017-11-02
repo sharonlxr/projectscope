@@ -46,7 +46,10 @@ Then("I select {string} to copy") do |string|
 end
 
 Given("Create team {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+  n = Project.new
+  n.name= string
+  n.save
+   # Write code here that turns the phrase above into concrete actions
 end
 
 Then("I should see graph for {string}") do |string|

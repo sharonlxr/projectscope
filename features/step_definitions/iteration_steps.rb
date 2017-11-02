@@ -13,7 +13,7 @@ end
 
 Then(/^I should see "(.*)" iterations$/) do |arg1|
   arg1.to_i.times do |num|
-    expect(page).to have_selector(:css, "a[href='#{edit_iteration_path(num + 1)}']" )
+    expect(page).to have_selector(:css, "a[href='#{show_iteration_path(num + 1)}']" )
   end 
 end
 

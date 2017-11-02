@@ -21,7 +21,7 @@ class IterationsController < ApplicationController
     #create a new, default Iteration and redirect to the edit page for that iteration
     require "date"
     n = Iteration.create!(:name => "new_iteration", :start => Date.today, :end => Date.today + 7)
-    redirect_to show_iteration_path(n.id)
+    redirect_to edit_iteration_path(n.id)
   end
   def student_show
     puts "student show"
