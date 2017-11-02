@@ -1,0 +1,11 @@
+%table.table
+    %thead
+        %h2 Teams:
+        %tr
+            %th= "Teams"
+            %th= "Updates"
+    %tbody
+        - @teams.each do |team|
+            %tr
+                %td= link_to team.name, show_a_team_path(@iter, team.user_id)
+                %td= Last Updated on: #{@tasks.where('project_id': team.user_id).updated_at}
