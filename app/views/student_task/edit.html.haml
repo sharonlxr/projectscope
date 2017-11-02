@@ -1,0 +1,23 @@
+%h1 Edit New Task #{@task.title} For Specific Team
+- if flash[:message]
+    %p= flash[:message]
+= form_tag save_student_task_path(@task.id), :method => :put do
+    .form_row
+        .form-group
+        = label :task, :title, 'Title: '
+        = text_field :task, 'title', class: "form-control"
+        .form-group
+        = label :task, :description, 'Description: '
+        = text_field :task, 'description', class: "form-control"
+    .form-group
+        .form-check
+        %br
+        .form_row
+            %p{:style => "font-weight: bold;"} Parent Tasks:
+            .form_row
+            // 1. to do, retrive parents from task db
+            - @parents.each do |t|
+                = t.title
+                = check_box_tag "tasks[#{t.title}]", true, (@selected_parents.include? t)
+    .form-group
+        = submit_tag 'Save Edit', :class => "btn btn-primary"

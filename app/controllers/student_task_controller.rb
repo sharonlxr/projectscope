@@ -6,12 +6,14 @@ class StudentTaskController < ApplicationController
         iter = params[:iter]
         @tasks = StudentTask.where('iteration_id': iter, 'project_id': team.id)
         #to do : display the tasks in the view
+        
     end
     #retrive the form for editing a task(instructor only)
     def edit
         @task = StudentTask.find(params[:id])
         @parents = StudentTask.where('iteration_id': @task.iteration_id, 'project_id': @task.project_id)
         #to do : display the task in the view
+        @selected_parents = @task.parents
     end
     
     #save the change made by an instructor

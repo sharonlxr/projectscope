@@ -1,0 +1,12 @@
+%table.table#Tasks
+    %thead
+        %h2 Latest Tasks:
+        %tr
+            %th= "Title"
+            %th="Description"
+    %tbody        
+        - @tasks.each do |t|
+            %tr
+                %td= link_to t.title, edit_student_task_path(t.id)
+                %td= t.description
+                

@@ -4,7 +4,7 @@ class IterationsController < ApplicationController
     puts "current_user:"
     puts current_user.role
     if current_user.is_student? 
-      # or current_user.is_admin?
+      #or current_user.is_admin?
       puts "in student view"
       redirect_to student_iteration_path()
       return
