@@ -1,4 +1,4 @@
-%h1 Edit New Task #{@task.title}
+%h1 Edit Task #{@task.title}
 - if flash[:message]
     %p= flash[:message]
 = form_tag update_task_path(@task.id), :method => :put do
@@ -17,11 +17,13 @@
             .form_row
             // 1. to do, retrive parents from task db
             - @all_parents.each do |t|
-                = t.title
-                = check_box_tag "tasks[#{t.title}]", true, (@selected_parents.include? t)
+                .div.buttonInLine
+                    .buttonInLine= t.title
+                    = check_box_tag "tasks[#{t.title}]", true, (@selected_parents.include? t)
+    %br
+    %br
     .form-group
-        = submit_tag 'Save Edit', :class => "btn btn-primary"
-        
-%br
+        = submit_tag 'Save Edit', :class => "btn btn-primary buttonInLine top"
+
 = form_tag update_task_path(@task.id), :method => :delete do
     = submit_tag 'Delete Task', :class => "btn btn-primary"
