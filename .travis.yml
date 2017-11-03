@@ -21,7 +21,7 @@ before_install:
 script:
   - rm db/test.sqlite3
   - rm db/schema.rb
-  - bundle exec rake db:drop db:create db:migrate
+
   - bundle exec rake db:migrate RAILS_ENV=test --trace
   - bundle exec rake db:test:prepare
   - bundle exec rspec
