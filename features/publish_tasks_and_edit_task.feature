@@ -12,42 +12,47 @@ Feature: publish tasks to all the teams and edit for each team
     And I am on the "iteration dashboard" page
     And I follow "iteration_1"
     Given I create Task "customer meeting" to "meet with customer"
+    And I follow "Edit Iteration"
     When I follow "Add new task"
     And I fill in "task_title" with "create low-fi"
     And I fill in "task_description" with "mock up after the meeting"
     And I should see "customer meeting"
     And I check "tasks[customer meeting]"
     And I press "Create Task"
+    
  
 
  
   
     Scenario: publish task to students and see team's general graph
-        Then I press "publish tasks"
-        And I am on the "tasks are published" page
+        Then I follow "Publish tasks"
+        And I am on the showing "iteration_1" page
         Then I should see graph for "team1"
         Then I should see graph for "team2"
         
     Scenario: each team's graph can be clicked for edit
-        Then I press "publish tasks"
-        And I am on the "tasks are published" page
+        Then I follow "Publish tasks"
+        And I am on the showing "iteration_1" page
         Then I should see graph for "team1"
         Then I should see graph for "team2"
-        Then I follow the graph for "team1"
-        Then I should be on the tasks page for "team1"
+        Then I follow "team1"
+        Then I should be on the tasks page for "team1" in "iteration_1"
+ 
         
     Scenario: edit for individual team's tasks
-        Then I press "publish tasks"
-        And I am on the "tasks are published" page
+        Then I follow "Publish tasks"
+        And I am on the showing "iteration_1" page
         Then I should see graph for "team1"
         Then I should see graph for "team2"
-        Then I follow the graph for "team1"
-        Then I should be on the tasks page for "team1"
-        Then I edit "create low_fi"
+        Then I follow "team1"
+        Then I should be on the tasks page for "team1" in "iteration_1"
+        Then I should see the "create low-fi" link
+        Then I edit "create low-fi"
         And I fill in "task_title" with "create high-fi"
         And I fill in "task_description" with "work with the customer"
-        Then I press "save"
-        Then I should be on the tasks page for "team1"
+        Then I press "Save Edit"
+        Then I should be on the tasks page for "team1" in "iteration_1"
+        Then I should see "Successfully saved the change"
         Then I should see "create high-fi"
         Then I should not see "create low-fi"
   

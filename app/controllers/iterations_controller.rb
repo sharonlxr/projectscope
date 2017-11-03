@@ -63,28 +63,27 @@ class IterationsController < ApplicationController
   end
   
   def copy
-  
     @to = Iteration.find(params[:id])
     @selected_params = params[:iterations]
-
     @iterations = Iteration.all
     @iterations.each do|i|
-
-      if @selected_params[i.id.to_s]=="true"
-    
-        @tasks = Task.where('iteration_id',i.id)
+      if @to.id != i.id && @selected_params[i.id.to_s]=="true"
+        @tasks = Task.where('iteration_id': i.id)
         map = {}
         @tasks.each do|t|
           new_task = Task.new
           new_task.title= t.title
-          new_task.description=t.description
-          new_task.iteration_id=@to.id
+          new_task.description = t.description
+          new_task.iteration_id = @to.id
           new_task.save
           map[t.id]=new_task
         end
         @tasks.each do|t|
+          target = map[t.id]
           t.parents.each do|p|
-             t.add_parent(map[p.id])
+            if map[p.id] !=nil
+             target.add_parent(map[p.id])
+           end
           end
         end
       end

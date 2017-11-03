@@ -53,19 +53,25 @@ Given("Create team {string}") do |string|
 end
 
 Then("I should see graph for {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+   steps %Q{Then I should see the "#{string}" link}
+   # Write code here that turns the phrase above into concrete actions
 end
 
-Then("I follow the graph for {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
-end
+
 
 Then("I edit {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+   steps %Q{Then I follow "#{string}"
+   }
+  # Write code here that turns the phrase above into concrete actions
 end
 
 Given("I am logged in as {string}") do |string|
-  pending # Write code here that turns the phrase above into concrete actions
+   admin_user = User.create!(provider_username: "Admin_stu", uid: "uadmin", email: 'uadmin_stu@example.com',
+                            provider: "developer", role: User::STUDENT, password: Devise.friendly_token[0,20])
+  ENV['ADMIN_PASSWORD'] = 'password'
+  admin_user.project_id = Project.find_by_name(string).id
+  visit "/login/#{admin_user.uid}?passwd=password"
+   # Write code here that turns the phrase above into concrete actions
 end
 
 Given("I select {string}") do |string|

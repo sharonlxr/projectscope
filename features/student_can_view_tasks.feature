@@ -9,6 +9,7 @@ Feature: student can view tasks for each iteration
     And I have "iteration_1" iterations created
     And I am on the "iteration dashboard" page
     And I follow "iteration_1"
+    And I follow "Edit Iteration"
     Given I create Task "customer meeting" to "meet with customer"
     When I follow "Add new task"
     And I fill in "task_title" with "create low-fi"

@@ -96,9 +96,8 @@ class StudentTaskController < ApplicationController
    
         ##need to add display message and direct to some page 
         flash[:message]= "Successfully saved the change"
-   
         ## to do: need to redirect but need to show the team view but not implemented yet
-        redirect_to edit_student_task_path(params[:id])
+        redirect_to show_a_team_path(:iter =>@target_task.iteration_id,:team => @target_task.project_id)
         
     end
     

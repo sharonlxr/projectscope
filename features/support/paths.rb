@@ -47,7 +47,12 @@ module NavigationHelpers
       when /^task creation page for "(.*)"/ then
       
         new_task_view_path(Iteration.find_by_name($1).id)
-
+      when /^the showing "(.*)" page/ then
+        show_iteration_path(Iteration.find_by_name($1).id)
+      when /^the tasks page for "(.*)" in "(.*)"/ then
+        show_a_team_path(:team =>Project.find_by_name($1).id,:iter=>Iteration.find_by_name($2))
+      when /^iteration dashboard/ then
+        "/iterations"
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #
