@@ -51,7 +51,7 @@
                     -@student_tasks.where('project_id':team.id).each do |t|
                         %td
                             %table{:border => "2", :bordercolor => "green"}
-                                %tr
+                                %tr{:class => t.status}
                                     %td= t.title
-                                %tr
+                                %tr{:class => t.status}
                                     %td= t.status
