@@ -84,7 +84,7 @@ class IterationsController < ApplicationController
         end
         @tasks.each do|t|
           t.parents.each do|p|
-             t.add_parent(map[p.id])
+             map[t.id].add_parent(map[p.id])
           end
         end
       end
