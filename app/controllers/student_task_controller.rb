@@ -98,7 +98,6 @@ class StudentTaskController < ApplicationController
         flash[:message]= "Successfully saved the change"
         ## to do: need to redirect but need to show the team view but not implemented yet
         redirect_to show_a_team_path(:iter =>@target_task.iteration_id,:team => @target_task.project_id)
-        
     end
     
     #change the status of a task from student
