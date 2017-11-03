@@ -75,7 +75,7 @@ Feature: add and edit tasks to exisiting iteration
     And I should not see "customer meeting"
 
 
-   Scenario: copy tasks button available
+  Scenario: copy tasks button available
     Given I create Task "todo1" to "todo in iter1"
  
     And I have "iteration_2" iterations created
@@ -86,7 +86,7 @@ Feature: add and edit tasks to exisiting iteration
    
     
 
-   Scenario: copy tasks from existing iteration
+  Scenario: copy tasks from existing iteration
     Given I create Task "todo1" to "todo in iter1"
   
     And I have "iteration_2" iterations created
@@ -96,7 +96,7 @@ Feature: add and edit tasks to exisiting iteration
     Then I check "iterations[1]" 
     Then I press "Copy"
     Then I should see "todo1"
- Scenario: delete existing task
+Scenario: delete existing task
     Given I create Task "customer meeting" to "meet with customer"
     And I am on the "iteration dashboard" page
     # And I am on the dashboard page
