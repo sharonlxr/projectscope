@@ -28,13 +28,14 @@
         %tr
         
             %th= "Teams"
+
             -if !@teams[0].nil?
                 %th{:colspan => "#{@student_tasks.where('project_id':@teams[0].id).length}", :style => "text-align: center;"} Tasks Update
+
     %tbody
         - @teams.each do |team|
             %tr
                 %td= link_to team.name, show_a_team_path(:iter =>@iteration.id, :team =>team.id)
-
                 -@student_tasks.where('project_id':team.id).each do |t|
                     %td{:class => t.status}
                         %table
