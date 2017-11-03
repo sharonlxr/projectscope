@@ -17,6 +17,9 @@ Feature: student can view tasks for each iteration
     And I should see "customer meeting"
     And I check "tasks[customer meeting]"
     And I press "Create Task"
+
+    And I follow "Publish tasks"
+    And I follow "Logout"
     Given I am logged in as "team1"
  
 
@@ -25,13 +28,14 @@ Feature: student can view tasks for each iteration
     Scenario: should be able to select iteration
       And I should see "Iterations"
       And I follow "Iterations"
-     
-      And I should see "iteration_1"
-      And I select "iteration_1"
+      And I should see the "iteration_1" link
+
+      
      Scenario: should be able to view tasks iteration
       And I go to iteration dashboard
       And I should see "iteration_1"
-      And I select "iteration_1"
-      Then I should see graph for "iteration_1"
+      And I follow "iteration_1"
+      Then I should see "customer meeting"
+  
       
   

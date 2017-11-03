@@ -58,7 +58,7 @@ Feature: add and edit tasks to exisiting iteration
     Then I should see "Successfully created task"
     And I should see "customer meeting"
     
-  Scenario: edit existing task
+  Scenario: edit existing task from template
     Given I create Task "customer meeting" to "meet with customer"
     And I am on the "iteration dashboard" page
     # And I am on the dashboard page
@@ -72,11 +72,18 @@ Feature: add and edit tasks to exisiting iteration
     Then I should see "Successfully saved the changes"
     And I should see "first official meeting"
     And I should not see "customer meeting"
-
+  Scenario: delete existing task from template
+    Given I create Task "customer meeting" to "meet with customer"
+    And I am on the "iteration dashboard" page
+    # And I am on the dashboard page
+    And I follow "iteration_1"
+    And I follow "Edit Iteration"
+    When I follow "customer meeting"
+    And I press "Delete Task"
+    And I should not see "customer meeting"
 
    Scenario: copy tasks button available
     Given I create Task "todo1" to "todo in iter1"
- 
     And I have "iteration_2" iterations created
     And I am on the "iteration dashboard" page
     And I follow "iteration_2"

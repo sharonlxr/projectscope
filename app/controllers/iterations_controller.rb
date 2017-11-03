@@ -6,11 +6,10 @@ class IterationsController < ApplicationController
     @student_tasks = StudentTask.where('iteration_id': @iteration.id)
   end
   def index
-    puts "current_user:"
     puts current_user.role
     if current_user.is_student?
       # or current_user.is_admin?
-      puts "in student view"
+     
       redirect_to student_iteration_path()
       return
     end
@@ -24,7 +23,6 @@ class IterationsController < ApplicationController
     redirect_to edit_iteration_path(n.id)
   end
   def student_show
-    puts "student show"
     @iterations = Iteration.order(id: :asc).reverse_order.limit(10)
   end
   

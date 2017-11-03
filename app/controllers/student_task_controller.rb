@@ -50,7 +50,7 @@ class StudentTaskController < ApplicationController
    
         ##need to add display message and direct to some page 
         flash[:message]= "Successfully create the task"
-        redirect_to edit_student_task_path(new_added.id)
+        redirect_to   show_a_team_path(:iter =>params[:iter],:team => params[:team])
     
     end
     def destroy

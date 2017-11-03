@@ -17,5 +17,6 @@
                 %td= task.get_parents
                 %td= task.status
                
-    
+.btn.btn-primary= link_to "Add new task", new_student_task_path(:team =>@team.id, :iter =>params[:iter]), :style => "color: white;text-decoration: none;"
+
 

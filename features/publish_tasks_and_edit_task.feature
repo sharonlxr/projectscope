@@ -37,7 +37,28 @@ Feature: publish tasks to all the teams and edit for each team
         Then I should see graph for "team2"
         Then I follow "team1"
         Then I should be on the tasks page for "team1" in "iteration_1"
- 
+    Scenario: add new tasks to team's graph
+        Then I follow "Publish tasks"
+        And I am on the showing "iteration_1" page
+        Then I should see graph for "team1"
+        Then I should see graph for "team2"
+        Then I follow "team1"
+        Then I follow "Add new task"
+         And I fill in "task_title" with "third task"
+        And I fill in "task_description" with "baah"
+        And I should see "customer meeting"
+        And I check "tasks[customer meeting]"
+        And I press "Save"
+        And I should see "third task"
+     Scenario: delete task for a team
+        Then I follow "Publish tasks"
+        And I am on the showing "iteration_1" page
+        Then I should see graph for "team1"
+        Then I should see graph for "team2"
+        Then I follow "team1"
+        Then I follow "customer meeting"
+        Then I press "Delete Task"
+        And I should not see "customer meeting"
         
     Scenario: edit for individual team's tasks
         Then I follow "Publish tasks"
