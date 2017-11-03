@@ -26,8 +26,10 @@
     %thead
         %h2 Teams:
         %tr
+        
             %th= "Teams"
-            %th{:colspan => "#{@student_tasks.where('project_id':@teams[0].id).length}", :style => "text-align: center;"} Tasks Update
+            -if !@teams[0].nil?
+                %th{:colspan => "#{@student_tasks.where('project_id':@teams[0].id).length}", :style => "text-align: center;"} Tasks Update
     %tbody
         - @teams.each do |team|
             %tr
