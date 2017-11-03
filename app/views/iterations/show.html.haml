@@ -2,7 +2,7 @@
 - if flash[:message]
     %p= flash[:message]
 
-.btn.btn-primary= link_to "Edit Iteration", edit_iteration_path(@iteration.id), :style => "color: white;text-decoration: none;"
+
 %table.table#Tasks
     %thead
         
@@ -17,6 +17,8 @@
             %td= @iteration.name
             %td= @iteration.start
             %td= @iteration.end
+
+.btn.btn-primary= link_to "Edit Iteration", edit_iteration_path(@iteration.id), :style => "color: white;text-decoration: none;"
 
 %table.table#Tasks
     %thead
@@ -39,7 +41,7 @@
         %h2 Teams:
         %tr
             %th= "Teams"
-            %th= "Tasks"
+            %th{:colspan => "9", :style => "text-align: center;"} Tasks Update
     %tbody
         - @teams.each do |team|
             %tr
@@ -48,7 +50,8 @@
                     
                     -@student_tasks.where('project_id':team.id).each do |t|
                         %td
-                            
-                            %td= t.title
-                            
-                            %td= t.status
+                            %table{:border => "2", :bordercolor => "green"}
+                                %tr
+                                    %td= t.title
+                                %tr
+                                    %td= t.status
