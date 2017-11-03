@@ -1,6 +1,6 @@
-%table.table#Tasks
+%table.table.table-striped#Tasks
     %thead
-        %h2 Latest Tasks:
+        %h2 Tasks:
         %tr
             %th= "Title"
             %th="Description"
@@ -16,5 +16,5 @@
                 %td
                     = form_tag update_status_path(t.id), :method => :put do 
                         = select_tag(:status,options_for_select([["In Screen", "In Screen"], ["In Process", "In Process"], ["Finished", "Finished"]]))
-                        = submit_tag 'Save'
+                        = submit_tag 'Save', :class => "btn btn-primary left"
                 
