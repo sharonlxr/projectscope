@@ -96,3 +96,16 @@ Feature: add and edit tasks to exisiting iteration
     Then I check "iterations[1]" 
     Then I press "Copy"
     Then I should see "todo1"
+ Scenario: delete existing task
+    Given I create Task "customer meeting" to "meet with customer"
+    And I am on the "iteration dashboard" page
+    # And I am on the dashboard page
+    And I follow "iteration_1"
+    And I follow "Edit Iteration"
+    When I follow "customer meeting"
+    And I fill in "task_description" with "Meeting customer for first time and learn their need"
+    And I press "Save Edit"
+    Then I follow "Edit Iteration"
+    And I follow "customer meeting"
+    And I press "Delete Task"
+    And I should not see "customer meeting"
