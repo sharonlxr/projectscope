@@ -23,7 +23,9 @@ Feature: student can view tasks for each iteration
  
   
     Scenario: should be able to select iteration
-      And I go to iteration dashboard
+      And I should see "Iterations"
+      And I follow "Iterations"
+     
       And I should see "iteration_1"
       And I select "iteration_1"
      Scenario: should be able to view tasks iteration

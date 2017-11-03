@@ -81,7 +81,6 @@ class IterationsController < ApplicationController
         @tasks.each do|t|
           target = map[t.id]
           t.parents.each do|p|
-
             if map[p.id] !=nil
              target.add_parent(map[p.id])
            end
