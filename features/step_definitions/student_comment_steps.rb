@@ -27,17 +27,19 @@ def user_type_from_string(string)
   end
 end
 
-Given(/the following metrics exist:/) do |metrics_table|
-
+Given(/the following metrics samples exist:/) do |metrics_table|
+  
+  d = Date.today
   metrics_table.hashes.each do |metric|
     m = MetricSample.create!(:metric_name => metric["metric_name"],
                              :project_id => Project.find_by(name: metric["project"]).id,
-                             :score => 3,
+                             :score => metric["score"],
                              :image => File.read('./db/fake_data/slack2.json'),
-                             :created_at => Date.new(1997,1,3))
+                             :created_at => d)
     Config.create(:metric_name => metric["name"],
                   :project_id => Project.find_by(name: metric["project"]).id,
                   :token => (0...50).map { ('a'..'z').to_a[rand(26)] }.join)
+    d = d.prev_day
   end
 
 end
@@ -78,3 +80,29 @@ Given(/there is a "(.*)" comment "(.*)" on project "(.*)" metric "(.*)"/) do |us
                     content: comment)
 end
 
+When /^(?:|I )fill in the "([^"]*)" comment box with "([^"]*)"$/ do |num, value|
+  num = num[0].to_i - 1
+  within("form#comment_form_#{num}") do
+    fill_in("content", :with => value)
+  end
+end
+
+When /^(?:|I )submit form number "(.*)"$/ do |num|
+  num = num.to_i - 1
+  within("form#comment_form_#{num}") do
+    click_button("Submit")
+  end
+end
+
+Then /^there should be metric "(.*)"$/ do |num|
+  page.should have_css("div#project-1-ondate-code_climate-#{num}")
+end
+
+
+Then /^there should not be metric "(.*)"$/ do |num|
+  page.should_not have_css("div#project-1-ondate-code_climate-#{num}")
+end
+
+And /^I print page/ do
+  print(page.body)
+end
