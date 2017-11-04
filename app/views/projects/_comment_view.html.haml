@@ -1,0 +1,8 @@
+- user = User.find_by(id: comment.user_id)
+- if not user.nil? and user.provider_username
+  %div
+    = user.provider_username + ": "
+  %div
+    = comment.content.to_s
+- else
+  = comment.content

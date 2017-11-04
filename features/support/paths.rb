@@ -53,6 +53,10 @@ module NavigationHelpers
         show_a_team_path(:team =>Project.find_by_name($1).id,:iter=>Iteration.find_by_name($2))
       when /^iteration dashboard/ then
         "/iterations"
+        
+      when /^the "view project '(.*)'" page/ then
+        project_path(Project.find_by(name: $1).id)
+
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:
       #

@@ -5,46 +5,96 @@ Feature: students can comment
   I want to be able to add comments (new comment threads) to metrics
   
 Background: users and project in the data base
+  
+  Given the following projects exist:
+  | name      |
+  | Project_1 |
+  | Project_2 |
+
+  Given the following metrics samples exist:
+  | metric_name  | project   | score |
+  | code_climate | Project_1 | 137   |
+  | github       | Project_1 | 3     |
+  | code_climate | Project_1 | 200   |
 
   Given the following users exist:
-  | provider_username       | uid         | email               | provider  | role          | password                     | preferred_metrics | perferred_project | project |
-  | Admin                   | uadmin      | uadmin@example.com  | developer | User::ADMIN   | Devise.friendly_token[0,20]  | []                | projects_list     | 1       |
-  | Student                 | ustudent    | ustudent@example.com| developer | User::STUDENT | Devise.friendly_token[0,20]  | []                | projects_list     | 1       |
+  | provider_username       | uid         | email                 | provider  | role    | project   |
+  | Admin                   | uadmin      | uadmin@example.com    | developer | admin   | Project_1 |
+  | Student                 | ustudent    | ustudent@example.com  | developer | student | Project_1 |
+  | Student2                | ustudent2   | ustudent2@example.com | developer | student | Project_2 |
 
-  Given the following projects exist:
-  | name       |
-  | Project_1  |
-  
-  Given the following metrics exist:
-  | metric_name | project_id | score |
-  | metric_1    | 0          | 2     | 
-  | metric_2    | 1          | 2     |
-
-Scenario: see reply to metric comment as student
-  Given I am a "student" logged in
-  And there is a "admin" comment "ad com" on project "Project_1" metric "metric_1"
-  And I am on the "view Project_1" page
-  Then I should see "reply"
-  
-Scenario: add new comment as student
-  Given I am a "student" logged in
-  And I am on the "view Project_1" page
-  And I follow "metric_1"
-  Then I should see "comment"
-  And I fill in "comment" with "this is a student comment"
-  And I press "submit"
+#this feature is alrady implimented, so the test is a sanity check on testing apparatus
+Scenario: add new comment as admin
+  Given I am "uadmin" and logged in
+  And I am on the "view project 'Project_1'" page
+  And I follow "Code Climate"
+  Then I should see "Submit"
+  And I fill in the "1st" comment box with "this is an admin comment"
+  And I submit form number "1"
   And I follow "Project_1"
+  Then I should see "this is an admin comment"
+
+Scenario: add new comment as student
+  Given I am "ustudent" and logged in
+  And I am on the "view project 'Project_1'" page
+  And I follow "Code Climate"
+  Then I should see "Submit"
+  And I fill in the "1st" comment box with "this is a student comment"
+  And I submit form number "1"
+  #if user is a student, we are redirected from projects#index to our users project page, so we don't need to click on the link 
+  #like we did for the admin 
   Then I should see "this is a student comment"
   
+Scenario: can't add comment if student of different project
+  Given I am "ustudent2" and logged in
+  And I am on the "view project 'Project_1'" page
+  And I follow "Code Climate"
+  Then I should not see "Submit"
+  
+Scenario: see reply to metric comment as student
+  Given I am "ustudent" and logged in
+  And there is a "uadmin" comment "ad com" on project "Project_1" metric "code_climate"
+  And I am on the "view project 'Project_1'" page
+  Then I should see "Reply"
+  
+Scenario: I see name attached to comment in metric page and project page
+  Given there is a "uadmin" comment "another ad com" on project "Project_1" metric "code_climate"
+  And I am "ustudent" and logged in
+  And I am on the "view project 'Project_1'" page
+  Then I should see "Admin"
+  And I follow "Code Climate"
+  Then I should see "Admin"
+  
+Scenario: name should appear next to comment
+  Given I am "ustudent" and logged in
+  And I am on the "view project 'Project_1'" page
+  And I follow "Code Climate"
+  Then I should see "Submit"
+  And I fill in the "1st" comment box with "this is a student comment"
+  And I submit form number "1"
+  #if user is a student, we are redirected from projects#index to our users project page, so we don't need to click on the link 
+  #like we did for the admin 
+  Then I should see "Student: this is a student comment"
+
 Scenario: reply to a comment as a student
-  Given I am a "student" logged in
-  And there is a "admin" comment "ad com" on project "Project_1" metric "metric_1"
-  And I am on the "view Project_1" page
+  Given I am "ustudent" and logged in
+  And there is a "uadmin" comment "ad com" on project "Project_1" metric "code_climate"
+  And I am on the "view project 'Project_1'" page
   Then I should see "ad com"
-  And I should see "reply"
-  And I press "reply"
-  And I fill in "comment" with "this is a student reply"
-  And I press "submit"
-  And I follow "Project_1"
+  And I should see "Reply"
+  And I fill in the "1st" comment box with "this is a student reply"
+  And I press "Reply"
   Then I should see "ad com"
   And I should see "this is a student reply"
+  
+Scenario: writing comment associates with correct metric sample
+  Given I am "uadmin" and logged in
+  And I am on the "view project 'Project_1'" page
+  And I follow "Code Climate"
+  Then I should see "Submit"
+  And I fill in the "1st" comment box with "this should be on second metric"
+  And I submit form number "1"
+  And I follow "Project_1"
+
+  Then there should be metric "0"
+  And there should not be metric "2"

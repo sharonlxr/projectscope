@@ -60,6 +60,9 @@ Rails.application.routes.draw do
   get '/studenta_task/detail/:id', :to=>'student_task#detail', :as=>'detail_student_task'
   put '/iteration/:id/copy', :to=>'iterations#copy', :as=>'copy_iterations'
   put '/student_task/:id/status', :to=>'student_task#update_status', :as=>'update_status'
+  
+  post '/metric_samples/:id', :to => 'metric_samples#mark_read'
+
   root 'projects#index'
 
 end
