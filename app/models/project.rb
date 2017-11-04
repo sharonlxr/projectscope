@@ -107,4 +107,8 @@ class Project < ActiveRecord::Base
   def comments
     metric_samples.flat_map { |ms| ms.comments.where(ctype: 'general_comment') }.sort_by { |cmnt| Time.now - cmnt.created_at }
   end
+  
+  def metrics_with_unread_comments
+    metric_samples.select{|ms| ms.comments.where(ctype: 'general_comment').any?(&:unread?)}.sort_by {|ms| ms.comments.min_by{ Time.now - created_at}}
+  end
 end

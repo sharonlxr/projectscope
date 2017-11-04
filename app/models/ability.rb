@@ -28,7 +28,6 @@ class Ability
     #
     # See the wiki for details:
     # https://github.com/ryanb/cancan/wiki/Defining-Abilities
-
     user ||= User.new # guest user (not logged in)
     can :write_log, Project
     if user.is_admin? or user.is_instructor?
@@ -40,6 +39,7 @@ class Ability
       unless user.project.nil?
         can :manage, Project, :id => user.project.id
         can [:read, :update], Comment, :metric_sample => { :project_id => user.project.id }
+        can :create, Comment
       end
     end
   end

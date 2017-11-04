@@ -211,6 +211,24 @@ function read_comment(comment_id) {
     });
 }
 
+/*
+function read_sample(sample_id) {
+    $.ajax({
+        url: "/metric_samples/" + sample_id + "",
+        type: 'POST',
+        data: { metric_sample: {sample_id: sample_id}},
+        dataType: "json",
+        success: function (result) {
+            $('.sample_row_#{sample_id}').remove();
+        },
+        error: function (a, b, c) {
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+    });
+}
+*/
 function write_log(msg) {
     $.ajax({
         url: "/log",
