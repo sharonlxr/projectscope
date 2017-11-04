@@ -1,8 +1,8 @@
-# Feature: students can comment 
+Feature: students can comment 
 
-#   As an student, 
-#   So that I can pass context about metrics to Instructors and teammates
-#   I want to be able to add comments (new comment threads) to metrics
+   As an student, 
+   So that I can pass context about metrics to Instructors and teammates
+   I want to be able to add comments (new comment threads) to metrics
   
 Background: users and project in the data base
   
@@ -23,7 +23,6 @@ Background: users and project in the data base
   | Student                 | ustudent    | ustudent@example.com  | developer | student | Project_1 |
   | Student2                | ustudent2   | ustudent2@example.com | developer | student | Project_2 |
 
-#this feature is alrady implimented, so the test is a sanity check on testing apparatus
 Scenario: add new comment as admin
   Given I am "uadmin" and logged in
   And I am on the "view project 'Project_1'" page
@@ -41,8 +40,6 @@ Scenario: add new comment as student
   Then I should see "Submit"
   And I fill in the "1st" comment box with "this is a student comment"
   And I submit form number "1"
-  #if user is a student, we are redirected from projects#index to our users project page, so we don't need to click on the link 
-  #like we did for the admin 
   Then I should see "this is a student comment"
   
 Scenario: can't add comment if student of different project
@@ -72,8 +69,6 @@ Scenario: name should appear next to comment
   Then I should see "Submit"
   And I fill in the "1st" comment box with "this is a student comment"
   And I submit form number "1"
-  #if user is a student, we are redirected from projects#index to our users project page, so we don't need to click on the link 
-  #like we did for the admin 
   Then I should see "Student: this is a student comment"
 
 Scenario: reply to a comment as a student
