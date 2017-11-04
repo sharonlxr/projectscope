@@ -12,8 +12,6 @@
 [![Build Status](https://travis-ci.org/PeijieLi/cs169projectscope.svg?branch=master)](https://travis-ci.org/PeijieLi/cs169projectscope)
 #### Link to deployed app on Heroku (General)
 https://young-headland-90238.herokuapp.com/users/sign_in
-Iteration-specifically, the link to the features supported by our iteration is:
-https://young-headland-90238.herokuapp.com/iterations
 #### Link to Pivotal Tracker project
 https://www.pivotaltracker.com/n/projects/2118219
 #### A brief explanation of the customer's business need that the app addresses, including a link to the customer's website
