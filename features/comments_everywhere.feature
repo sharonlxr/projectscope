@@ -29,6 +29,7 @@ Feature: Students and Instructors can add comments to tasks, general metrics and
   | Student                 | ustudent    | ustudent@example.com  | developer | student | Project_1 |
   | Student2                | ustudent2   | ustudent2@example.com | developer | student | Project_2 |
   
+@wip
 Scenario: add admin comment to a task
   Given I am "uadmin" and logged in
   And I am on the "iteration_01" page
@@ -41,6 +42,7 @@ Scenario: add admin comment to a task
   And I press "Submit"
   Then I should see "this is an admin comment on a task"
   
+@wip
 Scenario: add student commment to a task
   Given I am "ustudent" and logged in
   And I am on the "Project_1, iteration_01" page
@@ -51,6 +53,7 @@ Scenario: add student commment to a task
   And I press "Submit"
   Then I should see "this is a student comment on a task"
   
+@wip
 Scenario: add admin comment to iteration
   Given I am "uadmin" and logged in
   And I am on the "iteration_01" page
@@ -60,6 +63,7 @@ Scenario: add admin comment to iteration
   And I press "Submit"
   Then I should see "this is an admin comment on iteration_01"
   
+@wip
 Scenario: add student comment to iteration
   Given I am "ustudent" and logged in
   And I am on the "Project_1, iteration_01" page
@@ -68,6 +72,7 @@ Scenario: add student comment to iteration
   And I press "Submit"
   Then I should see "this is a student comment on an iteration"
   
+@wip
 Scenario: add admin comment to a general metric
   Given I am "uadmin" and logged in
   And I am on the "view project 'Project_1'" page
@@ -77,7 +82,7 @@ Scenario: add admin comment to a general metric
   And I press "Submit"
   Then I should see "this is an admin comment on a general metric"
   
-  
+@wip
 Scenario: add student commment to a general metric
   Given I am "ustudent" and logged in
   And I am on the "view project 'Project_1'" page
