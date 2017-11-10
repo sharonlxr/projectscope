@@ -4,13 +4,13 @@
 %div.col-md-6{style: 'text-align:right'}
   %div.btn-group{role: 'group'}
     = link_to 'Config', edit_project_path(@project), class: 'btn btn-default', role: 'button'
-    = link_to 'Iterations', iterations_path, class: 'btn btn-default', role: 'button'
+
 = render partial: 'time_slider'
 
 %div.col-md-6
   %h2
     Comments
-  %table.table.table-striped
+  %table.table
     %tbody
       - num = 0
       - @project.metrics_with_unread_comments.each do |sample|
@@ -21,14 +21,21 @@
           %tr{id: "comment_#{cmnt.id}", class: "sample_row_#{sample.id}"}
             %td
               = render partial: 'comment_view', :locals => {:comment => cmnt}
-            %td.btn-default.btn.btn-sm{onclick: "read_comment(#{cmnt.id})"}
-              Mark as read
-        %tr{id: "comment_form_#{sample.id}", class: "sample_row_#{sample.id}"}
+        %tr{id: "buttons_#{sample.id}", class: "sample_row_#{sample.id}"}
+          %td
+            %a.function_link{onclick: "read_sample(#{sample.id})"}
+              Mark All Read
+            %a.function_link{onclick: "reveal_comment_form(#{sample.id})"}
+              Add Reply
+        %tr{id: "comment_form_#{sample.id}", class: "sample_row_#{sample.id}", style:"display:none"}
           %td
             = render partial: 'comment_form', :locals => { :identity => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}", 
                                                             :num => "#{num}", 
                                                             :ms_id => sample.id, 
                                                             :button_name => "Reply"}
+        %tr
+          %td
+            %br
         - num += 1
           
 -#      - @project.comments.select(&:unread?).each do |cmnt|
