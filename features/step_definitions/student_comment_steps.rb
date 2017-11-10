@@ -82,8 +82,15 @@ end
 
 When /^(?:|I )fill in the "([^"]*)" comment box with "([^"]*)"$/ do |num, value|
   num = num[0].to_i - 1
-  within("form#comment_form_#{num}") do
-    fill_in("content", :with => value)
+  within("form#comment_form_#{num}",  visible: false) do
+    fill_in("content", :with => value,  visible: false)
+  end
+end
+
+When /^(?:|I )click the "(.*)" "(.*)" link/ do |num, link|
+  num = num[0].to_i - 1
+  within("tr#buttons_#{num}") do
+    find("#add_reply_button").click
   end
 end
 

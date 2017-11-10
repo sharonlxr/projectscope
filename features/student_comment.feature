@@ -71,16 +71,18 @@ Scenario: name should appear next to comment
   And I submit form number "1"
   Then I should see "Student: this is a student comment"
 
-Scenario: reply to a comment as a student
+Scenario: reply to a comment as a student, :js => true
   Given I am "ustudent" and logged in
   And there is a "uadmin" comment "ad com" on project "Project_1" metric "code_climate"
   And I am on the "view project 'Project_1'" page
   Then I should see "ad com"
   And I should see "Reply"
+  And I click the "1st" "reply" link
   And I fill in the "1st" comment box with "this is a student reply"
   And I press "Reply"
   Then I should see "ad com"
   And I should see "this is a student reply"
+
   
 Scenario: writing comment associates with correct metric sample
   Given I am "uadmin" and logged in

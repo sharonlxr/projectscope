@@ -4,7 +4,7 @@
 %div.col-md-6{style: 'text-align:right'}
   %div.btn-group{role: 'group'}
     = link_to 'Config', edit_project_path(@project), class: 'btn btn-default', role: 'button'
-
+    = link_to 'Iterations', iterations_path, class: 'btn btn-default', role: 'button'
 = render partial: 'time_slider'
 
 %div.col-md-6
@@ -14,28 +14,9 @@
     %tbody
       - num = 0
       - @project.metrics_with_unread_comments.each do |sample|
-        %tr{id: "sample_#{sample.id}", class: "sample_row_#{sample.id}"}
-          %td{style: 'text-align: center'}
-            %div.chart_place{:id => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}"}
-        - sample.comments.where(ctype: 'general_comment').each do |cmnt|
-          %tr{id: "comment_#{cmnt.id}", class: "sample_row_#{sample.id}"}
-            %td
-              = render partial: 'comment_view', :locals => {:comment => cmnt}
-        %tr{id: "buttons_#{sample.id}", class: "sample_row_#{sample.id}"}
-          %td
-            %a.function_link{onclick: "read_sample(#{sample.id})"}
-              Mark All Read
-            %a.function_link{onclick: "reveal_comment_form(#{sample.id})"}
-              Add Reply
-        %tr{id: "comment_form_#{sample.id}", class: "sample_row_#{sample.id}", style:"display:none"}
-          %td
-            = render partial: 'comment_form', :locals => { :identity => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}", 
-                                                            :num => "#{num}", 
-                                                            :ms_id => sample.id, 
-                                                            :button_name => "Reply"}
         %tr
           %td
-            %br
+            = render partial: 'comment_thread', :locals => {:sample => sample, :num => num} 
         - num += 1
           
 -#      - @project.comments.select(&:unread?).each do |cmnt|
@@ -47,7 +28,29 @@
 -#            = render partial: 'comment_view', :locals => {:comment => cmnt}
 -#          %td.btn-default.btn.btn-sm{onclick: "read_comment(#{cmnt.id})"}
 -#            Mark as read
-            
+
+-#        %tr{id: "sample_#{sample.id}", class: "sample_row_#{sample.id}"}
+-#          %td{style: 'text-align: center'}
+-#            %div.chart_place{:id => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}"}
+-#        - sample.comments.where(ctype: 'general_comment').each do |cmnt|
+-#          %tr{id: "comment_#{cmnt.id}", class: "sample_row_#{sample.id}"}
+-#            %td
+-#              = render partial: 'comment_view', :locals => {:comment => cmnt}
+-#        %tr{id: "buttons_#{num}", class: "sample_row_#{sample.id}"}
+-#          %td
+-#            %a#mark_read_button.function_link{onclick: "read_sample(#{sample.id})"}
+-#              Mark All Read
+-#            %a#add_reply_button.function_link{onclick: "reveal_comment_form(#{sample.id})"}
+-#              Add Reply
+-#        %tr{id: "comment_form_#{sample.id}", class: "sample_row_#{sample.id}", style:"display:none"}
+-#          %td
+-#            = render partial: 'comment_form', :locals => { :identity => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}", 
+-#                                                            :num => "#{num}", 
+-#                                                            :ms_id => sample.id, 
+-#                                                            :button_name => "Reply"}
+-#        %tr
+-#          %td
+-#            %br
 
 - metric_names = ProjectMetrics.hierarchies :metric
 %div.col-md-6
