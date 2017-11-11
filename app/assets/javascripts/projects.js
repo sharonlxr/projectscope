@@ -231,8 +231,19 @@ function read_sample(sample_id) {
 
 
 function reveal_comment_form(sample_id) {
-    var elem = document.getElementById("comment_form_" + sample_id);
-    elem.style.display = 'table-row';
+    var form = document.getElementById("comment_form_" + sample_id);
+    var link = document.getElementById("reply_button_" + sample_id);
+    link.setAttribute( "onclick", "hide_comment_form(" + sample_id + ")" );
+    link.innerHTML = "Cancel Reply";
+    form.style.display = 'table-row';
+}
+
+function hide_comment_form(sample_id) {
+    var form = document.getElementById("comment_form_" + sample_id);
+    var link = document.getElementById("reply_button_" + sample_id);
+    link.innerHTML = "Add Reply";
+    link.setAttribute( "onclick", "reveal_comment_form(" + sample_id + ")" );
+    form.style.display = 'None';
 }
 
 function write_log(msg) {

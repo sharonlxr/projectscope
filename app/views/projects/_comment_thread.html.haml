@@ -9,9 +9,9 @@
           = render partial: 'comment_view', :locals => {:comment => cmnt}
     %tr{id: "buttons_#{num}", class: "sample_row_#{sample.id}"}
       %td
-        %a#mark_read_button.function_link{onclick: "read_sample(#{sample.id})"}
+        %a.function_link{onclick: "read_sample(#{sample.id})", id: "read_button_#{sample.id}"}
           Mark All Read
-        %a#add_reply_button.function_link{onclick: "reveal_comment_form(#{sample.id})"}
+        %a.function_link{onclick: "reveal_comment_form(#{sample.id})", id: "reply_button_#{sample.id}"}
           Add Reply
     %tr{id: "comment_form_#{sample.id}", class: "sample_row_#{sample.id}", style:"display:none"}
       %td
