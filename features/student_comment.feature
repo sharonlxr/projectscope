@@ -27,7 +27,6 @@ Scenario: add new comment as admin
   Given I am "uadmin" and logged in
   And I am on the "view project 'Project_1'" page
   And I follow "Code Climate"
-  Then I should see "Submit"
   And I fill in the "1st" comment box with "this is an admin comment"
   And I submit form number "1"
   And I follow "Project_1"
@@ -37,7 +36,6 @@ Scenario: add new comment as student
   Given I am "ustudent" and logged in
   And I am on the "view project 'Project_1'" page
   And I follow "Code Climate"
-  Then I should see "Submit"
   And I fill in the "1st" comment box with "this is a student comment"
   And I submit form number "1"
   Then I should see "this is a student comment"
@@ -46,7 +44,7 @@ Scenario: can't add comment if student of different project
   Given I am "ustudent2" and logged in
   And I am on the "view project 'Project_1'" page
   And I follow "Code Climate"
-  Then I should not see "Submit"
+  Then I should not see "Add Reply"
   
 Scenario: see reply to metric comment as student
   Given I am "ustudent" and logged in
@@ -66,7 +64,6 @@ Scenario: name should appear next to comment
   Given I am "ustudent" and logged in
   And I am on the "view project 'Project_1'" page
   And I follow "Code Climate"
-  Then I should see "Submit"
   And I fill in the "1st" comment box with "this is a student comment"
   And I submit form number "1"
   Then I should see "Student: this is a student comment"
@@ -87,7 +84,6 @@ Scenario: writing comment associates with correct metric sample
   Given I am "uadmin" and logged in
   And I am on the "view project 'Project_1'" page
   And I follow "Code Climate"
-  Then I should see "Submit"
   And I fill in the "1st" comment box with "this should be on second metric"
   And I submit form number "1"
   And I follow "Project_1"

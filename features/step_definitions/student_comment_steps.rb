@@ -96,8 +96,8 @@ end
 
 When /^(?:|I )submit form number "(.*)"$/ do |num|
   num = num.to_i - 1
-  within("form#comment_form_#{num}") do
-    click_button("Submit")
+  within("form#comment_form_#{num}",  visible: false) do
+    click_button("Reply",  visible: false)
   end
 end
 
