@@ -1,8 +1,9 @@
 %table.table
   %tbody
-    %tr{id: "sample_#{sample.id}", class: "sample_row_#{sample.id} comment_thread_head"}
-      %td{style: 'text-align: center'}
-        %div.chart_place{:id => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}"}
+    - if thread_type == "metric_sample"
+      %tr{id: "sample_#{sample.id}", class: "sample_row_#{sample.id} comment_thread_head"}
+        %td{style: 'text-align: center'}
+          %div.chart_place{:id => "project-#{@project.id}-ondate-#{sample.metric_name}-#{sample.days_ago}"}
     - sample.comments.where(ctype: 'general_comment').each do |cmnt|
       %tr{id: "comment_#{cmnt.id}", class: "sample_row_#{sample.id}"}
         %td

@@ -16,7 +16,7 @@
       - @project.metrics_with_unread_comments.each do |sample|
         %tr
           %td
-            = render partial: 'comment_thread', :locals => {:sample => sample, :num => num} 
+            = render partial: 'comment_thread', :locals => {:sample => sample, :num => num, :thread_type => "metric_sample"} 
         - num += 1
           
 -#      - @project.comments.select(&:unread?).each do |cmnt|

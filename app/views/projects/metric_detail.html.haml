@@ -1,4 +1,4 @@
-%div.col-md-2
+%div.col-xs-2
   %div.metric_overview
     %h4
       Metric
@@ -14,16 +14,18 @@
       Score Trend
     %div.chart_place{id: "project-#{@project.id}-series-#{@metric_name}"}
     = link_to 'Return', project_path(@project.id), class: 'btn btn-default'
-%div.col-md-8
+%div.col-xs-3
+-# TODO use @general_metric_comments to create all those comments
+%div.col-xs-7
   - num = 0
   - @comments.each do |mc_pair|
     %h3
       = (Date.today-mc_pair.first).strftime('%Y-%m-%d')
-    = render partial: 'comment_thread', :locals => {:sample => mc_pair.second, :num => num} 
-      
+    = render partial: 'comment_thread', :locals => {:sample => mc_pair.second, :num => num, :thread_type => "metric_sample"} 
     - num = num + 1
       
-
+      
+  
 -#    %div{style: 'text-align:center'}
 -#      %div.chart_place{id: "project-#{@project.id}-ondate-#{@metric_name}-#{mc_pair.first}"}
 -#    %br

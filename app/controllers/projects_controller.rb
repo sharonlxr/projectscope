@@ -123,6 +123,8 @@ class ProjectsController < ApplicationController
     @comments = @comments.map do |metric_sample|
       [days_ago(metric_sample.created_at), metric_sample]
     end
+    
+    @general_metric_comments = @project.comments.where(metric: @metric_name).sort_by { |elem| Time.now-elem.created_at }
 
     @parent_metric = @project.latest_metric_sample params[:metric]
     render template: 'projects/metric_detail'
