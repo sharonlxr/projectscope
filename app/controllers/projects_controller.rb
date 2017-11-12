@@ -34,6 +34,15 @@ class ProjectsController < ApplicationController
     @display_type = params.has_key?(:type) ? (params[:type]) : 'metric'
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
+    
+    @comment_groups = @project.metrics_with_unread_comments
+    
+    @comment_groups = @comment_groups.map do |metric_sample|
+      [days_ago(metric_sample.created_at),
+      metric_sample.id, 
+      metric_sample.metric_name, 
+      metric_sample.comments.where(ctype: 'general_comment').sort_by { |elem| elem.created_at - Time.now}]
+    end
   end
 
   # GET /projects/new
@@ -121,10 +130,13 @@ class ProjectsController < ApplicationController
 
     @comments = @project.metric_samples.where(metric_name: @metric_name).sort_by { |elem| Time.now-elem.created_at }
     @comments = @comments.map do |metric_sample|
-      [days_ago(metric_sample.created_at), metric_sample]
+      [days_ago(metric_sample.created_at), 
+      metric_sample.id, 
+      metric_sample.metric_name, 
+      metric_sample.comments.where(ctype: 'general_comment').sort_by { |elem| elem.created_at - Time.now}]
     end
     
-    @general_metric_comments = @project.comments.where(metric: @metric_name).sort_by { |elem| Time.now-elem.created_at }
+    #@general_metric_comments = @project.comments.where(metric: @metric_name).sort_by { |elem| Time.now-elem.created_at }
 
     @parent_metric = @project.latest_metric_sample params[:metric]
     render template: 'projects/metric_detail'

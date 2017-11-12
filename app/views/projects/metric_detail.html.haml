@@ -21,7 +21,12 @@
   - @comments.each do |mc_pair|
     %h3
       = (Date.today-mc_pair.first).strftime('%Y-%m-%d')
-    = render partial: 'comment_thread', :locals => {:sample => mc_pair.second, :num => num, :thread_type => "metric_sample"} 
+    = render partial: 'comment_thread', :locals => {:days_ago => mc_pair.first,
+                                                    :sample_id => mc_pair.second,
+                                                    :comments => mc_pair.fourth, 
+                                                    :metric_name => mc_pair.third,
+                                                    :num => num, 
+                                                    :thread_type => "metric_sample"}
     - num = num + 1
       
       
