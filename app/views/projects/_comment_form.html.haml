@@ -15,7 +15,11 @@
   = hidden_field_tag 'ctype', 'general_comment'
   = hidden_field_tag 'params', '{}'
   = hidden_field_tag 'user_id', current_user.id
-  = hidden_field_tag 'metric_sample_id', ms_id
+  - if ms_id == "general_metric"
+    = hidden_field_tag 'metric', @metric_name
+    = hidden_field_tag 'project_id', @project.id
+  -else 
+    = hidden_field_tag 'metric_sample_id', ms_id
   %div.input-group
     %textarea.form-control#content{placeholder: 'Add Comment', rows: 1, name: "content", form: "comment_form_#{num}"}
     %span.input-group-btn

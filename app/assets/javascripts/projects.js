@@ -230,20 +230,20 @@ function read_sample(sample_id) {
 }
 
 
-function reveal_comment_form(sample_id) {
-    var form = document.getElementById("comment_form_" + sample_id);
-    var link = document.getElementById("reply_button_" + sample_id);
-    link.setAttribute( "onclick", "hide_comment_form(" + sample_id + ")" );
-    link.innerHTML = "Cancel Reply";
-    form.style.display = 'table-row';
-}
+function toggle_element(element_id, toggle_link_id) {
+    var element = document.getElementById(element_id);
+    var link = document.getElementById(toggle_link_id)
 
-function hide_comment_form(sample_id) {
-    var form = document.getElementById("comment_form_" + sample_id);
-    var link = document.getElementById("reply_button_" + sample_id);
-    link.innerHTML = "Add Reply";
-    link.setAttribute( "onclick", "reveal_comment_form(" + sample_id + ")" );
-    form.style.display = 'None';
+    if (element.style.display == 'table-row'){
+        element.style.display = 'None'
+        link.innerHTML = "Add Reply"
+    } 
+
+    else if (element.style.display == 'none'){
+        element.style.display = 'table-row'
+        link.innerHTML = "Cancel Reply"
+    }
+
 }
 
 function write_log(msg) {

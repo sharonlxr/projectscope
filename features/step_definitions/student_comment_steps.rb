@@ -29,7 +29,7 @@ end
 
 Given(/the following metrics samples exist:/) do |metrics_table|
   
-  d = Date.today
+  d = DateTime.now
   metrics_table.hashes.each do |metric|
     m = MetricSample.create!(:metric_name => metric["metric_name"],
                              :project_id => Project.find_by(name: metric["project"]).id,

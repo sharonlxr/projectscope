@@ -136,7 +136,7 @@ class ProjectsController < ApplicationController
       metric_sample.comments.where(ctype: 'general_comment').sort_by { |elem| elem.created_at - Time.now}]
     end
     
-    #@general_metric_comments = @project.comments.where(metric: @metric_name).sort_by { |elem| Time.now-elem.created_at }
+    @general_metric_comments = @project.general_metric_comments.where(metric: @metric_name).sort_by { |elem| elem.created_at - Time.now }
 
     @parent_metric = @project.latest_metric_sample params[:metric]
     render template: 'projects/metric_detail'

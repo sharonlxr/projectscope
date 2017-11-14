@@ -1,8 +1,8 @@
 Feature: students can comment 
 
-   As an student, 
-   So that I can pass context about metrics to Instructors and teammates
-   I want to be able to add comments (new comment threads) to metrics
+  As an student, 
+  So that I can pass context about metrics to Instructors and teammates
+  I want to be able to add comments (new comment threads) to metrics
   
 Background: users and project in the data base
   

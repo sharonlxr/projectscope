@@ -20,7 +20,7 @@ class Project < ActiveRecord::Base
   validates :name, :presence => true, :uniqueness => true
 
   accepts_nested_attributes_for :configs
-  attr_accessible :name, :configs_attributes
+  attr_accessible :name, :configs_attributes[0]
 
   scope :order_by_metric_score, -> (metric_name, order) {
     joins(:metric_samples).where("metric_samples.metric_name = ?", metric_name)
@@ -107,6 +107,10 @@ class Project < ActiveRecord::Base
 
   def comments
     metric_samples.flat_map { |ms| ms.comments.where(ctype: 'general_comment') }.sort_by { |cmnt| Time.now - cmnt.created_at }
+  end
+  
+  def general_metric_comments 
+    Comment.where(project_id: self.id)
   end
   
   def metrics_with_unread_comments

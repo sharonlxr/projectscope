@@ -1,23 +1,22 @@
 %table.table
   %tbody
-    - if thread_type == "metric_sample"
+    - if thread_type == "sample"
       %tr{id: "sample_#{sample_id}", class: "sample_row_#{sample_id} comment_thread_head"}
         %td{style: 'text-align: center'}
           %div.chart_place{:id => "project-#{@project.id}-ondate-#{metric_name}-#{days_ago}"}
     - comments.each do |cmnt|
-      %tr{id: "comment_#{cmnt.id}", class: "sample_row_#{sample_id}"}
+      %tr{id: "comment_#{cmnt.id}", class: "#{thread_type}_row_#{sample_id}"}
         %td
           = render partial: 'comment_view', :locals => {:comment => cmnt}
     - if can? :create, Comment and can? :create_comment, @project
-      %tr{id: "buttons_#{num}", class: "sample_row_#{sample_id}"}
+      %tr{id: "buttons_#{num}", class: "#{thread_type}_row_#{sample_id}"}
         %td
           %a.function_link{onclick: "read_sample(#{sample_id})", id: "read_button_#{sample_id}"}
             Mark All Read
-          %a.function_link{onclick: "reveal_comment_form(#{sample_id})", id: "reply_button_#{sample_id}"}
+          %a.function_link{onclick: "toggle_element('comment_form_#{sample_id}', 'reply_button_#{sample_id}')", id: "reply_button_#{sample_id}"}
             Add Reply
-      %tr{id: "comment_form_#{sample_id}", class: "sample_row_#{sample_id}", style:"display:none"}
+      %tr{id: "comment_form_#{sample_id}", class: "#{thread_type}_row_#{sample_id}", style:"display:none"}
         %td
-          = render partial: 'comment_form', :locals => { :identity => "project-#{@project.id}-ondate-#{metric_name}-#{days_ago}", 
-                                                          :num => "#{num}", 
-                                                          :ms_id => sample_id, 
-                                                          :button_name => "Reply"}
+          = render partial: 'comment_form', :locals => {:num => "#{num}", 
+                                                        :ms_id => sample_id, 
+                                                        :button_name => "Reply"}
