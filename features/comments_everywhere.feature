@@ -30,7 +30,8 @@ Background: users and project in the data base
   | Admin                   | uadmin      | uadmin@example.com    | developer | admin   | Project_1 |
   | Student                 | ustudent    | ustudent@example.com  | developer | student | Project_1 |
   | Student2                | ustudent2   | ustudent2@example.com | developer | student | Project_2 |
-  
+
+@wip
 Scenario: add admin comment to a general metric
   Given I am "uadmin" and logged in
   And I am on the "view project 'Project_1'" page
