@@ -47,18 +47,13 @@ Scenario: add admin comment to a general metric
   And I follow "Code Climate"
   Then I should see "this is an admin comment on a general metric"
   
-@wip
 Scenario: add admin comment to a task
   Given I am "uadmin" and logged in
-  And I am on the "iteration_01" page
-  Then I should see "Project_1"
-  And I follow "Project_1"
-  Then I should see "first_1"
-  And I follow "first_1"
-  Then I should see "add_comment"
-  And I fill in "content" with "this is an admin comment on a task"
-  And I press "Submit"
-  Then I should see "this is an admin comment on a task"
+  And I am on the "edit student task 'first_1'" page
+  And I fill in the box for task comment with "this is an admin comment on a task"
+  And I submit task comment form
+  And I am on the "edit student task 'first_1'" page
+  Then I should see "this is an admin comment on a tas"
   
 @wip
 Scenario: add student commment to a task

@@ -74,6 +74,8 @@ class StudentTaskController < ApplicationController
         @parents = StudentTask.where('iteration_id': @task.iteration_id, 'project_id': @task.project_id)
         #to do : display the task in the view
         @selected_parents = @task.parents
+        @task_comments = @task.comments
+        @project = @task.project
     end
     
     #save the change made by an instructor
