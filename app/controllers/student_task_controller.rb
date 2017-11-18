@@ -14,7 +14,7 @@ class StudentTaskController < ApplicationController
             @team = Project.all[0]
         end
         
-        @tasks = StudentTask.where('iteration_id': @iter, 'project_id': @team.id)
+        @tasks = StudentTask.topological_sort(@iter, @team.id)
         #to do : display the tasks in the view
         
     end
@@ -108,22 +108,34 @@ class StudentTaskController < ApplicationController
     #change the status of a task from student
 
     def update_status
-        task = StudentTask.find( params[:id])
-        task.status = (params[:status])
-        task.save
-        redirect_to team_index_path(task.iteration_id)
+          task = StudentTask.find( params[:id])
+          statusKey =task.title+"status"
+        if(task.status==params[statusKey])
+            redirect_to team_index_path(task.iteration_id)
+            return 
+        else
+            puts task.title+"status"+params[statusKey]
+            history = TaskUpdate.new
+            history.user_id=current_user.id
+            history.before = task.status
+            history.after = params[statusKey]
+            history.student_task_id=task.id
+            history.save
+            task.status = (params[statusKey])
+            task.save
+            redirect_to team_index_path(task.iteration_id)
+        end
     end
     
     #show the detailed graph of a team for instructor
     def showATeamForInstructor
         @team = Project.find(params[:team])
         @iter = params[:iter]
-        @tasks = StudentTask.where('iteration_id': @iter, 'project_id': @team.id)
+        @tasks = StudentTask.topological_sort(@iter, @team.id)
         @iteration = Iteration.find_by(id: @iter)
         @project = @team
-        
         @iteration_comments = @iteration.get_comments(@team)
-        
+
         #todo: diplay the tasks 
     end
 end
