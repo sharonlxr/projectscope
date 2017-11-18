@@ -17,7 +17,7 @@ Given(/the following tasks exist:/) do |task_table|
     i_id = Iteration.where(name: "iteration_01").first.id
     
     i = StudentTask.create!(iteration_id: i_id,
-                            title: task["name"],
+                            title: task["title"],
                             description: "test generated Student Task",
                             created_at: Date.today,
                             project_id: p_id

@@ -10,15 +10,15 @@
         %tbody        
             - @tasks.each do |t|
                 %tr
-                  %td= link_to t.title, detail_history_path(t.id)
-                  %td= t.description
-                  %td= t.get_parents
-                  %td= t.status
-                  %td
-                    - if !t.is_blocked
-                        = form_tag update_status_path(t.id), :method => :put, :name =>"form:"+t.title do 
-                            = select_tag((t.title+"status").to_sym, options_for_select([["In Screen", "In Screen"], ["In Process", "In Process"], ["Finished", "Finished"]]))
-                            = submit_tag 'Save For '+t.title, :class => "btn btn-primary left"
+                    %td= link_to t.title, detail_history_path(t.id)
+                    %td= t.description
+                    %td= t.get_parents
+                    %td= t.status
+                    %td
+                        - if !t.is_blocked
+                            = form_tag update_status_path(t.id), :method => :put, :name =>"form:"+t.title do 
+                                = select_tag((t.title+"status").to_sym, options_for_select([["In Screen", "In Screen"], ["In Process", "In Process"], ["Finished", "Finished"]]))
+                                = submit_tag 'Save For '+t.title, :class => "btn btn-primary left"
                         
 %div.col-xs-4
     %div
