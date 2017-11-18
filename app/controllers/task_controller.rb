@@ -5,9 +5,6 @@ class TaskController < ApplicationController
         @iteration = Iteration.find(params[:iter])
         #get the list of current tasks in the iteration selected
         @all_tasks =  Task.where('iteration_id': params[:iter]).uniq.pluck(:title)
-        if !@all_tasks
-            @all_tasks =[]
-        end
     end
     def publish
         @iteration = Iteration.find(params[:iter])
@@ -17,10 +14,8 @@ class TaskController < ApplicationController
         all_old_copied_tasks.each do|e|
             e.destroy
         end
-        puts StudentTask.where('iteration_id': params[:iter]).length
         #to do : copy the tasks to all the teams
-        teams = Project.all
-        teams.each do |team|
+        Project.all.each do |team|
             map = Hash.new
             # copy the tasks for a team
             @all_tasks.each do|t|
@@ -36,8 +31,7 @@ class TaskController < ApplicationController
              @all_tasks.each do|t|
                 new_task = map[t.id]
                 t.parents.each do |p|
-                    new_parent_task = map[p.id]
-                    new_task.add_parent(new_parent_task)
+                    new_task.add_parent(map[p.id])
                 end
             end
         end
@@ -52,9 +46,6 @@ class TaskController < ApplicationController
     def create
         @iteration = Iteration.find(params[:iter])
         @tasks = Task.where('iteration_id': params[:iter])
-        if !@tasks
-            @tasks =[]
-        end
         parants_param = params[:tasks]
         task_param = params[:task]
         if task_param[:title].nil?or task_param[:description].nil? or task_param[:title].empty? or task_param[:description].empty?
@@ -69,7 +60,6 @@ class TaskController < ApplicationController
         new_task.iteration = @iteration
         new_task.save
         #added all the checked tasks to parents
-       
         @tasks.each do |p|
             if !p.title.nil? 
                 if !parants_param.nil? and parants_param[p.title]=="true"
@@ -95,9 +85,6 @@ class TaskController < ApplicationController
     def update
         @task = Task.find( params[:id])
         @tasks = Task.where('iteration_id': @task.iteration_id)
-        if !@tasks
-            @tasks =[]
-        end
         parants_param = params[:tasks]
         task_param = params[:task]
         @task.title = task_param[:title]
