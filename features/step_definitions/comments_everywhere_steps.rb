@@ -48,3 +48,16 @@ When /^(?:|I )fill in the box for iteration comment with "([^"]*)"$/ do |cmnt|
     fill_in("content", :with => cmnt,  visible: false)
   end
 end
+
+
+When /^(?:|I )submit task comment form$/ do 
+  within("form#task_1_form",  visible: false) do
+    click_button("Reply",  visible: false)
+  end
+end
+
+When /^(?:|I )fill in the box for task comment with "([^"]*)"$/ do |cmnt|
+  within("form#task_1_form",  visible: false) do
+    fill_in("content", :with => cmnt,  visible: false)
+  end
+end

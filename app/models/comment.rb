@@ -2,7 +2,7 @@ class Comment < ActiveRecord::Base
   belongs_to :metric_sample
   belongs_to :user
   belongs_to :project
-  belongs_to :task
+  belongs_to :student_task
   belongs_to :iteration
 
   def update_metric_sample
