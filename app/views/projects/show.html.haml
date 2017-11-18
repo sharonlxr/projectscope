@@ -13,15 +13,21 @@
   %table.table
     %tbody
       - num = 0
+      - @general_comment_groups.each do |comment_group|
+        %tr
+          %td
+            = render partial: 'comment_thread', :locals => {:object => @project,
+                                                            :comments => comment_group,
+                                                            :thread_type => "general_metric"}
       - @comment_groups.each do |mc_pair|
         %tr
           %td
+
             = render partial: 'comment_thread', :locals => {:days_ago => mc_pair.first,
-                                                            :sample_id => mc_pair.second, 
-                                                            :comments => mc_pair.fourth,
-                                                            :metric_name => mc_pair.third,
-                                                            :num => num, 
+                                                            :object => mc_pair.second, 
+                                                            :comments => mc_pair.third,
                                                             :thread_type => "sample"}
+                                                            
         - num += 1
           
 -#      - @project.comments.select(&:unread?).each do |cmnt|

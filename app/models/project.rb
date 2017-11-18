@@ -116,4 +116,17 @@ class Project < ActiveRecord::Base
   def metrics_with_unread_comments
     metric_samples.select{|ms| ms.comments.where(ctype: 'general_comment').any?(&:unread?)}.sort_by {|ms| ms.comments.min_by{ Time.now - created_at}}
   end
+  
+  def general_metrics_with_unread_comments
+    metric_names = ProjectMetrics.hierarchies :metric
+    comment_groups = []
+    
+    for metric in metric_names
+      if comments.any?{|comment| comment["status"] == :unread}
+        comment_groups << comments.where(ctype: 'general_comment', metric: metric)
+      end
+    end
+    
+    comment_groups
+  end
 end

@@ -14,16 +14,7 @@
       Score Trend
     %div.chart_place{id: "project-#{@project.id}-series-#{@metric_name}"}
     = link_to 'Return', project_path(@project.id), class: 'btn btn-default'
-%div.col-xs-4
-  %div
-    %h2
-      Comments
-    = render partial: 'comment_thread', :locals => {:sample_id => "general_metric",
-                                                    :comments => @general_metric_comments,
-                                                    :metric_name => @metric_name,
-                                                    :num => "general",
-                                                    :thread_type => "general_metric"}
-
+    
 %div.col-xs-6
   %h2
     Timeline
@@ -32,13 +23,19 @@
     %h3
       = (Date.today-mc_pair.first).strftime('%Y-%m-%d')
     = render partial: 'comment_thread', :locals => {:days_ago => mc_pair.first,
-                                                    :sample_id => mc_pair.second,
-                                                    :comments => mc_pair.fourth, 
-                                                    :metric_name => mc_pair.third,
-                                                    :num => num, 
+                                                    :object => mc_pair.second,
+                                                    :comments => mc_pair.third, 
                                                     :thread_type => "sample"}
     - num = num + 1
-      
+
+%div.col-xs-4
+  %div
+    %h2
+      Comments
+                                                    
+    = render partial: 'comment_thread', :locals => {:comments => @general_metric_comments,
+                                                    :object => @project,
+                                                    :thread_type => "general_metric"}
       
   
 -#    %div{style: 'text-align:center'}

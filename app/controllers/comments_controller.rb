@@ -81,7 +81,7 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:metric_sample_id, :user_id, :ctype, :content, :params, :created_at, :status, :metric, :project_id)
+      params.require(:comment).permit(:metric_sample_id, :user_id, :ctype, :content, :params, :created_at, :status, :metric, :project_id, :iteration_id)
     end
 
     def general_comment_params
@@ -108,7 +108,8 @@ class CommentsController < ApplicationController
           metric_sample_id: params[:metric_sample_id],
           created_at: Time.now,
           metric: params[:metric],
-          project_id: params[:project_id]
+          project_id: params[:project_id],
+          iteration_id: params[:iteration_id]
       }
     end
 end

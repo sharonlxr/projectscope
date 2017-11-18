@@ -74,7 +74,7 @@ Scenario: reply to a comment as a student, :js => true
   And I am on the "view project 'Project_1'" page
   Then I should see "ad com"
   And I should see "Reply"
-  And I fill in the "1st" comment box with "this is a student reply"
+  And I fill in the "3rd" comment box with "this is a student reply"
   And I press "Reply"
   Then I should see "ad com"
   And I should see "this is a student reply"
