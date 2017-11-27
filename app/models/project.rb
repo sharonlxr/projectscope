@@ -16,6 +16,7 @@ class Project < ActiveRecord::Base
   has_many :ownerships
   has_many :owners, :class_name => "User", :through => :ownerships, :source => :user
   has_many :comments
+  has_many :student_tasks
 
   validates :name, :presence => true, :uniqueness => true
 
@@ -113,20 +114,38 @@ class Project < ActiveRecord::Base
     Comment.where(project_id: self.id)
   end
   
-  def metrics_with_unread_comments
-    metric_samples.select{|ms| ms.comments.where(ctype: 'general_comment').any?(&:unread?)}.sort_by {|ms| ms.comments.min_by{ Time.now - created_at}}
+  def metrics_with_unread_comments(current_user)
+    metric_samples.select{|ms| ms.comments.where(ctype: 'general_comment').any?{|cmnt| cmnt.unread? current_user}}.sort_by {|ms| ms.comments.min_by{ Time.now - created_at}}
   end
   
-  def general_metrics_with_unread_comments
+  def general_metrics_with_unread_comments(current_user)
     metric_names = ProjectMetrics.hierarchies :metric
     comment_groups = []
     
     for metric in metric_names
-      if comments.any?{|comment| comment["status"] == :unread}
-        comment_groups << comments.where(ctype: 'general_comment', metric: metric)
+      if general_metric_comments.where(metric: metric).any?{|comment| comment.unread?(current_user)}
+        comment_groups << [metric, general_metric_comments.where(metric: metric)]
       end
     end
     
+    comment_groups
+  end
+  
+  def student_tasks_with_unread_comments(current_user)
+    comment_groups = []
+    s_tasks = student_tasks.select{|st| st.comments.where(ctype: 'general_comment').any?{|cmnt| cmnt.unread? current_user}}.sort_by {|st| st.comments.min_by{ Time.now - created_at}}
+    s_tasks.each do |s_task|
+      comment_groups << [s_task, s_task.comments]
+    end
+    comment_groups
+  end
+  
+  def iterations_with_unread_comments(current_user)
+    comment_groups = []
+    iterations = Iteration.all.select{|iter| iter.get_comments(self).where(ctype: 'general_comment').any?{|cmnt| cmnt.unread? current_user}}.sort_by {|iter| iter.comments.min_by{ Time.now - created_at}}
+    iterations.each do |iteration|
+      comment_groups << [iteration, iteration.get_comments(self)]
+    end
     comment_groups
   end
 end

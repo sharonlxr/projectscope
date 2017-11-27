@@ -81,7 +81,15 @@ class CommentsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def comment_params
-      params.require(:comment).permit(:metric_sample_id, :user_id, :ctype, :content, :params, :created_at, :status, :metric, :project_id, :iteration_id, :student_task_id)
+      params = params.require(:comment).permit(:metric_sample_id, :user_id, :ctype, :content, :params, :created_at, :status, :metric, :project_id, :iteration_id, :student_task_id)
+      if current_user.is_admin?
+        params[:admin_read] = 'read'
+        params[:student_read] = 'unread'
+      else
+        params[:admin_read] = 'unread'
+        params[:student_read] = 'read'
+      end
+      params
     end
 
     def general_comment_params
@@ -100,7 +108,7 @@ class CommentsController < ApplicationController
       #     metric_sample_id: metric_sample_id,
       #     created_at: Time.now
       # }
-      {
+      a = {
           content: params[:content],
           params: params[:params],
           user_id: current_user.id,
@@ -111,6 +119,15 @@ class CommentsController < ApplicationController
           project_id: params[:project_id],
           iteration_id: params[:iteration_id],
           student_task_id: params[:student_task_id]
-      }
+            }
+      
+      if current_user.is_admin?
+        a[:admin_read] = 'read'
+        a[:student_read] = 'unread'
+      else
+        a[:admin_read] = 'unread'
+        a[:student_read] = 'read'
+      end
+      a
     end
 end

@@ -16,10 +16,29 @@ class Comment < ActiveRecord::Base
   end
 
   def general_comment?
-    ctype.eql? 'general_comment'
+    self.ctype.eql? 'general_comment'
   end
 
-  def unread?
-    status.eql? 'unread'
+  def unread?(current_user)
+    if current_user.is_admin?
+      return self.admin_read.eql? 'unread'
+    else
+      return self.student_read.eql? 'unread'
+    end
+  end
+  
+  def read_comment(current_user)
+    if current_user.is_admin?
+      self.admin_read = 'read'
+    else
+      self.student_read = 'read'
+    end
+    self.save!
+  end
+  
+  def metric_name
+    name = metric
+    name.gsub!(/_/, ' ')
+    name.split.map(&:capitalize).join(' ')
   end
 end

@@ -35,7 +35,7 @@ class ProjectsController < ApplicationController
     metric_min_date = MetricSample.min_date || Date.today
     @num_days_from_today = (Date.today - metric_min_date).to_i
     
-    @comment_groups = @project.metrics_with_unread_comments
+    @comment_groups = @project.metrics_with_unread_comments(current_user)
     
     @comment_groups = @comment_groups.map do |metric_sample|
       [days_ago(metric_sample.created_at),
@@ -43,7 +43,9 @@ class ProjectsController < ApplicationController
       metric_sample.comments.where(ctype: 'general_comment').sort_by { |elem| elem.created_at - Time.now}]
     end
     
-    @general_comment_groups = @project.general_metrics_with_unread_comments
+    @general_comment_groups = @project.general_metrics_with_unread_comments(current_user)
+    @student_task_comment_groups = @project.student_tasks_with_unread_comments(current_user)
+    @iteration_comment_groups = @project.iterations_with_unread_comments(current_user)
   end
 
   # GET /projects/new
@@ -202,13 +204,19 @@ class ProjectsController < ApplicationController
     render json: { message: 'Success' }
   end
   
-  def mark_read
-    project = Project.find_by(id: params["id"].to_i)
-    comments = project.comments
+  def metric_read
+    comments = Comment.where(project_id: params["id"].to_i, metric: "code_climate")
+    comments.each do |cmnt|
+      cmnt.read_comment(current_user)
+    end
+    @comment = comments.first
+    render "comments/show/", status: :ok, location: comments.first
+  end
+  
+  def iteration_read
+    comments = Comment.where(project_id: params["id"].to_i, iteration_id:params["iteration_id"].to_i)
     for cmnt in comments
-      if cmnt.metric == params["metric"]
-        cmnt.update({ status: 'read' })
-      end
+      read_comment(current_user)
     end
     @comment = cmnt
     render "comments/show/", status: :ok, location: cmnt

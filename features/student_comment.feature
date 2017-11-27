@@ -26,6 +26,7 @@ Background: users and project in the data base
 Scenario: add new comment as admin
   Given I am "uadmin" and logged in
   And I am on the "view project 'Project_1'" page
+  And I print page
   And I follow "Code Climate"
   And I fill in the "1st" comment box with "this is an admin comment"
   And I submit form number "1"

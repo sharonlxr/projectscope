@@ -62,7 +62,8 @@ Rails.application.routes.draw do
   put '/student_task/:id/status', :to=>'student_task#update_status', :as=>'update_status'
   
   put '/metric_samples/:id', :to => 'metric_samples#mark_read'
-  put '/projects/:id/:metric/read_comments', :to => 'projects#mark_read'
+  put '/projects/:id/:metric/read_comments', :to => 'projects#metric_read'
+  put 'projects/:id/:iteration_id/read_comments', :to => 'projects#iteration_read'
   get '/update_task/:id', :to=>'task_update#index', :as=>'detail_history'
 
 
