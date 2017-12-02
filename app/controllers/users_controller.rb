@@ -1,7 +1,14 @@
 class UsersController < ApplicationController
   #before_action :authenticate_user!, :validate_current_user
   load_and_authorize_resource
-
+  def show_import
+    puts "showing"
+    # redirect_to root_path
+  end
+  def import
+    User.import(params[:file])
+    redirect_to root_path
+  end
   def show
     @user = User.find(params[:id])
     @all_projects = Project.all
@@ -52,4 +59,7 @@ class UsersController < ApplicationController
       redirect_to root_path
     end
   end
+  
+  
+  
 end

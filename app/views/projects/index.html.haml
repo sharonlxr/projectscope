@@ -1,5 +1,6 @@
 - metric_names = ProjectMetrics.hierarchies :metric
 %div.col-md-6
+
   %h3#gap Team List
   - if @display_type.eql? 'metric'
     = link_to 'switch to time view', projects_path(page: @current_page+1, type: 'series')
@@ -30,6 +31,8 @@
     = link_to "Iterations", iterations_path, :class => "btn btn-primary"
   -if can? :manage, :whitelist
     = link_to 'Privilege Control', whitelists_path, :class => "btn btn-primary"
-
+  - if current_user.is_admin?||current_user.is_instructor?
+    = link_to "Import Project", show_import_projects_path, :class => "btn btn-primary"
+    = link_to "Import Users", show_import_users_path, :class => "btn btn-primary"
 :javascript
   keep_log=false;

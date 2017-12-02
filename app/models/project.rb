@@ -33,7 +33,22 @@ class Project < ActiveRecord::Base
     configs.where metric_name: metric
     # configs.where(:metric_name => metric).first || configs.build(:metric_name => metric)
   end
-
+ def self.import(file)
+    spreadsheet = Roo::Spreadsheet.open(file.path)
+    
+    header=spreadsheet.row(1)
+    (2..spreadsheet.last_row).each do |i|
+      puts i
+     
+      row=Hash[[header,spreadsheet.row(i)].transpose]
+      puts row
+      puts "dhahdah"
+      proj=find_by_id(row["id"])||new
+      proj.id=row["id"]
+      proj.name=row["name"]
+      proj.save!
+    end
+  end
   # These two functions need further revisions.
   def all_metrics
     valid_configs = MetricSample.all.where(:project_id => id)

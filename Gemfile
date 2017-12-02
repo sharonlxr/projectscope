@@ -75,7 +75,7 @@ gem 'bootswatch-rails', '~>3.3.5'
 gem 'jquery-ui-rails'
 gem 'jquery-turbolinks'
 gem 'sprockets-rails', '~> 3.1.1'
-
+gem 'roo'
 group :development, :test do
   gem 'sqlite3'
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
