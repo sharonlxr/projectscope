@@ -14,7 +14,7 @@ class StudentTaskController < ApplicationController
             @team = Project.all[0]
         end
         
-        @tasks = StudentTask.topological_sort(@iter, @team.id)
+        @tasks = StudentTask.level_search(@iter, @team.id)
         #to do : display the tasks in the view
         
     end
