@@ -46,7 +46,7 @@ class Project < ActiveRecord::Base
       proj=find_by_id(row["id"])||new
       proj.id=row["id"]
       proj.name=row["name"]
-      proj.save!
+      proj.save
     end
   end
   # These two functions need further revisions.

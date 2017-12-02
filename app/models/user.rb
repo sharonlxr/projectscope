@@ -73,7 +73,7 @@ class User < ActiveRecord::Base
       user.provider= row["provider"]
       user.project_id=row["project_id"]
       user.password=Devise.friendly_token[0,20]
-      user.save!
+      user.save
   end
  
   end
