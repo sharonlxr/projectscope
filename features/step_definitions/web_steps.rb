@@ -36,6 +36,15 @@ When /^(.*) within (.*[^:])$/ do |string, parent|
   with_scope(parent) { steps "Then #{string}" }
 end
 
+Given("I upload users file") do
+  attach_file(:file, File.join(Rails.root, 'features', 'upload-files', 'users.xlsx'))
+   # Write code here that turns the phrase above into concrete actions
+end
+
+Given("I upload projects file") do
+  attach_file(:file, File.join(Rails.root, 'features', 'upload-files', 'team.xlsx'))
+   # Write code here that turns the phrase above into concrete actions
+end
 # BELOW SYNTAX IS OUTDATED AND BROKEN I THINK :SRHJ
 # # Multi-line step scoper
 # When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
