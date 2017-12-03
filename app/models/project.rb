@@ -41,8 +41,10 @@ class Project < ActiveRecord::Base
       puts i
      
       row=Hash[[header,spreadsheet.row(i)].transpose]
-      puts row
-      puts "dhahdah"
+    
+
+      proj=find_by_id(row["id"])||new
+      proj.attributes=row.to_hash.slice(*accessible_attributes)
       proj=find_by_id(row["id"])||new
       proj.id=row["id"]
       proj.name=row["name"]
