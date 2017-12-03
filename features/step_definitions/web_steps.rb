@@ -45,6 +45,7 @@ Given("I upload projects file") do
   attach_file(:file, File.join(Rails.root, 'features', 'upload-files', 'team.xlsx'))
    # Write code here that turns the phrase above into concrete actions
 end
+
 # BELOW SYNTAX IS OUTDATED AND BROKEN I THINK :SRHJ
 # # Multi-line step scoper
 # When /^(.*) within (.*[^:]):$/ do |step, parent, table_or_string|
