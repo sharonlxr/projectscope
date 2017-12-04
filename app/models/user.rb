@@ -87,6 +87,20 @@ class User < ActiveRecord::Base
   def is_owner_of? project
     self.owned_projects.include? project
   end
+  
+  def has_unread_comments?
+    
+    if self.project
+      return self.project.has_unread_comments(self)
+    else 
+      for project in Project.all
+        if project.has_unread_comments(self)
+          return true
+        end
+      end
+    end
+    return false
+  end
 
   private
 
@@ -95,4 +109,5 @@ class User < ActiveRecord::Base
       self.preferred_metrics = ProjectMetrics.metric_names 
     end
   end
+  
 end

@@ -11,7 +11,7 @@ class MetricSamplesController < ApplicationController
   def mark_read
     metric_sample = MetricSample.find_by(id: params["id"].to_i)
     for cmnt in metric_sample.comments
-      cmnt.read_comment
+      cmnt.read_comment(current_user)
     end
     @comment = cmnt
     render "comments/show/", status: :ok, location: cmnt

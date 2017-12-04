@@ -13,8 +13,28 @@
 
 ActiveRecord::Schema.define(version: 20171119043147) do
 
-# Could not dump table "comments" because of following NoMethodError
-#   undefined method `[]' for nil:NilClass
+  create_table "comments", force: :cascade do |t|
+    t.integer  "metric_sample_id"
+    t.integer  "user_id"
+    t.string   "ctype"
+    t.text     "content"
+    t.text     "params"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "status",           default: "unread"
+    t.integer  "project_id"
+    t.integer  "student_task_id"
+    t.integer  "iteration_id"
+    t.string   "metric"
+    t.string   "admin_read"
+    t.string   "student_read"
+  end
+
+  add_index "comments", ["iteration_id"], name: "index_comments_on_iteration_id"
+  add_index "comments", ["metric_sample_id"], name: "index_comments_on_metric_sample_id"
+  add_index "comments", ["project_id"], name: "index_comments_on_project_id"
+  add_index "comments", ["student_task_id"], name: "index_comments_on_student_task_id"
+  add_index "comments", ["user_id"], name: "index_comments_on_user_id"
 
   create_table "configs", force: :cascade do |t|
     t.integer  "project_id"

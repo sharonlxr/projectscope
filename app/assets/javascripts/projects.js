@@ -248,7 +248,7 @@ function read_general_metric(project_id, metric_name) {
 
 function read_iteration(project_id, iteration_id) {
     $.ajax({
-        url: "/projects/" + project_id + "/" + iteration_id + "/read_comments",
+        url: "/projects/" + project_id + "/" + iteration_id + "/read_iteration_comments",
         type: 'PUT',
         data: { comment: { status: 'read' } },
         dataType: "json",
@@ -263,6 +263,22 @@ function read_iteration(project_id, iteration_id) {
     });
 }
 
+function read_task(task_id) {
+    $.ajax({
+        url: "/student_task/" + task_id + "/read_comments",
+        type: 'PUT',
+        data: { comment: { status: 'read' } },
+        dataType: "json",
+        success: function (result) {
+            $(".task_" + task_id + "_row").remove();
+        },
+        error: function (a, b, c) {
+            console.log(a);
+            console.log(b);
+            console.log(c);
+        }
+    });
+}
 
 function toggle_element(element_id, toggle_link_id) {
     var element = document.getElementById(element_id);

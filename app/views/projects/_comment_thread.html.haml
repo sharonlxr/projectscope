@@ -14,7 +14,7 @@
       %tr.comment_thread_head
         %td
           %div
-            = comments.first.metric_name
+            = metric_name
     -elsif thread_type == "task"
       %tr.comment_thread_head
         %td
@@ -29,7 +29,10 @@
       %tr{id: "#{thread_type}_#{object.id}_buttons", class: "#{thread_type}_#{object.id}_row"}
         %td
           - if thread_type == "general_metric"
-            %a.function_link{onclick: "read_#{thread_type}(#{object.id},'#{comments.first.metric_name}')", id: "#{thread_type}_#{object.id}_read_button"}
+            %a.function_link{onclick: "read_#{thread_type}(#{object.id},'#{metric_name}')", id: "#{thread_type}_#{object.id}_read_button"}
+              Mark All Read
+          - elsif thread_type == "iteration"
+            %a.function_link{onclick: "read_#{thread_type}(#{@project.id}, #{object.id})", id: "#{thread_type}_#{object.id}_read_button"}
               Mark All Read
           - else
             %a.function_link{onclick: "read_#{thread_type}(#{object.id})", id: "#{thread_type}_#{object.id}_read_button"}

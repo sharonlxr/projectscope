@@ -119,9 +119,8 @@ class Project < ActiveRecord::Base
   end
   
   def general_metrics_with_unread_comments(current_user)
-    metric_names = ProjectMetrics.hierarchies :metric
+    metric_names = ProjectMetrics.metric_names
     comment_groups = []
-    
     for metric in metric_names
       if general_metric_comments.where(metric: metric).any?{|comment| comment.unread?(current_user)}
         comment_groups << [metric, general_metric_comments.where(metric: metric)]
@@ -147,5 +146,15 @@ class Project < ActiveRecord::Base
       comment_groups << [iteration, iteration.get_comments(self)]
     end
     comment_groups
+  end
+  
+  def has_unread_comments(user)
+    if self.comments.any?{|comment| comment.unread?(user)} or 
+      self.general_metric_comments.any?{|comment| comment.unread?(user)} or
+      self.student_tasks.any?{|st| st.comments.any?{|comment| comment.unread?(user)}}
+        return true
+    else
+      return false
+    end
   end
 end

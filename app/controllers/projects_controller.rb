@@ -205,7 +205,7 @@ class ProjectsController < ApplicationController
   end
   
   def metric_read
-    comments = Comment.where(project_id: params["id"].to_i, metric: "code_climate")
+    comments = Comment.where(project_id: params["id"].to_i, metric: params["metric"])
     comments.each do |cmnt|
       cmnt.read_comment(current_user)
     end
@@ -214,9 +214,9 @@ class ProjectsController < ApplicationController
   end
   
   def iteration_read
-    comments = Comment.where(project_id: params["id"].to_i, iteration_id:params["iteration_id"].to_i)
+    comments = Comment.where(project_id: params["id"].to_i, iteration_id: params["iteration_id"].to_i)
     for cmnt in comments
-      read_comment(current_user)
+      cmnt.read_comment(current_user)
     end
     @comment = cmnt
     render "comments/show/", status: :ok, location: cmnt
