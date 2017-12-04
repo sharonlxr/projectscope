@@ -55,12 +55,17 @@ module NavigationHelpers
         show_a_team_path(:team =>Project.find_by_name($1).id,:iter=>Iteration.find_by_name($2))
       when /^iteration dashboard/ then
         "/iterations"
+      when /^the "student page for iteration '(.*)'"/ then
+        show_students_task_path(Iteration.find_by_name($1).id)
         
       when /^the "view project '(.*)'" page/ then
         project_path(Project.find_by(name: $1).id)
         
       when /^the "edit student task '(.*)'" page/ then 
         edit_student_task_path(StudentTask.find_by(title: $1).id)
+        
+      when /^the "student view task '(.*)'"/ then
+        detail_history_path(StudentTask.find_by(title: $1).id)
 
       # Add more mappings here.
       # Here is an example that pulls values out of the Regexp:

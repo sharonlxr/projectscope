@@ -35,7 +35,8 @@
                                                     
     = render partial: 'comment_thread', :locals => {:comments => @general_metric_comments,
                                                     :object => @project,
-                                                    :thread_type => "general_metric"}
+                                                    :thread_type => "general_metric",
+                                                    :metric_name => @metric_name}
       
   
 -#    %div{style: 'text-align:center'}

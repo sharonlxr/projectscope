@@ -6,10 +6,13 @@
     = hidden_field_tag 'metric', @metric_name
     = hidden_field_tag 'project_id', @project.id
   - elsif thread_type == "iteration"
-    = hidden_field_tag 'iteration_id', @iteration.id
-    = hidden_field_tag 'project_id', @team.id
+    = hidden_field_tag 'iteration_id', object.id
+    - if @team
+      = hidden_field_tag 'project_id', @team.id
+    -else
+      = hidden_field_tag 'project_id', @project
   - elsif thread_type == "task"
-    = hidden_field_tag 'student_task_id', @task.id
+    = hidden_field_tag 'student_task_id', object.id
   - else 
     = hidden_field_tag 'metric_sample_id', object.id
   %div.input-group

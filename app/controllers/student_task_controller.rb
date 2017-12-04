@@ -7,6 +7,10 @@ class StudentTaskController < ApplicationController
         @iteration = Iteration.find_by(id: @iter)
         @project = @team
         
+        puts("--------------------------------------")
+        puts(@iter)
+        puts(@iteraion)
+        
         @iteration_comments = @iteration.get_comments(@team)
         
         #testing only purpose
@@ -139,5 +143,14 @@ class StudentTaskController < ApplicationController
         @iteration_comments = @iteration.get_comments(@team)
 
         #todo: diplay the tasks 
+    end
+    
+    def task_read
+        comments = Comment.where(student_task_id: params["id"].to_i)
+        for cmnt in comments
+          cmnt.read_comment(current_user)
+        end
+        @comment = cmnt
+        render "comments/show/", status: :ok, location: cmnt
     end
 end

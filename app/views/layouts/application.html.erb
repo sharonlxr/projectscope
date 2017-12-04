@@ -19,9 +19,14 @@
         <h4><%= link_to 'Welcome to Teamscope', projects_path, style: 'color:white' %></h4>
       </div>
     <% end %>
+
 		<div class="col-md-3" style="text-align: right;">
+
 			<% if user_signed_in? %>
-				<%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => "btn btn-md btn-default") %>
+				<%= link_to('Logout', destroy_user_session_path, :method => :delete, :class => "btn btn-md btn-default", :style => "float:right;") %>
+			<% end %>
+			<% if current_user and current_user.has_unread_comments? %>
+				<div id="top-bar-comment-notice", title="You have unread comments"> </div>
 			<% end %>
 		</div>
 	</div>

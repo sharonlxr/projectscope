@@ -30,6 +30,8 @@ Scenario: add new comment as admin
   And I fill in the "1st" comment box with "this is an admin comment"
   And I submit form number "1"
   And I follow "Project_1"
+  Then I should not see "this is an admin comment"
+  And I am "ustudent" and logged in
   Then I should see "this is an admin comment"
 
 Scenario: add new comment as student
@@ -38,6 +40,9 @@ Scenario: add new comment as student
   And I follow "Code Climate"
   And I fill in the "1st" comment box with "this is a student comment"
   And I submit form number "1"
+  Then I should not see "this is a student comment"
+  And I am "uadmin" and logged in
+  And I am on the "view project 'Project_1'" page
   Then I should see "this is a student comment"
   
 Scenario: can't add comment if student of different project
@@ -66,6 +71,9 @@ Scenario: name should appear next to comment
   And I follow "Code Climate"
   And I fill in the "1st" comment box with "this is a student comment"
   And I submit form number "1"
+  Then I should not see "Student: this is a student comment"
+  And I am "uadmin" and logged in
+  And I am on the "view project 'Project_1'" page
   Then I should see "Student: this is a student comment"
 
 Scenario: reply to a comment as a student, :js => true
@@ -87,7 +95,7 @@ Scenario: writing comment associates with correct metric sample
   And I fill in the "1st" comment box with "this should be on second metric"
   And I submit form number "1"
   And I follow "Project_1"
-
+  And I am "ustudent" and logged in
   Then there should be metric "0"
   And there should not be metric "2"
 

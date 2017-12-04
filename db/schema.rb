@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171118170339) do
+ActiveRecord::Schema.define(version: 20171119043147) do
 
   create_table "comments", force: :cascade do |t|
     t.integer  "metric_sample_id"
@@ -26,6 +26,8 @@ ActiveRecord::Schema.define(version: 20171118170339) do
     t.integer  "student_task_id"
     t.integer  "iteration_id"
     t.string   "metric"
+    t.string   "admin_read"
+    t.string   "student_read"
   end
 
   add_index "comments", ["iteration_id"], name: "index_comments_on_iteration_id"

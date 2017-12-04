@@ -55,15 +55,14 @@ Scenario: add admin comment to a task
   And I am on the "edit student task 'first_1'" page
   Then I should see "this is an admin comment on a tas"
   
-@wip
 Scenario: add student commment to a task
   Given I am "ustudent" and logged in
-  And I am on the "Project_1, iteration_01" page
+  And I am on the "student view task 'first_1'" page
   Then I should see "first_1"
-  And I follow "first_1"
-  Then I should see "add_comment"
-  And I fill in "content" with "this is a student comment on a task"
-  And I press "Submit"
+  Then I should see "Add Reply"
+  And I fill in the box for task comment with "this is a student comment on a task"
+  And I submit task comment form
+  And I am on the "student view task 'first_1'" page
   Then I should see "this is a student comment on a task"
   
 Scenario: add admin comment to iteration

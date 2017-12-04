@@ -15,6 +15,46 @@ Given(/the following users exist:/) do |users_table|
   end
 end
 
+Given(/the following comments exist:/) do |comments_table|
+  
+  comments_table.hashes.each do |comment|
+    if comment["project"] == "nil"
+      p_id = nil
+    else
+      p_id = Project.find_by(name: comment["project"]).id
+    end
+    
+    if comment["student_task"] == "nil"
+      st_id = nil
+    else
+      st_id = StudentTask.find_by(title: comment["student_task"]).id
+    end
+      
+    if comment["iteration"] == "nil"
+      i_id = nil
+    else
+      i_id = Iteration.find_by(name: comment["iteration"]).id
+    end
+    
+    c = Comment.create!(metric_sample_id: comment["metric_sample"],
+                        user_id: User.find_by(uid: comment["user"]),
+                        ctype: "general_comment",
+                        content: comment["content"],
+                        created_at: DateTime.now,
+                        updated_at: DateTime.now,
+                        status: "unread",
+                        project_id: p_id,
+                        student_task_id: st_id,
+                        iteration_id: i_id,
+                        metric: comment["metric"],
+                        admin_read: comment["admin_read"],
+                        student_read: comment["student_read"]
+                 )
+
+  end
+end
+
+
 #helper for creating users
 def user_type_from_string(string)
   if string == "student"
@@ -70,13 +110,24 @@ Given(/there is a "(.*)" comment "(.*)" on project "(.*)" metric "(.*)"/) do |us
     require 'date'
     project = Project.find_by(name: project)
     metric_sample = project.latest_metric_sample(metric)
-    this_user = User.find_by(uid: user).id
+    this_user = User.find_by(uid: user)
+    if this_user.is_admin?
+      a_read = 'read'
+      s_read = 'unread'
+    else
+      a_read = 'unread'
+      s_read = 'read'
+    end
+    this_user = this_user.id
+    
     Comment.create!(metric_sample_id: metric_sample.id, 
                     user_id: this_user,
                     ctype: 'general_comment',
                     params: '{}',
                     created_at: Date.today,
-                    content: comment)
+                    content: comment,
+                    student_read: s_read,
+                    admin_read: a_read)
 end
 
 When /^(?:|I )fill in the "([^"]*)" comment box with "([^"]*)"$/ do |num, value|
@@ -112,3 +163,20 @@ end
 And /^I print page/ do
   print(page.body)
 end
+
+And /^I Mark All Read for the "(.*)" comment thread "(.*)"$/ do |thread_type, num|
+    within("tr##{thread_type}_#{num}_buttons") do 
+      find('.function_link', :text=>'Mark All Read').click
+    end
+end
+
+Then /^I should have unread indicator/ do 
+  page.should have_css("div#top-bar-comment-notice")
+  
+end
+
+Then /^I should not have unread indicator/ do 
+  page.should_not have_css("div#top-bar-comment-notice")
+  
+end
+
