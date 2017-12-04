@@ -1,0 +1,4 @@
+%h2 Import Projects
+= form_tag submit_projects_path, multipart: true do
+    = file_field_tag :file, accept: ".xlsx"
+    = submit_tag "Import"

@@ -23,6 +23,8 @@
 #
 
 class User < ActiveRecord::Base
+  require 'csv'
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :recoverable, 
@@ -53,7 +55,28 @@ class User < ActiveRecord::Base
     	end
     end
   end
-  
+  def self.import(file)
+    spreadsheet = Roo::Spreadsheet.open(file.path)
+    
+    header=spreadsheet.row(1)
+    (2..spreadsheet.last_row).each do |i|
+      puts i
+     
+      row=Hash[[header,spreadsheet.row(i)].transpose]
+      puts row
+      puts "dhahdah"
+      user=find_by_id(row["id"])||new
+      user.attributes=row.to_hash.slice(*accessible_attributes)
+      user.email = row["email"]
+      user.provider_username = row["provider_username"]
+      user.uid = row["uid"]
+      user.provider= row["provider"]
+      user.project_id=row["project_id"]
+      user.password=Devise.friendly_token[0,20]
+      user.save
+  end
+ 
+  end
   def email_required?
     false
   end

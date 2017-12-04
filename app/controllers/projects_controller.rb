@@ -5,7 +5,12 @@ class ProjectsController < ApplicationController
   before_action :init_existed_configs, only: [:show, :edit, :new]
   before_action :authenticate_user!
   load_and_authorize_resource
-
+  def show_import
+  end
+  def import
+    Project.import(params[:file])
+    redirect_to root_path
+  end
   # GET /projects
   # GET /projects.json
   def index

@@ -65,7 +65,11 @@ Rails.application.routes.draw do
   put '/projects/:id/:metric/read_comments', :to => 'projects#mark_read'
   get '/update_task/:id', :to=>'task_update#index', :as=>'detail_history'
 
-
+  get 'user/import', :to=>'users#show_import', :as=>'show_import_users'
+  post 'user/submit', :to=>'users#import', :as=>'submit_users'
+  
+  get 'import/projects', :to=>'projects#show_import', :as=>'show_import_projects'
+  post 'submit/projects', :to=>'projects#import', :as=>'submit_projects'
   root 'projects#index'
 
 end
