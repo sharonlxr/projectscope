@@ -7,6 +7,33 @@ class StudentTask < ActiveRecord::Base
         self.parents.push(p)
         self.save
     end
+    def depth
+        min = 0
+        self.parents.each do |p|
+            tmp = 1 + p.depth
+            if tmp>min
+                min=tmp
+            end
+        end
+        return min
+    end
+    def self.level_search(iter_id,team_id)
+        tasks = StudentTask.where('iteration_id': iter_id, 'project_id': team_id)
+        
+        result = []
+        tasks.each do |t|
+            
+            level = t.depth
+            puts level 
+            if result[level].nil?
+                result[level]=[]
+            end
+            result[level].push(t)
+            puts result[level]
+        end
+        puts result.length
+        return result
+    end
   
     def self.topological_sort(iter_id,team_id)
         tasks = StudentTask.where('iteration_id': iter_id, 'project_id': team_id)
